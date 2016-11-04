@@ -364,7 +364,9 @@
 ```
 
 + 使用方法
+
     先将Demo中播放器文件夹拖拽到工程中（资源文件不要忘记了），导入AVPlayer支持框架`MediaPlayer.framework`
+
     不喜欢拖拽可以直接使用cocoapods导入，`pod 'CLPlayer', '~> 1.0.0'`
 + 具体使用代码
 
