@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.version      = "1.0.0"
   s.summary      = "A Player."
   s.description  = <<-DESC
-		This is Player ,use is so easy.
+		This is a very easy to use player.
                    DESC
 
   s.homepage     = "https://github.com/JmoVxia/CLPlayer"
