@@ -8,7 +8,6 @@
 
 #import "PlayerView.h"
 #import <AVFoundation/AVFoundation.h>
-#import <MediaPlayer/MediaPlayer.h>
 #import "UIView+SetRect.h"
 #import "UIImage+TintColor.h"
 #import "UIImage+ScaleToSize.h"
