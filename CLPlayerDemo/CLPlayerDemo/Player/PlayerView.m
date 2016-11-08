@@ -37,6 +37,8 @@
 @property (nonatomic,assign) CGRect customFarme;
 /**父类控件*/
 @property (nonatomic,strong) UIView *fatherView;
+/**全屏标记*/
+@property (nonatomic,assign) BOOL isFullScreen;
 
 /**播放器*/
 @property(nonatomic,strong)AVPlayer *player;
@@ -78,6 +80,7 @@
     if (self = [super initWithFrame:frame])
     {
         _customFarme = frame;
+        _isFullScreen = NO;
         self.backgroundColor = [UIColor blackColor];
     }
     return self;
@@ -89,22 +92,14 @@
     self.playerItem = [AVPlayerItem playerItemWithURL:url];
     self.player = [AVPlayer playerWithPlayerItem:_playerItem];
     _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
+    self.frame = _customFarme;
+    _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
+
     [self creatUI];
 }
 #pragma mark - 创建播放器UI
 - (void)creatUI
 {
-    if (ScreenWidth < ScreenHeight)
-    {
-        self.frame = _customFarme;
-        _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
-    }
-    else
-    {
-        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-        _playerLayer.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-    }
-
     _playerLayer.videoGravity = AVLayerVideoGravityResize;
     [self.layer addSublayer:_playerLayer];
 
@@ -117,11 +112,11 @@
     [self addSubview:_backView];
     
     //顶部View条
-    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, ViewHeight)];
+    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _backView.width, ViewHeight)];
     _topView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
     [_backView addSubview:_topView];
     //底部View条
-    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, _backView.height - ViewHeight, self.frame.size.width, ViewHeight)];
+    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, _backView.height - ViewHeight, _backView.width, ViewHeight)];
     _bottomView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
     [_backView addSubview:_bottomView];
     // 监听loadedTimeRanges属性
@@ -152,62 +147,24 @@
     //工具条定时消失
     _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime target:self selector:@selector(disappear) userInfo:nil repeats:NO];
 }
-#pragma mark - 状态栏
-- (BOOL)prefersStatusBarHidden
-{
-    // 返回NO表示要显示，返回YES将hiden
-    return YES;
-}
-#pragma mark - 创建UISlider
-- (void)createSlider
-{
-    self.slider = [[Slider alloc]init];
-    _slider.frame = CGRectMake(_progress.x, 0, _progress.width, ViewHeight);
-    _slider.centerY = _bottomView.height/2.0;
-    [_bottomView addSubview:_slider];
-    //自定义滑块大小
-    UIImage *image = [UIImage imageNamed:@"round"];
-    //改变滑块大小
-    UIImage *tempImage = [image OriginImage:image scaleToSize:CGSizeMake( SliderSize, SliderSize)];
-    //改变滑块颜色
-    UIImage *newImage = [tempImage imageWithTintColor:SliderColor];
-    [_slider setThumbImage:newImage forState:UIControlStateNormal];
-    //添加监听
-    [_slider addTarget:self action:@selector(progressSlider:) forControlEvents:UIControlEventValueChanged];
-    //左边颜色
-    _slider.minimumTrackTintColor = PlayFinishColor;
-    //右边颜色
-    _slider.maximumTrackTintColor = [UIColor clearColor];
-}
 
-#pragma mark - 拖动进度条
-- (void)progressSlider:(UISlider *)slider
-{
-    //拖动改变视频播放进度
-    if (_player.status == AVPlayerStatusReadyToPlay)
-    {
-        //暂停
-        [self pausePlay];
-        
-        //计算出拖动的当前秒数
-        CGFloat total = (CGFloat)_playerItem.duration.value / _playerItem.duration.timescale;
-        NSInteger dragedSeconds = floorf(total * slider.value);
-        
-        //转换成CMTime才能给player来控制播放进度
-        CMTime dragedCMTime = CMTimeMake(dragedSeconds, 1);
-       
-        [_player seekToTime:dragedCMTime completionHandler:^(BOOL finish){
-            //继续播放
-            [self playVideo];
-        }];
-    }
-}
+
+
 #pragma mark - 创建UIProgressView
 - (void)createProgress
 {
-    self.progress = [[UIProgressView alloc]initWithFrame:CGRectMake(_startButton.right + Padding, 0, self.frame.size.width - 80 - Padding - _startButton.right - Padding - Padding, Padding)];
+    CGFloat width;
+    if (_isFullScreen == NO)
+    {
+        width = self.frame.size.width;
+    }
+    else
+    {
+        width = self.frame.size.height;
+    }
+    self.progress = [[UIProgressView alloc]initWithFrame:CGRectMake(_startButton.right + Padding, 0, width - 80 - Padding - _startButton.right - Padding - Padding, Padding)];
     self.progress.centerY = _bottomView.height/2.0;
-    
+
     //进度条颜色
     self.progress.trackTintColor = ProgressColor;
     // 计算缓冲进度
@@ -218,7 +175,7 @@
     
     CGFloat time = round(timeInterval);
     CGFloat total = round(totalDuration);
-   
+    
     //确保都是number
     if (isnan(time) == 0 && isnan(total) == 0)
     {
@@ -264,6 +221,51 @@
     NSTimeInterval result = startSeconds + durationSeconds;// 计算缓冲总进度
     return result;
 }
+#pragma mark - 创建UISlider
+- (void)createSlider
+{
+    self.slider = [[Slider alloc]init];
+    _slider.frame = CGRectMake(_progress.x, 0, _progress.width, ViewHeight);
+    _slider.centerY = _bottomView.height/2.0;
+    [_bottomView addSubview:_slider];
+    //自定义滑块大小
+    UIImage *image = [UIImage imageNamed:@"round"];
+    //改变滑块大小
+    UIImage *tempImage = [image OriginImage:image scaleToSize:CGSizeMake( SliderSize, SliderSize)];
+    //改变滑块颜色
+    UIImage *newImage = [tempImage imageWithTintColor:SliderColor];
+    [_slider setThumbImage:newImage forState:UIControlStateNormal];
+    //添加监听
+    [_slider addTarget:self action:@selector(progressSlider:) forControlEvents:UIControlEventValueChanged];
+    //左边颜色
+    _slider.minimumTrackTintColor = PlayFinishColor;
+    //右边颜色
+    _slider.maximumTrackTintColor = [UIColor clearColor];
+}
+
+#pragma mark - 拖动进度条
+- (void)progressSlider:(UISlider *)slider
+{
+    //拖动改变视频播放进度
+    if (_player.status == AVPlayerStatusReadyToPlay)
+    {
+        //暂停
+        [self pausePlay];
+        
+        //计算出拖动的当前秒数
+        CGFloat total = (CGFloat)_playerItem.duration.value / _playerItem.duration.timescale;
+        NSInteger dragedSeconds = floorf(total * slider.value);
+        
+        //转换成CMTime才能给player来控制播放进度
+        CMTime dragedCMTime = CMTimeMake(dragedSeconds, 1);
+       
+        [_player seekToTime:dragedCMTime completionHandler:^(BOOL finish){
+            //继续播放
+            [self playVideo];
+        }];
+    }
+}
+
 #pragma mark - 创建播放时间
 - (void)createCurrentTimeLabel
 {
@@ -350,13 +352,13 @@
     button.frame = CGRectMake(0, 0, ButtonSize, ButtonSize);
     button.right = _topView.right - Padding;
     button.centerY = _topView.centerY;
-    if (ScreenWidth < ScreenHeight)
+    if (_isFullScreen == YES)
     {
-        [button setBackgroundImage:[[UIImage imageNamed:@"maxBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [button setBackgroundImage:[[UIImage imageNamed:@"minBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     else
     {
-        [button setBackgroundImage:[[UIImage imageNamed:@"minBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [button setBackgroundImage:[[UIImage imageNamed:@"maxBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     [button addTarget:self action:@selector(maxAction:) forControlEvents:UIControlEventTouchUpInside];
     [_topView addSubview:button];
@@ -367,34 +369,40 @@
     //取消定时消失
     [_timer invalidate];
     
-    if (ScreenWidth < ScreenHeight)
+    if (_isFullScreen == NO)
     {
         //记录播放器父类
         _fatherView = self.superview;
-        //横屏
-        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         //添加到Window上
         [self.window addSubview:self];
+        
         //删除原有控件
         [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [obj removeFromSuperview];
         }];
-        //创建全屏控件
-        [self creatUI];
+        self.transform = CGAffineTransformMakeRotation(M_PI / 2);
+        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
     }
     else
     {
         //旋转屏幕
-        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
+
+        self.transform = CGAffineTransformMakeRotation(0);
+        self.frame = _customFarme;
+        _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
+
+        
         //还原到原有父类上
         [_fatherView addSubview:self];
         //删除
         [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [obj removeFromSuperview];
         }];
-        //创建小屏UI
-        [self creatUI];
     }
+    _isFullScreen = !_isFullScreen;
+    //创建小屏UI
+    [self creatUI];
 }
 
 #pragma mark - 创建手势
