@@ -107,6 +107,11 @@ typedef enum : NSUInteger {
     self.frame = _customFarme;
     _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
     [self originalscreen];
+    //转子
+    self.activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    _activity.center = _backView.center;
+    [self addSubview:_activity];
+    [_activity startAnimating];
 }
 #pragma mark - 创建播放器UI
 - (void)creatUI
@@ -146,12 +151,6 @@ typedef enum : NSUInteger {
     [self createMaxButton];
     //创建点击手势
     [self createGesture];
-    
-    //转子
-    self.activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    _activity.center = _backView.center;
-    [self addSubview:_activity];
-    [_activity startAnimating];
     
     //计时器，循环执行
     [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeStack) userInfo:nil repeats:YES];
