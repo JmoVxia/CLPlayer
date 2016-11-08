@@ -12,10 +12,18 @@
 #import "UIImage+TintColor.h"
 #import "UIImage+ScaleToSize.h"
 #import "Slider.h"
+
+
+typedef enum : NSUInteger {
+    Letf = 0,
+    Right,
+}Direction;
+
+
 //间隙
 #define Padding        10
 //消失时间
-#define DisappearTime  4
+#define DisappearTime  6
 //顶部底部控件高度
 #define ViewHeight     40
 //按钮大小
@@ -100,6 +108,7 @@
     _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
     self.frame = _customFarme;
     _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
+    [self originalscreen];
 }
 #pragma mark - 创建播放器UI
 - (void)creatUI
@@ -148,8 +157,9 @@
     
     //计时器，循环执行
     [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeStack) userInfo:nil repeats:YES];
-    //工具条定时消失
+    //定时器，工具条消失
     _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime target:self selector:@selector(disappear) userInfo:nil repeats:NO];
+
 }
 #pragma mark - 隐藏或者显示状态栏方法
 - (void)setStatusBarHidden:(BOOL)hidden
@@ -300,7 +310,6 @@
         NSInteger durMin = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总秒
         NSInteger durSec = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总分钟
         self.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld / %02ld:%02ld", proMin, proSec, durMin, durSec];
-        
     }
     //开始播放停止转子
     if (_player.status == AVPlayerStatusReadyToPlay)
@@ -311,6 +320,7 @@
     {
         [_activity startAnimating];
     }
+
 }
 #pragma mark - 播放按钮
 - (void)createButton
@@ -372,45 +382,17 @@
     [button addTarget:self action:@selector(maxAction:) forControlEvents:UIControlEventTouchUpInside];
     [_topView addSubview:button];
 }
-#pragma mark - 横屏代码
+#pragma mark - 全屏按钮响应事件
 - (void)maxAction:(UIButton *)button
 {
-    //取消定时消失
-    [_timer invalidate];
-    
     if (_isFullScreen == NO)
     {
-        [self setStatusBarHidden:YES];
-        //记录播放器父类
-        _fatherView = self.superview;
-        //添加到Window上
-        [self.window addSubview:self];
-        //旋转，改变大小
-        self.transform = CGAffineTransformMakeRotation(M_PI / 2);
-        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
-        //删除原有控件
-        [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [obj removeFromSuperview];
-        }];
+        [self fullScreenWithDirection:Letf];
     }
     else
     {
-        [self setStatusBarHidden:NO];
-        //还原大小
-        self.transform = CGAffineTransformMakeRotation(0);
-        self.frame = _customFarme;
-        _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
-        //还原到原有父类上
-        [_fatherView addSubview:self];
-        //删除
-        [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [obj removeFromSuperview];
-        }];
+        [self originalscreen];
     }
-    _isFullScreen = !_isFullScreen;
-    //创建小屏UI
-    [self creatUI];
 }
 
 #pragma mark - 创建手势
@@ -422,10 +404,10 @@
 #pragma mark - 轻拍方法
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
+    //取消定时消失
+    [_timer invalidate];
     if (_backView.alpha == 1)
     {
-        //取消定时消失
-        [_timer invalidate];
         [UIView animateWithDuration:0.5 animations:^{
             _backView.alpha = 0;
         }];
@@ -487,66 +469,67 @@
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     if (orientation == UIDeviceOrientationLandscapeLeft)
     {
-        //取消定时消失
-        [_timer invalidate];
-        [self setStatusBarHidden:YES];
-        //记录播放器父类
-        _fatherView = self.superview;
-        //添加到Window上
-        [self.window addSubview:self];
-        //旋转，改变大小
-        self.transform = CGAffineTransformMakeRotation(M_PI / 2);
-        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
-        //删除原有控件
-        [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [obj removeFromSuperview];
-        }];
-        _isFullScreen = YES;
-        //创建小屏UI
-        [self creatUI];
+        [self fullScreenWithDirection:Letf];
     }
     else if (orientation == UIDeviceOrientationLandscapeRight)
     {
-        //取消定时消失
-        [_timer invalidate];
-        [self setStatusBarHidden:YES];
-        //记录播放器父类
-        _fatherView = self.superview;
-        //添加到Window上
-        [self.window addSubview:self];
-        //旋转，改变大小
-        self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
-        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
-        //删除原有控件
-        [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [obj removeFromSuperview];
-        }];
-        _isFullScreen = YES;
-        //创建小屏UI
-        [self creatUI];
-        
+        [self fullScreenWithDirection:Right];
     }
     else if (orientation == UIDeviceOrientationPortrait)
     {
-        //取消定时消失
-        [_timer invalidate];
-        [self setStatusBarHidden:NO];
-        //还原大小
-        self.transform = CGAffineTransformMakeRotation(0);
-        self.frame = _customFarme;
-        _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
-        //还原到原有父类上
-        [_fatherView addSubview:self];
-        //删除
-        [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [obj removeFromSuperview];
-        }];
-        _isFullScreen = NO;
-        //创建小屏UI
-        [self creatUI];
+
     }
+}
+#pragma mark - 全屏
+- (void)fullScreenWithDirection:(Direction)direction
+{
+    //取消定时消失
+    [_timer invalidate];
+    [self setStatusBarHidden:YES];
+    //记录播放器父类
+    _fatherView = self.superview;
+    //添加到Window上
+    [self.window addSubview:self];
+
+    //不支持旋转
+   
+    if (direction == Letf)
+    {
+        self.transform = CGAffineTransformMakeRotation(M_PI / 2);
+    }
+    else
+    {
+        self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
+    }
+        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
+    //删除原有控件
+    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
+    _isFullScreen = YES;
+    //创建小屏UI
+    [self creatUI];
+}
+#pragma mark - 原始大小
+- (void)originalscreen
+{
+    //取消定时消失
+    [_timer invalidate];
+    [self setStatusBarHidden:NO];
+    //还原大小
+    self.transform = CGAffineTransformMakeRotation(0);
+    self.frame = _customFarme;
+    _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
+    //还原到原有父类上
+    [_fatherView addSubview:self];
+    //删除
+    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
+    _isFullScreen = NO;
+    //创建小屏UI
+    [self creatUI];
 }
 #pragma mark - APP活动通知
 - (void)appwillResignActive:(NSNotification *)note
@@ -559,6 +542,7 @@
     //回到前台,继续播放
     [self playVideo];
 }
+
 #pragma mark - dealloc
 - (void)dealloc
 {
