@@ -147,9 +147,14 @@
     //工具条定时消失
     _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime target:self selector:@selector(disappear) userInfo:nil repeats:NO];
 }
-
-
-
+#pragma mark - 隐藏或者显示状态栏方法
+- (void)setStatusBarHidden:(BOOL)hidden
+{
+    //取出当前控制器的导航条
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    //设置是否隐藏
+    statusBar.hidden = hidden;
+}
 #pragma mark - 创建UIProgressView
 - (void)createProgress
 {
@@ -371,28 +376,27 @@
     
     if (_isFullScreen == NO)
     {
+        [self setStatusBarHidden:YES];
         //记录播放器父类
         _fatherView = self.superview;
         //添加到Window上
         [self.window addSubview:self];
-        
+        //旋转，改变大小
+        self.transform = CGAffineTransformMakeRotation(M_PI / 2);
+        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
         //删除原有控件
         [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [obj removeFromSuperview];
         }];
-        self.transform = CGAffineTransformMakeRotation(M_PI / 2);
-        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
     }
     else
     {
-        //旋转屏幕
-
+        [self setStatusBarHidden:NO];
+        //还原大小
         self.transform = CGAffineTransformMakeRotation(0);
         self.frame = _customFarme;
         _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
-
-        
         //还原到原有父类上
         [_fatherView addSubview:self];
         //删除
