@@ -82,6 +82,8 @@
         _customFarme = frame;
         _isFullScreen = NO;
         self.backgroundColor = [UIColor blackColor];
+        //注册屏幕旋转通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationChange:) name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
     }
     return self;
 }
@@ -94,8 +96,6 @@
     _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
     self.frame = _customFarme;
     _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
-
-    [self creatUI];
 }
 #pragma mark - 创建播放器UI
 - (void)creatUI
@@ -477,6 +477,78 @@
     _startButton.selected = YES;
     [_startButton setBackgroundImage:[[UIImage imageNamed:@"pauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
 }
+#pragma mark - 屏幕旋转
+- (void)statusBarOrientationChange:(NSNotification *)notification
+{
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    if (orientation == UIDeviceOrientationLandscapeLeft)
+    {
+        //取消定时消失
+        [_timer invalidate];
+        [self setStatusBarHidden:YES];
+        //记录播放器父类
+        _fatherView = self.superview;
+        //添加到Window上
+        [self.window addSubview:self];
+        //旋转，改变大小
+        self.transform = CGAffineTransformMakeRotation(M_PI / 2);
+        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
+        //删除原有控件
+        [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
+        }];
+        _isFullScreen = YES;
+        //创建小屏UI
+        [self creatUI];
+    }
+    else if (orientation == UIDeviceOrientationLandscapeRight)
+    {
+        //取消定时消失
+        [_timer invalidate];
+        [self setStatusBarHidden:YES];
+        //记录播放器父类
+        _fatherView = self.superview;
+        //添加到Window上
+        [self.window addSubview:self];
+        //旋转，改变大小
+        self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
+        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
+        //删除原有控件
+        [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
+        }];
+        _isFullScreen = YES;
+        //创建小屏UI
+        [self creatUI];
+        
+    }
+    else if (orientation == UIDeviceOrientationPortrait)
+    {
+        //取消定时消失
+        [_timer invalidate];
+        [self setStatusBarHidden:NO];
+        //还原大小
+        self.transform = CGAffineTransformMakeRotation(0);
+        self.frame = _customFarme;
+        _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
+        //还原到原有父类上
+        [_fatherView addSubview:self];
+        //删除
+        [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [obj removeFromSuperview];
+        }];
+        _isFullScreen = NO;
+        //创建小屏UI
+        [self creatUI];
+    }
+}
+
+
+
+
+
 
 #pragma mark - dealloc
 - (void)dealloc
