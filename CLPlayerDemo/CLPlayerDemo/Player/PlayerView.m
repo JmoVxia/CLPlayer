@@ -84,6 +84,10 @@
         self.backgroundColor = [UIColor blackColor];
         //注册屏幕旋转通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationChange:) name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
+        //APP运行状态通知，将要被挂起
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appwillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+        //已经进入前台
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -477,7 +481,7 @@
     _startButton.selected = YES;
     [_startButton setBackgroundImage:[[UIImage imageNamed:@"pauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
 }
-#pragma mark - 屏幕旋转
+#pragma mark - 屏幕旋转通知
 - (void)statusBarOrientationChange:(NSNotification *)notification
 {
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
@@ -544,16 +548,25 @@
         [self creatUI];
     }
 }
-
-
-
-
-
-
+#pragma mark - APP活动通知
+- (void)appwillResignActive:(NSNotification *)note
+{
+    //将要挂起，停止播放
+    [self pausePlay];
+}
+- (void)appBecomeActive:(NSNotification *)note
+{
+    //回到前台,继续播放
+    [self playVideo];
+}
 #pragma mark - dealloc
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:@"loadedTimeRanges"];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:_player.currentItem];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 @end
