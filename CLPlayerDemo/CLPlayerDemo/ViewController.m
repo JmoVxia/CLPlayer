@@ -28,7 +28,7 @@
     playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0215/56c1809735217_wpd.mp4"];
     //播放
     [playerView playVideo];
-    //根据旋转自动支持全屏
+    //根据旋转自动支持全屏，默认不支持
     playerView.autoFull = YES;
     
     //返回按钮点击事件回调

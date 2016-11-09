@@ -17,17 +17,12 @@ typedef void(^EndBolck)();
 @property (nonatomic,strong) NSURL *url;
 /**旋转自动全屏*/
 @property (nonatomic,assign) BOOL autoFull;
-
 /**返回按钮回调方法*/
 - (void)backButton:(BackButtonBlock) backButton;
-
 /**播放完成回调*/
 - (void)endPlay:(EndBolck) end;
-
-
 /**播放*/
 - (void)playVideo;
-
 /**暂停*/
 - (void)pausePlay;
 

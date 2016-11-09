@@ -119,8 +119,6 @@ typedef enum : NSUInteger {
 {
     _autoFull = autoFull;
 }
-
-
 #pragma mark - 创建播放器UI
 - (void)creatUI
 {
@@ -266,7 +264,6 @@ typedef enum : NSUInteger {
     //右边颜色
     _slider.maximumTrackTintColor = [UIColor clearColor];
 }
-
 #pragma mark - 拖动进度条
 - (void)progressSlider:(UISlider *)slider
 {
@@ -289,7 +286,6 @@ typedef enum : NSUInteger {
         }];
     }
 }
-
 #pragma mark - 创建播放时间
 - (void)createCurrentTimeLabel
 {
@@ -399,7 +395,6 @@ typedef enum : NSUInteger {
         [self originalscreen];
     }
 }
-
 #pragma mark - 创建手势
 - (void)createGesture
 {
@@ -442,7 +437,6 @@ typedef enum : NSUInteger {
 {
     self.EndBlock = end;
 }
-
 #pragma mark - 返回按钮
 - (void)backButtonAction:(UIButton *)button
 {
@@ -452,14 +446,12 @@ typedef enum : NSUInteger {
 {
     self.BackBlock = backButton;
 }
-
 #pragma mark - 暂停播放
 - (void)pausePlay
 {
     [_player pause];
     _startButton.selected = NO;
     [_startButton setBackgroundImage:[[UIImage imageNamed:@"playBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-
 }
 #pragma mark - 播放
 - (void)playVideo
@@ -499,8 +491,6 @@ typedef enum : NSUInteger {
     _fatherView = self.superview;
     //添加到Window上
     [self.window addSubview:self];
-
-    //不支持旋转
    
     if (direction == Letf)
     {
@@ -546,7 +536,6 @@ typedef enum : NSUInteger {
     //将要挂起，停止播放
     [self pausePlay];
 }
-
 #pragma mark - dealloc
 - (void)dealloc
 {
