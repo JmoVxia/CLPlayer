@@ -15,7 +15,8 @@ typedef void(^EndBolck)();
 
 /**视频url*/
 @property (nonatomic,strong) NSURL *url;
-
+/**旋转自动全屏*/
+@property (nonatomic,assign) BOOL autoFull;
 
 /**返回按钮回调方法*/
 - (void)backButton:(BackButtonBlock) backButton;

@@ -27,7 +27,10 @@
     //视频地址
     playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0215/56c1809735217_wpd.mp4"];
     //播放
-//    [playerView playVideo];
+    [playerView playVideo];
+    //根据旋转自动支持全屏
+    playerView.autoFull = YES;
+    
     //返回按钮点击事件回调
     [playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");

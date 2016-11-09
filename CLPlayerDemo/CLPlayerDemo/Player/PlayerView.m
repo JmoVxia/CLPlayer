@@ -89,6 +89,7 @@ typedef enum : NSUInteger {
     {
         _customFarme = frame;
         _isFullScreen = NO;
+        _autoFull = NO;
         self.backgroundColor = [UIColor blackColor];
         //注册屏幕旋转通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationChange:) name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
@@ -113,6 +114,13 @@ typedef enum : NSUInteger {
     [self addSubview:_activity];
     [_activity startAnimating];
 }
+#pragma mark - 是否自动支持全屏
+-(void)setAutoFull:(BOOL)autoFull
+{
+    _autoFull = autoFull;
+}
+
+
 #pragma mark - 创建播放器UI
 - (void)creatUI
 {
@@ -463,6 +471,10 @@ typedef enum : NSUInteger {
 #pragma mark - 屏幕旋转通知
 - (void)statusBarOrientationChange:(NSNotification *)notification
 {
+    if (_autoFull == NO)
+    {
+        return;
+    }
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     if (orientation == UIDeviceOrientationLandscapeLeft)
     {
@@ -474,7 +486,7 @@ typedef enum : NSUInteger {
     }
     else if (orientation == UIDeviceOrientationPortrait)
     {
-
+        [self originalscreen];
     }
 }
 #pragma mark - 全屏
