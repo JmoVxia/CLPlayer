@@ -56,6 +56,10 @@ playerView.repeatPlay = YES;
 }];
 
 ```
-#详细请看简书地址
+#播放器效果图
+
+![](http://upload-images.jianshu.io/upload_images/1979970-6bf88743bcaf8ff4.gif?imageMogr2/auto-orient/strip)
+
+#详细请看简书
 
 http://www.jianshu.com/p/b9659492d064
