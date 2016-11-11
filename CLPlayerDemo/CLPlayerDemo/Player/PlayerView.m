@@ -89,7 +89,8 @@ typedef enum : NSUInteger {
     {
         _customFarme         = frame;
         _isFullScreen        = NO;
-        _autoFull            = NO;
+        _autoFullScreen      = NO;
+        _repeatPlay          = NO;
         self.backgroundColor = [UIColor blackColor];
         
         //注册屏幕旋转通知
@@ -104,7 +105,7 @@ typedef enum : NSUInteger {
     return self;
 }
 #pragma mark - 传入播放地址
--(void)setUrl:(NSURL *)url
+- (void)setUrl:(NSURL *)url
 {
     self.frame                = _customFarme;
     _url                      = url;
@@ -131,9 +132,14 @@ typedef enum : NSUInteger {
                                                object:_player.currentItem];
 }
 #pragma mark - 是否自动支持全屏
--(void)setAutoFull:(BOOL)autoFull
+- (void)setAutoFullScreen:(BOOL)autoFullScreen
 {
-    _autoFull = autoFull;
+    _autoFullScreen = autoFullScreen;
+}
+#pragma mark - 重复播放
+- (void)setRepeatPlay:(BOOL)repeatPlay
+{
+    _repeatPlay = repeatPlay;
 }
 #pragma mark - 创建播放器UI
 - (void)creatUI
@@ -497,7 +503,15 @@ typedef enum : NSUInteger {
 #pragma mark - 播放完成
 - (void)moviePlayDidEnd:(id)sender
 {
-    [self pausePlay];
+    if (_repeatPlay == NO)
+    {
+        [self pausePlay];
+    }
+    else
+    {
+        [self resetPlay];
+    }
+    
     self.EndBlock();
 }
 - (void)endPlay:(EndBolck) end
@@ -537,7 +551,7 @@ typedef enum : NSUInteger {
 #pragma mark - 屏幕旋转通知
 - (void)statusBarOrientationChange:(NSNotification *)notification
 {
-    if (_autoFull == NO)
+    if (_autoFullScreen == NO)
     {
         return;
     }

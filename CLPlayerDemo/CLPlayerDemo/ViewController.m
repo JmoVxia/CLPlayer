@@ -23,23 +23,27 @@
     [super viewDidLoad];
 
     PlayerView *playerView = [[PlayerView alloc] initWithFrame:CGRectMake(0, 90, ScreenWidth, 300)];
-    [self.view addSubview:playerView];
     //视频地址
-    playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0215/56c1809735217_wpd.mp4"];
+    playerView.url         = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0215/56c1809735217_wpd.mp4"];
+    [self.view addSubview:playerView];
+    
     //播放
     [playerView playVideo];
+    
     //根据旋转自动支持全屏，默认不支持
-    playerView.autoFull = YES;
+    playerView.autoFullScreen = YES;
+    
+    //重复播放，默认不播放
+    playerView.repeatPlay = YES;
     
     //返回按钮点击事件回调
     [playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");
     }];
+    
     //播放完成回调
     [playerView endPlay:^{
         NSLog(@"播放完成");
-        //重新开始播放
-        [playerView resetPlay];
     }];
 
 

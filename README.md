@@ -10,44 +10,52 @@
 /**视频url*/
 @property (nonatomic,strong) NSURL *url;
 /**旋转自动全屏*/
-@property (nonatomic,assign) BOOL autoFull;
-/**返回按钮回调方法*/
-- (void)backButton:(BackButtonBlock) backButton;
-/**播放完成回调*/
-- (void)endPlay:(EndBolck) end;
+@property (nonatomic,assign) BOOL autoFullScreen;
+/**重复播放*/
+@property (nonatomic,assign) BOOL repeatPlay;
 /**播放*/
 - (void)playVideo;
 /**暂停*/
 - (void)pausePlay;
-/**重新开始播放*/
-- (void)resetPlay;
+/**返回按钮回调方法*/
+- (void)backButton:(BackButtonBlock) backButton;
+/**播放完成回调*/
+- (void)endPlay:(EndBolck) end;
 
 ```
 
 + 使用方法
 
-    先将Demo中播放器文件夹拖拽到工程中（资源文件不要忘记了），导入AVPlayer支持框架`MediaPlayer.framework`，如果不喜欢拖拽，可以直接使用cocoapods导入，`pod 'CLPlayer', '~> 1.0.1'`
+    直接使用cocoapods导入，`pod 'CLPlayer', '~> 1.0.1'`
+
 + 具体使用代码
 
 ```
 PlayerView *playerView = [[PlayerView alloc] initWithFrame:CGRectMake(0, 90, ScreenWidth, 300)];
+//视频地址
+playerView.url         = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0215/56c1809735217_wpd.mp4"];
 [self.view addSubview:playerView];
-    //视频地址
-playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0215/56c1809735217_wpd.mp4"];
-    //播放
+    
+//播放
 [playerView playVideo];
-    //根据旋转自动支持全屏，默认不支持
+    
+//根据旋转自动支持全屏，默认不支持
 playerView.autoFull = YES;
-    
-    //返回按钮点击事件回调
+  
+//重复播放，默认不播放
+playerView.repeatPlay = YES;
+
+//返回按钮点击事件回调
 [playerView backButton:^(UIButton *button) {
-    NSLog(@"返回按钮被点击");
+    NSLog(@"返回按钮被点击");
 }];
-    //播放完成回调
+    
+//播放完成回调
 [playerView endPlay:^{
-    NSLog(@"播放完成");
+    NSLog(@"播放完成");        
 }];
 
 ```
-#简书地址
+#详细请看简书地址
+
 http://www.jianshu.com/p/b9659492d064
