@@ -19,11 +19,14 @@
 - (void)playVideo;
 /**暂停*/
 - (void)pausePlay;
+/**重新开始播放*/
+- (void)resetPlay;
+
 ```
 
 + 使用方法
 
-    先将Demo中播放器文件夹拖拽到工程中（资源文件不要忘记了），导入AVPlayer支持框架`MediaPlayer.framework`，如果不喜欢拖拽，可以直接使用cocoapods导入，`pod 'CLPlayer', '~> 1.0.0'`
+    先将Demo中播放器文件夹拖拽到工程中（资源文件不要忘记了），导入AVPlayer支持框架`MediaPlayer.framework`，如果不喜欢拖拽，可以直接使用cocoapods导入，`pod 'CLPlayer', '~> 1.0.1'`
 + 具体使用代码
 
 ```
