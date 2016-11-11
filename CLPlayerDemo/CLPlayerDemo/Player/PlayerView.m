@@ -87,35 +87,48 @@ typedef enum : NSUInteger {
 {
     if (self = [super initWithFrame:frame])
     {
-        _customFarme = frame;
-        _isFullScreen = NO;
-        _autoFull = NO;
+        _customFarme         = frame;
+        _isFullScreen        = NO;
+        _autoFull            = NO;
         self.backgroundColor = [UIColor blackColor];
+        
         //注册屏幕旋转通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationChange:) name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationChange:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:[UIDevice currentDevice]];
         //APP运行状态通知，将要被挂起
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appwillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appwillResignActive:)
+                                                     name:UIApplicationWillResignActiveNotification
+                                                   object:nil];
     }
     return self;
 }
 #pragma mark - 传入播放地址
 -(void)setUrl:(NSURL *)url
 {
-    _url = url;
-    self.playerItem = [AVPlayerItem playerItemWithURL:url];
-    self.player = [AVPlayer playerWithPlayerItem:_playerItem];
-    _playerLayer = [AVPlayerLayer playerLayerWithPlayer:_player];
-    self.frame = _customFarme;
-    _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
+    self.frame                = _customFarme;
+    _url                      = url;
+    
+    _playerItem               = [AVPlayerItem playerItemWithURL:url];
+    _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
+    _playerLayer              = [AVPlayerLayer playerLayerWithPlayer:_player];
+    _playerLayer.frame        = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
+    _playerLayer.videoGravity = AVLayerVideoGravityResize;
+    [self.layer addSublayer:_playerLayer];
+
+    //创建原始屏幕UI
     [self originalscreen];
+    
     //转子
-    self.activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    _activity        = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     _activity.center = _backView.center;
-    [self addSubview:_activity];
     [_activity startAnimating];
+    [self addSubview:_activity];
     
     //AVPlayer播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:_player.currentItem];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:_player.currentItem];
 }
 #pragma mark - 是否自动支持全屏
 -(void)setAutoFull:(BOOL)autoFull
@@ -125,24 +138,27 @@ typedef enum : NSUInteger {
 #pragma mark - 创建播放器UI
 - (void)creatUI
 {
-    _playerLayer.videoGravity = AVLayerVideoGravityResize;
-    [self.layer addSublayer:_playerLayer];
-    
     //最上面的View
-    _backView = [[UIView alloc]initWithFrame:CGRectMake(0, _playerLayer.frame.origin.y, _playerLayer.frame.size.width, _playerLayer.frame.size.height)];
+    _backView                 = [[UIView alloc]init];
+    _backView.frame           = CGRectMake(0, _playerLayer.frame.origin.y, _playerLayer.frame.size.width, _playerLayer.frame.size.height);
     _backView.backgroundColor = [UIColor clearColor];
     [self addSubview:_backView];
     
     //顶部View条
-    self.topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _backView.width, ViewHeight)];
+    _topView                 = [[UIView alloc]init];
+    _topView.frame           = CGRectMake(0, 0, _backView.width, ViewHeight);
     _topView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
     [_backView addSubview:_topView];
+    
     //底部View条
-    self.bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, _backView.height - ViewHeight, _backView.width, ViewHeight)];
+    _bottomView                 = [[UIView alloc] init];
+    _bottomView.frame           = CGRectMake(0, _backView.height - ViewHeight, _backView.width, ViewHeight);
     _bottomView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
     [_backView addSubview:_bottomView];
+    
     // 监听loadedTimeRanges属性
-    [self.playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+    [_playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+    
     //创建播放按钮
     [self createButton];
     //创建进度条
@@ -159,10 +175,18 @@ typedef enum : NSUInteger {
     [self createGesture];
     
     //计时器，循环执行
-    [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timeStack) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                     target:self
+                                   selector:@selector(timeStack)
+                                   userInfo:nil
+                                    repeats:YES];
     //定时器，工具条消失
-    _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime target:self selector:@selector(disappear) userInfo:nil repeats:NO];
-
+    _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+                                              target:self
+                                            selector:@selector(disappear)
+                                            userInfo:nil
+                                             repeats:NO];
+    
 }
 #pragma mark - 隐藏或者显示状态栏方法
 - (void)setStatusBarHidden:(BOOL)hidden
@@ -170,7 +194,7 @@ typedef enum : NSUInteger {
     //取出当前控制器的导航条
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
     //设置是否隐藏
-    statusBar.hidden = hidden;
+    statusBar.hidden  = hidden;
 }
 #pragma mark - 创建UIProgressView
 - (void)createProgress
@@ -184,18 +208,19 @@ typedef enum : NSUInteger {
     {
         width = self.frame.size.height;
     }
-    self.progress = [[UIProgressView alloc]initWithFrame:CGRectMake(_startButton.right + Padding, 0, width - 80 - Padding - _startButton.right - Padding - Padding, Padding)];
-    self.progress.centerY = _bottomView.height/2.0;
-
+    _progress                = [[UIProgressView alloc]init];
+    _progress.frame          = CGRectMake(_startButton.right + Padding, 0, width - 80 - Padding - _startButton.right - Padding - Padding, Padding);
+    _progress.centerY        = _bottomView.height/2.0;
     //进度条颜色
-    self.progress.trackTintColor = ProgressColor;
+    _progress.trackTintColor = ProgressColor;
+    
     // 计算缓冲进度
     NSTimeInterval timeInterval = [self availableDuration];
-    CMTime duration = self.playerItem.duration;
-    CGFloat totalDuration = CMTimeGetSeconds(duration);
-    [self.progress setProgress:timeInterval / totalDuration animated:NO];
+    CMTime duration             = _playerItem.duration;
+    CGFloat totalDuration       = CMTimeGetSeconds(duration);
+    [_progress setProgress:timeInterval / totalDuration animated:NO];
     
-    CGFloat time = round(timeInterval);
+    CGFloat time  = round(timeInterval);
     CGFloat total = round(totalDuration);
     
     //确保都是number
@@ -204,18 +229,18 @@ typedef enum : NSUInteger {
         if (time == total)
         {
             //缓冲进度颜色
-            self.progress.progressTintColor = ProgressTintColor;
+            _progress.progressTintColor = ProgressTintColor;
         }
         else
         {
             //缓冲进度颜色
-            self.progress.progressTintColor = [UIColor clearColor];
+            _progress.progressTintColor = [UIColor clearColor];
         }
     }
     else
     {
         //缓冲进度颜色
-        self.progress.progressTintColor = [UIColor clearColor];
+        _progress.progressTintColor = [UIColor clearColor];
     }
     [_bottomView addSubview:_progress];
 }
@@ -226,43 +251,53 @@ typedef enum : NSUInteger {
     {
         // 计算缓冲进度
         NSTimeInterval timeInterval = [self availableDuration];
-        CMTime duration = self.playerItem.duration;
-        CGFloat totalDuration = CMTimeGetSeconds(duration);
-        [self.progress setProgress:timeInterval / totalDuration animated:NO];
+        CMTime duration             = _playerItem.duration;
+        CGFloat totalDuration       = CMTimeGetSeconds(duration);
+        [_progress setProgress:timeInterval / totalDuration animated:NO];
+        
         //设置缓存进度颜色
-        self.progress.progressTintColor = ProgressTintColor;
+        _progress.progressTintColor = ProgressTintColor;
     }
 }
 //计算缓冲进度
 - (NSTimeInterval)availableDuration
 {
     NSArray *loadedTimeRanges = [[_player currentItem] loadedTimeRanges];
-    CMTimeRange timeRange = [loadedTimeRanges.firstObject CMTimeRangeValue];// 获取缓冲区域
-    float startSeconds = CMTimeGetSeconds(timeRange.start);
-    float durationSeconds = CMTimeGetSeconds(timeRange.duration);
-    NSTimeInterval result = startSeconds + durationSeconds;// 计算缓冲总进度
+    CMTimeRange timeRange     = [loadedTimeRanges.firstObject CMTimeRangeValue];// 获取缓冲区域
+    float startSeconds        = CMTimeGetSeconds(timeRange.start);
+    float durationSeconds     = CMTimeGetSeconds(timeRange.duration);
+    NSTimeInterval result     = startSeconds + durationSeconds;// 计算缓冲总进度
     return result;
 }
 #pragma mark - 创建UISlider
 - (void)createSlider
 {
-    self.slider = [[Slider alloc]init];
-    _slider.frame = CGRectMake(_progress.x, 0, _progress.width, ViewHeight);
+    _slider         = [[Slider alloc]init];
+    _slider.frame   = CGRectMake(_progress.x, 0, _progress.width, ViewHeight);
     _slider.centerY = _bottomView.height/2.0;
     [_bottomView addSubview:_slider];
+    
     //自定义滑块大小
-    UIImage *image = [UIImage imageNamed:@"round"];
+    UIImage *image     = [UIImage imageNamed:@"round"];
     //改变滑块大小
     UIImage *tempImage = [image OriginImage:image scaleToSize:CGSizeMake( SliderSize, SliderSize)];
     //改变滑块颜色
-    UIImage *newImage = [tempImage imageWithTintColor:SliderColor];
+    UIImage *newImage  = [tempImage imageWithTintColor:SliderColor];
     [_slider setThumbImage:newImage forState:UIControlStateNormal];
+    
     //开始拖拽
-    [_slider addTarget:self action:@selector(processSliderStartDragAction:) forControlEvents:UIControlEventTouchDown];
+    [_slider addTarget:self
+                action:@selector(processSliderStartDragAction:)
+      forControlEvents:UIControlEventTouchDown];
     //拖拽中
-    [_slider addTarget:self action:@selector(sliderValueChangedAction:) forControlEvents:UIControlEventValueChanged];
+    [_slider addTarget:self
+                action:@selector(sliderValueChangedAction:)
+      forControlEvents:UIControlEventValueChanged];
     //结束拖拽
-    [_slider addTarget:self action:@selector(processSliderEndDragAction:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+    [_slider addTarget:self
+                action:@selector(processSliderEndDragAction:)
+      forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+    
     //左边颜色
     _slider.minimumTrackTintColor = PlayFinishColor;
     //右边颜色
@@ -281,44 +316,50 @@ typedef enum : NSUInteger {
 {
     //继续播放
     [self playVideo];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime target:self selector:@selector(disappear) userInfo:nil repeats:NO];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+                                              target:self
+                                            selector:@selector(disappear)
+                                            userInfo:nil
+                                             repeats:NO];
 }
 //拖拽中
 - (void)sliderValueChangedAction:(UISlider *)slider
 {
     //计算出拖动的当前秒数
-    CGFloat total = (CGFloat)_playerItem.duration.value / _playerItem.duration.timescale;
+    CGFloat total           = (CGFloat)_playerItem.duration.value / _playerItem.duration.timescale;
     NSInteger dragedSeconds = floorf(total * slider.value);
-        
     //转换成CMTime才能给player来控制播放进度
-    CMTime dragedCMTime = CMTimeMake(dragedSeconds, 1);
+    CMTime dragedCMTime     = CMTimeMake(dragedSeconds, 1);
     [_player seekToTime:dragedCMTime];
 }
 #pragma mark - 创建播放时间
 - (void)createCurrentTimeLabel
 {
-    self.currentTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 80, Padding)];
-    self.currentTimeLabel.centerY = _progress.centerY;
-    self.currentTimeLabel.right = self.backView.right - Padding;
-    [_bottomView addSubview:_currentTimeLabel];
+    _currentTimeLabel           = [[UILabel alloc]init];
+    _currentTimeLabel.frame     = CGRectMake(0, 0, 80, Padding);
+    _currentTimeLabel.centerY   = _progress.centerY;
+    _currentTimeLabel.right     = _backView.right - Padding;
     _currentTimeLabel.textColor = [UIColor whiteColor];
-    _currentTimeLabel.font = [UIFont systemFontOfSize:12];
-    _currentTimeLabel.text = @"00:00/00:00";
+    _currentTimeLabel.font      = [UIFont systemFontOfSize:12];
+    _currentTimeLabel.text      = @"00:00/00:00";
+    [_bottomView addSubview:_currentTimeLabel];
 }
 #pragma mark - 计时器事件
 - (void)timeStack
 {
     if (_playerItem.duration.timescale != 0)
     {
-        _slider.maximumValue = 1;//总共时长
-        _slider.value = CMTimeGetSeconds([_playerItem currentTime]) / (_playerItem.duration.value / _playerItem.duration.timescale);//当前进度
+        //总共时长
+        _slider.maximumValue = 1;
+        //当前进度
+        _slider.value        = CMTimeGetSeconds([_playerItem currentTime]) / (_playerItem.duration.value / _playerItem.duration.timescale);
         //当前时长进度progress
-        NSInteger proMin = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
-        NSInteger proSec = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
+        NSInteger proMin     = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
+        NSInteger proSec     = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
         //duration 总时长
-        NSInteger durMin = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总秒
-        NSInteger durSec = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总分钟
-        self.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld / %02ld:%02ld", proMin, proSec, durMin, durSec];
+        NSInteger durMin     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总秒
+        NSInteger durSec     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总分钟
+        self.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld / %02ld:%02ld", (long)proMin, proSec, durMin, durSec];
     }
     //开始播放停止转子
     if (_player.status == AVPlayerStatusReadyToPlay)
@@ -329,15 +370,16 @@ typedef enum : NSUInteger {
     {
         [_activity startAnimating];
     }
-
+    
 }
 #pragma mark - 播放按钮
 - (void)createButton
 {
-    _startButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _startButton.frame = CGRectMake(Padding, 0, ButtonSize, ButtonSize);
+    _startButton         = [UIButton buttonWithType:UIButtonTypeCustom];
+    _startButton.frame   = CGRectMake(Padding, 0, ButtonSize, ButtonSize);
     _startButton.centerY = _bottomView.height/2.0;
     [_bottomView addSubview:_startButton];
+   
     //根据播放状态来设置播放按钮
     if (_player.rate == 1.0)
     {
@@ -349,7 +391,10 @@ typedef enum : NSUInteger {
         _startButton.selected = NO;
         [_startButton setBackgroundImage:[[UIImage imageNamed:@"playBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
-    [_startButton addTarget:self action:@selector(startAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_startButton addTarget:self
+                     action:@selector(startAction:)
+           forControlEvents:UIControlEventTouchUpInside];
 }
 #pragma mark - 播放暂停按钮方法
 - (void)startAction:(UIButton *)button
@@ -367,19 +412,24 @@ typedef enum : NSUInteger {
 - (void)createBackButton
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0 , 0, ButtonSize, ButtonSize);
-    button.centerY = _topView.centerY;
+    button.frame     = CGRectMake(0 , 0, ButtonSize, ButtonSize);
+    button.centerY   = _topView.centerY;
     [button setBackgroundImage:[[UIImage imageNamed:@"backBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     [_topView addSubview:button];
-    [button addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [button addTarget:self
+               action:@selector(backButtonAction:)
+     forControlEvents:UIControlEventTouchUpInside];
 }
 #pragma mark - 全屏按钮
 - (void)createMaxButton
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(0, 0, ButtonSize, ButtonSize);
-    button.right = _topView.right - Padding;
-    button.centerY = _topView.centerY;
+    button.frame     = CGRectMake(0, 0, ButtonSize, ButtonSize);
+    button.right     = _topView.right - Padding;
+    button.centerY   = _topView.centerY;
+    [_topView addSubview:button];
+
     if (_isFullScreen == YES)
     {
         [button setBackgroundImage:[[UIImage imageNamed:@"minBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
@@ -388,8 +438,10 @@ typedef enum : NSUInteger {
     {
         [button setBackgroundImage:[[UIImage imageNamed:@"maxBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
-    [button addTarget:self action:@selector(maxAction:) forControlEvents:UIControlEventTouchUpInside];
-    [_topView addSubview:button];
+    
+    [button addTarget:self
+               action:@selector(maxAction:)
+     forControlEvents:UIControlEventTouchUpInside];
 }
 #pragma mark - 全屏按钮响应事件
 - (void)maxAction:(UIButton *)button
@@ -406,7 +458,8 @@ typedef enum : NSUInteger {
 #pragma mark - 创建手势
 - (void)createGesture
 {
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction:)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self
+                                                                         action:@selector(tapAction:)];
     [self addGestureRecognizer:tap];
 }
 #pragma mark - 轻拍方法
@@ -419,10 +472,16 @@ typedef enum : NSUInteger {
         [UIView animateWithDuration:0.5 animations:^{
             _backView.alpha = 0;
         }];
-    } else if (_backView.alpha == 0)
+    }
+    else if (_backView.alpha == 0)
     {
         //添加定时消失
-        _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime target:self selector:@selector(disappear) userInfo:nil repeats:NO];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+                                                  target:self
+                                                selector:@selector(disappear)
+                                                userInfo:nil
+                                                 repeats:NO];
+        
         [UIView animateWithDuration:0.5 animations:^{
             _backView.alpha = 1;
         }];
@@ -457,15 +516,15 @@ typedef enum : NSUInteger {
 #pragma mark - 暂停播放
 - (void)pausePlay
 {
-    [_player pause];
     _startButton.selected = NO;
+    [_player pause];
     [_startButton setBackgroundImage:[[UIImage imageNamed:@"playBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
 }
 #pragma mark - 播放
 - (void)playVideo
 {
-    [_player play];
     _startButton.selected = YES;
+    [_player play];
     [_startButton setBackgroundImage:[[UIImage imageNamed:@"pauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
 }
 #pragma mark - 重新开始播放
@@ -482,6 +541,7 @@ typedef enum : NSUInteger {
     {
         return;
     }
+    
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     if (orientation == UIDeviceOrientationLandscapeLeft)
     {
@@ -499,59 +559,59 @@ typedef enum : NSUInteger {
 #pragma mark - 全屏
 - (void)fullScreenWithDirection:(Direction)direction
 {
-    self.alpha = 0;
+    //记录播放器父类
+    _fatherView = self.superview;
+    
+    _isFullScreen = YES;
+
     //取消定时消失
     [_timer invalidate];
     [self setStatusBarHidden:YES];
-    //记录播放器父类
-    _fatherView = self.superview;
     //添加到Window上
     [self.window addSubview:self];
-   
+    
     if (direction == Letf)
     {
         [UIView animateWithDuration:0.25 animations:^{
             self.transform = CGAffineTransformMakeRotation(M_PI / 2);
-            self.alpha = 1;
         }];
-
     }
     else
     {
         [UIView animateWithDuration:0.25 animations:^{
             self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
-            self.alpha = 1;
         }];
     }
     
-    self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    self.frame         = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
     _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
+    
     //删除原有控件
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    _isFullScreen = YES;
     //创建全屏UI
     [self creatUI];
 }
 #pragma mark - 原始大小
 - (void)originalscreen
 {
-    self.alpha = 0;
-    [UIView animateWithDuration:0.25 animations:^{
-        self.alpha = 1;
-        //还原大小
-        self.transform = CGAffineTransformMakeRotation(0);
-    }];
+    _isFullScreen = NO;
     
     //取消定时消失
     [_timer invalidate];
     [self setStatusBarHidden:NO];
+
+    [UIView animateWithDuration:0.25 animations:^{
+        //还原大小
+        self.transform = CGAffineTransformMakeRotation(0);
+    }];
+    
     self.frame = _customFarme;
     _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
     //还原到原有父类上
     [_fatherView addSubview:self];
+    
     //删除
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    _isFullScreen = NO;
     //创建小屏UI
     [self creatUI];
 }
@@ -565,9 +625,12 @@ typedef enum : NSUInteger {
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:@"loadedTimeRanges"];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:_player.currentItem];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification
+                                                  object:_player.currentItem];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification
+                                                  object:[UIDevice currentDevice]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification
+                                                  object:nil];
 }
 
 
