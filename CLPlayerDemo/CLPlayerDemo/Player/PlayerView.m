@@ -499,6 +499,7 @@ typedef enum : NSUInteger {
 #pragma mark - 全屏
 - (void)fullScreenWithDirection:(Direction)direction
 {
+    self.alpha = 0;
     //取消定时消失
     [_timer invalidate];
     [self setStatusBarHidden:YES];
@@ -509,37 +510,47 @@ typedef enum : NSUInteger {
    
     if (direction == Letf)
     {
-        self.transform = CGAffineTransformMakeRotation(M_PI / 2);
+        [UIView animateWithDuration:0.25 animations:^{
+            self.transform = CGAffineTransformMakeRotation(M_PI / 2);
+            self.alpha = 1;
+        }];
+
     }
     else
     {
-        self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
+        [UIView animateWithDuration:0.25 animations:^{
+            self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
+            self.alpha = 1;
+        }];
     }
-        self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
+    
+    self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+    _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
     //删除原有控件
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    
-    
     _isFullScreen = YES;
-    //创建小屏UI
+    //创建全屏UI
     [self creatUI];
 }
 #pragma mark - 原始大小
 - (void)originalscreen
 {
+    self.alpha = 0;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 1;
+        //还原大小
+        self.transform = CGAffineTransformMakeRotation(0);
+    }];
+    
     //取消定时消失
     [_timer invalidate];
     [self setStatusBarHidden:NO];
-    //还原大小
-    self.transform = CGAffineTransformMakeRotation(0);
     self.frame = _customFarme;
     _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
     //还原到原有父类上
     [_fatherView addSubview:self];
     //删除
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-
     _isFullScreen = NO;
     //创建小屏UI
     [self creatUI];
