@@ -257,34 +257,42 @@ typedef enum : NSUInteger {
     //改变滑块颜色
     UIImage *newImage = [tempImage imageWithTintColor:SliderColor];
     [_slider setThumbImage:newImage forState:UIControlStateNormal];
-    //添加监听
-    [_slider addTarget:self action:@selector(progressSlider:) forControlEvents:UIControlEventValueChanged];
+    //开始拖拽
+    [_slider addTarget:self action:@selector(processSliderStartDragAction:) forControlEvents:UIControlEventTouchDown];
+    //拖拽中
+    [_slider addTarget:self action:@selector(sliderValueChangedAction:) forControlEvents:UIControlEventValueChanged];
+    //结束拖拽
+    [_slider addTarget:self action:@selector(processSliderEndDragAction:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     //左边颜色
     _slider.minimumTrackTintColor = PlayFinishColor;
     //右边颜色
     _slider.maximumTrackTintColor = [UIColor clearColor];
 }
 #pragma mark - 拖动进度条
-- (void)progressSlider:(UISlider *)slider
+//开始
+- (void)processSliderStartDragAction:(UISlider *)slider
 {
-    //拖动改变视频播放进度
-    if (_player.status == AVPlayerStatusReadyToPlay)
-    {
-        //暂停
-        [self pausePlay];
+    //暂停
+    [self pausePlay];
+    [_timer invalidate];
+}
+//结束
+- (void)processSliderEndDragAction:(UISlider *)slider
+{
+    //继续播放
+    [self playVideo];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime target:self selector:@selector(disappear) userInfo:nil repeats:NO];
+}
+//拖拽中
+- (void)sliderValueChangedAction:(UISlider *)slider
+{
+    //计算出拖动的当前秒数
+    CGFloat total = (CGFloat)_playerItem.duration.value / _playerItem.duration.timescale;
+    NSInteger dragedSeconds = floorf(total * slider.value);
         
-        //计算出拖动的当前秒数
-        CGFloat total = (CGFloat)_playerItem.duration.value / _playerItem.duration.timescale;
-        NSInteger dragedSeconds = floorf(total * slider.value);
-        
-        //转换成CMTime才能给player来控制播放进度
-        CMTime dragedCMTime = CMTimeMake(dragedSeconds, 1);
-       
-        [_player seekToTime:dragedCMTime completionHandler:^(BOOL finish){
-            //继续播放
-            [self playVideo];
-        }];
-    }
+    //转换成CMTime才能给player来控制播放进度
+    CMTime dragedCMTime = CMTimeMake(dragedSeconds, 1);
+    [_player seekToTime:dragedCMTime];
 }
 #pragma mark - 创建播放时间
 - (void)createCurrentTimeLabel
@@ -503,9 +511,9 @@ typedef enum : NSUInteger {
         self.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
         _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
     //删除原有控件
-    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj removeFromSuperview];
-    }];
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
+    
     _isFullScreen = YES;
     //创建小屏UI
     [self creatUI];
@@ -523,9 +531,8 @@ typedef enum : NSUInteger {
     //还原到原有父类上
     [_fatherView addSubview:self];
     //删除
-    [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [obj removeFromSuperview];
-    }];
+    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+
     _isFullScreen = NO;
     //创建小屏UI
     [self creatUI];
@@ -544,5 +551,9 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
 }
+
+
+
+
 
 @end
