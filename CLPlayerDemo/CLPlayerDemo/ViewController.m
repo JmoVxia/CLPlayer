@@ -11,9 +11,6 @@
 #import "UIView+SetRect.h"
 @interface ViewController ()
 
-
-
-
 @end
 
 @implementation ViewController
