@@ -25,5 +25,7 @@ typedef void(^EndBolck)();
 - (void)playVideo;
 /**暂停*/
 - (void)pausePlay;
+/**重新开始播放*/
+- (void)resetPlay;
 
 @end

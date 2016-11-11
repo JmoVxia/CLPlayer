@@ -38,6 +38,8 @@
     //播放完成回调
     [playerView endPlay:^{
         NSLog(@"播放完成");
+        //重新开始播放
+        [playerView resetPlay];
     }];
 
 
