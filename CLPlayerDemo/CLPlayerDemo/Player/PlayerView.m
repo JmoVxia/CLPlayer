@@ -113,6 +113,9 @@ typedef enum : NSUInteger {
     _activity.center = _backView.center;
     [self addSubview:_activity];
     [_activity startAnimating];
+    
+    //AVPlayer播放完成通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:_player.currentItem];
 }
 #pragma mark - 是否自动支持全屏
 -(void)setAutoFull:(BOOL)autoFull
@@ -124,9 +127,6 @@ typedef enum : NSUInteger {
 {
     _playerLayer.videoGravity = AVLayerVideoGravityResize;
     [self.layer addSublayer:_playerLayer];
-
-    //AVPlayer播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:_player.currentItem];
     
     //最上面的View
     _backView = [[UIView alloc]initWithFrame:CGRectMake(0, _playerLayer.frame.origin.y, _playerLayer.frame.size.width, _playerLayer.frame.size.height)];
