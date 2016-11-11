@@ -46,32 +46,32 @@ typedef enum : NSUInteger {
 /**父类控件*/
 @property (nonatomic,strong) UIView *fatherView;
 /**全屏标记*/
-@property (nonatomic,assign) BOOL isFullScreen;
+@property (nonatomic,assign) BOOL   isFullScreen;
 
 /**播放器*/
-@property(nonatomic,strong)AVPlayer *player;
+@property (nonatomic,strong) AVPlayer                *player;
 /**playerLayer*/
-@property (nonatomic,strong) AVPlayerLayer *playerLayer;
+@property (nonatomic,strong) AVPlayerLayer           *playerLayer;
 /**播放器item*/
-@property(nonatomic,strong)AVPlayerItem *playerItem;
+@property (nonatomic,strong) AVPlayerItem            *playerItem;
 /**播放进度条*/
-@property(nonatomic,strong)Slider *slider;
+@property (nonatomic,strong) Slider                  *slider;
 /**播放时间*/
-@property(nonatomic,strong)UILabel *currentTimeLabel;
+@property (nonatomic,strong) UILabel                 *currentTimeLabel;
 /**表面View*/
-@property(nonatomic,strong)UIView *backView;
+@property (nonatomic,strong) UIView                  *backView;
 /**转子*/
-@property(nonatomic,strong)UIActivityIndicatorView *activity;
+@property (nonatomic,strong) UIActivityIndicatorView *activity;
 /**缓冲进度条*/
-@property(nonatomic,strong)UIProgressView *progress;
+@property (nonatomic,strong) UIProgressView          *progress;
 /**顶部控件*/
-@property(nonatomic,strong) UIView *topView;
+@property (nonatomic,strong) UIView                  *topView;
 /**底部控件 */
-@property (nonatomic,strong) UIView *bottomView;
+@property (nonatomic,strong) UIView                  *bottomView;
 /**播放按钮*/
-@property (nonatomic,strong) UIButton *startButton;
+@property (nonatomic,strong) UIButton                *startButton;
 /**轻拍定时器*/
-@property (nonatomic,strong) NSTimer *timer;
+@property (nonatomic,strong) NSTimer                 *timer;
 
 /**返回按钮回调*/
 @property (nonatomic,copy) void(^BackBlock) (UIButton *backButton);
