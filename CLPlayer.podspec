@@ -1,12 +1,11 @@
 Pod::Spec.new do |s|
 
   s.name         = "CLPlayer"
-  s.version      = "1.0.1"
+  s.version      = "1.0.0"
   s.summary      = "A Player."
   s.description  = <<-DESC
 		This is a very easy to use player.
                       DESC
-
   s.homepage     = "https://github.com/JmoVxia/CLPlayer"
   s.license      = "MIT"
   s.author       = { "JmoVxia" => "610934716@qq.com" }
