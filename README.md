@@ -26,7 +26,7 @@
 
 + 使用方法
 
-    直接使用cocoapods导入，`pod 'CLPlayer', '~> 1.0.1'`
+      直接使用cocoapods导入，`pod 'CLPlayer', '~> 1.0.0'`
 
 + 具体使用代码
 
