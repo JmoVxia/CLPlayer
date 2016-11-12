@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CLPlayer"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "A Player."
   s.description  = <<-DESC
 		This is a very easy to use player.
