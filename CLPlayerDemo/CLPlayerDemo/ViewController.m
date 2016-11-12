@@ -28,10 +28,10 @@
     [playerView playVideo];
     
     //根据旋转自动支持全屏，默认不支持
-    playerView.autoFullScreen = YES;
+//    playerView.autoFullScreen = YES;
     
     //重复播放，默认不播放
-    playerView.repeatPlay = YES;
+//    playerView.repeatPlay = YES;
     
     //返回按钮点击事件回调
     [playerView backButton:^(UIButton *button) {
