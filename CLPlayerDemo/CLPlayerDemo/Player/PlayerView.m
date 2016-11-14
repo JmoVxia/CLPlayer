@@ -98,7 +98,7 @@ typedef enum : NSUInteger {
         self.backgroundColor = [UIColor blackColor];
         
         //注册屏幕旋转通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarOrientationChange:)
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:)
                                                      name:UIDeviceOrientationDidChangeNotification
                                                    object:[UIDevice currentDevice]];
         //APP运行状态通知，将要被挂起
@@ -568,7 +568,7 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark - 屏幕旋转通知
-- (void)statusBarOrientationChange:(NSNotification *)notification
+- (void)orientChange:(NSNotification *)notification
 {
     if (_autoFullScreen == NO)
     {
