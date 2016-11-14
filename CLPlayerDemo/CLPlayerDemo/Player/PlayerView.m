@@ -47,6 +47,8 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) UIView *fatherView;
 /**全屏标记*/
 @property (nonatomic,assign) BOOL   isFullScreen;
+/**横屏标记*/
+@property (nonatomic,assign) BOOL   landscape;
 
 /**播放器*/
 @property (nonatomic,strong) AVPlayer                *player;
@@ -89,8 +91,10 @@ typedef enum : NSUInteger {
     {
         _customFarme         = frame;
         _isFullScreen        = NO;
-        _autoFullScreen      = NO;
+        _autoFullScreen      = YES;
         _repeatPlay          = NO;
+        _isLandscape         = NO;
+        _landscape           = NO;
         self.backgroundColor = [UIColor blackColor];
         
         //注册屏幕旋转通知
@@ -104,6 +108,22 @@ typedef enum : NSUInteger {
     }
     return self;
 }
+#pragma mark - 是否自动支持全屏
+- (void)setAutoFullScreen:(BOOL)autoFullScreen
+{
+    _autoFullScreen = autoFullScreen;
+}
+#pragma mark - 是否支持横屏
+-(void)setIsLandscape:(BOOL)isLandscape
+{
+    _isLandscape = isLandscape;
+    _landscape   = isLandscape;
+}
+#pragma mark - 重复播放
+- (void)setRepeatPlay:(BOOL)repeatPlay
+{
+    _repeatPlay = repeatPlay;
+}
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url
 {
@@ -116,7 +136,7 @@ typedef enum : NSUInteger {
     _playerLayer.frame        = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
     _playerLayer.videoGravity = AVLayerVideoGravityResize;
     [self.layer addSublayer:_playerLayer];
-
+    
     //创建原始屏幕UI
     [self originalscreen];
     
@@ -130,16 +150,6 @@ typedef enum : NSUInteger {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:)
                                                  name:AVPlayerItemDidPlayToEndTimeNotification
                                                object:_player.currentItem];
-}
-#pragma mark - 是否自动支持全屏
-- (void)setAutoFullScreen:(BOOL)autoFullScreen
-{
-    _autoFullScreen = autoFullScreen;
-}
-#pragma mark - 重复播放
-- (void)setRepeatPlay:(BOOL)repeatPlay
-{
-    _repeatPlay = repeatPlay;
 }
 #pragma mark - 创建播放器UI
 - (void)creatUI
@@ -206,13 +216,20 @@ typedef enum : NSUInteger {
 - (void)createProgress
 {
     CGFloat width;
-    if (_isFullScreen == NO)
+    if (_isLandscape == YES)
     {
         width = self.frame.size.width;
     }
     else
     {
-        width = self.frame.size.height;
+        if (_isFullScreen == NO)
+        {
+            width = self.frame.size.width;
+        }
+        else
+        {
+            width = self.frame.size.height;
+        }
     }
     _progress                = [[UIProgressView alloc]init];
     _progress.frame          = CGRectMake(_startButton.right + Padding, 0, width - 80 - Padding - _startButton.right - Padding - Padding, Padding);
@@ -452,6 +469,7 @@ typedef enum : NSUInteger {
 #pragma mark - 全屏按钮响应事件
 - (void)maxAction:(UIButton *)button
 {
+    _isLandscape = NO;
     if (_isFullScreen == NO)
     {
         [self fullScreenWithDirection:Letf];
@@ -460,6 +478,7 @@ typedef enum : NSUInteger {
     {
         [self originalscreen];
     }
+    _isLandscape = _landscape;
 }
 #pragma mark - 创建手势
 - (void)createGesture
@@ -584,21 +603,29 @@ typedef enum : NSUInteger {
     //添加到Window上
     [self.window addSubview:self];
     
-    if (direction == Letf)
+    if (_isLandscape == YES)
     {
-        [UIView animateWithDuration:0.25 animations:^{
-            self.transform = CGAffineTransformMakeRotation(M_PI / 2);
-        }];
+        self.frame         = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        _playerLayer.frame = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
     }
     else
-    {
-        [UIView animateWithDuration:0.25 animations:^{
-            self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
-        }];
+    {        
+        if (direction == Letf)
+        {
+            [UIView animateWithDuration:0.25 animations:^{
+                self.transform = CGAffineTransformMakeRotation(M_PI / 2);
+            }];
+        }
+        else
+        {
+            [UIView animateWithDuration:0.25 animations:^{
+                self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
+            }];
+        }
+        self.frame         = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
+        _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
     }
     
-    self.frame         = CGRectMake(0, 0, ScreenWidth, ScreenHeight);
-    _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
     
     //删除原有控件
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
@@ -608,6 +635,8 @@ typedef enum : NSUInteger {
 #pragma mark - 原始大小
 - (void)originalscreen
 {
+    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
+    
     _isFullScreen = NO;
     
     //取消定时消失
