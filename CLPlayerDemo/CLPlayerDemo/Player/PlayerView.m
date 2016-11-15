@@ -96,7 +96,8 @@ typedef enum : NSUInteger {
         _isLandscape         = NO;
         _landscape           = NO;
         self.backgroundColor = [UIColor blackColor];
-        
+        //开启
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:)
                                                      name:UIDeviceOrientationDidChangeNotification
@@ -601,7 +602,8 @@ typedef enum : NSUInteger {
     [_timer invalidate];
     [self setStatusBarHidden:YES];
     //添加到Window上
-    [self.window addSubview:self];
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    [keyWindow addSubview:self];
     
     if (_isLandscape == YES)
     {
@@ -667,6 +669,7 @@ typedef enum : NSUInteger {
 #pragma mark - dealloc
 - (void)dealloc
 {
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:@"loadedTimeRanges"];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification
                                                   object:_player.currentItem];
