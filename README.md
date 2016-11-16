@@ -33,7 +33,7 @@
 + 具体使用代码
 
 ```
-PlayerView *playerView = [[PlayerView alloc] initWithFrame:CGRectMake(0, 90, ScreenWidth, 300)];
+CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 90, ScreenWidth, 300)];
 [self.view addSubview:playerView];
 //根据旋转自动支持全屏，默认支持
 //    playerView.autoFullScreen = NO;
