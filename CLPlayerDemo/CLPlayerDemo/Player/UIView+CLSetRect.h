@@ -58,7 +58,7 @@
  */
 #define  iPhone6_6sPlus (Width == 414.f && Height == 736.f ? YES : NO)
 
-@interface UIView (SetRect)
+@interface UIView (CLSetRect)
 
 
 

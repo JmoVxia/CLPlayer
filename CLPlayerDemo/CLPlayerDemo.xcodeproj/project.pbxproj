@@ -7,62 +7,43 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5B1680B51DCC5800000AC320 /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680A51DCC5800000AC320 /* PlayerView.m */; };
-		5B1680B61DCC5800000AC320 /* backBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680A71DCC5800000AC320 /* backBtn.png */; };
-		5B1680B71DCC5800000AC320 /* maxBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680A81DCC5800000AC320 /* maxBtn.png */; };
-		5B1680B81DCC5800000AC320 /* minBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680A91DCC5800000AC320 /* minBtn.png */; };
-		5B1680B91DCC5800000AC320 /* pauseBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680AA1DCC5800000AC320 /* pauseBtn.png */; };
-		5B1680BA1DCC5800000AC320 /* playBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680AB1DCC5800000AC320 /* playBtn.png */; };
-		5B1680BB1DCC5800000AC320 /* round.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680AC1DCC5800000AC320 /* round.png */; };
-		5B1680BC1DCC5800000AC320 /* Slider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680AE1DCC5800000AC320 /* Slider.m */; };
-		5B1680BD1DCC5800000AC320 /* UIImage+ScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B01DCC5800000AC320 /* UIImage+ScaleToSize.m */; };
-		5B1680BE1DCC5800000AC320 /* UIImage+TintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B21DCC5800000AC320 /* UIImage+TintColor.m */; };
-		5B1680BF1DCC5800000AC320 /* UIView+SetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B41DCC5800000AC320 /* UIView+SetRect.m */; };
+		5B1680B51DCC5800000AC320 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680A51DCC5800000AC320 /* CLPlayerView.m */; };
+		5B1680B61DCC5800000AC320 /* CLBackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680A71DCC5800000AC320 /* CLBackBtn.png */; };
+		5B1680B71DCC5800000AC320 /* CLMaxBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680A81DCC5800000AC320 /* CLMaxBtn.png */; };
+		5B1680B81DCC5800000AC320 /* CLMinBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680A91DCC5800000AC320 /* CLMinBtn.png */; };
+		5B1680B91DCC5800000AC320 /* CLPauseBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680AA1DCC5800000AC320 /* CLPauseBtn.png */; };
+		5B1680BA1DCC5800000AC320 /* CLPlayBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680AB1DCC5800000AC320 /* CLPlayBtn.png */; };
+		5B1680BB1DCC5800000AC320 /* CLRound.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680AC1DCC5800000AC320 /* CLRound.png */; };
+		5B1680BC1DCC5800000AC320 /* CLSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680AE1DCC5800000AC320 /* CLSlider.m */; };
+		5B1680BD1DCC5800000AC320 /* UIImage+CLScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B01DCC5800000AC320 /* UIImage+CLScaleToSize.m */; };
+		5B1680BE1DCC5800000AC320 /* UIImage+CLTintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B21DCC5800000AC320 /* UIImage+CLTintColor.m */; };
+		5B1680BF1DCC5800000AC320 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B41DCC5800000AC320 /* UIView+CLSetRect.m */; };
 		5B1FC4C81DC850820036C489 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4C71DC850820036C489 /* main.m */; };
 		5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CA1DC850820036C489 /* AppDelegate.m */; };
 		5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CD1DC850820036C489 /* ViewController.m */; };
 		5B1FC4D11DC850820036C489 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CF1DC850820036C489 /* Main.storyboard */; };
 		5B1FC4D61DC850820036C489 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B1FC4D41DC850820036C489 /* LaunchScreen.storyboard */; };
-		5B1FC4E11DC850830036C489 /* CLPlayerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4E01DC850830036C489 /* CLPlayerDemoTests.m */; };
-		5B1FC4EC1DC850830036C489 /* CLPlayerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4EB1DC850830036C489 /* CLPlayerDemoUITests.m */; };
 		5B1FC4FB1DC850EF0036C489 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		5B1FC4DD1DC850830036C489 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5B1FC4BB1DC850820036C489 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5B1FC4C21DC850820036C489;
-			remoteInfo = CLPlayerDemo;
-		};
-		5B1FC4E81DC850830036C489 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5B1FC4BB1DC850820036C489 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5B1FC4C21DC850820036C489;
-			remoteInfo = CLPlayerDemo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		5B1680A41DCC5800000AC320 /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
-		5B1680A51DCC5800000AC320 /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
-		5B1680A71DCC5800000AC320 /* backBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backBtn.png; sourceTree = "<group>"; };
-		5B1680A81DCC5800000AC320 /* maxBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = maxBtn.png; sourceTree = "<group>"; };
-		5B1680A91DCC5800000AC320 /* minBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = minBtn.png; sourceTree = "<group>"; };
-		5B1680AA1DCC5800000AC320 /* pauseBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseBtn.png; sourceTree = "<group>"; };
-		5B1680AB1DCC5800000AC320 /* playBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playBtn.png; sourceTree = "<group>"; };
-		5B1680AC1DCC5800000AC320 /* round.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = round.png; sourceTree = "<group>"; };
-		5B1680AD1DCC5800000AC320 /* Slider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Slider.h; sourceTree = "<group>"; };
-		5B1680AE1DCC5800000AC320 /* Slider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Slider.m; sourceTree = "<group>"; };
-		5B1680AF1DCC5800000AC320 /* UIImage+ScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ScaleToSize.h"; sourceTree = "<group>"; };
-		5B1680B01DCC5800000AC320 /* UIImage+ScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ScaleToSize.m"; sourceTree = "<group>"; };
-		5B1680B11DCC5800000AC320 /* UIImage+TintColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TintColor.h"; sourceTree = "<group>"; };
-		5B1680B21DCC5800000AC320 /* UIImage+TintColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TintColor.m"; sourceTree = "<group>"; };
-		5B1680B31DCC5800000AC320 /* UIView+SetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SetRect.h"; sourceTree = "<group>"; };
-		5B1680B41DCC5800000AC320 /* UIView+SetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SetRect.m"; sourceTree = "<group>"; };
+		5B1680A41DCC5800000AC320 /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
+		5B1680A51DCC5800000AC320 /* CLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerView.m; sourceTree = "<group>"; };
+		5B1680A71DCC5800000AC320 /* CLBackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLBackBtn.png; sourceTree = "<group>"; };
+		5B1680A81DCC5800000AC320 /* CLMaxBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLMaxBtn.png; sourceTree = "<group>"; };
+		5B1680A91DCC5800000AC320 /* CLMinBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLMinBtn.png; sourceTree = "<group>"; };
+		5B1680AA1DCC5800000AC320 /* CLPauseBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLPauseBtn.png; sourceTree = "<group>"; };
+		5B1680AB1DCC5800000AC320 /* CLPlayBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLPlayBtn.png; sourceTree = "<group>"; };
+		5B1680AC1DCC5800000AC320 /* CLRound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLRound.png; sourceTree = "<group>"; };
+		5B1680AD1DCC5800000AC320 /* CLSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSlider.h; sourceTree = "<group>"; };
+		5B1680AE1DCC5800000AC320 /* CLSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSlider.m; sourceTree = "<group>"; };
+		5B1680AF1DCC5800000AC320 /* UIImage+CLScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLScaleToSize.h"; sourceTree = "<group>"; };
+		5B1680B01DCC5800000AC320 /* UIImage+CLScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLScaleToSize.m"; sourceTree = "<group>"; };
+		5B1680B11DCC5800000AC320 /* UIImage+CLTintColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLTintColor.h"; sourceTree = "<group>"; };
+		5B1680B21DCC5800000AC320 /* UIImage+CLTintColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLTintColor.m"; sourceTree = "<group>"; };
+		5B1680B31DCC5800000AC320 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
+		5B1680B41DCC5800000AC320 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5B1FC4C31DC850820036C489 /* CLPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1FC4C71DC850820036C489 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5B1FC4C91DC850820036C489 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -72,12 +53,6 @@
 		5B1FC4D01DC850820036C489 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5B1FC4D51DC850820036C489 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B1FC4D71DC850820036C489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5B1FC4DC1DC850830036C489 /* CLPlayerDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLPlayerDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B1FC4E01DC850830036C489 /* CLPlayerDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPlayerDemoTests.m; sourceTree = "<group>"; };
-		5B1FC4E21DC850830036C489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5B1FC4E71DC850830036C489 /* CLPlayerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLPlayerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B1FC4EB1DC850830036C489 /* CLPlayerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLPlayerDemoUITests.m; sourceTree = "<group>"; };
-		5B1FC4ED1DC850830036C489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,36 +66,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5B1FC4D91DC850830036C489 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B1FC4E41DC850830036C489 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		5B1680A31DCC5800000AC320 /* Player */ = {
 			isa = PBXGroup;
 			children = (
-				5B1680A41DCC5800000AC320 /* PlayerView.h */,
-				5B1680A51DCC5800000AC320 /* PlayerView.m */,
-				5B1680AD1DCC5800000AC320 /* Slider.h */,
-				5B1680AE1DCC5800000AC320 /* Slider.m */,
-				5B1680AF1DCC5800000AC320 /* UIImage+ScaleToSize.h */,
-				5B1680B01DCC5800000AC320 /* UIImage+ScaleToSize.m */,
-				5B1680B11DCC5800000AC320 /* UIImage+TintColor.h */,
-				5B1680B21DCC5800000AC320 /* UIImage+TintColor.m */,
-				5B1680B31DCC5800000AC320 /* UIView+SetRect.h */,
-				5B1680B41DCC5800000AC320 /* UIView+SetRect.m */,
+				5B1680A41DCC5800000AC320 /* CLPlayerView.h */,
+				5B1680A51DCC5800000AC320 /* CLPlayerView.m */,
+				5B1680AD1DCC5800000AC320 /* CLSlider.h */,
+				5B1680AE1DCC5800000AC320 /* CLSlider.m */,
+				5B1680AF1DCC5800000AC320 /* UIImage+CLScaleToSize.h */,
+				5B1680B01DCC5800000AC320 /* UIImage+CLScaleToSize.m */,
+				5B1680B11DCC5800000AC320 /* UIImage+CLTintColor.h */,
+				5B1680B21DCC5800000AC320 /* UIImage+CLTintColor.m */,
+				5B1680B31DCC5800000AC320 /* UIView+CLSetRect.h */,
+				5B1680B41DCC5800000AC320 /* UIView+CLSetRect.m */,
 				5B1680A61DCC5800000AC320 /* Resources */,
 			);
 			path = Player;
@@ -129,12 +90,12 @@
 		5B1680A61DCC5800000AC320 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5B1680A71DCC5800000AC320 /* backBtn.png */,
-				5B1680A81DCC5800000AC320 /* maxBtn.png */,
-				5B1680A91DCC5800000AC320 /* minBtn.png */,
-				5B1680AA1DCC5800000AC320 /* pauseBtn.png */,
-				5B1680AB1DCC5800000AC320 /* playBtn.png */,
-				5B1680AC1DCC5800000AC320 /* round.png */,
+				5B1680A71DCC5800000AC320 /* CLBackBtn.png */,
+				5B1680A81DCC5800000AC320 /* CLMaxBtn.png */,
+				5B1680A91DCC5800000AC320 /* CLMinBtn.png */,
+				5B1680AA1DCC5800000AC320 /* CLPauseBtn.png */,
+				5B1680AB1DCC5800000AC320 /* CLPlayBtn.png */,
+				5B1680AC1DCC5800000AC320 /* CLRound.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -143,8 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				5B1FC4C51DC850820036C489 /* CLPlayerDemo */,
-				5B1FC4DF1DC850830036C489 /* CLPlayerDemoTests */,
-				5B1FC4EA1DC850830036C489 /* CLPlayerDemoUITests */,
 				5B1FC4C41DC850820036C489 /* Products */,
 				5B1FC4F91DC850EF0036C489 /* Frameworks */,
 			);
@@ -154,8 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				5B1FC4C31DC850820036C489 /* CLPlayerDemo.app */,
-				5B1FC4DC1DC850830036C489 /* CLPlayerDemoTests.xctest */,
-				5B1FC4E71DC850830036C489 /* CLPlayerDemoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -183,24 +140,6 @@
 				5B1FC4C71DC850820036C489 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		5B1FC4DF1DC850830036C489 /* CLPlayerDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				5B1FC4E01DC850830036C489 /* CLPlayerDemoTests.m */,
-				5B1FC4E21DC850830036C489 /* Info.plist */,
-			);
-			path = CLPlayerDemoTests;
-			sourceTree = "<group>";
-		};
-		5B1FC4EA1DC850830036C489 /* CLPlayerDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				5B1FC4EB1DC850830036C489 /* CLPlayerDemoUITests.m */,
-				5B1FC4ED1DC850830036C489 /* Info.plist */,
-			);
-			path = CLPlayerDemoUITests;
 			sourceTree = "<group>";
 		};
 		5B1FC4F91DC850EF0036C489 /* Frameworks */ = {
@@ -231,42 +170,6 @@
 			productReference = 5B1FC4C31DC850820036C489 /* CLPlayerDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5B1FC4DB1DC850830036C489 /* CLPlayerDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5B1FC4F31DC850830036C489 /* Build configuration list for PBXNativeTarget "CLPlayerDemoTests" */;
-			buildPhases = (
-				5B1FC4D81DC850830036C489 /* Sources */,
-				5B1FC4D91DC850830036C489 /* Frameworks */,
-				5B1FC4DA1DC850830036C489 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5B1FC4DE1DC850830036C489 /* PBXTargetDependency */,
-			);
-			name = CLPlayerDemoTests;
-			productName = CLPlayerDemoTests;
-			productReference = 5B1FC4DC1DC850830036C489 /* CLPlayerDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		5B1FC4E61DC850830036C489 /* CLPlayerDemoUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5B1FC4F61DC850830036C489 /* Build configuration list for PBXNativeTarget "CLPlayerDemoUITests" */;
-			buildPhases = (
-				5B1FC4E31DC850830036C489 /* Sources */,
-				5B1FC4E41DC850830036C489 /* Frameworks */,
-				5B1FC4E51DC850830036C489 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5B1FC4E91DC850830036C489 /* PBXTargetDependency */,
-			);
-			name = CLPlayerDemoUITests;
-			productName = CLPlayerDemoUITests;
-			productReference = 5B1FC4E71DC850830036C489 /* CLPlayerDemoUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -280,18 +183,6 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 533J5B8T42;
 						ProvisioningStyle = Automatic;
-					};
-					5B1FC4DB1DC850830036C489 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 533J5B8T42;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 5B1FC4C21DC850820036C489;
-					};
-					5B1FC4E61DC850830036C489 = {
-						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 533J5B8T42;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 5B1FC4C21DC850820036C489;
 					};
 				};
 			};
@@ -309,8 +200,6 @@
 			projectRoot = "";
 			targets = (
 				5B1FC4C21DC850820036C489 /* CLPlayerDemo */,
-				5B1FC4DB1DC850830036C489 /* CLPlayerDemoTests */,
-				5B1FC4E61DC850830036C489 /* CLPlayerDemoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -320,29 +209,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B1680BA1DCC5800000AC320 /* playBtn.png in Resources */,
-				5B1680B71DCC5800000AC320 /* maxBtn.png in Resources */,
-				5B1680B81DCC5800000AC320 /* minBtn.png in Resources */,
-				5B1680BB1DCC5800000AC320 /* round.png in Resources */,
+				5B1680BA1DCC5800000AC320 /* CLPlayBtn.png in Resources */,
+				5B1680B71DCC5800000AC320 /* CLMaxBtn.png in Resources */,
+				5B1680B81DCC5800000AC320 /* CLMinBtn.png in Resources */,
+				5B1680BB1DCC5800000AC320 /* CLRound.png in Resources */,
 				5B1FC4D61DC850820036C489 /* LaunchScreen.storyboard in Resources */,
-				5B1680B91DCC5800000AC320 /* pauseBtn.png in Resources */,
+				5B1680B91DCC5800000AC320 /* CLPauseBtn.png in Resources */,
 				5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */,
 				5B1FC4D11DC850820036C489 /* Main.storyboard in Resources */,
-				5B1680B61DCC5800000AC320 /* backBtn.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B1FC4DA1DC850830036C489 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B1FC4E51DC850830036C489 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				5B1680B61DCC5800000AC320 /* CLBackBtn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,46 +229,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */,
-				5B1680BF1DCC5800000AC320 /* UIView+SetRect.m in Sources */,
+				5B1680BF1DCC5800000AC320 /* UIView+CLSetRect.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
-				5B1680BD1DCC5800000AC320 /* UIImage+ScaleToSize.m in Sources */,
+				5B1680BD1DCC5800000AC320 /* UIImage+CLScaleToSize.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
-				5B1680BE1DCC5800000AC320 /* UIImage+TintColor.m in Sources */,
-				5B1680B51DCC5800000AC320 /* PlayerView.m in Sources */,
-				5B1680BC1DCC5800000AC320 /* Slider.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B1FC4D81DC850830036C489 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5B1FC4E11DC850830036C489 /* CLPlayerDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5B1FC4E31DC850830036C489 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5B1FC4EC1DC850830036C489 /* CLPlayerDemoUITests.m in Sources */,
+				5B1680BE1DCC5800000AC320 /* UIImage+CLTintColor.m in Sources */,
+				5B1680B51DCC5800000AC320 /* CLPlayerView.m in Sources */,
+				5B1680BC1DCC5800000AC320 /* CLSlider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5B1FC4DE1DC850830036C489 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5B1FC4C21DC850820036C489 /* CLPlayerDemo */;
-			targetProxy = 5B1FC4DD1DC850830036C489 /* PBXContainerItemProxy */;
-		};
-		5B1FC4E91DC850830036C489 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5B1FC4C21DC850820036C489 /* CLPlayerDemo */;
-			targetProxy = 5B1FC4E81DC850830036C489 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5B1FC4CF1DC850820036C489 /* Main.storyboard */ = {
@@ -531,56 +377,6 @@
 			};
 			name = Release;
 		};
-		5B1FC4F41DC850830036C489 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 533J5B8T42;
-				INFOPLIST_FILE = CLPlayerDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CL.CLPlayerDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CLPlayerDemo.app/CLPlayerDemo";
-			};
-			name = Debug;
-		};
-		5B1FC4F51DC850830036C489 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 533J5B8T42;
-				INFOPLIST_FILE = CLPlayerDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CL.CLPlayerDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CLPlayerDemo.app/CLPlayerDemo";
-			};
-			name = Release;
-		};
-		5B1FC4F71DC850830036C489 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = 533J5B8T42;
-				INFOPLIST_FILE = CLPlayerDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CL.CLPlayerDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = CLPlayerDemo;
-			};
-			name = Debug;
-		};
-		5B1FC4F81DC850830036C489 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = 533J5B8T42;
-				INFOPLIST_FILE = CLPlayerDemoUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = CL.CLPlayerDemoUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = CLPlayerDemo;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -598,24 +394,6 @@
 			buildConfigurations = (
 				5B1FC4F11DC850830036C489 /* Debug */,
 				5B1FC4F21DC850830036C489 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5B1FC4F31DC850830036C489 /* Build configuration list for PBXNativeTarget "CLPlayerDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5B1FC4F41DC850830036C489 /* Debug */,
-				5B1FC4F51DC850830036C489 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5B1FC4F61DC850830036C489 /* Build configuration list for PBXNativeTarget "CLPlayerDemoUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5B1FC4F71DC850830036C489 /* Debug */,
-				5B1FC4F81DC850830036C489 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

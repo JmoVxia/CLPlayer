@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Slider : UISlider
+@interface CLSlider : UISlider
 
 @end

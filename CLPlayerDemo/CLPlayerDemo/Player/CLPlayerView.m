@@ -6,12 +6,12 @@
 //  Copyright © 2016年 JmoVxia. All rights reserved.
 //
 
-#import "PlayerView.h"
+#import "CLPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
-#import "UIView+SetRect.h"
-#import "UIImage+TintColor.h"
-#import "UIImage+ScaleToSize.h"
-#import "Slider.h"
+#import "UIView+CLSetRect.h"
+#import "UIImage+CLTintColor.h"
+#import "UIImage+CLScaleToSize.h"
+#import "CLSlider.h"
 
 
 typedef enum : NSUInteger {
@@ -39,7 +39,7 @@ typedef enum : NSUInteger {
 //滑块颜色
 #define SliderColor       [UIColor redColor]
 
-@interface PlayerView ()
+@interface CLPlayerView ()
 
 /**控件原始Farme*/
 @property (nonatomic,assign) CGRect customFarme;
@@ -57,7 +57,7 @@ typedef enum : NSUInteger {
 /**播放器item*/
 @property (nonatomic,strong) AVPlayerItem            *playerItem;
 /**播放进度条*/
-@property (nonatomic,strong) Slider                  *slider;
+@property (nonatomic,strong) CLSlider                  *slider;
 /**播放时间*/
 @property (nonatomic,strong) UILabel                 *currentTimeLabel;
 /**表面View*/
@@ -82,7 +82,7 @@ typedef enum : NSUInteger {
 
 @end
 
-@implementation PlayerView
+@implementation CLPlayerView
 
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame
@@ -296,13 +296,13 @@ typedef enum : NSUInteger {
 #pragma mark - 创建UISlider
 - (void)createSlider
 {
-    _slider         = [[Slider alloc]init];
+    _slider         = [[CLSlider alloc]init];
     _slider.frame   = CGRectMake(_progress.x, 0, _progress.width, ViewHeight);
     _slider.centerY = _bottomView.height/2.0;
     [_bottomView addSubview:_slider];
     
     //自定义滑块大小
-    UIImage *image     = [UIImage imageNamed:@"round"];
+    UIImage *image     = [UIImage imageNamed:@"CLRound"];
     //改变滑块大小
     UIImage *tempImage = [image OriginImage:image scaleToSize:CGSizeMake( SliderSize, SliderSize)];
     //改变滑块颜色
@@ -408,12 +408,12 @@ typedef enum : NSUInteger {
     if (_player.rate == 1.0)
     {
         _startButton.selected = YES;
-        [_startButton setBackgroundImage:[[UIImage imageNamed:@"pauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_startButton setBackgroundImage:[[UIImage imageNamed:@"CLPauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     else
     {
         _startButton.selected = NO;
-        [_startButton setBackgroundImage:[[UIImage imageNamed:@"playBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_startButton setBackgroundImage:[[UIImage imageNamed:@"CLPlayBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     
     [_startButton addTarget:self
@@ -438,7 +438,7 @@ typedef enum : NSUInteger {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame     = CGRectMake(0 , 0, ButtonSize, ButtonSize);
     button.centerY   = _topView.centerY;
-    [button setBackgroundImage:[[UIImage imageNamed:@"backBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [button setBackgroundImage:[[UIImage imageNamed:@"CLBackBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     [_topView addSubview:button];
     
     [button addTarget:self
@@ -456,11 +456,11 @@ typedef enum : NSUInteger {
 
     if (_isFullScreen == YES)
     {
-        [button setBackgroundImage:[[UIImage imageNamed:@"minBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [button setBackgroundImage:[[UIImage imageNamed:@"CLMinBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     else
     {
-        [button setBackgroundImage:[[UIImage imageNamed:@"maxBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [button setBackgroundImage:[[UIImage imageNamed:@"CLMaxBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     
     [button addTarget:self
@@ -552,14 +552,14 @@ typedef enum : NSUInteger {
 {
     _startButton.selected = NO;
     [_player pause];
-    [_startButton setBackgroundImage:[[UIImage imageNamed:@"playBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [_startButton setBackgroundImage:[[UIImage imageNamed:@"CLPlayBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
 }
 #pragma mark - 播放
 - (void)playVideo
 {
     _startButton.selected = YES;
     [_player play];
-    [_startButton setBackgroundImage:[[UIImage imageNamed:@"pauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [_startButton setBackgroundImage:[[UIImage imageNamed:@"CLPauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
 }
 #pragma mark - 重新开始播放
 - (void)resetPlay

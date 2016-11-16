@@ -6,9 +6,9 @@
 //  Copyright © 2016年 JmoVxia. All rights reserved.
 //
 
-#import "Slider.h"
+#import "CLSlider.h"
 
-@implementation Slider
+@implementation CLSlider
 
 // 控制slider的宽和高，这个方法才是真正的改变slider滑道的高的
 - (CGRect)trackRectForBounds:(CGRect)bounds

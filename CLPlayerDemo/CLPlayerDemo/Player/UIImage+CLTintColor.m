@@ -6,9 +6,9 @@
 //  Copyright © 2016年 David Zheng. All rights reserved.
 //
 
-#import "UIImage+TintColor.h"
+#import "UIImage+CLTintColor.h"
 
-@implementation UIImage (TintColor)
+@implementation UIImage (CLTintColor)
 
 - (UIImage *) imageWithTintColor:(UIColor *)tintColor
 

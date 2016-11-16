@@ -7,8 +7,8 @@
 //
 
 #import "ViewController.h"
-#import "PlayerView.h"
-#import "UIView+SetRect.h"
+#import "CLPlayerView.h"
+#import "UIView+CLSetRect.h"
 @interface ViewController ()
 
 @end
@@ -19,7 +19,7 @@
 {
     [super viewDidLoad];
 
-    PlayerView *playerView = [[PlayerView alloc] initWithFrame:CGRectMake(0, 90, ScreenWidth, 300)];
+    CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 90, ScreenWidth, 300)];
     [self.view addSubview:playerView];
     //根据旋转自动支持全屏，默认支持
     //    playerView.autoFullScreen = NO;

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (TintColor)
+@interface UIImage (CLTintColor)
 
 - (UIImage *) imageWithTintColor:(UIColor *)tintColor;
 

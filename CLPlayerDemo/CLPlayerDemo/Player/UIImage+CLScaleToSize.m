@@ -6,9 +6,9 @@
 //  Copyright © 2016年 JmoVxia. All rights reserved.
 //
 
-#import "UIImage+ScaleToSize.h"
+#import "UIImage+CLScaleToSize.h"
 
-@implementation UIImage (ScaleToSize)
+@implementation UIImage (CLScaleToSize)
 
 -(UIImage*) OriginImage:(UIImage*)image scaleToSize:(CGSize)size
 {

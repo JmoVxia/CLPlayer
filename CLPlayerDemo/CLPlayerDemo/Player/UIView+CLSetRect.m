@@ -6,9 +6,9 @@
 //  Copyright © 2016年 JmoVxia. All rights reserved.
 //
 
-#import "UIView+SetRect.h"
+#import "UIView+CLSetRect.h"
 
-@implementation UIView (SetRect)
+@implementation UIView (CLSetRect)
 
 - (CGPoint)viewOrigin {
     

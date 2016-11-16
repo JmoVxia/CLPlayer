@@ -11,7 +11,7 @@
 typedef void(^BackButtonBlock)(UIButton *button);
 typedef void(^EndBolck)();
 
-@interface PlayerView : UIView
+@interface CLPlayerView : UIView
 
 /**视频url*/
 @property (nonatomic,strong) NSURL *url;
