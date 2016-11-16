@@ -8,12 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5B1680B51DCC5800000AC320 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680A51DCC5800000AC320 /* CLPlayerView.m */; };
-		5B1680B61DCC5800000AC320 /* CLBackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680A71DCC5800000AC320 /* CLBackBtn.png */; };
-		5B1680B71DCC5800000AC320 /* CLMaxBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680A81DCC5800000AC320 /* CLMaxBtn.png */; };
-		5B1680B81DCC5800000AC320 /* CLMinBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680A91DCC5800000AC320 /* CLMinBtn.png */; };
-		5B1680B91DCC5800000AC320 /* CLPauseBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680AA1DCC5800000AC320 /* CLPauseBtn.png */; };
-		5B1680BA1DCC5800000AC320 /* CLPlayBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680AB1DCC5800000AC320 /* CLPlayBtn.png */; };
-		5B1680BB1DCC5800000AC320 /* CLRound.png in Resources */ = {isa = PBXBuildFile; fileRef = 5B1680AC1DCC5800000AC320 /* CLRound.png */; };
 		5B1680BC1DCC5800000AC320 /* CLSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680AE1DCC5800000AC320 /* CLSlider.m */; };
 		5B1680BD1DCC5800000AC320 /* UIImage+CLScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B01DCC5800000AC320 /* UIImage+CLScaleToSize.m */; };
 		5B1680BE1DCC5800000AC320 /* UIImage+CLTintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B21DCC5800000AC320 /* UIImage+CLTintColor.m */; };
@@ -25,17 +19,12 @@
 		5B1FC4D61DC850820036C489 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B1FC4D41DC850820036C489 /* LaunchScreen.storyboard */; };
 		5B1FC4FB1DC850EF0036C489 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
+		5BEF1C731DDC2BB70007DE70 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF1C721DDC2BB70007DE70 /* Resources.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5B1680A41DCC5800000AC320 /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
 		5B1680A51DCC5800000AC320 /* CLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerView.m; sourceTree = "<group>"; };
-		5B1680A71DCC5800000AC320 /* CLBackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLBackBtn.png; sourceTree = "<group>"; };
-		5B1680A81DCC5800000AC320 /* CLMaxBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLMaxBtn.png; sourceTree = "<group>"; };
-		5B1680A91DCC5800000AC320 /* CLMinBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLMinBtn.png; sourceTree = "<group>"; };
-		5B1680AA1DCC5800000AC320 /* CLPauseBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLPauseBtn.png; sourceTree = "<group>"; };
-		5B1680AB1DCC5800000AC320 /* CLPlayBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLPlayBtn.png; sourceTree = "<group>"; };
-		5B1680AC1DCC5800000AC320 /* CLRound.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CLRound.png; sourceTree = "<group>"; };
 		5B1680AD1DCC5800000AC320 /* CLSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSlider.h; sourceTree = "<group>"; };
 		5B1680AE1DCC5800000AC320 /* CLSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSlider.m; sourceTree = "<group>"; };
 		5B1680AF1DCC5800000AC320 /* UIImage+CLScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLScaleToSize.h"; sourceTree = "<group>"; };
@@ -55,6 +44,7 @@
 		5B1FC4D71DC850820036C489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5BEF1C721DDC2BB70007DE70 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,22 +72,9 @@
 				5B1680B21DCC5800000AC320 /* UIImage+CLTintColor.m */,
 				5B1680B31DCC5800000AC320 /* UIView+CLSetRect.h */,
 				5B1680B41DCC5800000AC320 /* UIView+CLSetRect.m */,
-				5B1680A61DCC5800000AC320 /* Resources */,
+				5BEF1C721DDC2BB70007DE70 /* Resources.bundle */,
 			);
 			path = Player;
-			sourceTree = "<group>";
-		};
-		5B1680A61DCC5800000AC320 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				5B1680A71DCC5800000AC320 /* CLBackBtn.png */,
-				5B1680A81DCC5800000AC320 /* CLMaxBtn.png */,
-				5B1680A91DCC5800000AC320 /* CLMinBtn.png */,
-				5B1680AA1DCC5800000AC320 /* CLPauseBtn.png */,
-				5B1680AB1DCC5800000AC320 /* CLPlayBtn.png */,
-				5B1680AC1DCC5800000AC320 /* CLRound.png */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		5B1FC4BA1DC850820036C489 = {
@@ -209,15 +186,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B1680BA1DCC5800000AC320 /* CLPlayBtn.png in Resources */,
-				5B1680B71DCC5800000AC320 /* CLMaxBtn.png in Resources */,
-				5B1680B81DCC5800000AC320 /* CLMinBtn.png in Resources */,
-				5B1680BB1DCC5800000AC320 /* CLRound.png in Resources */,
 				5B1FC4D61DC850820036C489 /* LaunchScreen.storyboard in Resources */,
-				5B1680B91DCC5800000AC320 /* CLPauseBtn.png in Resources */,
 				5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */,
 				5B1FC4D11DC850820036C489 /* Main.storyboard in Resources */,
-				5B1680B61DCC5800000AC320 /* CLBackBtn.png in Resources */,
+				5BEF1C731DDC2BB70007DE70 /* Resources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

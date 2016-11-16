@@ -301,8 +301,7 @@ typedef enum : NSUInteger {
     _slider.centerY = _bottomView.height/2.0;
     [_bottomView addSubview:_slider];
     
-    //自定义滑块大小
-    UIImage *image     = [UIImage imageNamed:@"CLRound"];
+    UIImage *image     = [self getPictureWithName:@"CLRound"];
     //改变滑块大小
     UIImage *tempImage = [image OriginImage:image scaleToSize:CGSizeMake( SliderSize, SliderSize)];
     //改变滑块颜色
@@ -408,12 +407,12 @@ typedef enum : NSUInteger {
     if (_player.rate == 1.0)
     {
         _startButton.selected = YES;
-        [_startButton setBackgroundImage:[[UIImage imageNamed:@"CLPauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_startButton setBackgroundImage:[[self getPictureWithName:@"CLPauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     else
     {
         _startButton.selected = NO;
-        [_startButton setBackgroundImage:[[UIImage imageNamed:@"CLPlayBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_startButton setBackgroundImage:[[self getPictureWithName:@"CLPlayBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     
     [_startButton addTarget:self
@@ -438,7 +437,7 @@ typedef enum : NSUInteger {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame     = CGRectMake(0 , 0, ButtonSize, ButtonSize);
     button.centerY   = _topView.centerY;
-    [button setBackgroundImage:[[UIImage imageNamed:@"CLBackBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [button setBackgroundImage:[[self getPictureWithName:@"CLBackBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     [_topView addSubview:button];
     
     [button addTarget:self
@@ -456,11 +455,11 @@ typedef enum : NSUInteger {
 
     if (_isFullScreen == YES)
     {
-        [button setBackgroundImage:[[UIImage imageNamed:@"CLMinBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [button setBackgroundImage:[[self getPictureWithName:@"CLMinBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     else
     {
-        [button setBackgroundImage:[[UIImage imageNamed:@"CLMaxBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [button setBackgroundImage:[[self getPictureWithName:@"CLMaxBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     }
     
     [button addTarget:self
@@ -552,14 +551,14 @@ typedef enum : NSUInteger {
 {
     _startButton.selected = NO;
     [_player pause];
-    [_startButton setBackgroundImage:[[UIImage imageNamed:@"CLPlayBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [_startButton setBackgroundImage:[[self getPictureWithName:@"CLPlayBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
 }
 #pragma mark - 播放
 - (void)playVideo
 {
     _startButton.selected = YES;
     [_player play];
-    [_startButton setBackgroundImage:[[UIImage imageNamed:@"CLPauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [_startButton setBackgroundImage:[[self getPictureWithName:@"CLPauseBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
 }
 #pragma mark - 重新开始播放
 - (void)resetPlay
@@ -665,6 +664,13 @@ typedef enum : NSUInteger {
 {
     //将要挂起，停止播放
     [self pausePlay];
+}
+#pragma mark - 获取资源图片
+- (UIImage *)getPictureWithName:(NSString *)name
+{
+    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"Resources" ofType:@"bundle"]];
+    NSString *path   = [bundle pathForResource:name ofType:@"png"];
+    return [UIImage imageWithContentsOfFile:path];
 }
 #pragma mark - dealloc
 - (void)dealloc
