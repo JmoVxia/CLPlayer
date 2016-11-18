@@ -680,7 +680,7 @@ typedef enum : NSUInteger {
 - (void)dealloc
 {
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter] removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification
                                                   object:_player.currentItem];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification
