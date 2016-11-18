@@ -57,7 +57,7 @@ typedef enum : NSUInteger {
 /**播放器item*/
 @property (nonatomic,strong) AVPlayerItem            *playerItem;
 /**播放进度条*/
-@property (nonatomic,strong) CLSlider                  *slider;
+@property (nonatomic,strong) CLSlider                *slider;
 /**播放时间*/
 @property (nonatomic,strong) UILabel                 *currentTimeLabel;
 /**表面View*/
@@ -74,7 +74,8 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) UIButton                *startButton;
 /**轻拍定时器*/
 @property (nonatomic,strong) NSTimer                 *timer;
-
+/**slider定时器*/
+@property (nonatomic,strong) NSTimer                 *sliderTimer;
 /**返回按钮回调*/
 @property (nonatomic,copy) void(^BackBlock) (UIButton *backButton);
 /**播放完成回调*/
@@ -137,7 +138,8 @@ typedef enum : NSUInteger {
     _playerLayer.frame        = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
     _playerLayer.videoGravity = AVLayerVideoGravityResize;
     [self.layer addSublayer:_playerLayer];
-    
+    // 监听loadedTimeRanges属性
+    [_playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
     //创建原始屏幕UI
     [self originalscreen];
     
@@ -173,9 +175,6 @@ typedef enum : NSUInteger {
     _bottomView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
     [_backView addSubview:_bottomView];
     
-    // 监听loadedTimeRanges属性
-    [_playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
-    
     //创建播放按钮
     [self createButton];
     //创建进度条
@@ -192,7 +191,7 @@ typedef enum : NSUInteger {
     [self createGesture];
     
     //计时器，循环执行
-    [NSTimer scheduledTimerWithTimeInterval:1.0f
+    _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
                                      target:self
                                    selector:@selector(timeStack)
                                    userInfo:nil
@@ -569,7 +568,13 @@ typedef enum : NSUInteger {
 #pragma mark - 销毁播放器
 - (void)destroyPlayer
 {
-    
+    [_sliderTimer invalidate];
+    _sliderTimer = nil;
+    [_player pause];
+    [_player.currentItem cancelPendingSeeks];
+    [_player.currentItem.asset cancelLoading];
+    [self removeFromSuperview];
+
 }
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification
@@ -603,6 +608,10 @@ typedef enum : NSUInteger {
 
     //取消定时消失
     [_timer invalidate];
+    _timer = nil;
+    [_sliderTimer invalidate];
+    _sliderTimer = nil;
+    
     [self setStatusBarHidden:YES];
     //添加到Window上
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
@@ -631,7 +640,6 @@ typedef enum : NSUInteger {
         _playerLayer.frame = CGRectMake(0, 0, ScreenHeight, ScreenWidth);
     }
     
-    
     //删除原有控件
     [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     //创建全屏UI
@@ -646,6 +654,10 @@ typedef enum : NSUInteger {
     
     //取消定时消失
     [_timer invalidate];
+    _timer = nil;
+    [_sliderTimer invalidate];
+    _sliderTimer = nil;
+
     [self setStatusBarHidden:NO];
 
     [UIView animateWithDuration:0.25 animations:^{
@@ -687,6 +699,7 @@ typedef enum : NSUInteger {
                                                   object:[UIDevice currentDevice]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification
                                                   object:nil];
+    NSLog(@"播放器被销毁了");
 }
 
 
