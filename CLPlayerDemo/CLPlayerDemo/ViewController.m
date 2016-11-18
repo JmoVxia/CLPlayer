@@ -61,7 +61,7 @@
 - (void)PlayVideoWithCell:(TableViewCell *)cell;
 {
     [_playerView destroyPlayer];
-    _playerView = nil;
+//    _playerView = nil;
     
     _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.width, cell.height)];
     [cell addSubview:_playerView];

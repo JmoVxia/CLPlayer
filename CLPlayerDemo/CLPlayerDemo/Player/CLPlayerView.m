@@ -331,7 +331,7 @@ typedef enum : NSUInteger {
 {
     //暂停
     [self pausePlay];
-    [_timer invalidate];
+    [self destroyTimer];
 }
 //结束
 - (void)processSliderEndDragAction:(UISlider *)slider
@@ -490,7 +490,7 @@ typedef enum : NSUInteger {
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
     //取消定时消失
-    [_timer invalidate];
+    [self destroyTimer];
     if (_backView.alpha == 1)
     {
         [UIView animateWithDuration:0.5 animations:^{
@@ -568,13 +568,31 @@ typedef enum : NSUInteger {
 #pragma mark - 销毁播放器
 - (void)destroyPlayer
 {
-    [_sliderTimer invalidate];
-    _sliderTimer = nil;
+    //销毁定时器
+    [self destroyAllTimer];
+    //暂停
     [_player pause];
+    //清除
     [_player.currentItem cancelPendingSeeks];
     [_player.currentItem.asset cancelLoading];
+    //移除
     [self removeFromSuperview];
 
+}
+#pragma mark - 取消定时器
+//销毁所有定时器
+- (void)destroyAllTimer
+{
+    [_sliderTimer invalidate];
+    [_timer invalidate];
+    _sliderTimer = nil;
+    _timer       = nil;
+}
+//销毁定时消失定时器
+- (void)destroyTimer
+{
+    [_timer invalidate];
+    _timer = nil;
 }
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification
@@ -606,11 +624,8 @@ typedef enum : NSUInteger {
     
     _isFullScreen = YES;
 
-    //取消定时消失
-    [_timer invalidate];
-    _timer = nil;
-    [_sliderTimer invalidate];
-    _sliderTimer = nil;
+    //取消定时器
+    [self destroyAllTimer];
     
     [self setStatusBarHidden:YES];
     //添加到Window上
@@ -652,11 +667,8 @@ typedef enum : NSUInteger {
     
     _isFullScreen = NO;
     
-    //取消定时消失
-    [_timer invalidate];
-    _timer = nil;
-    [_sliderTimer invalidate];
-    _sliderTimer = nil;
+    //取消定时器
+    [self destroyAllTimer];
 
     [self setStatusBarHidden:NO];
 
