@@ -566,7 +566,11 @@ typedef enum : NSUInteger {
     [_player seekToTime:CMTimeMake(0, 1)];
     [self playVideo];
 }
-
+#pragma mark - 销毁播放器
+- (void)destroyPlayer
+{
+    
+}
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification
 {

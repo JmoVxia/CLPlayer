@@ -29,6 +29,8 @@ typedef void(^EndBolck)();
 - (void)backButton:(BackButtonBlock) backButton;
 /**播放完成回调*/
 - (void)endPlay:(EndBolck) end;
+/**销毁播放器*/
+- (void)destroyPlayer;
 
 
 @end
