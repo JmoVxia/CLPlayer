@@ -76,6 +76,7 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) NSTimer                 *timer;
 /**slider定时器*/
 @property (nonatomic,strong) NSTimer                 *sliderTimer;
+
 /**返回按钮回调*/
 @property (nonatomic,copy) void(^BackBlock) (UIButton *backButton);
 /**播放完成回调*/
@@ -131,7 +132,6 @@ typedef enum : NSUInteger {
 {
     self.frame                = _customFarme;
     _url                      = url;
-    
     _playerItem               = [AVPlayerItem playerItemWithURL:url];
     _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
     _playerLayer              = [AVPlayerLayer playerLayerWithPlayer:_player];
@@ -232,7 +232,7 @@ typedef enum : NSUInteger {
         }
     }
     _progress                = [[UIProgressView alloc]init];
-    _progress.frame          = CGRectMake(_startButton.right + Padding, 0, width - 80 - Padding - _startButton.right - Padding - Padding, Padding);
+    _progress.frame          = CGRectMake(_startButton.right + Padding, 0, width - 120 - Padding - _startButton.right - Padding - Padding, Padding);
     _progress.centerY        = _bottomView.height/2.0;
     //进度条颜色
     _progress.trackTintColor = ProgressColor;
@@ -358,12 +358,12 @@ typedef enum : NSUInteger {
 - (void)createCurrentTimeLabel
 {
     _currentTimeLabel           = [[UILabel alloc]init];
-    _currentTimeLabel.frame     = CGRectMake(0, 0, 80, Padding);
+    _currentTimeLabel.frame     = CGRectMake(0, 0, 120, Padding);
     _currentTimeLabel.centerY   = _progress.centerY;
     _currentTimeLabel.right     = _backView.right - Padding;
     _currentTimeLabel.textColor = [UIColor whiteColor];
     _currentTimeLabel.font      = [UIFont systemFontOfSize:12];
-    _currentTimeLabel.text      = @"00:00/00:00";
+    _currentTimeLabel.text      = @"00:00:00/00:00:00";
     [_bottomView addSubview:_currentTimeLabel];
 }
 #pragma mark - 计时器事件
@@ -378,10 +378,13 @@ typedef enum : NSUInteger {
         //当前时长进度progress
         NSInteger proMin     = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
         NSInteger proSec     = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
+        NSInteger proHour    = (NSInteger)CMTimeGetSeconds([_player currentTime]) /3600;//当前小时
         //duration 总时长
         NSInteger durMin     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总秒
         NSInteger durSec     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总分钟
-        self.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld / %02ld:%02ld", (long)proMin, proSec, durMin, durSec];
+        NSInteger durHour    = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 3600;//总小时
+
+        self.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld:%02ld / %02ld:%02ld:%02ld", proHour, proMin, proSec, durHour, durMin, durSec];
     }
     //开始播放停止转子
     if (_player.status == AVPlayerStatusReadyToPlay)
