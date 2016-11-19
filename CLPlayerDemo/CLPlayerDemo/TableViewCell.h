@@ -7,24 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Model.h"
 @class TableViewCell;
 
 @protocol VideoDelegate <NSObject>
 
 - (void)PlayVideoWithCell:(TableViewCell *)cell;
 
-
 @end
-
-
 
 @interface TableViewCell : UITableViewCell
 
-/**url*/
-@property (nonatomic,copy) NSString *url;
+/**model*/
+@property (nonatomic,copy) Model *model;
 
 @property (nonatomic,weak) id <VideoDelegate>videoDelegate;
+
+
+- (CGFloat)cellOffset;
 
 
 @end

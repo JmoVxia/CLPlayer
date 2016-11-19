@@ -10,15 +10,20 @@
 #import "CLPlayerView.h"
 #import "UIView+CLSetRect.h"
 #import "TableViewCell.h"
+#import "Model.h"
+
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate,UIScrollViewDelegate>
 
 /**tableView*/
 @property (nonatomic,strong) UITableView *tableView;
 
+/**数据源*/
+@property (nonatomic,strong) NSMutableArray *arrayDS;
+
 /**CLplayer*/
 @property (nonatomic,strong) CLPlayerView *playerView;
 
-/**index*/
+/**记录Cell*/
 @property (nonatomic,assign) TableViewCell *cell;
 
 @end
@@ -29,15 +34,39 @@
 {
     [super viewDidLoad];
 
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) style:UITableViewStyleGrouped];
+    [self initDate];
+    
+    [self initUI];
+}
+
+- (void)initDate
+{
+    _arrayDS = [NSMutableArray array];
+    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Date" ofType:@"json"]];
+    NSArray *array = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+    [array enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        Model *model = [Model new];
+        [model setValuesForKeysWithDictionary:obj];
+        [_arrayDS addObject:model];
+    }];
+
+}
+- (void)initUI
+{
+    self.navigationItem.title = @"CLPlayer";
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.sectionFooterHeight = 0;
+    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.tableView];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return _arrayDS.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -48,9 +77,15 @@
         cell = [[TableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Index];
     }
     cell.videoDelegate = self;
-    cell.url = @"http://wvideo.spriteapp.cn/video/2016/0215/56c1809735217_wpd.mp4";
-    
     return cell;
+}
+//在willDisplayCell里面处理数据能优化tableview的滑动流畅性
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    TableViewCell * myCell = (TableViewCell *)cell;
+    myCell.model = _arrayDS[indexPath.row];
+    //Cell开始出现的时候修正偏移量，让图片可以全部显示
+    [myCell cellOffset];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -77,7 +112,7 @@
     //    playerView.isLandscape    = YES;
     
     //视频地址
-    _playerView.url = [NSURL URLWithString:cell.url];
+    _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
     
     //播放
     [_playerView playVideo];
@@ -100,6 +135,16 @@
 #pragma mark - 滑动代理
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+    
+    // visibleCells 获取界面上能显示出来了cell
+    NSArray<TableViewCell *> *array = [self.tableView visibleCells];
+    
+    //enumerateObjectsUsingBlock 类似于for，但是比for更快
+    [array enumerateObjectsUsingBlock:^(TableViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj cellOffset];
+    }];
+
+    
     [_playerView calculateWith:self.tableView cell:_cell beyond:^{
         //销毁播放器
         [_playerView destroyPlayer];

@@ -1,0 +1,3 @@
+target 'CLPlayerDemo' do
+pod 'SDWebImage'
+end
