@@ -10,7 +10,7 @@
 #import "CLPlayerView.h"
 #import "UIView+CLSetRect.h"
 #import "TableViewCell.h"
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate>
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate,UIScrollViewDelegate>
 
 /**tableView*/
 @property (nonatomic,strong) UITableView *tableView;
@@ -18,8 +18,8 @@
 /**CLplayer*/
 @property (nonatomic,strong) CLPlayerView *playerView;
 
-
-
+/**index*/
+@property (nonatomic,assign) TableViewCell *cell;
 
 @end
 
@@ -60,12 +60,15 @@
 
 - (void)PlayVideoWithCell:(TableViewCell *)cell;
 {
+    _cell = cell;
+    
     //销毁播放器
     [_playerView destroyPlayer];
     _playerView = nil;
     
     _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.width, cell.height)];
-    [cell addSubview:_playerView];
+    [cell.contentView addSubview:_playerView];
+    
     //根据旋转自动支持全屏，默认支持
     //    playerView.autoFullScreen = NO;
     //重复播放，默认不播放
@@ -94,5 +97,19 @@
     }];
  
 }
+#pragma mark - 滑动代理
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [_playerView calculateWith:self.tableView cell:_cell beyond:^{
+        //销毁播放器
+        [_playerView destroyPlayer];
+        _playerView = nil;
+    }];
+}
+
+
+
+
+
 
 @end

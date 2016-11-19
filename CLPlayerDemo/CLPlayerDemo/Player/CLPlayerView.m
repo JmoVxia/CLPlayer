@@ -78,9 +78,13 @@ typedef enum : NSUInteger {
 @property (nonatomic,strong) NSTimer                 *sliderTimer;
 
 /**返回按钮回调*/
-@property (nonatomic,copy) void(^BackBlock) (UIButton *backButton);
+@property (nonatomic,copy) void (^BackBlock) (UIButton *backButton);
 /**播放完成回调*/
-@property (nonatomic,copy) void(^EndBlock) ();
+@property (nonatomic,copy) void (^EndBlock) ();
+/**滑动完成回调*/
+//@property (nonatomic,copy) void (^CompleteBlock) ();
+
+
 
 @end
 
@@ -703,6 +707,29 @@ typedef enum : NSUInteger {
     NSString *path   = [bundle pathForResource:name ofType:@"png"];
     return [UIImage imageWithContentsOfFile:path];
 }
+#pragma mark - 根据Cell位置判断是否销毁
+- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell beyond:(BeyondBlock) beyond;
+{
+    //取出cell位置
+    CGRect rect = cell.frame;
+    //cell顶部
+    CGFloat cellTop = rect.origin.y;
+    //cell底部
+    CGFloat cellBottom = rect.origin.y + rect.size.height;
+    
+    if (tableView.contentOffset.y > cellBottom)
+    {
+        beyond();
+        return;
+    }
+    
+    if (cellTop > tableView.contentOffset.y + tableView.frame.size.height)
+    {
+        beyond();
+        return;
+    }
+}
+
 #pragma mark - dealloc
 - (void)dealloc
 {
