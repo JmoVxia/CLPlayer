@@ -89,11 +89,7 @@
 ```
 #播放器效果图
 
-![播放器模拟器效果图](http://upload-images.jianshu.io/upload_images/1979970-03f72cc0cd69d630.gif?imageMogr2/auto-orient/strip)
-
-#播放器效果图
-
-![](http://upload-images.jianshu.io/upload_images/1979970-6bf88743bcaf8ff4.gif?imageMogr2/auto-orient/strip)
+![](http://upload-images.jianshu.io/upload_images/1979970-03f72cc0cd69d630.gif?imageMogr2/auto-orient/strip)
 
 #详细请看简书
 
