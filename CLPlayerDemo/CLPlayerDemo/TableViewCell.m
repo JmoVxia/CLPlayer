@@ -7,7 +7,6 @@
 //
 
 #import "TableViewCell.h"
-#import "CLPlayerView.h"
 #import "UIView+CLSetRect.h"
 #import "UIImage+CLTintColor.h"
 #import "UIImageView+WebCache.h"

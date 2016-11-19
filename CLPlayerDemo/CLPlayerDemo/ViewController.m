@@ -92,9 +92,10 @@
 {
     return 300;
 }
-
+#pragma mark - 点击播放代理
 - (void)PlayVideoWithCell:(TableViewCell *)cell;
 {
+    //记录被点击的Cell
     _cell = cell;
     
     //销毁播放器
@@ -132,6 +133,7 @@
     }];
  
 }
+
 #pragma mark - 滑动代理
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {

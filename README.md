@@ -30,36 +30,67 @@
 
       直接使用cocoapods导入，`pod 'CLPlayer', '~> 1.0.0'`
 
-+ 具体使用代码
+```
+#pragma mark - 点击播放代理
+- (void)PlayVideoWithCell:(TableViewCell *)cell;
+{
+//记录被点击的cell
+    _cell = cell;
+    
+    //销毁播放器
+    [_playerView destroyPlayer];
+    _playerView = nil;
+    
+    _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.width, cell.height)];
+    [cell.contentView addSubview:_playerView];
+    
+    //根据旋转自动支持全屏，默认支持
+    //    playerView.autoFullScreen = NO;
+    //重复播放，默认不播放
+    //    playerView.repeatPlay     = YES;
+    //如果播放器所在页面支持横屏，需要设置为Yes，不支持不需要设置(默认不支持)
+    //    playerView.isLandscape    = YES;
+    
+    //视频地址
+    _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
+    
+    //播放
+    [_playerView playVideo];
+    
+    //返回按钮点击事件回调
+    [_playerView backButton:^(UIButton *button) {
+        NSLog(@"返回按钮被点击");
+    }];
+    
+    //播放完成回调
+    [_playerView endPlay:^{
+        
+        //销毁播放器
+        [_playerView destroyPlayer];
+        _playerView = nil;
+        NSLog(@"播放完成");
+    }];
+ 
+}
 
 ```
-CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 90, ScreenWidth, 300)];
-[self.view addSubview:playerView];
-//根据旋转自动支持全屏，默认支持
-//    playerView.autoFullScreen = NO;
-//重复播放，默认不播放
-//    playerView.repeatPlay     = YES;
-//如果播放器所在页面支持横屏，需要设置为Yes，不支持不需要设置(默认不支持)
-//    playerView.isLandscape    = YES;
-
-//视频地址
-playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0215/56c1809735217_wpd.mp4"];
-
-//播放
-[playerView playVideo];
-
-//返回按钮点击事件回调
-[playerView backButton:^(UIButton *button) {
-NSLog(@"返回按钮被点击");
-}];
-
-//播放完成回调
-[playerView endPlay:^{
-NSLog(@"播放完成");
-}];
-
+    在`tableView`滑动代理中，需要使用`- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell beyond:(BeyondBlock) beyond`方法，将`tableView`和播放器所在`cell`传递给播放器，播放器会在内部计算播放器所在位置，在超出屏幕的时候，会调用超出的`block`，在`block`回调中对播放器销毁。
 
 ```
+#pragma mark - 滑动代理
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [_playerView calculateWith:self.tableView cell:_cell beyond:^{
+        //销毁播放器
+        [_playerView destroyPlayer];
+        _playerView = nil;
+    }];
+}
+```
+#播放器效果图
+
+![播放器模拟器效果图](http://upload-images.jianshu.io/upload_images/1979970-03f72cc0cd69d630.gif?imageMogr2/auto-orient/strip)
+
 #播放器效果图
 
 ![](http://upload-images.jianshu.io/upload_images/1979970-6bf88743bcaf8ff4.gif?imageMogr2/auto-orient/strip)
