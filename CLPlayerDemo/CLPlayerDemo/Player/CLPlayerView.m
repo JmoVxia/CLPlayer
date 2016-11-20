@@ -193,6 +193,8 @@ typedef enum : NSUInteger {
     [self createMaxButton];
     //创建点击手势
     [self createGesture];
+    //手动调用计时器时间，解决旋转等引起跳转
+    [self timeStack];
     
     //计时器，循环执行
     _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
