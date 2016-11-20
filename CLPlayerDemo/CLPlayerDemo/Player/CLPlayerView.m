@@ -612,15 +612,24 @@ typedef enum : NSUInteger {
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     if (orientation == UIDeviceOrientationLandscapeLeft)
     {
-        [self fullScreenWithDirection:Letf];
+        if (_isFullScreen == NO)
+        {
+            [self fullScreenWithDirection:Letf];
+        }
     }
     else if (orientation == UIDeviceOrientationLandscapeRight)
     {
-        [self fullScreenWithDirection:Right];
+        if (_isFullScreen == NO)
+        {
+            [self fullScreenWithDirection:Right];
+        }
     }
     else if (orientation == UIDeviceOrientationPortrait)
     {
-        [self originalscreen];
+        if (_isFullScreen == YES)
+        {
+            [self originalscreen];
+        }
     }
 }
 #pragma mark - 全屏
