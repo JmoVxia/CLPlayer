@@ -101,16 +101,7 @@
 ```
 #播放器效果图
 
-
-![](https://github.com/JmoVxia/CLPlayer/blob/master/CLPlayerDemo/%E6%92%AD%E6%94%BE%E5%99%A8%E7%9C%9F%E6%9C%BA%E6%95%88%E6%9E%9C%E5%9B%BE.gif)
-
-![](https://github.com/JmoVxia/CLPlayer/blob/master/CLPlayerDemo/%E6%92%AD%E6%94%BE%E5%99%A8%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%95%88%E6%9E%9C%E5%9B%BE1.gif)
-
-![](https://github.com/JmoVxia/CLPlayer/blob/master/CLPlayerDemo/%E6%92%AD%E6%94%BE%E5%99%A8%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%95%88%E6%9E%9C%E5%9B%BE2.gif)
-
-![](https://github.com/JmoVxia/CLPlayer/blob/master/CLPlayerDemo/%E6%92%AD%E6%94%BE%E5%99%A8%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%95%88%E6%9E%9C%E5%9B%BE3.gif)
-
-![](https://github.com/JmoVxia/CLPlayer/blob/master/CLPlayerDemo/%E6%92%AD%E6%94%BE%E5%99%A8%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%95%88%E6%9E%9C%E5%9B%BE4.gif)
+![](https://github.com/JmoVxia/CLPlayer/blob/master/CLPlayerDemo/%E6%95%88%E6%9E%9C%E5%9B%BE.gif)
 
 
 
