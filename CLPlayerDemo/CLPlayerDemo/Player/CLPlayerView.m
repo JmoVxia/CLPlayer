@@ -140,6 +140,11 @@ typedef enum : NSUInteger {
     _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
     _playerLayer              = [AVPlayerLayer playerLayerWithPlayer:_player];
     _playerLayer.frame        = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
+    //设置静音模式播放声音
+    AVAudioSession * session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [session setActive:YES error:nil];
+
     _playerLayer.videoGravity = AVLayerVideoGravityResize;
     [self.layer addSublayer:_playerLayer];
     // 监听loadedTimeRanges属性
@@ -247,7 +252,8 @@ typedef enum : NSUInteger {
     NSTimeInterval timeInterval = [self availableDuration];
     CMTime duration             = _playerItem.duration;
     CGFloat totalDuration       = CMTimeGetSeconds(duration);
-    [_progress setProgress:timeInterval / totalDuration animated:NO];
+    CGFloat progress            = timeInterval / totalDuration;
+    [_progress setProgress:progress animated:NO];
     
     CGFloat time  = round(timeInterval);
     CGFloat total = round(totalDuration);
@@ -282,7 +288,8 @@ typedef enum : NSUInteger {
         NSTimeInterval timeInterval = [self availableDuration];
         CMTime duration             = _playerItem.duration;
         CGFloat totalDuration       = CMTimeGetSeconds(duration);
-        [_progress setProgress:timeInterval / totalDuration animated:NO];
+        CGFloat progress            = timeInterval / totalDuration;
+        [_progress setProgress:progress animated:NO];
         
         //设置缓存进度颜色
         _progress.progressTintColor = ProgressTintColor;
