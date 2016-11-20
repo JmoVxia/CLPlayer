@@ -91,8 +91,7 @@
 ```
 #播放器效果图
 
-![TableView滑动效果图](http://upload-images.jianshu.io/upload_images/1979970-8c8e90bbbfbaf896.gif?imageMogr2/auto-orient/strip)
-
+https://github.com/JmoVxia/CLPlayer/blob/master/CLPlayerDemo/%E6%92%AD%E6%94%BE%E5%99%A8%E7%9C%9F%E6%9C%BA%E6%95%88%E6%9E%9C%E5%9B%BE.gif
 
 ![全屏按钮点击效果图](http://upload-images.jianshu.io/upload_images/1979970-144d8b9470369312.gif?imageMogr2/auto-orient/strip)
 
