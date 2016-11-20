@@ -30,6 +30,8 @@
 
       直接使用cocoapods导入，`pod 'CLPlayer', '~> 1.0.0'`
 
++ TableView使用方法
+
 ```
 #pragma mark - 点击播放代理
 - (void)PlayVideoWithCell:(TableViewCell *)cell;
@@ -89,8 +91,20 @@
 ```
 #播放器效果图
 
-![](http://upload-images.jianshu.io/upload_images/1979970-03f72cc0cd69d630.gif?imageMogr2/auto-orient/strip)
+![TableView滑动效果图](http://upload-images.jianshu.io/upload_images/1979970-8c8e90bbbfbaf896.gif?imageMogr2/auto-orient/strip)
+
+
+![全屏按钮点击效果图](http://upload-images.jianshu.io/upload_images/1979970-144d8b9470369312.gif?imageMogr2/auto-orient/strip)
+
+
+![手机左右旋转自动全屏效果图](http://upload-images.jianshu.io/upload_images/1979970-6885f7f88487b18d.gif?imageMogr2/auto-orient/strip)
+
+
+![cell滑出屏幕外效果图](http://upload-images.jianshu.io/upload_images/1979970-71e43d172820b6f2.gif?imageMogr2/auto-orient/strip)
+
+
+![点击其他视频效果图](http://upload-images.jianshu.io/upload_images/1979970-eb38a6af079dbad2.gif?imageMogr2/auto-orient/strip)
 
 #详细请看简书
 
-http://www.jianshu.com/p/b9659492d064
+http://www.jianshu.com/p/83191c7bc840
