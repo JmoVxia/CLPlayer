@@ -19,6 +19,16 @@
 #define  ScreenHeight  [UIScreen mainScreen].bounds.size.height
 
 /**
+ iPhone6为标准，乘以宽的比例
+ */
+#define ScaleX(value) ((value)/375.0f*ScreenWidth)
+
+/**
+ iPhone6为标准，乘以高的比例
+ */
+#define ScaleY(value) ((value)/667.0f*ScreenHeight)
+
+/**
  *  Status bar height.
  */
 #define  StatusBarHeight      20.f

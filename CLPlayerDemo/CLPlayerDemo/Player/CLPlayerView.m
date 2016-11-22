@@ -25,7 +25,7 @@ typedef enum : NSUInteger {
 //消失时间
 #define DisappearTime  6
 //顶部底部控件高度
-#define ViewHeight     40
+#define ViewHeight     50
 //按钮大小
 #define ButtonSize     30
 //滑块大小
@@ -81,10 +81,6 @@ typedef enum : NSUInteger {
 @property (nonatomic,copy) void (^BackBlock) (UIButton *backButton);
 /**播放完成回调*/
 @property (nonatomic,copy) void (^EndBlock) ();
-/**滑动完成回调*/
-//@property (nonatomic,copy) void (^CompleteBlock) ();
-
-
 
 @end
 
