@@ -187,7 +187,7 @@
 				TargetAttributes = {
 					5B1FC4C21DC850820036C489 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 533J5B8T42;
+						DevelopmentTeam = Y56852HD87;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -401,7 +401,8 @@
 			baseConfigurationReference = 133621D737F2050001C8A017 /* Pods-CLPlayerDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 533J5B8T42;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Y56852HD87;
 				INFOPLIST_FILE = CLPlayerDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CL.CLPlayerDemo;
@@ -414,7 +415,8 @@
 			baseConfigurationReference = BA727F0172B5759313BFAF15 /* Pods-CLPlayerDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 533J5B8T42;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = Y56852HD87;
 				INFOPLIST_FILE = CLPlayerDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CL.CLPlayerDemo;
