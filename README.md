@@ -101,7 +101,7 @@
 ```
 #播放器效果图
 
-![](https://github.com/JmoVxia/CLPlayer/blob/master/CLPlayerDemo/%E6%95%88%E6%9E%9C%E5%9B%BE.gif)
+![](https://github.com/JmoVxia/CLPlayer/blob/master/%E6%95%88%E6%9E%9C%E5%9B%BE.gif)
 
 
 
