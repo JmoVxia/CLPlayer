@@ -22,7 +22,7 @@
 		5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B35DDE31DE07F9A00CEB057 /* Date.json */; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
 		5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDB581B1DDE968700523A8C /* TableViewCell.m */; };
-		5BEF1C731DDC2BB70007DE70 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF1C721DDC2BB70007DE70 /* Resources.bundle */; };
+		5BEF1C731DDC2BB70007DE70 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF1C721DDC2BB70007DE70 /* CLPlayer.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,7 +53,7 @@
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BDB581A1DDE968700523A8C /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		5BDB581B1DDE968700523A8C /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
-		5BEF1C721DDC2BB70007DE70 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
+		5BEF1C721DDC2BB70007DE70 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
 		BA727F0172B5759313BFAF15 /* Pods-CLPlayerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLPlayerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLPlayerDemo/Pods-CLPlayerDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,7 +92,7 @@
 				5B1680B21DCC5800000AC320 /* UIImage+CLTintColor.m */,
 				5B1680B31DCC5800000AC320 /* UIView+CLSetRect.h */,
 				5B1680B41DCC5800000AC320 /* UIView+CLSetRect.m */,
-				5BEF1C721DDC2BB70007DE70 /* Resources.bundle */,
+				5BEF1C721DDC2BB70007DE70 /* CLPlayer.bundle */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -218,7 +218,7 @@
 				5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */,
 				5B1FC4D61DC850820036C489 /* LaunchScreen.storyboard in Resources */,
 				5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */,
-				5BEF1C731DDC2BB70007DE70 /* Resources.bundle in Resources */,
+				5BEF1C731DDC2BB70007DE70 /* CLPlayer.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
