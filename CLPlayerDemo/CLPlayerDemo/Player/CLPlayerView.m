@@ -541,8 +541,10 @@ typedef enum : NSUInteger {
     {
         [self resetPlay];
     }
-    
-    self.EndBlock();
+    if (self.EndBlock)
+    {
+        self.EndBlock();
+    }
 }
 - (void)endPlay:(EndBolck) end
 {
@@ -551,7 +553,10 @@ typedef enum : NSUInteger {
 #pragma mark - 返回按钮
 - (void)backButtonAction:(UIButton *)button
 {
-    self.BackBlock(button);
+    if (self.BackBlock)
+    {
+        self.BackBlock(button);
+    }
 }
 - (void)backButton:(BackButtonBlock) backButton;
 {
