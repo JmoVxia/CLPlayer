@@ -55,7 +55,7 @@
 {
     self.navigationItem.title = @"CLPlayer";
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CLscreenWidth, CLscreenHeight) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.sectionFooterHeight = 0;
@@ -102,7 +102,7 @@
     [_playerView destroyPlayer];
     _playerView = nil;
     
-    _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.CLwidth, cell.CLheight)];
+    _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.width, cell.height)];
     [cell.contentView addSubview:_playerView];
     
     //根据旋转自动支持全屏，默认支持

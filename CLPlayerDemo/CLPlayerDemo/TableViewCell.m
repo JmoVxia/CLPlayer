@@ -41,7 +41,7 @@
     self.clipsToBounds = YES;
     self.selectionStyle=UITableViewCellSelectionStyleNone;
 
-    UIImageView *pictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, - CellHeight / 2.0, CLscreenWidth, 20)];
+    UIImageView *pictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, - CellHeight / 2.0, ScreenWidth, 20)];
     [self.contentView addSubview:pictureView];
     _PictureView = pictureView;
     
@@ -95,7 +95,7 @@
     CGFloat offsetDig = 2 * cellOffsetY / self.superview.frame.size.height ;
     
     //要补偿的位移,self.superview.frame.origin.y是tableView的Y值，这里加上是为了让图片从最上面开始显示
-    CGFloat superViewY = CLscreenHeight - self.superview.frame.size.height;
+    CGFloat superViewY = ScreenHeight - self.superview.frame.size.height;
     CGFloat offset = -offsetDig * CellHeight / 2 + superViewY;
     
     //让pictureViewY轴方向位移offset
@@ -108,10 +108,10 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    _button.CLcenterX = self.CLwidth/2.0;
-    _button.CLcenterY = self.CLheight/2.0;
+    _button.centerX = self.width/2.0;
+    _button.centerY = self.height/2.0;
     
-    _PictureView.CLheight = self.CLheight * 2;
+    _PictureView.height = self.height * 2;
 }
 
 

@@ -8,42 +8,45 @@
 
 #import <UIKit/UIKit.h>
 
-
 /**
  *  UIScreen width.
  */
-#define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
+#define  ScreenWidth   [UIScreen mainScreen].bounds.size.width
 
 /**
  *  UIScreen height.
  */
-#define  CLscreenHeight  [UIScreen mainScreen].bounds.size.height
+#define  ScreenHeight  [UIScreen mainScreen].bounds.size.height
 
-/**iPhone5为标准，乘以宽的比例*/
-#define CLscaleX(value) (((value) / 2.0f)/320.0f * CLscreenWidth)
+/**
+ iPhone6为标准，乘以宽的比例
+ */
+#define ScaleX(value) ((value)/375.0f*ScreenWidth)
 
-/**iPhone5为标准，乘以高的比例*/
-#define CLscaleY(value) (((value) / 2.0f)/568.0f * CLscreenHeight)
+/**
+ iPhone6为标准，乘以高的比例
+ */
+#define ScaleY(value) ((value)/667.0f*ScreenHeight)
 
 /**
  *  Status bar height.
  */
-#define  CLstatusBarHeight      20.f
+#define  StatusBarHeight      20.f
 
 /**
  *  Navigation bar height.
  */
-#define  CLnavigationBarHeight  44.f
+#define  NavigationBarHeight  44.f
 
 /**
  *  Tabbar height.
  */
-#define  CLtabbarHeight         49.f
+#define  TabbarHeight         49.f
 
 /**
  *  Status bar & navigation bar height.
  */
-#define  CLstatusBarAndNavigationBarHeight   (20.f + 44.f)
+#define  StatusBarAndNavigationBarHeight   (20.f + 44.f)
 
 /**
  *  iPhone4 or iPhone4s
@@ -72,97 +75,97 @@
 /**
  控件起点
  */
-@property (nonatomic) CGPoint CLviewOrigin;
+@property (nonatomic) CGPoint viewOrigin;
 
 /**
  控件大小
  */
-@property (nonatomic) CGSize  CLviewSize;
+@property (nonatomic) CGSize  viewSize;
 
 /**
  控件起点x
  */
-@property (nonatomic) CGFloat CLx;
+@property (nonatomic) CGFloat x;
 
 /**
  控件起点Y
  */
-@property (nonatomic) CGFloat CLy;
+@property (nonatomic) CGFloat y;
 
 /**
  控件宽
  */
-@property (nonatomic) CGFloat CLwidth;
+@property (nonatomic) CGFloat width;
 
 /**
  控件高
  */
-@property (nonatomic) CGFloat CLheight;
+@property (nonatomic) CGFloat height;
 
 /**
  控件顶部
  */
-@property (nonatomic) CGFloat CLtop;
+@property (nonatomic) CGFloat top;
 
 /**
  控件底部
  */
-@property (nonatomic) CGFloat CLbottom;
+@property (nonatomic) CGFloat bottom;
 
 /**
  控件左边
  */
-@property (nonatomic) CGFloat CLleft;
+@property (nonatomic) CGFloat left;
 
 /**
  控件右边
  */
-@property (nonatomic) CGFloat CLright;
+@property (nonatomic) CGFloat right;
 
 /**
  控件中心点X
  */
-@property (nonatomic) CGFloat CLcenterX;
+@property (nonatomic) CGFloat centerX;
 
 /**
  控件中心点Y
  */
-@property (nonatomic) CGFloat CLcenterY;
+@property (nonatomic) CGFloat centerY;
 
 /**
  控件左下
  */
-@property(readonly) CGPoint CLbottomLeft ;
+@property(readonly) CGPoint BottomLeft ;
 
 /**
  控件右下
  */
-@property(readonly) CGPoint CLbottomRight ;
+@property(readonly) CGPoint BottomRight ;
 
 /**
  控件左上
  */
-@property(readonly) CGPoint CLtopLeft ;
+@property(readonly) CGPoint TopLeft ;
 /**
  控件右上
  */
-@property(readonly) CGPoint CLtopRight ;
+@property(readonly) CGPoint TopRight ;
 
 
 /**
  屏幕中心点X
  */
-@property (nonatomic, readonly) CGFloat CLmiddleX;
+@property (nonatomic, readonly) CGFloat middleX;
 
 /**
  屏幕中心点Y
  */
-@property (nonatomic, readonly) CGFloat CLmiddleY;
+@property (nonatomic, readonly) CGFloat middleY;
 
 /**
  屏幕中心点
  */
-@property (nonatomic, readonly) CGPoint CLmiddlePoint;
+@property (nonatomic, readonly) CGPoint middlePoint;
 
 
 /**
