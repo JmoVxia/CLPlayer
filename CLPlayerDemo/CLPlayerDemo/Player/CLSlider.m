@@ -17,4 +17,10 @@
     return CGRectMake(-2, (self.frame.size.height - 3)/2.0, CGRectGetWidth(bounds) + 4, 3);
 }
 
+//- (CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)rect value:(float)value
+//{
+//    
+//}
+
+
 @end

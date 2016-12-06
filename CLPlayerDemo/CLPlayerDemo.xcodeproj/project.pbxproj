@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		52CFF55482649C3F8FF48753 /* libPods-CLPlayerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */; };
-		5B1680B51DCC5800000AC320 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680A51DCC5800000AC320 /* CLPlayerView.m */; };
-		5B1680BC1DCC5800000AC320 /* CLSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680AE1DCC5800000AC320 /* CLSlider.m */; };
-		5B1680BD1DCC5800000AC320 /* UIImage+CLScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B01DCC5800000AC320 /* UIImage+CLScaleToSize.m */; };
-		5B1680BE1DCC5800000AC320 /* UIImage+CLTintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B21DCC5800000AC320 /* UIImage+CLTintColor.m */; };
-		5B1680BF1DCC5800000AC320 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1680B41DCC5800000AC320 /* UIView+CLSetRect.m */; };
 		5B1FC4C81DC850820036C489 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4C71DC850820036C489 /* main.m */; };
 		5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CA1DC850820036C489 /* AppDelegate.m */; };
 		5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CD1DC850820036C489 /* ViewController.m */; };
@@ -21,23 +16,18 @@
 		5B35DDE21DE07A5700CEB057 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B35DDE11DE07A5700CEB057 /* Model.m */; };
 		5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B35DDE31DE07F9A00CEB057 /* Date.json */; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
+		5BAEF9C61DF6B822009D1783 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */; };
+		5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */; };
+		5BAEF9C81DF6B822009D1783 /* CLSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9C11DF6B822009D1783 /* CLSlider.m */; };
+		5BAEF9C91DF6B822009D1783 /* UIImage+CLScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9C31DF6B822009D1783 /* UIImage+CLScaleToSize.m */; };
+		5BAEF9CA1DF6B822009D1783 /* UIImage+CLTintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9C51DF6B822009D1783 /* UIImage+CLTintColor.m */; };
+		5BAEF9CD1DF6B87D009D1783 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */; };
 		5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDB581B1DDE968700523A8C /* TableViewCell.m */; };
-		5BEF1C731DDC2BB70007DE70 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BEF1C721DDC2BB70007DE70 /* CLPlayer.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		133621D737F2050001C8A017 /* Pods-CLPlayerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLPlayerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLPlayerDemo/Pods-CLPlayerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLPlayerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B1680A41DCC5800000AC320 /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
-		5B1680A51DCC5800000AC320 /* CLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerView.m; sourceTree = "<group>"; };
-		5B1680AD1DCC5800000AC320 /* CLSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSlider.h; sourceTree = "<group>"; };
-		5B1680AE1DCC5800000AC320 /* CLSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSlider.m; sourceTree = "<group>"; };
-		5B1680AF1DCC5800000AC320 /* UIImage+CLScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLScaleToSize.h"; sourceTree = "<group>"; };
-		5B1680B01DCC5800000AC320 /* UIImage+CLScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLScaleToSize.m"; sourceTree = "<group>"; };
-		5B1680B11DCC5800000AC320 /* UIImage+CLTintColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLTintColor.h"; sourceTree = "<group>"; };
-		5B1680B21DCC5800000AC320 /* UIImage+CLTintColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLTintColor.m"; sourceTree = "<group>"; };
-		5B1680B31DCC5800000AC320 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
-		5B1680B41DCC5800000AC320 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5B1FC4C31DC850820036C489 /* CLPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1FC4C71DC850820036C489 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5B1FC4C91DC850820036C489 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -51,9 +41,19 @@
 		5B35DDE11DE07A5700CEB057 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		5B35DDE31DE07F9A00CEB057 /* Date.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Date.json; sourceTree = "<group>"; };
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
+		5BAEF9BE1DF6B822009D1783 /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
+		5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerView.m; sourceTree = "<group>"; };
+		5BAEF9C01DF6B822009D1783 /* CLSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSlider.h; sourceTree = "<group>"; };
+		5BAEF9C11DF6B822009D1783 /* CLSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSlider.m; sourceTree = "<group>"; };
+		5BAEF9C21DF6B822009D1783 /* UIImage+CLScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLScaleToSize.h"; sourceTree = "<group>"; };
+		5BAEF9C31DF6B822009D1783 /* UIImage+CLScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLScaleToSize.m"; sourceTree = "<group>"; };
+		5BAEF9C41DF6B822009D1783 /* UIImage+CLTintColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLTintColor.h"; sourceTree = "<group>"; };
+		5BAEF9C51DF6B822009D1783 /* UIImage+CLTintColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLTintColor.m"; sourceTree = "<group>"; };
+		5BAEF9CB1DF6B87D009D1783 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
+		5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5BDB581A1DDE968700523A8C /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		5BDB581B1DDE968700523A8C /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
-		5BEF1C721DDC2BB70007DE70 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
 		BA727F0172B5759313BFAF15 /* Pods-CLPlayerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLPlayerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLPlayerDemo/Pods-CLPlayerDemo.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,24 +77,6 @@
 				BA727F0172B5759313BFAF15 /* Pods-CLPlayerDemo.release.xcconfig */,
 			);
 			name = Pods;
-			sourceTree = "<group>";
-		};
-		5B1680A31DCC5800000AC320 /* Player */ = {
-			isa = PBXGroup;
-			children = (
-				5B1680A41DCC5800000AC320 /* CLPlayerView.h */,
-				5B1680A51DCC5800000AC320 /* CLPlayerView.m */,
-				5B1680AD1DCC5800000AC320 /* CLSlider.h */,
-				5B1680AE1DCC5800000AC320 /* CLSlider.m */,
-				5B1680AF1DCC5800000AC320 /* UIImage+CLScaleToSize.h */,
-				5B1680B01DCC5800000AC320 /* UIImage+CLScaleToSize.m */,
-				5B1680B11DCC5800000AC320 /* UIImage+CLTintColor.h */,
-				5B1680B21DCC5800000AC320 /* UIImage+CLTintColor.m */,
-				5B1680B31DCC5800000AC320 /* UIView+CLSetRect.h */,
-				5B1680B41DCC5800000AC320 /* UIView+CLSetRect.m */,
-				5BEF1C721DDC2BB70007DE70 /* CLPlayer.bundle */,
-			);
-			path = Player;
 			sourceTree = "<group>";
 		};
 		5B1FC4BA1DC850820036C489 = {
@@ -126,7 +108,7 @@
 				5B35DDE11DE07A5700CEB057 /* Model.m */,
 				5BDB581A1DDE968700523A8C /* TableViewCell.h */,
 				5BDB581B1DDE968700523A8C /* TableViewCell.m */,
-				5B1680A31DCC5800000AC320 /* Player */,
+				5BAEF9BC1DF6B822009D1783 /* Player */,
 				5B1FC4C61DC850820036C489 /* Supporting Files */,
 			);
 			path = CLPlayerDemo;
@@ -151,6 +133,24 @@
 				188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5BAEF9BC1DF6B822009D1783 /* Player */ = {
+			isa = PBXGroup;
+			children = (
+				5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */,
+				5BAEF9BE1DF6B822009D1783 /* CLPlayerView.h */,
+				5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */,
+				5BAEF9C01DF6B822009D1783 /* CLSlider.h */,
+				5BAEF9C11DF6B822009D1783 /* CLSlider.m */,
+				5BAEF9C21DF6B822009D1783 /* UIImage+CLScaleToSize.h */,
+				5BAEF9C31DF6B822009D1783 /* UIImage+CLScaleToSize.m */,
+				5BAEF9C41DF6B822009D1783 /* UIImage+CLTintColor.h */,
+				5BAEF9C51DF6B822009D1783 /* UIImage+CLTintColor.m */,
+				5BAEF9CB1DF6B87D009D1783 /* UIView+CLSetRect.h */,
+				5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */,
+			);
+			path = Player;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,7 +218,7 @@
 				5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */,
 				5B1FC4D61DC850820036C489 /* LaunchScreen.storyboard in Resources */,
 				5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */,
-				5BEF1C731DDC2BB70007DE70 /* CLPlayer.bundle in Resources */,
+				5BAEF9C61DF6B822009D1783 /* CLPlayer.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,15 +277,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BAEF9CD1DF6B87D009D1783 /* UIView+CLSetRect.m in Sources */,
+				5BAEF9C81DF6B822009D1783 /* CLSlider.m in Sources */,
 				5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */,
-				5B1680BF1DCC5800000AC320 /* UIView+CLSetRect.m in Sources */,
+				5BAEF9CA1DF6B822009D1783 /* UIImage+CLTintColor.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
-				5B1680BD1DCC5800000AC320 /* UIImage+CLScaleToSize.m in Sources */,
+				5BAEF9C91DF6B822009D1783 /* UIImage+CLScaleToSize.m in Sources */,
 				5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
-				5B1680BE1DCC5800000AC320 /* UIImage+CLTintColor.m in Sources */,
-				5B1680B51DCC5800000AC320 /* CLPlayerView.m in Sources */,
-				5B1680BC1DCC5800000AC320 /* CLSlider.m in Sources */,
+				5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */,
 				5B35DDE21DE07A5700CEB057 /* Model.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
