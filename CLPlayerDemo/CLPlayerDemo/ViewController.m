@@ -147,7 +147,7 @@
     }];
 
     
-    [_playerView calculateWith:self.tableView cell:_cell beyond:^{
+    [_playerView calculateWith:_tableView cell:_cell Offset:64 beyond:^{
         //销毁播放器
         [_playerView destroyPlayer];
         _playerView = nil;

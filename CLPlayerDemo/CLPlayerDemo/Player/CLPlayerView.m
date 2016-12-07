@@ -729,7 +729,7 @@ typedef enum : NSUInteger {
     //取消定时器
     [self destroyAllTimer];
 
-    [self setStatusBarHidden:YES];
+    [self setStatusBarHidden:NO];
 
     [UIView animateWithDuration:0.25 animations:^{
         //还原大小
@@ -760,7 +760,7 @@ typedef enum : NSUInteger {
     return [UIImage imageWithContentsOfFile:path];
 }
 #pragma mark - 根据Cell位置判断是否销毁
-- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell beyond:(BeyondBlock) beyond;
+- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell Offset:(CGFloat)offset beyond:(BeyondBlock) beyond;
 {
     //取出cell位置
     CGRect rect = cell.frame;
@@ -769,15 +769,21 @@ typedef enum : NSUInteger {
     //cell底部
     CGFloat cellBottom = rect.origin.y + rect.size.height;
     
-    if (tableView.contentOffset.y > cellBottom)
+    if (tableView.contentOffset.y + offset > cellBottom)
     {
-        beyond();
+        if (beyond)
+        {
+            beyond();
+        }
         return;
     }
     
-    if (cellTop > tableView.contentOffset.y + tableView.frame.size.height)
+    if (cellTop > tableView.contentOffset.y + cellBottom - offset)
     {
-        beyond();
+        if (beyond)
+        {
+            beyond();
+        }
         return;
     }
 }
