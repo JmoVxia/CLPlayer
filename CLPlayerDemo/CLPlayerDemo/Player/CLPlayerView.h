@@ -34,7 +34,7 @@ typedef void(^BeyondBlock)();
 - (void)destroyPlayer;
 
 /**
- 根据播放器所在位置计算是否滑出tableView
+ 根据播放器所在位置计算是否滑出tableView，根据上下偏移量可以精准的计算你想要销毁播放器的位置
  
  @param tableView tableView
  @param cell 播放器所在cell
