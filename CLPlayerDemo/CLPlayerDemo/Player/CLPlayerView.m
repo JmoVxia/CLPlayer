@@ -760,7 +760,7 @@ typedef enum : NSUInteger {
     return [UIImage imageWithContentsOfFile:path];
 }
 #pragma mark - 根据Cell位置判断是否销毁
-- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell Offset:(CGFloat)offset beyond:(BeyondBlock) beyond;
+- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell topOffset:(CGFloat)topOffset bottomOffset:(CGFloat)bottomOffset beyond:(BeyondBlock) beyond;
 {
     //取出cell位置
     CGRect rect = cell.frame;
@@ -769,7 +769,8 @@ typedef enum : NSUInteger {
     //cell底部
     CGFloat cellBottom = rect.origin.y + rect.size.height;
     
-    if (tableView.contentOffset.y + offset > cellBottom)
+    
+    if (tableView.contentOffset.y + topOffset > cellBottom)
     {
         if (beyond)
         {
@@ -778,7 +779,7 @@ typedef enum : NSUInteger {
         return;
     }
     
-    if (cellTop > tableView.contentOffset.y + cellBottom - offset)
+    if (cellTop > tableView.contentOffset.y + tableView.frame.size.height - bottomOffset)
     {
         if (beyond)
         {

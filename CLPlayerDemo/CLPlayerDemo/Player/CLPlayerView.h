@@ -34,14 +34,15 @@ typedef void(^BeyondBlock)();
 - (void)destroyPlayer;
 
 /**
- 根据播放器所在位置计算是否滑出
-
- @param tableView <#tableView description#>
+ 根据播放器所在位置计算是否滑出tableView
+ 
+ @param tableView tableView
  @param cell 播放器所在cell
- @param offset tableview 相对于屏幕顶部的偏移（如果有导航条和状态栏，就是64）
+ @param topOffset tableview 相对于屏幕顶部的偏移（如果有导航条和状态栏，就是64）
+ @param bottomOffset  tableView 相对于屏幕底部的偏移 (如果有Tabbar)
  @param beyond 超出后的回调
  */
-- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell Offset:(CGFloat)offset beyond:(BeyondBlock) beyond;
+- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell topOffset:(CGFloat)topOffset bottomOffset:(CGFloat)bottomOffset beyond:(BeyondBlock) beyond;
 
 
 
