@@ -38,8 +38,8 @@ typedef void(^BeyondBlock)();
  
  @param tableView tableView
  @param cell 播放器所在cell
- @param topOffset tableview 相对于屏幕顶部的偏移（如果有导航条和状态栏，就是64）
- @param bottomOffset  tableView 相对于屏幕底部的偏移 (如果有Tabbar)
+ @param topOffset tableview 相对于屏幕顶部的偏移（根据你自己需求设置）
+ @param bottomOffset  tableView 相对于屏幕底部的偏移
  @param beyond 超出后的回调
  */
 - (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell topOffset:(CGFloat)topOffset bottomOffset:(CGFloat)bottomOffset beyond:(BeyondBlock) beyond;

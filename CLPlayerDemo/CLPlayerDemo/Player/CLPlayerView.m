@@ -319,9 +319,9 @@ typedef enum : NSUInteger {
     [_bottomView addSubview:_slider];
     
     UIImage *image     = [self getPictureWithName:@"CLRound"];
-    //改变滑块大小
+    //通过改变图片大小来改变滑块大小
     UIImage *tempImage = [image OriginImage:image scaleToSize:CGSizeMake( SliderSize, SliderSize)];
-    //改变滑块颜色
+    //通过改变图片颜色来改变滑块颜色
     UIImage *newImage  = [tempImage imageWithTintColor:SliderColor];
     [_slider setThumbImage:newImage forState:UIControlStateNormal];
     
