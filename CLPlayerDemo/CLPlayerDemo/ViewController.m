@@ -21,7 +21,7 @@
 @property (nonatomic,strong) NSMutableArray *arrayDS;
 
 /**CLplayer*/
-@property (nonatomic,strong) CLPlayerView *playerView;
+@property (nonatomic,weak) CLPlayerView *playerView;
 
 /**记录Cell*/
 @property (nonatomic,assign) TableViewCell *cell;
@@ -102,7 +102,8 @@
     [_playerView destroyPlayer];
     _playerView = nil;
     
-    _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.CLwidth, cell.CLheight)];
+    CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.CLwidth, cell.CLheight)];
+    _playerView = playerView;
     [cell.contentView addSubview:_playerView];
     
     //根据旋转自动支持全屏，默认支持
