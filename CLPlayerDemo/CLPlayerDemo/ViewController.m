@@ -16,13 +16,10 @@
 
 /**tableView*/
 @property (nonatomic,strong) UITableView *tableView;
-
 /**数据源*/
 @property (nonatomic,strong) NSMutableArray *arrayDS;
-
 /**CLplayer*/
 @property (nonatomic,weak) CLPlayerView *playerView;
-
 /**记录Cell*/
 @property (nonatomic,assign) TableViewCell *cell;
 

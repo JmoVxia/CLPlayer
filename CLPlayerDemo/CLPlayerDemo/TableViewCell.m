@@ -38,8 +38,8 @@
 - (void)initUI
 {
     //剪裁看不到的
-    self.clipsToBounds = YES;
-    self.selectionStyle=UITableViewCellSelectionStyleNone;
+    self.clipsToBounds  = YES;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     UIImageView *pictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, - CellHeight / 2.0, CLscreenWidth, 20)];
     [self.contentView addSubview:pictureView];
@@ -83,24 +83,20 @@
      将rect由rect所在视图转换到目标视图view中，返回在目标视图view中的rect
      这里用来获取self在window上的位置
      */
-    CGRect toWindow = [self convertRect:self.bounds toView:self.window];
-    
+    CGRect toWindow      = [self convertRect:self.bounds toView:self.window];
     //获取父视图的中心
     CGPoint windowCenter = self.superview.center;
-    
     //cell在y轴上的位移  CGRectGetMidY之前讲过,获取中心Y值
-    CGFloat cellOffsetY = CGRectGetMidY(toWindow) - windowCenter.y;
-    
+    CGFloat cellOffsetY  = CGRectGetMidY(toWindow) - windowCenter.y;
     //位移比例
-    CGFloat offsetDig = 2 * cellOffsetY / self.superview.frame.size.height ;
-    
+    CGFloat offsetDig    = 2 * cellOffsetY / self.superview.frame.size.height ;
     //要补偿的位移,self.superview.frame.origin.y是tableView的Y值，这里加上是为了让图片从最上面开始显示
-    CGFloat superViewY = CLscreenHeight - self.superview.frame.size.height;
-    CGFloat offset = -offsetDig * CellHeight / 2 + superViewY;
+    CGFloat superViewY   = CLscreenHeight - self.superview.frame.size.height;
+    CGFloat offset       = -offsetDig * CellHeight / 2 + superViewY;
     
     //让pictureViewY轴方向位移offset
     CGAffineTransform transY = CGAffineTransformMakeTranslation(0,offset);
-    _PictureView.transform = transY;
+    _PictureView.transform   = transY;
     
     return offset;
 }
@@ -108,9 +104,8 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
-    _button.CLcenterX = self.CLwidth/2.0;
-    _button.CLcenterY = self.CLheight/2.0;
-    
+    _button.CLcenterX     = self.CLwidth/2.0;
+    _button.CLcenterY     = self.CLheight/2.0;
     _PictureView.CLheight = self.CLheight * 2;
 }
 

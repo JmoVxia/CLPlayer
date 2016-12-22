@@ -472,10 +472,12 @@ typedef enum : NSUInteger {
 - (void)createBackButton
 {
     UIButton *backButton = [UIButton new];
-    backButton.frame = CGRectMake(CLscaleX(15), CLscaleX(15), CLscaleX(55), CLscaleX(55));
+    backButton.frame     = CGRectMake(CLscaleX(15), CLscaleX(15), CLscaleX(55), CLscaleX(55));
     backButton.layer.cornerRadius = backButton.CLwidth / 2.0;
-    backButton.clipsToBounds = YES;
-    backButton.backgroundColor = [UIColor colorWithRed:0.14510f green:0.17255f blue:0.21569f alpha:0.50000f];
+    backButton.layer.borderWidth  = 1.0;
+    backButton.layer.borderColor  = [UIColor whiteColor].CGColor;
+    backButton.clipsToBounds      = YES;
+    backButton.backgroundColor    = [UIColor colorWithRed:0.14510f green:0.17255f blue:0.21569f alpha:0.50000f];
     
     [backButton setImage:[self getPictureWithName:@"CLBackBtn"] forState:UIControlStateNormal];
 
