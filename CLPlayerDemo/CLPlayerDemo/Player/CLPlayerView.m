@@ -137,7 +137,16 @@ typedef enum : NSUInteger {
     self.frame                = _customFarme;
     _url                      = url;
     _playerItem               = [AVPlayerItem playerItemWithURL:url];
-    _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
+    //存在直接替换
+    if (_player.currentItem) {
+        // 主线程刷新
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_player replaceCurrentItemWithPlayerItem:_playerItem];
+        });
+    }else{
+        //不存在创建
+        _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
+    }
     _playerLayer              = [AVPlayerLayer playerLayerWithPlayer:_player];
     _playerLayer.frame        = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
     //设置静音模式播放声音
