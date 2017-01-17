@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Masonry.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-CLPlayerDemo.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,17 +17,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>122BAF3F41AD7376B1612F2FF5FA0EA7</key>
+		<key>6E9DEC10E21E8A2CA2E52B8C9D70AE7B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EC36F65C0E4E38733F2A169847772A78</key>
+		<key>D6BED54F86AFD3723BB8869D19951888</key>
 		<dict>
 			<key>primary</key>
 			<true/>

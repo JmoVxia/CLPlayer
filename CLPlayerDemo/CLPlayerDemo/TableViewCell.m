@@ -8,7 +8,6 @@
 
 #import "TableViewCell.h"
 #import "UIView+CLSetRect.h"
-#import "UIImage+CLTintColor.h"
 #import "UIImageView+WebCache.h"
 
 #define CellHeight   300
@@ -46,7 +45,7 @@
     _PictureView = pictureView;
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
-    [button setBackgroundImage:[[self getPictureWithName:@"CLPlayBtn"] imageWithTintColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+    [button setBackgroundImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.contentView addSubview:button];
     _button = button;

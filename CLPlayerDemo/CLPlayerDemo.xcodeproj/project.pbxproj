@@ -20,7 +20,6 @@
 		5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */; };
 		5BAEF9C81DF6B822009D1783 /* CLSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9C11DF6B822009D1783 /* CLSlider.m */; };
 		5BAEF9C91DF6B822009D1783 /* UIImage+CLScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9C31DF6B822009D1783 /* UIImage+CLScaleToSize.m */; };
-		5BAEF9CA1DF6B822009D1783 /* UIImage+CLTintColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9C51DF6B822009D1783 /* UIImage+CLTintColor.m */; };
 		5BAEF9CD1DF6B87D009D1783 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */; };
 		5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDB581B1DDE968700523A8C /* TableViewCell.m */; };
 /* End PBXBuildFile section */
@@ -37,7 +36,6 @@
 		5B1FC4D51DC850820036C489 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B1FC4D71DC850820036C489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		5B2BC5901E2DE29B00EB4E36 /* CLPlayer.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayer.pch; sourceTree = "<group>"; };
 		5B35DDE01DE07A5700CEB057 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		5B35DDE11DE07A5700CEB057 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		5B35DDE31DE07F9A00CEB057 /* Date.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Date.json; sourceTree = "<group>"; };
@@ -49,8 +47,6 @@
 		5BAEF9C11DF6B822009D1783 /* CLSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSlider.m; sourceTree = "<group>"; };
 		5BAEF9C21DF6B822009D1783 /* UIImage+CLScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLScaleToSize.h"; sourceTree = "<group>"; };
 		5BAEF9C31DF6B822009D1783 /* UIImage+CLScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLScaleToSize.m"; sourceTree = "<group>"; };
-		5BAEF9C41DF6B822009D1783 /* UIImage+CLTintColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLTintColor.h"; sourceTree = "<group>"; };
-		5BAEF9C51DF6B822009D1783 /* UIImage+CLTintColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLTintColor.m"; sourceTree = "<group>"; };
 		5BAEF9CB1DF6B87D009D1783 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
 		5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5BDB581A1DDE968700523A8C /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
@@ -146,11 +142,8 @@
 				5BAEF9C11DF6B822009D1783 /* CLSlider.m */,
 				5BAEF9C21DF6B822009D1783 /* UIImage+CLScaleToSize.h */,
 				5BAEF9C31DF6B822009D1783 /* UIImage+CLScaleToSize.m */,
-				5BAEF9C41DF6B822009D1783 /* UIImage+CLTintColor.h */,
-				5BAEF9C51DF6B822009D1783 /* UIImage+CLTintColor.m */,
 				5BAEF9CB1DF6B87D009D1783 /* UIView+CLSetRect.h */,
 				5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */,
-				5B2BC5901E2DE29B00EB4E36 /* CLPlayer.pch */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -282,7 +275,6 @@
 				5BAEF9CD1DF6B87D009D1783 /* UIView+CLSetRect.m in Sources */,
 				5BAEF9C81DF6B822009D1783 /* CLSlider.m in Sources */,
 				5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */,
-				5BAEF9CA1DF6B822009D1783 /* UIImage+CLTintColor.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
 				5BAEF9C91DF6B822009D1783 /* UIImage+CLScaleToSize.m in Sources */,
 				5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */,
@@ -405,7 +397,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y56852HD87;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/CLPlayerDemo/Player/CLPlayer.pch";
 				INFOPLIST_FILE = CLPlayerDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CL.CLPlayerDemo;
@@ -420,7 +411,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = Y56852HD87;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/CLPlayerDemo/Player/CLPlayer.pch";
 				INFOPLIST_FILE = CLPlayerDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CL.CLPlayerDemo;
