@@ -90,6 +90,28 @@ typedef enum : NSUInteger {
 
 @implementation CLPlayerView
 
+#pragma mark - 懒加载
+- (UIView *) backView
+{
+    if (_backView == nil)
+    {
+        _backView                 = [[UIView alloc] init];
+        _backView.frame           = CGRectMake(0, _playerLayer.frame.origin.y, _playerLayer.frame.size.width, _playerLayer.frame.size.height);
+        [self addSubview:_backView];
+    }
+    return _backView;
+}
+- (UIView *) topView
+{
+    if (_topView == nil)
+    {
+        _topView                 = [[UIView alloc]init];
+        _topView.frame           = CGRectMake(0, 0, _backView.CLwidth, ViewHeight);
+        [self.backView addSubview:_topView];
+    }
+    return _topView;
+}
+
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -176,16 +198,10 @@ typedef enum : NSUInteger {
 - (void)creatUI
 {
     //最上面的View
-    _backView                 = [[UIView alloc]init];
-    _backView.frame           = CGRectMake(0, _playerLayer.frame.origin.y, _playerLayer.frame.size.width, _playerLayer.frame.size.height);
-    _backView.backgroundColor = [UIColor clearColor];
-    [self addSubview:_backView];
-    
+    self.backView.backgroundColor = [UIColor clearColor];
     //顶部View条
-    _topView                 = [[UIView alloc]init];
-    _topView.frame           = CGRectMake(0, 0, _backView.CLwidth, ViewHeight);
-    _topView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.00000f];
-    [_backView addSubview:_topView];
+    self.topView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.00000f];
+
     
     //底部View条
     _bottomView                 = [[UIView alloc] init];
