@@ -111,7 +111,16 @@ typedef enum : NSUInteger {
     }
     return _topView;
 }
-
+- (UIView *) bottomView
+{
+    if (_bottomView == nil)
+    {
+        _bottomView                 = [[UIView alloc] init];
+        _bottomView.frame           = CGRectMake(0, _backView.CLheight - ViewHeight, _backView.CLwidth, ViewHeight);
+        [self.backView addSubview:_bottomView];
+    }
+    return _bottomView;
+}
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -204,10 +213,8 @@ typedef enum : NSUInteger {
 
     
     //底部View条
-    _bottomView                 = [[UIView alloc] init];
-    _bottomView.frame           = CGRectMake(0, _backView.CLheight - ViewHeight, _backView.CLwidth, ViewHeight);
-    _bottomView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
-    [_backView addSubview:_bottomView];
+    self.bottomView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
+
     
     //创建播放按钮
     [self createButton];
