@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger,VideoFillMode){
+    Resize = 0,          //拉伸占满整个播放器，不按原比例拉伸
+    ResizeAspect,        //按原视频比例显示，是竖屏的就显示出竖屏的，两边留黑
+    ResizeAspectFill,    //按照原比例拉伸占满整个播放器，但视频内容超出部分会被剪切
+};
+
 typedef void(^BackButtonBlock)(UIButton *button);
 typedef void(^EndBolck)();
 typedef void(^BeyondBlock)();
@@ -22,6 +28,11 @@ typedef void(^BeyondBlock)();
 @property (nonatomic,assign) BOOL repeatPlay;
 /**是否支持横屏，默认No*/
 @property (nonatomic,assign) BOOL isLandscape;
+/**拉伸方式，默认全屏填充*/
+@property (nonatomic,assign) VideoFillMode fillMode;
+
+
+
 /**播放*/
 - (void)playVideo;
 /**暂停*/

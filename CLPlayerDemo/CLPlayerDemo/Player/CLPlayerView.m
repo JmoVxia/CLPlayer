@@ -12,11 +12,14 @@
 #import "UIView+CLSetRect.h"
 #import "CLSlider.h"
 
-
-typedef enum : NSUInteger {
+//方向枚举
+typedef NS_ENUM(NSInteger,Direction){
     Letf = 0,
     Right,
-}Direction;
+};
+
+
+
 
 
 //间隙
@@ -48,6 +51,9 @@ typedef enum : NSUInteger {
 @property (nonatomic,assign) BOOL   isFullScreen;
 /**横屏标记*/
 @property (nonatomic,assign) BOOL   landscape;
+/**视频拉伸模式*/
+@property (nonatomic,copy) NSString *videoFillMode;
+
 
 /**播放器*/
 @property (nonatomic,strong) AVPlayer                *player;
@@ -114,6 +120,25 @@ typedef enum : NSUInteger {
     }
     return self;
 }
+#pragma mark - 视频拉伸方式
+-(void)setFillMode:(VideoFillMode)fillMode
+{
+    switch (fillMode)
+    {
+        case ResizeAspectFill:
+            //原比例拉伸视频，直到两边屏幕都占满，但视频内容有部分会被剪切
+            _videoFillMode = AVLayerVideoGravityResizeAspectFill;
+            break;
+        case ResizeAspect:
+            //按原视频比例显示，是竖屏的就显示出竖屏的，两边留黑
+            _videoFillMode = AVLayerVideoGravityResizeAspect;
+            break;
+        case Resize:
+            //拉伸视频内容达到边框占满，但不按原比例拉伸
+            _videoFillMode = AVLayerVideoGravityResize;
+            break;
+    }
+}
 #pragma mark - 是否自动支持全屏
 - (void)setAutoFullScreen:(BOOL)autoFullScreen
 {
@@ -152,8 +177,13 @@ typedef enum : NSUInteger {
     AVAudioSession * session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     [session setActive:YES error:nil];
-
+    //全屏拉伸
     _playerLayer.videoGravity = AVLayerVideoGravityResize;
+    if (_videoFillMode)
+    {
+        _playerLayer.videoGravity = _videoFillMode;
+    }
+    
     [self.layer addSublayer:_playerLayer];
     // 监听loadedTimeRanges属性
     [_playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
