@@ -29,11 +29,12 @@
 - (CGRect)trackRectForBounds:(CGRect)bounds
 {
     [super trackRectForBounds:bounds];
-    return CGRectMake(-2, (self.frame.size.height - 2.5)/2.0, CGRectGetWidth(bounds) + 4, 2.5);
+    return CGRectMake(-2, bounds.origin.y, CGRectGetWidth(bounds) + 4, CGRectGetHeight(bounds));
 }
+//修改滑块位置
 - (CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)rect value:(float)value {
-    rect.origin.x = rect.origin.x - 5 ;
-    rect.size.width = rect.size.width + 10;
+    rect.origin.x = rect.origin.x - 6 ;
+    rect.size.width = rect.size.width + 12;
     return CGRectInset ([super thumbRectForBounds:bounds trackRect:rect value:value], 10 , 10);
 }
 

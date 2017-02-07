@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger,Direction){
 //消失时间
 #define DisappearTime  10
 //顶部底部控件高度
-#define ViewHeight     CLscaleY(65)
+#define ViewHeight     35
 //按钮大小
 #define ButtonSize     CLscaleX(40)
 //滑块大小
@@ -71,7 +71,7 @@ typedef NS_ENUM(NSInteger,Direction){
 /**全屏按钮*/
 @property (nonatomic,strong) UIButton                *maxButton;
 /**表面遮罩*/
-@property (nonatomic,strong) UIButton                  *backView;
+@property (nonatomic,strong) UIButton                *backView;
 /**转子*/
 @property (nonatomic,strong) UIActivityIndicatorView *activity;
 /**缓冲进度条*/
@@ -350,7 +350,7 @@ typedef NS_ENUM(NSInteger,Direction){
 - (void)createSlider
 {
     _slider         = [[CLSlider alloc]init];
-    _slider.frame   = CGRectMake(_progress.CLx, 0, _progress.CLwidth, SliderSize);
+    _slider.frame   = CGRectMake(_progress.CLx, 0, _progress.CLwidth, 2);
     _slider.CLcenterY = _bottomView.CLheight/2.0;
     [_bottomView addSubview:_slider];
     
