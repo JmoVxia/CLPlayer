@@ -70,8 +70,8 @@ typedef NS_ENUM(NSInteger,Direction){
 @property (nonatomic,strong) UILabel                 *totalTimeLabel;
 /**全屏按钮*/
 @property (nonatomic,strong) UIButton                *maxButton;
-/**表面View*/
-@property (nonatomic,strong) UIView                  *backView;
+/**表面遮罩*/
+@property (nonatomic,strong) UIButton                  *backView;
 /**转子*/
 @property (nonatomic,strong) UIActivityIndicatorView *activity;
 /**缓冲进度条*/
@@ -207,9 +207,9 @@ typedef NS_ENUM(NSInteger,Direction){
 - (void)creatUI
 {
     //最上面的View
-    _backView                 = [[UIView alloc]init];
+    _backView                 = [[UIButton alloc]init];
     _backView.frame           = CGRectMake(0, _playerLayer.frame.origin.y, _playerLayer.frame.size.width, _playerLayer.frame.size.height);
-    _backView.backgroundColor = [UIColor clearColor];
+    [_backView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_backView];
     
     //顶部View条
@@ -239,10 +239,6 @@ typedef NS_ENUM(NSInteger,Direction){
     //创建返回按钮
     [self createBackButton];
     
-    
-    
-    //创建点击手势
-    [self createGesture];
     //手动调用计时器时间，解决旋转等引起跳转
     [self timeStack];
     
@@ -552,15 +548,9 @@ typedef NS_ENUM(NSInteger,Direction){
     }
     _isLandscape = _landscape;
 }
-#pragma mark - 创建手势
-- (void)createGesture
-{
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self
-                                                                         action:@selector(tapAction:)];
-    [_backView addGestureRecognizer:tap];
-}
-#pragma mark - 轻拍方法
-- (void)tapAction:(UITapGestureRecognizer *)tap
+
+#pragma mark - 点击响应
+- (void)disappearAction:(UIButton *)button
 {
     //取消定时消失
     [self destroyTimer];
@@ -591,7 +581,8 @@ typedef NS_ENUM(NSInteger,Direction){
 - (void)disappear
 {
     [UIView animateWithDuration:0.5 animations:^{
-        _backView.alpha = 0;
+        _topView.alpha    = 0;
+        _bottomView.alpha = 0;
     }];
 }
 #pragma mark - 播放完成
