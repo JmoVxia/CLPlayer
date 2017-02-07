@@ -50,6 +50,8 @@ typedef NS_ENUM(NSInteger,Direction){
 @property (nonatomic,assign) BOOL   isFullScreen;
 /**横屏标记*/
 @property (nonatomic,assign) BOOL   landscape;
+/**工具条隐藏标记*/
+@property (nonatomic,assign) BOOL   isDisappear;
 /**视频拉伸模式*/
 @property (nonatomic,copy) NSString *videoFillMode;
 
@@ -105,6 +107,7 @@ typedef NS_ENUM(NSInteger,Direction){
         _repeatPlay          = NO;
         _isLandscape         = NO;
         _landscape           = NO;
+        _isDisappear         = NO;
         self.backgroundColor = [UIColor blackColor];
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -554,20 +557,21 @@ typedef NS_ENUM(NSInteger,Direction){
 {
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self
                                                                          action:@selector(tapAction:)];
-    [self addGestureRecognizer:tap];
+    [_backView addGestureRecognizer:tap];
 }
 #pragma mark - 轻拍方法
 - (void)tapAction:(UITapGestureRecognizer *)tap
 {
     //取消定时消失
     [self destroyTimer];
-    if (_backView.alpha == 1)
+    if (_isDisappear == NO)
     {
         [UIView animateWithDuration:0.5 animations:^{
-            _backView.alpha = 0;
+            _topView.alpha    = 0;
+            _bottomView.alpha = 0;
         }];
     }
-    else if (_backView.alpha == 0)
+    else
     {
         //添加定时消失
         _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
@@ -577,9 +581,11 @@ typedef NS_ENUM(NSInteger,Direction){
                                                  repeats:NO];
         
         [UIView animateWithDuration:0.5 animations:^{
-            _backView.alpha = 1;
+            _topView.alpha    = 1;
+            _bottomView.alpha = 1;
         }];
     }
+    _isDisappear = !_isDisappear;
 }
 #pragma mark - 定时消失
 - (void)disappear
