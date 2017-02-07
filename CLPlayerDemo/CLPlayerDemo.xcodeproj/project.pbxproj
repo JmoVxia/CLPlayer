@@ -19,7 +19,6 @@
 		5BAEF9C61DF6B822009D1783 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */; };
 		5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */; };
 		5BAEF9C81DF6B822009D1783 /* CLSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9C11DF6B822009D1783 /* CLSlider.m */; };
-		5BAEF9C91DF6B822009D1783 /* UIImage+CLScaleToSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9C31DF6B822009D1783 /* UIImage+CLScaleToSize.m */; };
 		5BAEF9CD1DF6B87D009D1783 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */; };
 		5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDB581B1DDE968700523A8C /* TableViewCell.m */; };
 /* End PBXBuildFile section */
@@ -45,8 +44,6 @@
 		5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerView.m; sourceTree = "<group>"; };
 		5BAEF9C01DF6B822009D1783 /* CLSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSlider.h; sourceTree = "<group>"; };
 		5BAEF9C11DF6B822009D1783 /* CLSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSlider.m; sourceTree = "<group>"; };
-		5BAEF9C21DF6B822009D1783 /* UIImage+CLScaleToSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+CLScaleToSize.h"; sourceTree = "<group>"; };
-		5BAEF9C31DF6B822009D1783 /* UIImage+CLScaleToSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+CLScaleToSize.m"; sourceTree = "<group>"; };
 		5BAEF9CB1DF6B87D009D1783 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
 		5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5BDB581A1DDE968700523A8C /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
@@ -140,8 +137,6 @@
 				5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */,
 				5BAEF9C01DF6B822009D1783 /* CLSlider.h */,
 				5BAEF9C11DF6B822009D1783 /* CLSlider.m */,
-				5BAEF9C21DF6B822009D1783 /* UIImage+CLScaleToSize.h */,
-				5BAEF9C31DF6B822009D1783 /* UIImage+CLScaleToSize.m */,
 				5BAEF9CB1DF6B87D009D1783 /* UIView+CLSetRect.h */,
 				5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */,
 			);
@@ -276,7 +271,6 @@
 				5BAEF9C81DF6B822009D1783 /* CLSlider.m in Sources */,
 				5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
-				5BAEF9C91DF6B822009D1783 /* UIImage+CLScaleToSize.m in Sources */,
 				5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
 				5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */,

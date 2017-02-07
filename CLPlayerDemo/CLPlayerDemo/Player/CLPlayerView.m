@@ -8,7 +8,6 @@
 
 #import "CLPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
-#import "UIImage+CLScaleToSize.h"
 #import "UIView+CLSetRect.h"
 #import "CLSlider.h"
 
@@ -25,7 +24,7 @@ typedef NS_ENUM(NSInteger,Direction){
 //间隙
 #define Padding        CLscaleX(15)
 //消失时间
-#define DisappearTime  6
+#define DisappearTime  10
 //顶部底部控件高度
 #define ViewHeight     CLscaleY(65)
 //按钮大小
@@ -33,11 +32,11 @@ typedef NS_ENUM(NSInteger,Direction){
 //滑块大小
 #define SliderSize     CLscaleX(30)
 //进度条颜色
-#define ProgressColor     [UIColor colorWithRed:1.00000f green:1.00000f blue:1.00000f alpha:0.40000f]
+#define ProgressColor     [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000]
 //缓冲颜色
-#define ProgressTintColor [UIColor whiteColor]
+#define ProgressTintColor [UIColor colorWithRed:0.69020 green:0.68628 blue:0.68235 alpha:1.00000]
 //播放完成颜色
-#define PlayFinishColor   [UIColor redColor]
+#define PlayFinishColor   [UIColor whiteColor]
 //滑块颜色
 #define SliderColor       [UIColor whiteColor]
 
@@ -355,11 +354,6 @@ typedef NS_ENUM(NSInteger,Direction){
     _slider.frame   = CGRectMake(_progress.CLx, 0, _progress.CLwidth, SliderSize);
     _slider.CLcenterY = _bottomView.CLheight/2.0;
     [_bottomView addSubview:_slider];
-    
-    UIImage *image     = [self getPictureWithName:@"CLRound"];
-    //通过改变图片大小来改变滑块大小
-    UIImage *newImage = [image OriginImage:image scaleToSize:CGSizeMake( SliderSize, SliderSize)];
-    [_slider setThumbImage:newImage forState:UIControlStateNormal];
     
     //开始拖拽
     [_slider addTarget:self
