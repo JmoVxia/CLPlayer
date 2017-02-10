@@ -823,7 +823,9 @@ typedef NS_ENUM(NSInteger,Direction){
                                                   object:[UIDevice currentDevice]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification
                                                   object:nil];
-    NSLog(@"播放器被销毁了");
+    if (DEBUG) {
+        NSLog(@"播放器被销毁了");
+    }
 }
 
 
