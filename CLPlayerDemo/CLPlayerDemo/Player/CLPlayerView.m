@@ -17,6 +17,14 @@ typedef NS_ENUM(NSInteger,Direction){
     Right,
 };
 
+// 播放器的几种状态
+typedef NS_ENUM(NSInteger, CLPlayerState) {
+    CLPlayerStateFailed,     // 播放失败
+    CLPlayerStateBuffering,  // 缓冲中
+    CLPlayerStatePlaying,    // 播放中
+    CLPlayerStateStopped,    // 停止播放
+    CLPlayerStatePause       // 暂停播放
+};
 
 
 
@@ -54,6 +62,10 @@ typedef NS_ENUM(NSInteger,Direction){
 @property (nonatomic,assign) BOOL   isDisappear;
 /**视频拉伸模式*/
 @property (nonatomic,copy) NSString *videoFillMode;
+/** 播发器的几种状态 */
+@property (nonatomic, assign) CLPlayerState state;
+/** 是否被用户暂停 */
+@property (nonatomic, assign) BOOL  isPauseByUser;
 
 
 /**播放器*/
@@ -162,17 +174,9 @@ typedef NS_ENUM(NSInteger,Direction){
 {
     self.frame                = _customFarme;
     _url                      = url;
-    _playerItem               = [AVPlayerItem playerItemWithURL:url];
-    //存在直接替换
-    if (_player.currentItem) {
-        // 主线程刷新
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [_player replaceCurrentItemWithPlayerItem:_playerItem];
-        });
-    }else{
-        //不存在创建
-        _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
-    }
+    self.playerItem               = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:_url]];
+    //创建
+    _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
     _playerLayer              = [AVPlayerLayer playerLayerWithPlayer:_player];
     _playerLayer.frame        = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
     //设置静音模式播放声音
@@ -187,22 +191,48 @@ typedef NS_ENUM(NSInteger,Direction){
     }
     
     [self.layer addSublayer:_playerLayer];
-    // 监听loadedTimeRanges属性
-    [_playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
     //创建原始屏幕UI
     [self originalscreen];
-    
-    //转子
-    _activity        = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    _activity.center = _backView.center;
+    //开始旋转
     [_activity startAnimating];
-    [self addSubview:_activity];
-    
-    //AVPlayer播放完成通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:)
-                                                 name:AVPlayerItemDidPlayToEndTimeNotification
-                                               object:_player.currentItem];
+   
 }
+
+-(void)setPlayerItem:(AVPlayerItem *)playerItem
+{
+    
+    if (_playerItem == playerItem) {return;}
+    
+    if (_playerItem) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:_playerItem];
+        [_playerItem removeObserver:self forKeyPath:@"status"];
+        [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+        [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
+        [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+    }
+    _playerItem = playerItem;
+    if (playerItem) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlayDidEnd:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+        [playerItem addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
+        [playerItem addObserver:self forKeyPath:@"loadedTimeRanges" options:NSKeyValueObservingOptionNew context:nil];
+        [playerItem addObserver:self forKeyPath:@"playbackBufferEmpty" options:NSKeyValueObservingOptionNew context:nil];
+        [playerItem addObserver:self forKeyPath:@"playbackLikelyToKeepUp" options:NSKeyValueObservingOptionNew context:nil];
+    }
+    
+}
+- (void)setState:(CLPlayerState)state{
+    _state = state;
+    if (state == CLPlayerStateBuffering) {
+        [_activity startAnimating];
+    }else{
+        [_activity stopAnimating];
+        [self playVideo];
+    }
+}
+
+
+
+
 #pragma mark - 创建播放器UI
 - (void)creatUI
 {
@@ -223,6 +253,12 @@ typedef NS_ENUM(NSInteger,Direction){
     _bottomView.frame           = CGRectMake(0, _backView.CLheight - ViewHeight, _backView.CLwidth, ViewHeight);
     _bottomView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
     [_backView addSubview:_bottomView];
+    
+    //转子
+    _activity        = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    _activity.center = _backView.center;
+    [self.backView addSubview:_activity];
+
     
     //创建播放按钮
     [self createButton];
@@ -295,6 +331,8 @@ typedef NS_ENUM(NSInteger,Direction){
     CGFloat totalDuration       = CMTimeGetSeconds(duration);
     CGFloat progress            = timeInterval / totalDuration;
     [_progress setProgress:progress animated:NO];
+
+
     
     CGFloat time  = round(timeInterval);
     CGFloat total = round(totalDuration);
@@ -323,30 +361,74 @@ typedef NS_ENUM(NSInteger,Direction){
 #pragma mark - 缓冲条监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"loadedTimeRanges"])
-    {
+    if ([keyPath isEqualToString:@"status"]) {
+        
+        if (self.player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
+            self.state = CLPlayerStatePlaying;
+        }
+        else if (self.player.currentItem.status == AVPlayerItemStatusFailed) {
+            self.state = CLPlayerStateFailed;
+            NSLog(@"加载失败");
+        }
+    } else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
+        
         // 计算缓冲进度
         NSTimeInterval timeInterval = [self availableDuration];
-        CMTime duration             = _playerItem.duration;
+        CMTime duration             = self.playerItem.duration;
         CGFloat totalDuration       = CMTimeGetSeconds(duration);
-        CGFloat progress            = timeInterval / totalDuration;
-        [_progress setProgress:progress animated:NO];
-        //设置缓存进度颜色
-        _progress.progressTintColor = ProgressTintColor;
+        [self.progress setProgress:timeInterval / totalDuration animated:NO];
+        self.progress.progressTintColor = ProgressTintColor;
+
+    } else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
         
-        if (_slider.value > progress)
-        {
-                //播放的进度大于缓冲进度,暂停
-            [self pausePlay];
-            [_activity startAnimating];
-        }else{
-            //播放
-            [self playVideo];
-            [_activity stopAnimating];
+        // 当缓冲是空的时候
+        if (self.playerItem.playbackBufferEmpty) {
+            self.state = CLPlayerStateBuffering;
+            [self bufferingSomeSecond];
+        }
+        
+    } else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
+        
+        // 当缓冲好的时候
+        if (self.playerItem.playbackLikelyToKeepUp && self.state == CLPlayerStateBuffering){
+            self.state = CLPlayerStatePlaying;
         }
         
     }
 }
+
+#pragma mark - 缓冲较差时候
+
+/**
+ *  缓冲较差时候回调这里
+ */
+- (void)bufferingSomeSecond
+{
+    self.state = CLPlayerStateBuffering;
+
+    __block BOOL isBuffering = NO;
+    if (isBuffering) return;
+    isBuffering = YES;
+    
+    // 需要先暂停一小会之后再播放，否则网络状况不好的时候时间在走，声音播放不出来
+    [self pausePlay];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        // 如果此时用户已经暂停了，则不再需要开启播放了
+        if (self.isPauseByUser) {
+            isBuffering = NO;
+            return;
+        }
+        
+        [self playVideo];
+        // 如果执行了play还是没有播放则说明还没有缓存好，则再次缓存一段时间
+        isBuffering = NO;
+        if (!self.playerItem.isPlaybackLikelyToKeepUp) { [self bufferingSomeSecond]; }
+        
+    });
+}
+
+
 //计算缓冲进度
 - (NSTimeInterval)availableDuration
 {
@@ -618,6 +700,7 @@ typedef NS_ENUM(NSInteger,Direction){
 - (void)pausePlay
 {
     _startButton.selected = NO;
+    _isPauseByUser = YES;
     [_player pause];
     [_startButton setBackgroundImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
 }
@@ -625,6 +708,7 @@ typedef NS_ENUM(NSInteger,Direction){
 - (void)playVideo
 {
     _startButton.selected = YES;
+    _isPauseByUser = NO;
     [_player play];
     [_startButton setBackgroundImage:[self getPictureWithName:@"CLPauseBtn"] forState:UIControlStateNormal];
 }
@@ -812,7 +896,10 @@ typedef NS_ENUM(NSInteger,Direction){
 - (void)dealloc
 {
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+    [_playerItem removeObserver:self forKeyPath:@"status"];
     [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
+    [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification
                                                   object:_player.currentItem];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification
