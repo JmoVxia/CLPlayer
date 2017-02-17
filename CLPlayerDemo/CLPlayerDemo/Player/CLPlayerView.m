@@ -34,7 +34,8 @@ typedef NS_ENUM(NSInteger,Direction){
 //进度条颜色
 #define ProgressColor     [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000]
 //缓冲颜色
-#define ProgressTintColor [UIColor colorWithRed:0.69020 green:0.68628 blue:0.68235 alpha:1.00000]
+#define ProgressTintColor [UIColor orangeColor]
+//[UIColor colorWithRed:0.69020 green:0.68628 blue:0.68235 alpha:1.00000]
 //播放完成颜色
 #define PlayFinishColor   [UIColor whiteColor]
 //滑块颜色
@@ -320,7 +321,7 @@ typedef NS_ENUM(NSInteger,Direction){
     }
     [_bottomView addSubview:_progress];
 }
-#pragma mark - 缓存条监听
+#pragma mark - 缓冲条监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"loadedTimeRanges"])
@@ -331,9 +332,20 @@ typedef NS_ENUM(NSInteger,Direction){
         CGFloat totalDuration       = CMTimeGetSeconds(duration);
         CGFloat progress            = timeInterval / totalDuration;
         [_progress setProgress:progress animated:NO];
-        
         //设置缓存进度颜色
         _progress.progressTintColor = ProgressTintColor;
+        
+        if (_slider.value > progress)
+        {
+                //播放的进度大于缓冲进度,暂停
+            [self pausePlay];
+            [_activity startAnimating];
+        }else{
+            //播放
+            [self playVideo];
+            [_activity stopAnimating];
+        }
+        
     }
 }
 //计算缓冲进度
@@ -447,19 +459,7 @@ typedef NS_ENUM(NSInteger,Direction){
         NSInteger durMin     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总分钟
         NSInteger durSec     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总秒
         _totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", durMin, durSec];
-
-        
     }
-    //开始播放停止转子
-    if (_player.status == AVPlayerStatusReadyToPlay)
-    {
-        [_activity stopAnimating];
-    }
-    else
-    {
-        [_activity startAnimating];
-    }
-    
 }
 #pragma mark - 播放按钮
 - (void)createButton
