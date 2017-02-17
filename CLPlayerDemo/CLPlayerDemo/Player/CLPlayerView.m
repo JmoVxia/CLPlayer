@@ -458,7 +458,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     //结束拖拽
     [_slider addTarget:self
                 action:@selector(processSliderEndDragAction:)
-      forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
+      forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchCancel | UIControlEventTouchUpOutside];
     
     //左边颜色
     _slider.minimumTrackTintColor = PlayFinishColor;
