@@ -35,7 +35,6 @@ typedef NS_ENUM(NSInteger,Direction){
 #define ProgressColor     [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000]
 //缓冲颜色
 #define ProgressTintColor [UIColor orangeColor]
-//[UIColor colorWithRed:0.69020 green:0.68628 blue:0.68235 alpha:1.00000]
 //播放完成颜色
 #define PlayFinishColor   [UIColor whiteColor]
 //滑块颜色
@@ -503,9 +502,7 @@ typedef NS_ENUM(NSInteger,Direction){
     UIButton *backButton = [UIButton new];
     backButton.frame     = CGRectMake(CLscaleX(15), CLscaleX(15), CLscaleX(40), CLscaleX(40));    
     [backButton setImage:[self getPictureWithName:@"CLBackBtn"] forState:UIControlStateNormal];
-
     [_topView addSubview:backButton];
-    
     [backButton addTarget:self
                action:@selector(backButtonAction:)
      forControlEvents:UIControlEventTouchUpInside];
@@ -519,7 +516,6 @@ typedef NS_ENUM(NSInteger,Direction){
     maxButton.CLcenterY   = _bottomView.CLheight / 2.0;
     [_bottomView addSubview:maxButton];
     _maxButton = maxButton;
-    
     
     if (_isFullScreen == YES)
     {
