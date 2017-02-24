@@ -134,8 +134,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     _repeatPlay = repeatPlay;
 }
 #pragma mark - 传入播放地址
-- (void)setUrl:(NSURL *)url
-{
+- (void)setUrl:(NSURL *)url{
     self.frame                = _customFarme;
     _url                      = url;
     self.playerItem               = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:_url]];
@@ -155,10 +154,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     
     [self.layer addSublayer:_playerLayer];
     [self creatUI];
-
-    //开始旋转
-//    [_activity startAnimating];
-   
 }
 
 -(void)setPlayerItem:(AVPlayerItem *)playerItem
@@ -194,10 +189,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [self playVideo];
     }
 }
-
-
-
-
 #pragma mark - 创建播放器UI
 - (void)creatUI
 {
@@ -377,9 +368,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 
 #pragma mark - 播放暂停按钮方法
-- (void)startAction:(UIButton *)button
-{
-    if (button.selected == YES)
+-(void)cl_playButtonAction:(UIButton *)button{
+    if (button.selected == NO)
     {
         [self pausePlay];
     }
@@ -390,8 +380,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 
 #pragma mark - 全屏按钮响应事件
-- (void)maxAction:(UIButton *)button
-{
+-(void)cl_fullButtonAction:(UIButton *)button{
     _isLandscape = NO;
     if (_isFullScreen == NO)
     {
@@ -586,6 +575,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         }
         self.frame         = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
     }
+    self.maskView.fullButton.selected = YES;
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
@@ -607,6 +597,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     self.frame = _customFarme;
     //还原到原有父类上
     [_fatherView addSubview:self];
+    self.maskView.fullButton.selected = NO;
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
