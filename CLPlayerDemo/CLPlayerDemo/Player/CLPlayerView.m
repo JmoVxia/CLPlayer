@@ -52,17 +52,17 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 
 
 /**播放器*/
-@property (nonatomic,strong) AVPlayer                *player;
+@property (nonatomic,strong) AVPlayer         *player;
 /**playerLayer*/
-@property (nonatomic,strong) AVPlayerLayer           *playerLayer;
+@property (nonatomic,strong) AVPlayerLayer    *playerLayer;
 /**播放器item*/
-@property (nonatomic,strong) AVPlayerItem            *playerItem;
+@property (nonatomic,strong) AVPlayerItem     *playerItem;
 /**遮罩*/
-@property (nonatomic,strong) CLPlayerMaskView        *maskView;
+@property (nonatomic,strong) CLPlayerMaskView *maskView;
 /**轻拍定时器*/
-@property (nonatomic,strong) NSTimer                 *timer;
+@property (nonatomic,strong) NSTimer          *timer;
 /**slider定时器*/
-@property (nonatomic,strong) NSTimer                 *sliderTimer;
+@property (nonatomic,strong) NSTimer          *sliderTimer;
 
 /**返回按钮回调*/
 @property (nonatomic,copy) void (^BackBlock) (UIButton *backButton);
@@ -643,7 +643,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                   object:[UIDevice currentDevice]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification
                                                   object:nil];
-        CLlog(@"播放器被销毁了");
+    CLlog(@"播放器被销毁了");
 }
 -(void)layoutSubviews{
     [super layoutSubviews];

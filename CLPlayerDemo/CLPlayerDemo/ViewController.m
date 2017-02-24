@@ -105,10 +105,7 @@
    
     _playerView = playerView;
     [cell.contentView addSubview:_playerView];
-//    [playerView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(cell);
-//    }];
-    
+   
     
     //根据旋转自动支持全屏，默认支持
 //        _playerView.autoFullScreen = NO;
