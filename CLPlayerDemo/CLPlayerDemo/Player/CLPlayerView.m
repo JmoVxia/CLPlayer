@@ -111,9 +111,14 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                      name:UIDeviceOrientationDidChangeNotification
                                                    object:[UIDevice currentDevice]];
         //APP运行状态通知，将要被挂起
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appwillResignActive:)
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground:)
                                                      name:UIApplicationWillResignActiveNotification
                                                    object:nil];
+        // app进入前台
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(appDidEnterPlayground:)
+                                                     name:UIApplicationDidBecomeActiveNotification object:nil];
+        
         [self creatUI];
 
     }
@@ -532,9 +537,13 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     self.maskView.fullButton.selected = NO;
 }
 #pragma mark - APP活动通知
-- (void)appwillResignActive:(NSNotification *)note{
+- (void)appDidEnterBackground:(NSNotification *)note{
     //将要挂起，停止播放
     [self pausePlay];
+}
+- (void)appDidEnterPlayground:(NSNotification *)note{
+    //继续播放
+    [self playVideo];
 }
 #pragma mark - 获取资源图片
 - (UIImage *)getPictureWithName:(NSString *)name{
@@ -574,11 +583,17 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
     [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
     [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:AVPlayerItemDidPlayToEndTimeNotification
                                                   object:_player.currentItem];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIDeviceOrientationDidChangeNotification
                                                   object:[UIDevice currentDevice]];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationWillResignActiveNotification
+                                                  object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
     CLlog(@"播放器被销毁了");
 }
