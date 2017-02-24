@@ -9,9 +9,8 @@
 #import "CLPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CLplayer.h"
-#import "CLSlider.h"
-#import "UIView+CLSetRect.h"
 #import "CLPlayerMaskView.h"
+#import "UIView+CLSetRect.h"
 //方向枚举
 typedef NS_ENUM(NSInteger,Direction){
     Letf = 0,
@@ -31,7 +30,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 
 
 
-@interface CLPlayerView ()
+@interface CLPlayerView ()<CLPlayerMaskViewDelegate>
 
 /**控件原始Farme*/
 @property (nonatomic,assign) CGRect customFarme;
@@ -57,24 +56,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,strong) AVPlayerLayer           *playerLayer;
 /**播放器item*/
 @property (nonatomic,strong) AVPlayerItem            *playerItem;
-/**播放进度条*/
-@property (nonatomic,strong) CLSlider                *slider;
-/**播放时间*/
-@property (nonatomic,strong) UILabel                 *currentTimeLabel;
-/**总时间*/
-@property (nonatomic,strong) UILabel                 *totalTimeLabel;
-/**全屏按钮*/
-@property (nonatomic,strong) UIButton                *maxButton;
-/**表面遮罩*/
+/**遮罩*/
 @property (nonatomic,strong) CLPlayerMaskView        *maskView;
-/**缓冲进度条*/
-@property (nonatomic,strong) UIProgressView          *progress;
-/**顶部控件*/
-@property (nonatomic,strong) UIView                  *topView;
-/**底部控件 */
-@property (nonatomic,strong) UIView                  *bottomView;
-/**播放按钮*/
-@property (nonatomic,strong) UIButton                *startButton;
 /**轻拍定时器*/
 @property (nonatomic,strong) NSTimer                 *timer;
 /**slider定时器*/
@@ -159,7 +142,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     //创建
     _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
     _playerLayer              = [AVPlayerLayer playerLayerWithPlayer:_player];
-    _playerLayer.frame        = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
     //设置静音模式播放声音
     AVAudioSession * session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
@@ -172,8 +154,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     
     [self.layer addSublayer:_playerLayer];
-    //创建原始屏幕UI
-    [self originalscreen];
+    [self creatUI];
+
     //开始旋转
 //    [_activity startAnimating];
    
@@ -219,44 +201,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 {
     //最上面的View
     _maskView                 = [[CLPlayerMaskView alloc]init];
-    _maskView.frame           = CGRectMake(0, _playerLayer.frame.origin.y, _playerLayer.frame.size.width, _playerLayer.frame.size.height);
-    [_maskView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
+    _maskView.delegate = self;
+//    [_maskView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_maskView];
     
-//    //顶部View条
-//    _topView                 = [[UIView alloc]init];
-//    _topView.frame           = CGRectMake(0, 0, _maskView.CLwidth, ViewHeight);
-//    _topView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.00000f];
-//    [_maskView addSubview:_topView];
-//    
-//    //底部View条
-//    _bottomView                 = [[UIView alloc] init];
-//    _bottomView.frame           = CGRectMake(0, _maskView.CLheight - ViewHeight, _maskView.CLwidth, ViewHeight);
-//    _bottomView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
-//    [_maskView addSubview:_bottomView];
     
-    //转子
-//    _activity.center = _maskView.center;
-//    [self.maskView addSubview:_activity];
 
-    
-    //创建播放按钮
-    [self createButton];
-    //创建全屏按钮
-    [self createMaxButton];
-    //创建进度条
-    [self createProgress];
-    //创建播放条
-    [self createSlider];
-    //创建总时间Label
-    [self createtotalTimeLabel];
-    //创建播放时间Label
-    [self createCurrentTimeLabel];
-    //创建返回按钮
-    [self createBackButton];
-    
-    //手动调用计时器时间，解决旋转等引起跳转
-    [self timeStack];
     
     //计时器，循环执行
     _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
@@ -264,7 +214,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                    selector:@selector(timeStack)
                                    userInfo:nil
                                     repeats:YES];
-    //定时器，工具条消失
+//    定时器，工具条消失
     _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
                                               target:self
                                             selector:@selector(disappear)
@@ -283,60 +233,38 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 创建UIProgressView
 - (void)createProgress
 {
-    CGFloat width;
-    if (_isLandscape == YES)
-    {
-        width = self.frame.size.width;
-    }
-    else
-    {
-        if (_isFullScreen == NO)
-        {
-            width = self.frame.size.width;
-        }
-        else
-        {
-            width = self.frame.size.height;
-        }
-    }
-    _progress                = [[UIProgressView alloc]init];
-    _progress.frame          = CGRectMake(_startButton.CLright + Padding + 40 + Padding, 0, width - 80 - Padding - _startButton.CLright - Padding - Padding - Padding - _maxButton.CLwidth - Padding, Padding);
-    _progress.CLcenterY        = _bottomView.CLheight/2.0;
-    //进度条颜色
-    _progress.trackTintColor = ProgressColor;
-    
     // 计算缓冲进度
     NSTimeInterval timeInterval = [self availableDuration];
-    CMTime duration             = _playerItem.duration;
+    CMTime duration             = self.playerItem.duration;
     CGFloat totalDuration       = CMTimeGetSeconds(duration);
     CGFloat progress            = timeInterval / totalDuration;
-    [_progress setProgress:progress animated:NO];
+    [self.maskView.progress setProgress:progress animated:NO];
 
 
     
-    CGFloat time  = round(timeInterval);
-    CGFloat total = round(totalDuration);
+//    CGFloat time  = round(timeInterval);
+//    CGFloat total = round(totalDuration);
     
-    //确保都是number
-    if (isnan(time) == 0 && isnan(total) == 0)
-    {
-        if (time == total)
-        {
-            //缓冲进度颜色
-            _progress.progressTintColor = ProgressTintColor;
-        }
-        else
-        {
-            //缓冲进度颜色
-            _progress.progressTintColor = [UIColor clearColor];
-        }
-    }
-    else
-    {
-        //缓冲进度颜色
-        _progress.progressTintColor = [UIColor clearColor];
-    }
-    [_bottomView addSubview:_progress];
+//    //确保都是number
+//    if (isnan(time) == 0 && isnan(total) == 0)
+//    {
+//        if (time == total)
+//        {
+//            //缓冲进度颜色
+//            _progress.progressTintColor = ProgressTintColor;
+//        }
+//        else
+//        {
+//            //缓冲进度颜色
+//            _progress.progressTintColor = [UIColor clearColor];
+//        }
+//    }
+//    else
+//    {
+//        //缓冲进度颜色
+//        _progress.progressTintColor = [UIColor clearColor];
+//    }
+//    [_bottomView addSubview:_progress];
 }
 #pragma mark - 缓冲条监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
@@ -356,8 +284,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         NSTimeInterval timeInterval = [self availableDuration];
         CMTime duration             = self.playerItem.duration;
         CGFloat totalDuration       = CMTimeGetSeconds(duration);
-        [self.progress setProgress:timeInterval / totalDuration animated:NO];
-        self.progress.progressTintColor = ProgressTintColor;
+        [self.maskView.progress setProgress:timeInterval / totalDuration animated:NO];
 
     } else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
         
@@ -419,32 +346,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     NSTimeInterval result     = startSeconds + durationSeconds;// 计算缓冲总进度
     return result;
 }
-#pragma mark - 创建UISlider
-- (void)createSlider
-{
-    _slider         = [[CLSlider alloc]init];
-    _slider.frame   = CGRectMake(_progress.CLx, 0, _progress.CLwidth, 2);
-    _slider.CLcenterY = _bottomView.CLheight/2.0;
-    [_bottomView addSubview:_slider];
-    
-    //开始拖拽
-    [_slider addTarget:self
-                action:@selector(processSliderStartDragAction:)
-      forControlEvents:UIControlEventTouchDown];
-    //拖拽中
-    [_slider addTarget:self
-                action:@selector(sliderValueChangedAction:)
-      forControlEvents:UIControlEventValueChanged];
-    //结束拖拽
-    [_slider addTarget:self
-                action:@selector(processSliderEndDragAction:)
-      forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchCancel | UIControlEventTouchUpOutside];
-    
-    //左边颜色
-    _slider.minimumTrackTintColor = PlayFinishColor;
-    //右边颜色
-    _slider.maximumTrackTintColor = [UIColor clearColor];
-}
 #pragma mark - 拖动进度条
 //开始
 - (void)processSliderStartDragAction:(UISlider *)slider
@@ -475,32 +376,32 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [_player seekToTime:dragedCMTime];
 }
 
-#pragma mark - 创建播放时间
-- (void)createCurrentTimeLabel
-{
-    _currentTimeLabel           = [[UILabel alloc]init];
-    _currentTimeLabel.frame     = CGRectMake(0, 0, 40, ViewHeight / 2.0);
-    _currentTimeLabel.textColor = [UIColor whiteColor];
-    _currentTimeLabel.font      = [UIFont systemFontOfSize:12];
-    _currentTimeLabel.text      = @"00:00";
-    _currentTimeLabel.textAlignment = NSTextAlignmentCenter;
-//    _currentTimeLabel.CLcenterY = _progress.CLcenterY;
-//    _currentTimeLabel.CLleft    = _startButton.CLright + Padding;
-    [_bottomView addSubview:_currentTimeLabel];
-}
-#pragma mark - 总时间
-- (void)createtotalTimeLabel
-{
-    _totalTimeLabel           = [[UILabel alloc] init];
-    _totalTimeLabel.frame     = CGRectMake(0, 0, 40, ViewHeight / 2.0);
-    _totalTimeLabel.textColor = [UIColor whiteColor];
-    _totalTimeLabel.font      = [UIFont systemFontOfSize:12];
-    _totalTimeLabel.text      = @"00:00";
-    _totalTimeLabel.textAlignment = NSTextAlignmentCenter;
-//    _totalTimeLabel.CLcenterY = _progress.CLcenterY;
-//    _totalTimeLabel.CLright   = _maxButton.CLleft - Padding;
-    [_bottomView addSubview:_totalTimeLabel];
-}
+//#pragma mark - 创建播放时间
+//- (void)createCurrentTimeLabel
+//{
+//    _currentTimeLabel           = [[UILabel alloc]init];
+//    _currentTimeLabel.frame     = CGRectMake(0, 0, 40, ViewHeight / 2.0);
+//    _currentTimeLabel.textColor = [UIColor whiteColor];
+//    _currentTimeLabel.font      = [UIFont systemFontOfSize:12];
+//    _currentTimeLabel.text      = @"00:00";
+//    _currentTimeLabel.textAlignment = NSTextAlignmentCenter;
+////    _currentTimeLabel.CLcenterY = _progress.CLcenterY;
+////    _currentTimeLabel.CLleft    = _startButton.CLright + Padding;
+//    [_bottomView addSubview:_currentTimeLabel];
+//}
+//#pragma mark - 总时间
+//- (void)createtotalTimeLabel
+//{
+//    _totalTimeLabel           = [[UILabel alloc] init];
+//    _totalTimeLabel.frame     = CGRectMake(0, 0, 40, ViewHeight / 2.0);
+//    _totalTimeLabel.textColor = [UIColor whiteColor];
+//    _totalTimeLabel.font      = [UIFont systemFontOfSize:12];
+//    _totalTimeLabel.text      = @"00:00";
+//    _totalTimeLabel.textAlignment = NSTextAlignmentCenter;
+////    _totalTimeLabel.CLcenterY = _progress.CLcenterY;
+////    _totalTimeLabel.CLright   = _maxButton.CLleft - Padding;
+//    [_bottomView addSubview:_totalTimeLabel];
+//}
 
 #pragma mark - 计时器事件
 - (void)timeStack
@@ -508,44 +409,44 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     if (_playerItem.duration.timescale != 0)
     {
         //总共时长
-        _slider.maximumValue = 1;
+        self.maskView.slider.maximumValue = 1;
         //当前进度
-        _slider.value        = CMTimeGetSeconds([_playerItem currentTime]) / (_playerItem.duration.value / _playerItem.duration.timescale);
+        self.maskView.slider.value        = CMTimeGetSeconds([_playerItem currentTime]) / (_playerItem.duration.value / _playerItem.duration.timescale);
         //当前时长进度progress
         NSInteger proMin     = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
         NSInteger proSec     = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
-        _currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", proMin, proSec];
+        self.maskView.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", proMin, proSec];
         
         //duration 总时长
         NSInteger durMin     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总分钟
         NSInteger durSec     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总秒
-        _totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", durMin, durSec];
+        self.maskView.totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", durMin, durSec];
     }
 }
 #pragma mark - 播放按钮
-- (void)createButton
-{
-    _startButton           = [UIButton buttonWithType:UIButtonTypeCustom];
-//    _startButton.frame     = CGRectMake(Padding, 0, ButtonSize, ButtonSize);
-//    _startButton.CLcenterY = _bottomView.CLheight/2.0;
-    [_bottomView addSubview:_startButton];
-   
-    //根据播放状态来设置播放按钮
-    if (_player.rate == 1.0)
-    {
-        _startButton.selected = YES;
-        [_startButton setBackgroundImage:[self getPictureWithName:@"CLPauseBtn"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        _startButton.selected = NO;
-        [_startButton setBackgroundImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
-    }
-    
-    [_startButton addTarget:self
-                     action:@selector(startAction:)
-           forControlEvents:UIControlEventTouchUpInside];
-}
+//- (void)createButton
+//{
+//    _startButton           = [UIButton buttonWithType:UIButtonTypeCustom];
+////    _startButton.frame     = CGRectMake(Padding, 0, ButtonSize, ButtonSize);
+////    _startButton.CLcenterY = _bottomView.CLheight/2.0;
+//    [_bottomView addSubview:_startButton];
+//   
+//    //根据播放状态来设置播放按钮
+//    if (_player.rate == 1.0)
+//    {
+//        _startButton.selected = YES;
+//        [_startButton setBackgroundImage:[self getPictureWithName:@"CLPauseBtn"] forState:UIControlStateNormal];
+//    }
+//    else
+//    {
+//        _startButton.selected = NO;
+//        [_startButton setBackgroundImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
+//    }
+//    
+//    [_startButton addTarget:self
+//                     action:@selector(startAction:)
+//           forControlEvents:UIControlEventTouchUpInside];
+//}
 #pragma mark - 播放暂停按钮方法
 - (void)startAction:(UIButton *)button
 {
@@ -559,39 +460,39 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
 }
 #pragma mark - 返回按钮
-- (void)createBackButton
-{
-    UIButton *backButton = [UIButton new];
-//    backButton.frame     = CGRectMake(CLscaleX(15), CLscaleX(15), CLscaleX(40), CLscaleX(40));    
-    [backButton setImage:[self getPictureWithName:@"CLBackBtn"] forState:UIControlStateNormal];
-    [_topView addSubview:backButton];
-    [backButton addTarget:self
-               action:@selector(backButtonAction:)
-     forControlEvents:UIControlEventTouchUpInside];
-}
+//- (void)createBackButton
+//{
+//    UIButton *backButton = [UIButton new];
+////    backButton.frame     = CGRectMake(CLscaleX(15), CLscaleX(15), CLscaleX(40), CLscaleX(40));    
+//    [backButton setImage:[self getPictureWithName:@"CLBackBtn"] forState:UIControlStateNormal];
+//    [_topView addSubview:backButton];
+//    [backButton addTarget:self
+//               action:@selector(backButtonAction:)
+//     forControlEvents:UIControlEventTouchUpInside];
+//}
 #pragma mark - 全屏按钮
-- (void)createMaxButton
-{
-    UIButton *maxButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//    maxButton.frame     = CGRectMake(0, 0, ButtonSize, ButtonSize);
-//    maxButton.CLright     = _bottomView.CLright - Padding;
-//    maxButton.CLcenterY   = _bottomView.CLheight / 2.0;
-    [_bottomView addSubview:maxButton];
-    _maxButton = maxButton;
-    
-    if (_isFullScreen == YES)
-    {
-        [_maxButton setBackgroundImage:[self getPictureWithName:@"CLMinBtn"] forState:UIControlStateNormal];
-    }
-    else
-    {
-        [_maxButton setBackgroundImage:[self getPictureWithName:@"CLMaxBtn"] forState:UIControlStateNormal];
-    }
-    
-    [_maxButton addTarget:self
-               action:@selector(maxAction:)
-     forControlEvents:UIControlEventTouchUpInside];
-}
+//- (void)createMaxButton
+//{
+//    UIButton *maxButton = [UIButton buttonWithType:UIButtonTypeCustom];
+////    maxButton.frame     = CGRectMake(0, 0, ButtonSize, ButtonSize);
+////    maxButton.CLright     = _bottomView.CLright - Padding;
+////    maxButton.CLcenterY   = _bottomView.CLheight / 2.0;
+//    [_bottomView addSubview:maxButton];
+//    _maxButton = maxButton;
+//    
+//    if (_isFullScreen == YES)
+//    {
+//        [_maxButton setBackgroundImage:[self getPictureWithName:@"CLMinBtn"] forState:UIControlStateNormal];
+//    }
+//    else
+//    {
+//        [_maxButton setBackgroundImage:[self getPictureWithName:@"CLMaxBtn"] forState:UIControlStateNormal];
+//    }
+//    
+//    [_maxButton addTarget:self
+//               action:@selector(maxAction:)
+//     forControlEvents:UIControlEventTouchUpInside];
+//}
 #pragma mark - 全屏按钮响应事件
 - (void)maxAction:(UIButton *)button
 {
@@ -615,8 +516,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     if (_isDisappear == NO)
     {
         [UIView animateWithDuration:0.5 animations:^{
-            _topView.alpha    = 0;
-            _bottomView.alpha = 0;
+//            _topView.alpha    = 0;
+//            _bottomView.alpha = 0;
         }];
     }
     else
@@ -629,8 +530,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                  repeats:NO];
         
         [UIView animateWithDuration:0.5 animations:^{
-            _topView.alpha    = 1;
-            _bottomView.alpha = 1;
+//            _topView.alpha    = 1;
+//            _bottomView.alpha = 1;
         }];
     }
     _isDisappear = !_isDisappear;
@@ -639,8 +540,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)disappear
 {
     [UIView animateWithDuration:0.5 animations:^{
-        _topView.alpha    = 0;
-        _bottomView.alpha = 0;
+//        _topView.alpha    = 0;
+//        _bottomView.alpha = 0;
     }];
 }
 #pragma mark - 播放完成
@@ -665,8 +566,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     self.EndBlock = end;
 }
 #pragma mark - 返回按钮
-- (void)backButtonAction:(UIButton *)button
-{
+-(void)cl_backButtonAction:(UIButton *)button{
     if (self.BackBlock)
     {
         self.BackBlock(button);
@@ -679,18 +579,18 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 暂停播放
 - (void)pausePlay
 {
-    _startButton.selected = NO;
+    self.maskView.playButton.selected = NO;
     _isPauseByUser = YES;
     [_player pause];
-    [_startButton setBackgroundImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
+//    [_startButton setBackgroundImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
 }
 #pragma mark - 播放
 - (void)playVideo
 {
-    _startButton.selected = YES;
+    self.maskView.playButton.selected = YES;
     _isPauseByUser = NO;
     [_player play];
-    [_startButton setBackgroundImage:[self getPictureWithName:@"CLPauseBtn"] forState:UIControlStateNormal];
+//    [_startButton setBackgroundImage:[self getPictureWithName:@"CLPauseBtn"] forState:UIControlStateNormal];
 }
 #pragma mark - 重新开始播放
 - (void)resetPlay
@@ -777,7 +677,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     if (_isLandscape == YES)
     {
         self.frame         = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
-        _playerLayer.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
     }
     else
     {        
@@ -794,13 +693,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
             }];
         }
         self.frame         = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
-        _playerLayer.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
     }
-    
-    //删除原有控件
-    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    //创建全屏UI
-    [self creatUI];
 }
 #pragma mark - 原始大小
 - (void)originalscreen
@@ -820,14 +713,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }];
     
     self.frame = _customFarme;
-    _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
+//    _playerLayer.frame = CGRectMake(0, 0, _customFarme.size.width, _customFarme.size.height);
     //还原到原有父类上
     [_fatherView addSubview:self];
-    
-    //删除
-    [self.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    //创建小屏UI
-    [self creatUI];
 }
 #pragma mark - APP活动通知
 - (void)appwillResignActive:(NSNotification *)note
@@ -890,7 +778,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
-//    self.playerLayer.frame = self.bounds;
+    self.playerLayer.frame = self.bounds;
+    [_maskView makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self);
+    }];
+
 }
 
 

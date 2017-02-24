@@ -14,22 +14,6 @@
 @property (nonatomic,strong) UIView *topToolBar;
 /**底部工具条*/
 @property (nonatomic,strong) UIView *bottomToolBar;
-/**转子*/
-@property (nonatomic,strong) UIActivityIndicatorView *activity;
-/**顶部工具条返回按钮*/
-@property (nonatomic,strong) UIButton *backButton;
-/**底部工具条播放按钮*/
-@property (nonatomic,strong) UIButton *playButton;
-/**底部工具条全屏按钮*/
-@property (nonatomic,strong) UIButton *fullButton;
-/**底部工具条当前播放时间*/
-@property (nonatomic,strong) UILabel *currentTimeLabel;
-/**底部工具条视频总时间*/
-@property (nonatomic,strong) UILabel *totalTimeLabel;
-/**缓冲进度条*/
-@property (nonatomic,strong) UIProgressView *progress;
-/**播放进度条*/
-@property (nonatomic,strong) CLSlider *slider;
 
 @end
 
@@ -107,6 +91,7 @@
     [self.progress makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.currentTimeLabel.right).offset(10);
         make.right.equalTo(self.totalTimeLabel.left).offset(-10);
+        make.height.equalTo(2);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //滑杆
@@ -284,8 +269,7 @@
     
 }
 #pragma mark - 获取资源图片
-- (UIImage *)getPictureWithName:(NSString *)name
-{
+- (UIImage *)getPictureWithName:(NSString *)name{
     NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"CLPlayer" ofType:@"bundle"]];
     NSString *path   = [bundle pathForResource:name ofType:@"png"];
     return [UIImage imageWithContentsOfFile:path];
