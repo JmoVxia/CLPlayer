@@ -15,6 +15,7 @@
 		5B1FC4FB1DC850EF0036C489 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5B35DDE21DE07A5700CEB057 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B35DDE11DE07A5700CEB057 /* Model.m */; };
 		5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B35DDE31DE07F9A00CEB057 /* Date.json */; };
+		5B456F871E5FD86000C9599F /* CLPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456F861E5FD86000C9599F /* CLPlayerMaskView.m */; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
 		5BAEF9C61DF6B822009D1783 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */; };
 		5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */; };
@@ -38,6 +39,8 @@
 		5B35DDE01DE07A5700CEB057 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		5B35DDE11DE07A5700CEB057 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		5B35DDE31DE07F9A00CEB057 /* Date.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Date.json; sourceTree = "<group>"; };
+		5B456F851E5FD86000C9599F /* CLPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerMaskView.h; sourceTree = "<group>"; };
+		5B456F861E5FD86000C9599F /* CLPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerMaskView.m; sourceTree = "<group>"; };
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
 		5BAEF9BE1DF6B822009D1783 /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */,
 				5BAEF9BE1DF6B822009D1783 /* CLPlayerView.h */,
 				5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */,
+				5B456F851E5FD86000C9599F /* CLPlayerMaskView.h */,
+				5B456F861E5FD86000C9599F /* CLPlayerMaskView.m */,
 				5BAEF9C01DF6B822009D1783 /* CLSlider.h */,
 				5BAEF9C11DF6B822009D1783 /* CLSlider.m */,
 				5BAEF9CB1DF6B87D009D1783 /* UIView+CLSetRect.h */,
@@ -272,6 +277,7 @@
 				5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
 				5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */,
+				5B456F871E5FD86000C9599F /* CLPlayerMaskView.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
 				5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */,
 				5B35DDE21DE07A5700CEB057 /* Model.m in Sources */,

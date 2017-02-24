@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "UIView+CLSetRect.h"
 #import "CLSlider.h"
-
+#import "CLPlayerMaskView.h"
 //方向枚举
 typedef NS_ENUM(NSInteger,Direction){
     Letf = 0,
@@ -83,7 +83,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 /**全屏按钮*/
 @property (nonatomic,strong) UIButton                *maxButton;
 /**表面遮罩*/
-@property (nonatomic,strong) UIButton                *backView;
+@property (nonatomic,strong) CLPlayerMaskView        *maskView;
 /**转子*/
 @property (nonatomic,strong) UIActivityIndicatorView *activity;
 /**缓冲进度条*/
@@ -237,27 +237,27 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)creatUI
 {
     //最上面的View
-    _backView                 = [[UIButton alloc]init];
-    _backView.frame           = CGRectMake(0, _playerLayer.frame.origin.y, _playerLayer.frame.size.width, _playerLayer.frame.size.height);
-    [_backView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_backView];
+    _maskView                 = [[CLPlayerMaskView alloc]init];
+    _maskView.frame           = CGRectMake(0, _playerLayer.frame.origin.y, _playerLayer.frame.size.width, _playerLayer.frame.size.height);
+    [_maskView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_maskView];
     
     //顶部View条
     _topView                 = [[UIView alloc]init];
-    _topView.frame           = CGRectMake(0, 0, _backView.CLwidth, ViewHeight);
+    _topView.frame           = CGRectMake(0, 0, _maskView.CLwidth, ViewHeight);
     _topView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.00000f];
-    [_backView addSubview:_topView];
+    [_maskView addSubview:_topView];
     
     //底部View条
     _bottomView                 = [[UIView alloc] init];
-    _bottomView.frame           = CGRectMake(0, _backView.CLheight - ViewHeight, _backView.CLwidth, ViewHeight);
+    _bottomView.frame           = CGRectMake(0, _maskView.CLheight - ViewHeight, _maskView.CLwidth, ViewHeight);
     _bottomView.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
-    [_backView addSubview:_bottomView];
+    [_maskView addSubview:_bottomView];
     
     //转子
     _activity        = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-    _activity.center = _backView.center;
-    [self.backView addSubview:_activity];
+    _activity.center = _maskView.center;
+    [self.maskView addSubview:_activity];
 
     
     //创建播放按钮
@@ -908,7 +908,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                   object:nil];
         NSLog(@"播放器被销毁了");
 }
-
+-(void)layoutSubviews{
+    [super layoutSubviews];
+//    self.playerLayer.frame = self.bounds;
+}
 
 
 
