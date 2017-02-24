@@ -300,8 +300,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         }
     }
     _progress                = [[UIProgressView alloc]init];
-//    _progress.frame          = CGRectMake(_startButton.CLright + Padding + 40 + Padding, 0, width - 80 - Padding - _startButton.CLright - Padding - Padding - Padding - _maxButton.CLwidth - Padding, Padding);
-//    _progress.CLcenterY        = _bottomView.CLheight/2.0;
+    _progress.frame          = CGRectMake(_startButton.CLright + Padding + 40 + Padding, 0, width - 80 - Padding - _startButton.CLright - Padding - Padding - Padding - _maxButton.CLwidth - Padding, Padding);
+    _progress.CLcenterY        = _bottomView.CLheight/2.0;
     //进度条颜色
     _progress.trackTintColor = ProgressColor;
     
@@ -423,8 +423,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)createSlider
 {
     _slider         = [[CLSlider alloc]init];
-//    _slider.frame   = CGRectMake(_progress.CLx, 0, _progress.CLwidth, 2);
-//    _slider.CLcenterY = _bottomView.CLheight/2.0;
+    _slider.frame   = CGRectMake(_progress.CLx, 0, _progress.CLwidth, 2);
+    _slider.CLcenterY = _bottomView.CLheight/2.0;
     [_bottomView addSubview:_slider];
     
     //开始拖拽

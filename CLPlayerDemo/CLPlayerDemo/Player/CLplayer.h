@@ -27,11 +27,11 @@
 #define MAS_SHORTHAND_GLOBALS
 #import  "Masonry.h"
 
-/**iPhone5为标准，乘以宽的比例*/
-#define CLscaleX(value) ((value)/320.0f * CLscreenWidth)
-
-/**iPhone5为标准，乘以高的比例*/
-#define CLscaleY(value) ((value)/568.0f * CLscreenHeight)
+///**iPhone5为标准，乘以宽的比例*/
+//#define CLscaleX(value) ((value)/320.0f * CLscreenWidth)
+//
+///**iPhone5为标准，乘以高的比例*/
+//#define CLscaleY(value) ((value)/568.0f * CLscreenHeight)
 
 
 //间隙

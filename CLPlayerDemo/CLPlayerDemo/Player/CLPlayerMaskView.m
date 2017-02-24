@@ -8,7 +8,8 @@
 
 #import "CLPlayerMaskView.h"
 #import "CLplayer.h"
-@interface CLPlayerMaskView ()
+#import "CLSlider.h"
+@interface CLPlayerMaskView ()<UIGestureRecognizerDelegate>
 /**顶部工具条*/
 @property (nonatomic,strong) UIView *topToolBar;
 /**底部工具条*/
@@ -21,6 +22,15 @@
 @property (nonatomic,strong) UIButton *playButton;
 /**底部工具条全屏按钮*/
 @property (nonatomic,strong) UIButton *fullButton;
+/**底部工具条当前播放时间*/
+@property (nonatomic,strong) UILabel *currentTimeLabel;
+/**底部工具条视频总时间*/
+@property (nonatomic,strong) UILabel *totalTimeLabel;
+/**缓冲进度条*/
+@property (nonatomic,strong) UIProgressView *progress;
+/**播放进度条*/
+@property (nonatomic,strong) CLSlider *slider;
+
 @end
 
 @implementation CLPlayerMaskView
@@ -38,6 +48,10 @@
     [self.topToolBar addSubview:self.backButton];
     [self.bottomToolBar addSubview:self.playButton];
     [self.bottomToolBar addSubview:self.fullButton];
+    [self.bottomToolBar addSubview:self.currentTimeLabel];
+    [self.bottomToolBar addSubview:self.totalTimeLabel];
+    [self.bottomToolBar addSubview:self.progress];
+    [self.bottomToolBar addSubview:self.slider];
     [self makeConstraints];
     
     
@@ -78,6 +92,26 @@
         make.right.bottom.equalTo(-10);
         make.top.equalTo(10);
         make.width.equalTo(self.backButton.height);
+    }];
+    //当前播放时间
+    [self.currentTimeLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.playButton.right).offset(10);
+        make.centerY.equalTo(self.bottomToolBar);
+    }];
+    //总时间
+    [self.totalTimeLabel makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.fullButton.left).offset(-10);
+        make.centerY.equalTo(self.bottomToolBar);
+    }];
+    //缓冲条
+    [self.progress makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.currentTimeLabel.right).offset(10);
+        make.right.equalTo(self.totalTimeLabel.left).offset(-10);
+        make.centerY.equalTo(self.bottomToolBar);
+    }];
+    //滑杆
+    [self.slider makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.progress);
     }];
 }
 
@@ -125,6 +159,7 @@
     }
     return _playButton;
 }
+//全屏按钮
 - (UIButton *) fullButton{
     if (_fullButton == nil){
         _fullButton = [[UIButton alloc]init];
@@ -133,6 +168,63 @@
         [_fullButton addTarget:self action:@selector(fullButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _fullButton;
+}
+//当前播放时间
+- (UILabel *) currentTimeLabel{
+    if (_currentTimeLabel == nil){
+        _currentTimeLabel = [[UILabel alloc]init];
+        _currentTimeLabel.textColor = [UIColor whiteColor];
+        _currentTimeLabel.font      = [UIFont systemFontOfSize:12];
+        _currentTimeLabel.text      = @"00:00";
+        _currentTimeLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _currentTimeLabel;
+}
+//总时间
+- (UILabel *) totalTimeLabel{
+    if (_totalTimeLabel == nil){
+        _totalTimeLabel = [[UILabel alloc]init];
+        _totalTimeLabel.textColor = [UIColor whiteColor];
+        _totalTimeLabel.font      = [UIFont systemFontOfSize:12];
+        _totalTimeLabel.text      = @"00:00";
+        _totalTimeLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _totalTimeLabel;
+}
+//缓冲条
+- (UIProgressView *) progress{
+    if (_progress == nil){
+        _progress = [[UIProgressView alloc]init];
+        _progress.trackTintColor = [UIColor whiteColor];
+        _progress.progressTintColor = [UIColor orangeColor];
+    }
+    return _progress;
+}
+//滑动条
+- (CLSlider *) slider{
+    if (_slider == nil){
+        _slider = [[CLSlider alloc]init];
+        // slider开始滑动事件
+        [_slider addTarget:self action:@selector(progressSliderTouchBegan:) forControlEvents:UIControlEventTouchDown];
+        // slider滑动中事件
+        [_slider addTarget:self action:@selector(progressSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+        // slider结束滑动事件
+        [_slider addTarget:self action:@selector(progressSliderTouchEnded:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchCancel | UIControlEventTouchUpOutside];
+        
+        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panRecognizer:)];
+        panRecognizer.delegate = self;
+        [panRecognizer setMaximumNumberOfTouches:1];
+        [panRecognizer setDelaysTouchesBegan:YES];
+        [panRecognizer setDelaysTouchesEnded:YES];
+        [panRecognizer setCancelsTouchesInView:YES];
+        [_slider addGestureRecognizer:panRecognizer];
+        
+        //左边颜色
+        _slider.minimumTrackTintColor = PlayFinishColor;
+        //右边颜色
+        _slider.maximumTrackTintColor = [UIColor clearColor];
+    }
+    return _slider;
 }
 #pragma mark - 按钮点击事件
 //返回按钮
@@ -150,7 +242,25 @@
 }
 
 
+#pragma mark - 滑杆
+//开始滑动
+- (void)progressSliderTouchBegan:(CLSlider *)sender{
+   
+}
+//滑动中
+- (void)progressSliderValueChanged:(CLSlider *)sender{
+    
+}
+//滑动结束
+- (void)progressSliderTouchEnded:(CLSlider *)sender{
+    
+}
 
+
+//滑动slider其他地方不响应其他手势
+- (void)panRecognizer:(UIPanGestureRecognizer *)sender{
+    
+}
 
 
 
