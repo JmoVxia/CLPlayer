@@ -174,6 +174,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     {
         _playerLayer.videoGravity = _videoFillMode;
     }
+    //放到最下面，防止遮挡
     [self.layer insertSublayer:_playerLayer atIndex:0];
 
 
@@ -226,16 +227,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
     //设置是否隐藏
     statusBar.hidden  = hidden;
-}
-#pragma mark - 创建UIProgressView
-- (void)createProgress
-{
-    // 计算缓冲进度
-    NSTimeInterval timeInterval = [self availableDuration];
-    CMTime duration             = self.playerItem.duration;
-    CGFloat totalDuration       = CMTimeGetSeconds(duration);
-    CGFloat progress            = timeInterval / totalDuration;
-    [self.maskView.progress setProgress:progress animated:NO];
 }
 #pragma mark - 缓冲条监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
