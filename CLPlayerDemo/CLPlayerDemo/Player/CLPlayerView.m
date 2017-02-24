@@ -318,15 +318,13 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 拖动进度条
 //开始
-- (void)processSliderStartDragAction:(UISlider *)slider
-{
+-(void)cl_progressSliderTouchBegan:(CLSlider *)slider{
     //暂停
     [self pausePlay];
     [self destroyTimer];
 }
 //结束
-- (void)processSliderEndDragAction:(UISlider *)slider
-{
+-(void)cl_progressSliderTouchEnded:(CLSlider *)slider{
     //继续播放
     [self playVideo];
     _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
@@ -336,8 +334,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                              repeats:NO];
 }
 //拖拽中
-- (void)sliderValueChangedAction:(UISlider *)slider
-{
+-(void)cl_progressSliderValueChanged:(CLSlider *)slider{
     //计算出拖动的当前秒数
     CGFloat total           = (CGFloat)_playerItem.duration.value / _playerItem.duration.timescale;
     NSInteger dragedSeconds = floorf(total * slider.value);

@@ -106,6 +106,7 @@
 - (UIView *) topToolBar{
     if (_topToolBar == nil){
         _topToolBar = [[UIView alloc]init];
+        _topToolBar.userInteractionEnabled = YES;
     }
     return _topToolBar;
 }
@@ -113,6 +114,7 @@
 - (UIView *) bottomToolBar{
     if (_bottomToolBar == nil){
         _bottomToolBar = [[UIView alloc]init];
+        _bottomToolBar.userInteractionEnabled = YES;
     }
     return _bottomToolBar;
 }
@@ -195,15 +197,6 @@
         [_slider addTarget:self action:@selector(progressSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
         // slider结束滑动事件
         [_slider addTarget:self action:@selector(progressSliderTouchEnded:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchCancel | UIControlEventTouchUpOutside];
-        
-        UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panRecognizer:)];
-        panRecognizer.delegate = self;
-        [panRecognizer setMaximumNumberOfTouches:1];
-        [panRecognizer setDelaysTouchesBegan:YES];
-        [panRecognizer setDelaysTouchesEnded:YES];
-        [panRecognizer setCancelsTouchesInView:YES];
-        [_slider addGestureRecognizer:panRecognizer];
-        
         //左边颜色
         _slider.minimumTrackTintColor = PlayFinishColor;
         //右边颜色
@@ -241,32 +234,28 @@
 
 #pragma mark - 滑杆
 //开始滑动
-- (void)progressSliderTouchBegan:(CLSlider *)sender{
+- (void)progressSliderTouchBegan:(CLSlider *)slider{
     if (_delegate && [_delegate respondsToSelector:@selector(cl_progressSliderTouchBegan:)]) {
-        [_delegate cl_progressSliderTouchBegan:sender];
+        [_delegate cl_progressSliderTouchBegan:slider];
     }else{
         CLlog(@"没有实现代理或者没有设置代理人");
     }
 }
 //滑动中
-- (void)progressSliderValueChanged:(CLSlider *)sender{
+- (void)progressSliderValueChanged:(CLSlider *)slider{
     if (_delegate && [_delegate respondsToSelector:@selector(cl_progressSliderValueChanged:)]) {
-        [_delegate cl_progressSliderValueChanged:sender];
+        [_delegate cl_progressSliderValueChanged:slider];
     }else{
         CLlog(@"没有实现代理或者没有设置代理人");
     }
 }
 //滑动结束
-- (void)progressSliderTouchEnded:(CLSlider *)sender{
+- (void)progressSliderTouchEnded:(CLSlider *)slider{
     if (_delegate && [_delegate respondsToSelector:@selector(cl_progressSliderTouchEnded:)]) {
-        [_delegate cl_progressSliderTouchEnded:sender];
+        [_delegate cl_progressSliderTouchEnded:slider];
     }else{
         CLlog(@"没有实现代理或者没有设置代理人");
     }
-}
-//滑动slider其他地方不响应其他手势
-- (void)panRecognizer:(UIPanGestureRecognizer *)sender{
-    
 }
 #pragma mark - 获取资源图片
 - (UIImage *)getPictureWithName:(NSString *)name{

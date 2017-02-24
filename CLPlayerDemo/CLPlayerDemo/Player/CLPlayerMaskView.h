@@ -16,11 +16,11 @@
 /**全屏按钮代理*/
 - (void)cl_fullButtonAction:(UIButton *)button;
 /**开始滑动*/
-- (void)cl_progressSliderTouchBegan:(CLSlider *)sender;
+- (void)cl_progressSliderTouchBegan:(CLSlider *)slider;
 /**滑动中*/
-- (void)cl_progressSliderValueChanged:(CLSlider *)sender;
+- (void)cl_progressSliderValueChanged:(CLSlider *)slider;
 /**滑动结束*/
-- (void)cl_progressSliderTouchEnded:(CLSlider *)sender;
+- (void)cl_progressSliderTouchEnded:(CLSlider *)slider;
 @end
 
 
