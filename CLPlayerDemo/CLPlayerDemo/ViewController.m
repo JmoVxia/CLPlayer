@@ -11,6 +11,8 @@
 #import "TableViewCell.h"
 #import "Model.h"
 #import "UIView+CLSetRect.h"
+#import  "Masonry.h"
+
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate,UIScrollViewDelegate>
 
 /**tableView*/
@@ -98,9 +100,15 @@
     [_playerView destroyPlayer];
     _playerView = nil;
     
-    CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.CLwidth, cell.CLheight)];
+    CLPlayerView *playerView = [[CLPlayerView alloc] init];
+    playerView.frame = CGRectMake(0, 0, cell.CLwidth, cell.CLheight);
+   
     _playerView = playerView;
     [cell.contentView addSubview:_playerView];
+//    [playerView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.equalTo(cell);
+//    }];
+    
     
     //根据旋转自动支持全屏，默认支持
 //        _playerView.autoFullScreen = NO;

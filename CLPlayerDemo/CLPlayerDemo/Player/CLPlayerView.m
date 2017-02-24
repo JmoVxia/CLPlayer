@@ -100,7 +100,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 {
     if (self = [super initWithFrame:frame])
     {
-        _customFarme         = frame;
         _isFullScreen        = NO;
         _autoFullScreen      = YES;
         _repeatPlay          = NO;
@@ -537,6 +536,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 {
     //记录播放器父类
     _fatherView = self.superview;
+    //记录原始大小
+    _customFarme = self.frame;
     _isFullScreen = YES;
     [self setStatusBarHidden:YES];
     //添加到Window上
@@ -575,10 +576,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     _isFullScreen = NO;
     [self setStatusBarHidden:NO];
     [UIView animateWithDuration:0.25 animations:^{
-        //还原大小
+        //还原
         self.transform = CGAffineTransformMakeRotation(0);
     }];
-    
     self.frame = _customFarme;
     //还原到原有父类上
     [_fatherView addSubview:self];
