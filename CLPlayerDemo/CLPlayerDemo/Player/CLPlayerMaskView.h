@@ -25,6 +25,10 @@
 
 
 @interface CLPlayerMaskView : UIButton
+/**顶部工具条*/
+@property (nonatomic,strong) UIView *topToolBar;
+/**底部工具条*/
+@property (nonatomic,strong) UIView *bottomToolBar;
 /**转子*/
 @property (nonatomic,strong) UIActivityIndicatorView *activity;
 /**顶部工具条返回按钮*/

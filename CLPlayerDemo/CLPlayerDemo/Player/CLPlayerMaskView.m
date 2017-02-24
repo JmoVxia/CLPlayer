@@ -10,10 +10,7 @@
 #import "CLplayer.h"
 #import "CLSlider.h"
 @interface CLPlayerMaskView ()<UIGestureRecognizerDelegate>
-/**顶部工具条*/
-@property (nonatomic,strong) UIView *topToolBar;
-/**底部工具条*/
-@property (nonatomic,strong) UIView *bottomToolBar;
+
 
 @end
 
@@ -80,11 +77,13 @@
     //当前播放时间
     [self.currentTimeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.playButton.right).offset(10);
+        make.width.equalTo(35);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //总时间
     [self.totalTimeLabel makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.fullButton.left).offset(-10);
+        make.width.equalTo(35);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //缓冲条
