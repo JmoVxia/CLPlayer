@@ -33,21 +33,22 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @interface CLPlayerView ()<CLPlayerMaskViewDelegate>
 
 /**控件原始Farme*/
-@property (nonatomic,assign) CGRect customFarme;
+@property (nonatomic,assign) CGRect        customFarme;
+/** 播发器的几种状态 */
+@property (nonatomic,assign) CLPlayerState state;
 /**父类控件*/
-@property (nonatomic,strong) UIView *fatherView;
+@property (nonatomic,strong) UIView        *fatherView;
+/**视频拉伸模式*/
+@property (nonatomic,copy) NSString        *videoFillMode;
+
+/** 是否被用户暂停 */
+@property (nonatomic,assign) BOOL   isPauseByUser;
 /**全屏标记*/
 @property (nonatomic,assign) BOOL   isFullScreen;
 /**横屏标记*/
 @property (nonatomic,assign) BOOL   landscape;
 /**工具条隐藏标记*/
 @property (nonatomic,assign) BOOL   isDisappear;
-/**视频拉伸模式*/
-@property (nonatomic,copy) NSString *videoFillMode;
-/** 播发器的几种状态 */
-@property (nonatomic, assign) CLPlayerState state;
-/** 是否被用户暂停 */
-@property (nonatomic, assign) BOOL  isPauseByUser;
 
 
 /**播放器*/
@@ -71,6 +72,28 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @end
 
 @implementation CLPlayerView
+#pragma mark - 懒加载
+//遮罩
+- (CLPlayerMaskView *) maskView{
+    if (_maskView == nil){
+        _maskView          = [[CLPlayerMaskView alloc] init];
+        _maskView.delegate = self;
+        [_maskView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
+        //计时器，循环执行
+        _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                                        target:self
+                                                      selector:@selector(timeStack)
+                                                      userInfo:nil
+                                                       repeats:YES];
+        //定时器，工具条消失
+        _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+                                                  target:self
+                                                selector:@selector(disappear)
+                                                userInfo:nil
+                                                 repeats:NO];
+    }
+    return _maskView;
+}
 
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame
@@ -84,7 +107,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _isLandscape         = NO;
         _landscape           = NO;
         _isDisappear         = NO;
-        self.backgroundColor = [UIColor blackColor];
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
@@ -137,7 +159,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)setUrl:(NSURL *)url{
     self.frame                = _customFarme;
     _url                      = url;
-    self.playerItem               = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:_url]];
+    self.playerItem           = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:_url]];
     //创建
     _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
     _playerLayer              = [AVPlayerLayer playerLayerWithPlayer:_player];
@@ -151,9 +173,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     {
         _playerLayer.videoGravity = _videoFillMode;
     }
-    
     [self.layer addSublayer:_playerLayer];
+
     [self creatUI];
+
 }
 
 -(void)setPlayerItem:(AVPlayerItem *)playerItem
@@ -192,24 +215,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 创建播放器UI
 - (void)creatUI
 {
+    self.backgroundColor = [UIColor blackColor];
     //最上面的View
-    _maskView                 = [[CLPlayerMaskView alloc]init];
-    _maskView.delegate = self;
-    [_maskView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_maskView];
-    
-    //计时器，循环执行
-    _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
-                                     target:self
-                                   selector:@selector(timeStack)
-                                   userInfo:nil
-                                    repeats:YES];
-//    定时器，工具条消失
-    _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
-                                              target:self
-                                            selector:@selector(disappear)
-                                            userInfo:nil
-                                             repeats:NO];
+    [self addSubview:self.maskView];
 }
 #pragma mark - 隐藏或者显示状态栏方法
 - (void)setStatusBarHidden:(BOOL)hidden
