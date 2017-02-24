@@ -117,6 +117,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appwillResignActive:)
                                                      name:UIApplicationWillResignActiveNotification
                                                    object:nil];
+        [self creatUI];
+
     }
     return self;
 }
@@ -157,7 +159,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
-    self.frame                = _customFarme;
     _url                      = url;
     self.playerItem           = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:_url]];
     //创建
@@ -173,9 +174,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     {
         _playerLayer.videoGravity = _videoFillMode;
     }
-    [self.layer addSublayer:_playerLayer];
+    [self.layer insertSublayer:_playerLayer atIndex:0];
 
-    [self creatUI];
 
 }
 

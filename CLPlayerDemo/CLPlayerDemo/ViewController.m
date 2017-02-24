@@ -109,7 +109,7 @@
     //如果播放器所在页面支持横屏，需要设置为Yes，不支持不需要设置(默认不支持)
 //        _playerView.isLandscape    = YES;
     //设置等比例全屏拉伸，多余部分会被剪切
-    _playerView.fillMode = ResizeAspectFill;
+//    _playerView.fillMode = ResizeAspectFill;
     
     //视频地址
     _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
