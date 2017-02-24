@@ -120,6 +120,7 @@
 - (UIActivityIndicatorView *) activity{
     if (_activity == nil){
         _activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [_activity startAnimating];
     }
     return _activity;
 }

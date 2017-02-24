@@ -188,9 +188,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)setState:(CLPlayerState)state{
     _state = state;
     if (state == CLPlayerStateBuffering) {
-//        [_activity startAnimating];
+        [self.maskView.activity startAnimating];
     }else{
-//        [_activity stopAnimating];
+        [self.maskView.activity stopAnimating];
         [self playVideo];
     }
 }
