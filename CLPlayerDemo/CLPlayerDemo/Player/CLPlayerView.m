@@ -197,10 +197,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     _maskView.delegate = self;
     [_maskView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_maskView];
-   
-
-    
-
     
     //计时器，循环执行
     _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
@@ -214,7 +210,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                             selector:@selector(disappear)
                                             userInfo:nil
                                              repeats:NO];
-    
 }
 #pragma mark - 隐藏或者显示状态栏方法
 - (void)setStatusBarHidden:(BOOL)hidden
@@ -244,7 +239,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         }
         else if (self.player.currentItem.status == AVPlayerItemStatusFailed) {
             self.state = CLPlayerStateFailed;
-            NSLog(@"加载失败");
+            CLlog(@"加载失败");
         }
     } else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
         
@@ -398,8 +393,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     if (_isDisappear == NO)
     {
         [UIView animateWithDuration:0.5 animations:^{
-//            _topView.alpha    = 0;
-//            _bottomView.alpha = 0;
+            self.maskView.topToolBar.alpha    = 0;
+            self.maskView.bottomToolBar.alpha = 0;
         }];
     }
     else
@@ -412,8 +407,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                  repeats:NO];
         
         [UIView animateWithDuration:0.5 animations:^{
-//            _topView.alpha    = 1;
-//            _bottomView.alpha = 1;
+            self.maskView.topToolBar.alpha    = 1.0;
+            self.maskView.bottomToolBar.alpha = 1.0;
         }];
     }
     _isDisappear = !_isDisappear;
@@ -422,8 +417,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)disappear
 {
     [UIView animateWithDuration:0.5 animations:^{
-//        _topView.alpha    = 0;
-//        _bottomView.alpha = 0;
+        self.maskView.topToolBar.alpha    = 0;
+        self.maskView.bottomToolBar.alpha = 0;
     }];
 }
 #pragma mark - 播放完成
@@ -543,10 +538,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 {
     //记录播放器父类
     _fatherView = self.superview;
-    
     _isFullScreen = YES;
-
-       
     [self setStatusBarHidden:YES];
     //添加到Window上
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
@@ -582,10 +574,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
     
     _isFullScreen = NO;
-    
-
     [self setStatusBarHidden:NO];
-
     [UIView animateWithDuration:0.25 animations:^{
         //还原大小
         self.transform = CGAffineTransformMakeRotation(0);
@@ -655,7 +644,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                   object:[UIDevice currentDevice]];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification
                                                   object:nil];
-        NSLog(@"播放器被销毁了");
+        CLlog(@"播放器被销毁了");
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
