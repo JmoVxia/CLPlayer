@@ -96,10 +96,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 
 #pragma mark - 初始化
-- (instancetype)initWithFrame:(CGRect)frame
-{
-    if (self = [super initWithFrame:frame])
-    {
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]){
         _isFullScreen        = NO;
         _autoFullScreen      = YES;
         _repeatPlay          = NO;
@@ -122,10 +120,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     return self;
 }
 #pragma mark - 视频拉伸方式
--(void)setFillMode:(VideoFillMode)fillMode
-{
-    switch (fillMode)
-    {
+-(void)setFillMode:(VideoFillMode)fillMode{
+    switch (fillMode){
         case ResizeAspectFill:
             //原比例拉伸视频，直到两边屏幕都占满，但视频内容有部分会被剪切
             _videoFillMode = AVLayerVideoGravityResizeAspectFill;
@@ -141,19 +137,16 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
 }
 #pragma mark - 是否自动支持全屏
-- (void)setAutoFullScreen:(BOOL)autoFullScreen
-{
+- (void)setAutoFullScreen:(BOOL)autoFullScreen{
     _autoFullScreen = autoFullScreen;
 }
 #pragma mark - 是否支持横屏
--(void)setIsLandscape:(BOOL)isLandscape
-{
+-(void)setIsLandscape:(BOOL)isLandscape{
     _isLandscape = isLandscape;
     _landscape   = isLandscape;
 }
 #pragma mark - 重复播放
-- (void)setRepeatPlay:(BOOL)repeatPlay
-{
+- (void)setRepeatPlay:(BOOL)repeatPlay{
     _repeatPlay = repeatPlay;
 }
 #pragma mark - 传入播放地址
@@ -178,9 +171,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 
 
 }
-
--(void)setPlayerItem:(AVPlayerItem *)playerItem
-{
+-(void)setPlayerItem:(AVPlayerItem *)playerItem{
     
     if (_playerItem == playerItem){
         return;
@@ -213,23 +204,20 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
 }
 #pragma mark - 创建播放器UI
-- (void)creatUI
-{
+- (void)creatUI{
     self.backgroundColor = [UIColor blackColor];
     //最上面的View
     [self addSubview:self.maskView];
 }
 #pragma mark - 隐藏或者显示状态栏方法
-- (void)setStatusBarHidden:(BOOL)hidden
-{
+- (void)setStatusBarHidden:(BOOL)hidden{
     //取出当前控制器的导航条
     UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
     //设置是否隐藏
     statusBar.hidden  = hidden;
 }
 #pragma mark - 缓冲条监听
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"status"]) {
         
         if (self.player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
@@ -266,12 +254,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 
 #pragma mark - 缓冲较差时候
-
-/**
- *  缓冲较差时候回调这里
- */
-- (void)bufferingSomeSecond
-{
+//卡顿时会走这里
+- (void)bufferingSomeSecond{
     self.state = CLPlayerStateBuffering;
 
     __block BOOL isBuffering = NO;
@@ -300,8 +284,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 
 
 //计算缓冲进度
-- (NSTimeInterval)availableDuration
-{
+- (NSTimeInterval)availableDuration{
     NSArray *loadedTimeRanges = [[_player currentItem] loadedTimeRanges];
     CMTimeRange timeRange     = [loadedTimeRanges.firstObject CMTimeRangeValue];// 获取缓冲区域
     float startSeconds        = CMTimeGetSeconds(timeRange.start);
@@ -337,10 +320,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 
 #pragma mark - 计时器事件
-- (void)timeStack
-{
-    if (_playerItem.duration.timescale != 0)
-    {
+- (void)timeStack{
+    if (_playerItem.duration.timescale != 0){
         //总共时长
         self.maskView.slider.maximumValue = 1;
         //当前进度
@@ -359,12 +340,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 
 #pragma mark - 播放暂停按钮方法
 -(void)cl_playButtonAction:(UIButton *)button{
-    if (button.selected == NO)
-    {
+    if (button.selected == NO){
         [self pausePlay];
     }
-    else
-    {
+    else{
         [self playVideo];
     }
 }
@@ -372,31 +351,26 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 全屏按钮响应事件
 -(void)cl_fullButtonAction:(UIButton *)button{
     _isLandscape = NO;
-    if (_isFullScreen == NO)
-    {
+    if (_isFullScreen == NO){
         [self fullScreenWithDirection:Letf];
     }
-    else
-    {
+    else{
         [self originalscreen];
     }
     _isLandscape = _landscape;
 }
 
 #pragma mark - 点击响应
-- (void)disappearAction:(UIButton *)button
-{
+- (void)disappearAction:(UIButton *)button{
     //取消定时消失
     [self destroyTimer];
-    if (_isDisappear == NO)
-    {
+    if (_isDisappear == NO){
         [UIView animateWithDuration:0.5 animations:^{
             self.maskView.topToolBar.alpha    = 0;
             self.maskView.bottomToolBar.alpha = 0;
         }];
     }
-    else
-    {
+    else{
         //添加定时消失
         _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
                                                   target:self
@@ -412,68 +386,57 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     _isDisappear = !_isDisappear;
 }
 #pragma mark - 定时消失
-- (void)disappear
-{
+- (void)disappear{
     [UIView animateWithDuration:0.5 animations:^{
         self.maskView.topToolBar.alpha    = 0;
         self.maskView.bottomToolBar.alpha = 0;
     }];
 }
 #pragma mark - 播放完成
-- (void)moviePlayDidEnd:(id)sender
-{
-    if (_repeatPlay == NO)
-    {
+- (void)moviePlayDidEnd:(id)sender{
+    if (_repeatPlay == NO){
         [self pausePlay];
     }
     else
     {
         [self resetPlay];
     }
-    if (self.EndBlock)
-    {
+    if (self.EndBlock){
         self.EndBlock();
     }
     
 }
-- (void)endPlay:(EndBolck) end
-{
+- (void)endPlay:(EndBolck) end{
     self.EndBlock = end;
 }
 #pragma mark - 返回按钮
 -(void)cl_backButtonAction:(UIButton *)button{
-    if (self.BackBlock)
-    {
+    if (self.BackBlock){
         self.BackBlock(button);
     }
 }
-- (void)backButton:(BackButtonBlock) backButton;
-{
+- (void)backButton:(BackButtonBlock) backButton;{
     self.BackBlock = backButton;
 }
 #pragma mark - 暂停播放
-- (void)pausePlay
-{
+- (void)pausePlay{
     self.maskView.playButton.selected = NO;
     _isPauseByUser = YES;
     [_player pause];
 }
 #pragma mark - 播放
-- (void)playVideo
-{
+- (void)playVideo{
     self.maskView.playButton.selected = YES;
     _isPauseByUser = NO;
     [_player play];
 }
 #pragma mark - 重新开始播放
-- (void)resetPlay
-{
+- (void)resetPlay{
     [_player seekToTime:CMTimeMake(0, 1)];
     [self playVideo];
 }
 #pragma mark - 销毁播放器
-- (void)destroyPlayer
-{
+- (void)destroyPlayer{
     //销毁定时器
     [self destroyAllTimer];
     //暂停
@@ -487,53 +450,42 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 取消定时器
 //销毁所有定时器
-- (void)destroyAllTimer
-{
+- (void)destroyAllTimer{
     [_sliderTimer invalidate];
     [_timer invalidate];
     _sliderTimer = nil;
     _timer       = nil;
 }
 //销毁定时消失定时器
-- (void)destroyTimer
-{
+- (void)destroyTimer{
     [_timer invalidate];
     _timer = nil;
 }
 #pragma mark - 屏幕旋转通知
-- (void)orientChange:(NSNotification *)notification
-{
-    if (_autoFullScreen == NO)
-    {
+- (void)orientChange:(NSNotification *)notification{
+    if (_autoFullScreen == NO){
         return;
     }
     
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    if (orientation == UIDeviceOrientationLandscapeLeft)
-    {
-        if (_isFullScreen == NO)
-        {
+    if (orientation == UIDeviceOrientationLandscapeLeft){
+        if (_isFullScreen == NO){
             [self fullScreenWithDirection:Letf];
         }
     }
-    else if (orientation == UIDeviceOrientationLandscapeRight)
-    {
-        if (_isFullScreen == NO)
-        {
+    else if (orientation == UIDeviceOrientationLandscapeRight){
+        if (_isFullScreen == NO){
             [self fullScreenWithDirection:Right];
         }
     }
-    else if (orientation == UIDeviceOrientationPortrait)
-    {
-        if (_isFullScreen == YES)
-        {
+    else if (orientation == UIDeviceOrientationPortrait){
+        if (_isFullScreen == YES){
             [self originalscreen];
         }
     }
 }
 #pragma mark - 全屏
-- (void)fullScreenWithDirection:(Direction)direction
-{
+- (void)fullScreenWithDirection:(Direction)direction{
     //记录播放器父类
     _fatherView = self.superview;
     //记录原始大小
@@ -544,33 +496,28 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
     
-    if (_isLandscape == YES)
-    {
-        self.frame         = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
+    if (_isLandscape == YES){
+        self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
     }
-    else
-    {        
-        if (direction == Letf)
-        {
+    else{
+        if (direction == Letf){
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
             }];
         }
-        else
-        {
+        else{
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
             }];
         }
-        self.frame         = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
+        self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
     }
     self.maskView.fullButton.selected = YES;
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
 #pragma mark - 原始大小
-- (void)originalscreen
-{
+- (void)originalscreen{
     [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
     
     _isFullScreen = NO;
@@ -583,46 +530,37 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     //还原到原有父类上
     [_fatherView addSubview:self];
     self.maskView.fullButton.selected = NO;
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
 }
 #pragma mark - APP活动通知
-- (void)appwillResignActive:(NSNotification *)note
-{
+- (void)appwillResignActive:(NSNotification *)note{
     //将要挂起，停止播放
     [self pausePlay];
 }
 #pragma mark - 获取资源图片
-- (UIImage *)getPictureWithName:(NSString *)name
-{
+- (UIImage *)getPictureWithName:(NSString *)name{
     NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"CLPlayer" ofType:@"bundle"]];
     NSString *path   = [bundle pathForResource:name ofType:@"png"];
     return [UIImage imageWithContentsOfFile:path];
 }
 #pragma mark - 根据Cell位置判断是否销毁
-- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell topOffset:(CGFloat)topOffset bottomOffset:(CGFloat)bottomOffset beyond:(BeyondBlock) beyond;
-{
+- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell topOffset:(CGFloat)topOffset bottomOffset:(CGFloat)bottomOffset beyond:(BeyondBlock) beyond;{
     //取出cell位置
-    CGRect rect = cell.frame;
+    CGRect rect        = cell.frame;
     //cell顶部
-    CGFloat cellTop = rect.origin.y;
+    CGFloat cellTop    = rect.origin.y;
     //cell底部
     CGFloat cellBottom = rect.origin.y + rect.size.height;
     
     
-    if (tableView.contentOffset.y + topOffset > cellBottom)
-    {
-        if (beyond)
-        {
+    if (tableView.contentOffset.y + topOffset > cellBottom){
+        if (beyond){
             beyond();
         }
         return;
     }
     
-    if (cellTop > tableView.contentOffset.y + tableView.frame.size.height - bottomOffset)
-    {
-        if (beyond)
-        {
+    if (cellTop > tableView.contentOffset.y + tableView.frame.size.height - bottomOffset){
+        if (beyond){
             beyond();
         }
         return;
@@ -630,8 +568,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 
 #pragma mark - dealloc
-- (void)dealloc
-{
+- (void)dealloc{
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     [_playerItem removeObserver:self forKeyPath:@"status"];
     [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
