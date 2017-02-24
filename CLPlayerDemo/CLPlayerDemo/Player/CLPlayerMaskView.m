@@ -58,38 +58,38 @@
     }];
     //返回按钮
     [self.backButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(10);
-        make.bottom.equalTo(-10);
+        make.top.left.equalTo(Padding);
+        make.bottom.equalTo(-Padding);
         make.width.equalTo(self.backButton.height);
     }];
     //播放按钮
     [self.playButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(10);
-        make.bottom.equalTo(-10);
+        make.top.left.equalTo(Padding);
+        make.bottom.equalTo(-Padding);
         make.width.equalTo(self.backButton.height);
     }];
     //全屏按钮
     [self.fullButton makeConstraints:^(MASConstraintMaker *make) {
-        make.right.bottom.equalTo(-10);
-        make.top.equalTo(10);
+        make.right.bottom.equalTo(-Padding);
+        make.top.equalTo(Padding);
         make.width.equalTo(self.backButton.height);
     }];
     //当前播放时间
     [self.currentTimeLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.playButton.right).offset(10);
-        make.width.equalTo(35);
+        make.left.equalTo(self.playButton.right).offset(Padding);
+        make.width.equalTo(ToolBarHeight);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //总时间
     [self.totalTimeLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.fullButton.left).offset(-10);
-        make.width.equalTo(35);
+        make.right.equalTo(self.fullButton.left).offset(-Padding);
+        make.width.equalTo(ToolBarHeight);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //缓冲条
     [self.progress makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.currentTimeLabel.right).offset(10);
-        make.right.equalTo(self.totalTimeLabel.left).offset(-10);
+        make.left.equalTo(self.currentTimeLabel.right).offset(Padding);
+        make.right.equalTo(self.totalTimeLabel.left).offset(-Padding);
         make.height.equalTo(2);
         make.centerY.equalTo(self.bottomToolBar);
     }];
@@ -182,8 +182,8 @@
 - (UIProgressView *) progress{
     if (_progress == nil){
         _progress = [[UIProgressView alloc]init];
-        _progress.trackTintColor = [UIColor whiteColor];
-        _progress.progressTintColor = [UIColor orangeColor];
+        _progress.trackTintColor = ProgressColor;
+        _progress.progressTintColor = ProgressTintColor;
     }
     return _progress;
 }

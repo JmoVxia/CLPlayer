@@ -32,26 +32,30 @@
 //
 ///**iPhone5为标准，乘以高的比例*/
 //#define CLscaleY(value) ((value)/568.0f * CLscreenHeight)
+/**
+ *  UIScreen width.
+ */
+#define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
+
+/**
+ *  UIScreen height.
+ */
+#define  CLscreenHeight  [UIScreen mainScreen].bounds.size.height
 
 
 //间隙
-#define Padding        CLscaleX(15)
+#define Padding        10
 //消失时间
 #define DisappearTime  10
-//顶部底部控件高度
-#define ViewHeight     35
-//按钮大小
-#define ButtonSize     CLscaleX(40)
-//滑块大小
-#define SliderSize     CLscaleX(30)
+//顶部底部工具条高度
+#define ToolBarHeight     35
 //进度条颜色
 #define ProgressColor     [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000]
 //缓冲颜色
 #define ProgressTintColor [UIColor orangeColor]
 //播放完成颜色
 #define PlayFinishColor   [UIColor whiteColor]
-//滑块颜色
-#define SliderColor       [UIColor whiteColor]
+
 
 
 

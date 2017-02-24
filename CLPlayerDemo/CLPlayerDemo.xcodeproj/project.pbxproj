@@ -16,7 +16,7 @@
 		5B35DDE21DE07A5700CEB057 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B35DDE11DE07A5700CEB057 /* Model.m */; };
 		5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B35DDE31DE07F9A00CEB057 /* Date.json */; };
 		5B456F871E5FD86000C9599F /* CLPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456F861E5FD86000C9599F /* CLPlayerMaskView.m */; };
-		5B456F8C1E5FDDDF00C9599F /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456F8B1E5FDDDF00C9599F /* UIView+CLSetRect.m */; };
+		5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
 		5BAEF9C61DF6B822009D1783 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */; };
 		5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */; };
@@ -42,8 +42,8 @@
 		5B456F851E5FD86000C9599F /* CLPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerMaskView.h; sourceTree = "<group>"; };
 		5B456F861E5FD86000C9599F /* CLPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerMaskView.m; sourceTree = "<group>"; };
 		5B456F891E5FDB1F00C9599F /* CLplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLplayer.h; sourceTree = "<group>"; };
-		5B456F8A1E5FDDDF00C9599F /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
-		5B456F8B1E5FDDDF00C9599F /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
+		5B456F8D1E60164000C9599F /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
+		5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
 		5BAEF9BE1DF6B822009D1783 /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
@@ -98,6 +98,8 @@
 		5B1FC4C51DC850820036C489 /* CLPlayerDemo */ = {
 			isa = PBXGroup;
 			children = (
+				5B456F8D1E60164000C9599F /* UIView+CLSetRect.h */,
+				5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */,
 				5B1FC4C91DC850820036C489 /* AppDelegate.h */,
 				5B1FC4CA1DC850820036C489 /* AppDelegate.m */,
 				5B1FC4CC1DC850820036C489 /* ViewController.h */,
@@ -144,8 +146,6 @@
 				5BAEF9C01DF6B822009D1783 /* CLSlider.h */,
 				5BAEF9C11DF6B822009D1783 /* CLSlider.m */,
 				5B456F891E5FDB1F00C9599F /* CLplayer.h */,
-				5B456F8A1E5FDDDF00C9599F /* UIView+CLSetRect.h */,
-				5B456F8B1E5FDDDF00C9599F /* UIView+CLSetRect.m */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -280,7 +280,7 @@
 				5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */,
 				5B456F871E5FD86000C9599F /* CLPlayerMaskView.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
-				5B456F8C1E5FDDDF00C9599F /* UIView+CLSetRect.m in Sources */,
+				5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */,
 				5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */,
 				5B35DDE21DE07A5700CEB057 /* Model.m in Sources */,
 			);

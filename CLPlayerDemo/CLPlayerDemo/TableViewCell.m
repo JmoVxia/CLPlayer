@@ -7,9 +7,8 @@
 //
 
 #import "TableViewCell.h"
-#import "UIView+CLSetRect.h"
 #import "UIImageView+WebCache.h"
-
+#import "UIView+CLSetRect.h"
 #define CellHeight   300
 
 @interface TableViewCell ()

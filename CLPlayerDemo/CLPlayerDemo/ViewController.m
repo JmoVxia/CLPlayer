@@ -8,10 +8,9 @@
 
 #import "ViewController.h"
 #import "CLPlayerView.h"
-#import "UIView+CLSetRect.h"
 #import "TableViewCell.h"
 #import "Model.h"
-
+#import "UIView+CLSetRect.h"
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate,UIScrollViewDelegate>
 
 /**tableView*/
