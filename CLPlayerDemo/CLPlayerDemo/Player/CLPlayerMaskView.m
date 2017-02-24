@@ -229,41 +229,60 @@
 #pragma mark - 按钮点击事件
 //返回按钮
 - (void)backButtonAction:(UIButton *)button{
-    
+    if (_delegate && [_delegate respondsToSelector:@selector(cl_backButtonAction:)]) {
+        [_delegate cl_backButtonAction:button];
+    }else{
+        CLlog(@"没有实现代理或者没有设置代理人");
+    }
 }
 //播放按钮
 - (void)playButtonAction:(UIButton *)button{
     button.selected = !button.selected;
+    if (_delegate && [_delegate respondsToSelector:@selector(cl_playButtonAction:)]) {
+        [_delegate cl_playButtonAction:button];
+    }else{
+        CLlog(@"没有实现代理或者没有设置代理人");
+    }
 }
 //全屏按钮
 - (void)fullButtonAction:(UIButton *)button{
     button.selected = !button.selected;
-
+    if (_delegate && [_delegate respondsToSelector:@selector(cl_fullButtonAction:)]) {
+        [_delegate cl_fullButtonAction:button];
+    }else{
+        CLlog(@"没有实现代理或者没有设置代理人");
+    }
 }
-
 
 #pragma mark - 滑杆
 //开始滑动
 - (void)progressSliderTouchBegan:(CLSlider *)sender{
-   
+    if (_delegate && [_delegate respondsToSelector:@selector(cl_progressSliderTouchBegan:)]) {
+        [_delegate cl_progressSliderTouchBegan:sender];
+    }else{
+        CLlog(@"没有实现代理或者没有设置代理人");
+    }
 }
 //滑动中
 - (void)progressSliderValueChanged:(CLSlider *)sender{
-    
+    if (_delegate && [_delegate respondsToSelector:@selector(cl_progressSliderValueChanged:)]) {
+        [_delegate cl_progressSliderValueChanged:sender];
+    }else{
+        CLlog(@"没有实现代理或者没有设置代理人");
+    }
 }
 //滑动结束
 - (void)progressSliderTouchEnded:(CLSlider *)sender{
-    
+    if (_delegate && [_delegate respondsToSelector:@selector(cl_progressSliderTouchEnded:)]) {
+        [_delegate cl_progressSliderTouchEnded:sender];
+    }else{
+        CLlog(@"没有实现代理或者没有设置代理人");
+    }
 }
-
-
 //滑动slider其他地方不响应其他手势
 - (void)panRecognizer:(UIPanGestureRecognizer *)sender{
     
 }
-
-
-
 #pragma mark - 获取资源图片
 - (UIImage *)getPictureWithName:(NSString *)name
 {
