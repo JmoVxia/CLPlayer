@@ -16,11 +16,11 @@
 		5B35DDE21DE07A5700CEB057 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B35DDE11DE07A5700CEB057 /* Model.m */; };
 		5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B35DDE31DE07F9A00CEB057 /* Date.json */; };
 		5B456F871E5FD86000C9599F /* CLPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456F861E5FD86000C9599F /* CLPlayerMaskView.m */; };
+		5B456F8C1E5FDDDF00C9599F /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456F8B1E5FDDDF00C9599F /* UIView+CLSetRect.m */; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
 		5BAEF9C61DF6B822009D1783 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */; };
 		5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */; };
 		5BAEF9C81DF6B822009D1783 /* CLSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9C11DF6B822009D1783 /* CLSlider.m */; };
-		5BAEF9CD1DF6B87D009D1783 /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */; };
 		5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDB581B1DDE968700523A8C /* TableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -41,14 +41,15 @@
 		5B35DDE31DE07F9A00CEB057 /* Date.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Date.json; sourceTree = "<group>"; };
 		5B456F851E5FD86000C9599F /* CLPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerMaskView.h; sourceTree = "<group>"; };
 		5B456F861E5FD86000C9599F /* CLPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerMaskView.m; sourceTree = "<group>"; };
+		5B456F891E5FDB1F00C9599F /* CLplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLplayer.h; sourceTree = "<group>"; };
+		5B456F8A1E5FDDDF00C9599F /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
+		5B456F8B1E5FDDDF00C9599F /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BAEF9BD1DF6B822009D1783 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
 		5BAEF9BE1DF6B822009D1783 /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
 		5BAEF9BF1DF6B822009D1783 /* CLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerView.m; sourceTree = "<group>"; };
 		5BAEF9C01DF6B822009D1783 /* CLSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSlider.h; sourceTree = "<group>"; };
 		5BAEF9C11DF6B822009D1783 /* CLSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSlider.m; sourceTree = "<group>"; };
-		5BAEF9CB1DF6B87D009D1783 /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
-		5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5BDB581A1DDE968700523A8C /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		5BDB581B1DDE968700523A8C /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		BA727F0172B5759313BFAF15 /* Pods-CLPlayerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLPlayerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLPlayerDemo/Pods-CLPlayerDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -142,8 +143,9 @@
 				5B456F861E5FD86000C9599F /* CLPlayerMaskView.m */,
 				5BAEF9C01DF6B822009D1783 /* CLSlider.h */,
 				5BAEF9C11DF6B822009D1783 /* CLSlider.m */,
-				5BAEF9CB1DF6B87D009D1783 /* UIView+CLSetRect.h */,
-				5BAEF9CC1DF6B87D009D1783 /* UIView+CLSetRect.m */,
+				5B456F891E5FDB1F00C9599F /* CLplayer.h */,
+				5B456F8A1E5FDDDF00C9599F /* UIView+CLSetRect.h */,
+				5B456F8B1E5FDDDF00C9599F /* UIView+CLSetRect.m */,
 			);
 			path = Player;
 			sourceTree = "<group>";
@@ -272,13 +274,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BAEF9CD1DF6B87D009D1783 /* UIView+CLSetRect.m in Sources */,
 				5BAEF9C81DF6B822009D1783 /* CLSlider.m in Sources */,
 				5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
 				5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */,
 				5B456F871E5FD86000C9599F /* CLPlayerMaskView.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
+				5B456F8C1E5FDDDF00C9599F /* UIView+CLSetRect.m in Sources */,
 				5BAEF9C71DF6B822009D1783 /* CLPlayerView.m in Sources */,
 				5B35DDE21DE07A5700CEB057 /* Model.m in Sources */,
 			);
