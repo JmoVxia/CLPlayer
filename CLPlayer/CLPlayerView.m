@@ -10,7 +10,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CLplayer.h"
 #import "CLPlayerMaskView.h"
-#import "UIView+CLSetRect.h"
 //方向枚举
 typedef NS_ENUM(NSInteger,Direction){
     Letf = 0,
