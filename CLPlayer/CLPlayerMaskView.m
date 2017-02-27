@@ -7,11 +7,21 @@
 //
 
 #import "CLPlayerMaskView.h"
-#import "CLplayer.h"
 #import "CLSlider.h"
-#import  "Masonry.h"
+#import "Masonry.h"
+//间隙
+#define Padding        10
+//顶部底部工具条高度
+#define ToolBarHeight     35
+//进度条颜色
+#define ProgressColor     [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000]
+//缓冲颜色
+#define ProgressTintColor [UIColor orangeColor]
+//播放完成颜色
+#define PlayFinishColor   [UIColor whiteColor]
 
-@interface CLPlayerMaskView ()<UIGestureRecognizerDelegate>
+
+@interface CLPlayerMaskView ()
 
 
 @end
@@ -232,7 +242,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(cl_backButtonAction:)]) {
         [_delegate cl_backButtonAction:button];
     }else{
-        CLlog(@"没有实现代理或者没有设置代理人");
+        NSLog(@"没有实现代理或者没有设置代理人");
     }
 }
 //播放按钮
@@ -241,7 +251,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(cl_playButtonAction:)]) {
         [_delegate cl_playButtonAction:button];
     }else{
-        CLlog(@"没有实现代理或者没有设置代理人");
+        NSLog(@"没有实现代理或者没有设置代理人");
     }
 }
 //全屏按钮
@@ -250,7 +260,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(cl_fullButtonAction:)]) {
         [_delegate cl_fullButtonAction:button];
     }else{
-        CLlog(@"没有实现代理或者没有设置代理人");
+        NSLog(@"没有实现代理或者没有设置代理人");
     }
 }
 //失败按钮
@@ -260,7 +270,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(cl_failButtonAction:)]) {
         [_delegate cl_failButtonAction:button];
     }else{
-        CLlog(@"没有实现代理或者没有设置代理人");
+        NSLog(@"没有实现代理或者没有设置代理人");
     }
 }
 #pragma mark - 滑杆
@@ -269,7 +279,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(cl_progressSliderTouchBegan:)]) {
         [_delegate cl_progressSliderTouchBegan:slider];
     }else{
-        CLlog(@"没有实现代理或者没有设置代理人");
+        NSLog(@"没有实现代理或者没有设置代理人");
     }
 }
 //滑动中
@@ -277,7 +287,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(cl_progressSliderValueChanged:)]) {
         [_delegate cl_progressSliderValueChanged:slider];
     }else{
-        CLlog(@"没有实现代理或者没有设置代理人");
+        NSLog(@"没有实现代理或者没有设置代理人");
     }
 }
 //滑动结束
@@ -285,7 +295,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(cl_progressSliderTouchEnded:)]) {
         [_delegate cl_progressSliderTouchEnded:slider];
     }else{
-        CLlog(@"没有实现代理或者没有设置代理人");
+        NSLog(@"没有实现代理或者没有设置代理人");
     }
 }
 #pragma mark - 获取资源图片

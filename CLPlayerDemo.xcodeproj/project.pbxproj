@@ -45,7 +45,6 @@
 		5BDB581A1DDE968700523A8C /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		5BDB581B1DDE968700523A8C /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		5BDEA70D1E63F4BB00953D5D /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
-		5BDEA70E1E63F4BB00953D5D /* CLplayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLplayer.h; sourceTree = "<group>"; };
 		5BDEA70F1E63F4BB00953D5D /* CLPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerMaskView.h; sourceTree = "<group>"; };
 		5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerMaskView.m; sourceTree = "<group>"; };
 		5BDEA7111E63F4BB00953D5D /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
@@ -139,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				5BDEA70D1E63F4BB00953D5D /* CLPlayer.bundle */,
-				5BDEA70E1E63F4BB00953D5D /* CLplayer.h */,
 				5BDEA70F1E63F4BB00953D5D /* CLPlayerMaskView.h */,
 				5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */,
 				5BDEA7111E63F4BB00953D5D /* CLPlayerView.h */,

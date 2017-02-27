@@ -8,8 +8,15 @@
 
 #import "CLPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
-#import "CLplayer.h"
 #import "CLPlayerMaskView.h"
+//消失时间
+#define DisappearTime  10
+/**UIScreen width*/
+#define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
+/**UIScreen height*/
+#define  CLscreenHeight  [UIScreen mainScreen].bounds.size.height
+
+
 //方向枚举
 typedef NS_ENUM(NSInteger,Direction){
     Letf = 0,
@@ -203,7 +210,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [self.maskView.activity startAnimating];
     }else if (state == CLPlayerStateFailed){
         [self.maskView.activity stopAnimating];
-        CLlog(@"加载失败");
+        NSLog(@"加载失败");
         self.maskView.failButton.hidden = NO;
     }else{
         [self.maskView.activity stopAnimating];
@@ -596,7 +603,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
-    CLlog(@"播放器被销毁了");
+    NSLog(@"播放器被销毁了");
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
