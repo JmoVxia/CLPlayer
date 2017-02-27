@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   s.source_files = 'CLPlayerDemo/CLPlayerDemo/Player/*.{h,m}'
   s.resource     = 'CLPlayerDemo/CLPlayerDemo/Player/*.{bundle}'
   s.frameworks   = 'Foundation', 'UIKit','MediaPlayer'
+  s.public_header_files = 'CLPlayerDemo/CLPlayerDemo/Player/CLPlayer.h'
   s.dependency 'Masonry'
   s.requires_arc = true
 
