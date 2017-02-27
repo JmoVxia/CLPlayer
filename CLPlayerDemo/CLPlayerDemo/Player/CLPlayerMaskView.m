@@ -254,6 +254,7 @@
 //失败按钮
 - (void)failButtonAction:(UIButton *)button{
     self.failButton.hidden = YES;
+    [self.activity startAnimating];
     if (_delegate && [_delegate respondsToSelector:@selector(cl_failButtonAction:)]) {
         [_delegate cl_failButtonAction:button];
     }else{
