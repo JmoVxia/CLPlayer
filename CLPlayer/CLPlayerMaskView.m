@@ -9,6 +9,8 @@
 #import "CLPlayerMaskView.h"
 #import "CLplayer.h"
 #import "CLSlider.h"
+#import  "Masonry.h"
+
 @interface CLPlayerMaskView ()<UIGestureRecognizerDelegate>
 
 

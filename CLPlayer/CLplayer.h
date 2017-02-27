@@ -23,10 +23,6 @@
 /**打印方法名称*/
 #define CLlogFunc  CLlog(@"%s",__func__);
 
-
-#import  "Masonry.h"
-
-
 /**
  *  UIScreen width.
  */
