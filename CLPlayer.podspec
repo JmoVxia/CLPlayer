@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "CLPlayer"
-  s.version      = "1.0.4"
+  s.version      = "1.0.5"
   s.summary      = "A Player."
   s.description  = <<-DESC
 		This is a player that supports full screen,use it so easy.
@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   s.source_files = 'CLPlayerDemo/CLPlayerDemo/Player/*.{h,m}'
   s.resource     = 'CLPlayerDemo/CLPlayerDemo/Player/*.{bundle}'
   s.frameworks   = 'Foundation', 'UIKit','MediaPlayer'
+  s.dependency 'Masonry'
   s.requires_arc = true
 
 
