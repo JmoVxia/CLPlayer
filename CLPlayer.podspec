@@ -1,23 +1,16 @@
 Pod::Spec.new do |s|
-
-  s.name         = "CLPlayer"
-  s.version      = "1.0.5"
-  s.summary      = "A Player."
-  s.description  = <<-DESC
-		This is a player that supports full screen,use it so easy.
-                      DESC
-  s.homepage     = "https://github.com/JmoVxia/CLPlayer"
-  s.license      = "MIT"
-  s.author       = { "JmoVxia" => "610934716@qq.com" }
-  s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/JmoVxia/CLPlayer.git", :tag => s.version }  
-  s.source_files = 'CLPlayer','CLPlayerDemo/CLPlayerDemo/Player/*.{h,m}'
-  s.resource     = 'CLPlayerDemo/CLPlayerDemo/Player/*.{bundle}'
-  s.frameworks   = 'Foundation', 'UIKit','MediaPlayer'
-  s.public_header_files = 'CLPlayerDemo/CLPlayerDemo/Player/CLPlayer.h'
-  s.source_files = 'CLPlayerDemo/CLPlayerDemo/Player/CLPlayer.h' 
-  s.dependency 'Masonry'
-  s.requires_arc = true
-
-
+    s.name         = 'CLPlayer'
+    s.version      = '1.0.5'
+    s.summary      = '自定义支持全屏的视频播放器'
+    s.homepage     = 'https://github.com/JmoVxia/CLPlayer'
+    s.license      = 'MIT'
+    s.authors      = {'JmoVxia' => '269968846@qq.com'}
+    s.platform     = :ios, '7.0'
+    s.dependency "Masonry"
+    s.source       = {:git => 'https://github.com/JmoVxia/CLPlayer.git', :tag => s.version}
+    s.source_files = 'CLPlayer/**/*.{h,m}'
+    s.resource     = 'CLPlayer/CLPlayer.bundle'
+    s.public_header_files = 'CLPlayer/CLPlayer.h'
+    s.source_files = 'CLPlayer/CLPlayer.h' 
+    s.requires_arc = true
 end
