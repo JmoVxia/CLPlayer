@@ -44,62 +44,62 @@
 #pragma mark - 约束
 - (void)makeConstraints{
     //顶部工具条
-    [self.topToolBar makeConstraints:^(MASConstraintMaker *make) {
+    [self.topToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self);
-        make.height.equalTo(40);
+        make.height.mas_equalTo(40);
     }];
     //底部工具条
-    [self .bottomToolBar makeConstraints:^(MASConstraintMaker *make) {
+    [self .bottomToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);
-        make.height.equalTo(40);
+        make.height.mas_equalTo(40);
     }];
     //转子
-    [self.activity makeConstraints:^(MASConstraintMaker *make) {
+    [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
     }];
     //返回按钮
-    [self.backButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(Padding);
-        make.bottom.equalTo(-Padding);
-        make.width.equalTo(self.backButton.height);
+    [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.mas_equalTo(Padding);
+        make.bottom.mas_equalTo(-Padding);
+        make.width.equalTo(self.backButton.mas_height);
     }];
     //播放按钮
-    [self.playButton makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.equalTo(Padding);
-        make.bottom.equalTo(-Padding);
-        make.width.equalTo(self.backButton.height);
+    [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.mas_equalTo(Padding);
+        make.bottom.mas_equalTo(-Padding);
+        make.width.equalTo(self.backButton.mas_height);
     }];
     //全屏按钮
-    [self.fullButton makeConstraints:^(MASConstraintMaker *make) {
-        make.right.bottom.equalTo(-Padding);
-        make.top.equalTo(Padding);
-        make.width.equalTo(self.backButton.height);
+    [self.fullButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.bottom.mas_equalTo(-Padding);
+        make.top.mas_equalTo(Padding);
+        make.width.equalTo(self.backButton.mas_height);
     }];
     //当前播放时间
-    [self.currentTimeLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.playButton.right).offset(Padding);
-        make.width.equalTo(ToolBarHeight);
+    [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.playButton.mas_right).offset(Padding);
+        make.width.mas_equalTo(ToolBarHeight);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //总时间
-    [self.totalTimeLabel makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.fullButton.left).offset(-Padding);
-        make.width.equalTo(ToolBarHeight);
+    [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.fullButton.mas_left).offset(-Padding);
+        make.width.mas_equalTo(ToolBarHeight);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //缓冲条
-    [self.progress makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.currentTimeLabel.right).offset(Padding);
-        make.right.equalTo(self.totalTimeLabel.left).offset(-Padding);
-        make.height.equalTo(2);
+    [self.progress mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.currentTimeLabel.mas_right).offset(Padding);
+        make.right.equalTo(self.totalTimeLabel.mas_left).offset(-Padding);
+        make.height.mas_equalTo(2);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //滑杆
-    [self.slider makeConstraints:^(MASConstraintMaker *make) {
+    [self.slider mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.progress);
     }];
     //失败按钮
-    [self.failButton makeConstraints:^(MASConstraintMaker *make) {
+    [self.failButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
     }];
 }

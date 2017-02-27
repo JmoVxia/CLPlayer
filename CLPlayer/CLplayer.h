@@ -23,8 +23,7 @@
 /**打印方法名称*/
 #define CLlogFunc  CLlog(@"%s",__func__);
 
-#define MAS_SHORTHAND
-#define MAS_SHORTHAND_GLOBALS
+
 #import  "Masonry.h"
 
 
