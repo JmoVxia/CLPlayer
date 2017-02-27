@@ -98,12 +98,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]){
-        _isFullScreen        = NO;
-        _autoFullScreen      = YES;
-        _repeatPlay          = NO;
-        _isLandscape         = NO;
-        _landscape           = NO;
-        _isDisappear         = NO;
+        _isFullScreen   = NO;
+        _autoFullScreen = YES;
+        _repeatPlay     = NO;
+        _isLandscape    = NO;
+        _landscape      = NO;
+        _isDisappear    = NO;
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
@@ -161,14 +161,13 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     //创建
     _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
     _playerLayer              = [AVPlayerLayer playerLayerWithPlayer:_player];
-    //设置静音模式播放声音
-    AVAudioSession * session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [session setActive:YES error:nil];
     //全屏拉伸
     _playerLayer.videoGravity = AVLayerVideoGravityResize;
-    if (_videoFillMode)
-    {
+    //设置静音模式播放声音
+    AVAudioSession * session  = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [session setActive:YES error:nil];
+    if (_videoFillMode){
         _playerLayer.videoGravity = _videoFillMode;
     }
     //放到最下面，防止遮挡
@@ -203,6 +202,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     _state = state;
     if (state == CLPlayerStateBuffering) {
         [self.maskView.activity startAnimating];
+    }else if (state == CLPlayerStateFailed){
+        [self.maskView.activity stopAnimating];
+        CLlog(@"加载失败");
+        self.maskView.failButton.hidden = NO;
     }else{
         [self.maskView.activity stopAnimating];
         [self playVideo];
@@ -230,7 +233,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         }
         else if (self.player.currentItem.status == AVPlayerItemStatusFailed) {
             self.state = CLPlayerStateFailed;
-            CLlog(@"加载失败");
         }
     } else if ([keyPath isEqualToString:@"loadedTimeRanges"]) {
         
@@ -286,8 +288,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         
     });
 }
-
-
 //计算缓冲进度
 - (NSTimeInterval)availableDuration{
     NSArray *loadedTimeRanges = [[_player currentItem] loadedTimeRanges];
@@ -342,7 +342,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         self.maskView.totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", durMin, durSec];
     }
 }
-
 #pragma mark - 播放暂停按钮方法
 -(void)cl_playButtonAction:(UIButton *)button{
     if (button.selected == NO){
@@ -352,7 +351,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [self playVideo];
     }
 }
-
 #pragma mark - 全屏按钮响应事件
 -(void)cl_fullButtonAction:(UIButton *)button{
     _isLandscape = NO;
@@ -364,7 +362,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     _isLandscape = _landscape;
 }
-
+#pragma mark - 播放失败按钮点击事件
+-(void)cl_failButtonAction:(UIButton *)button{
+    [self setUrl:_url];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
+}
 #pragma mark - 点击响应
 - (void)disappearAction:(UIButton *)button{
     //取消定时消失
@@ -575,7 +578,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         return;
     }
 }
-
 #pragma mark - dealloc
 - (void)dealloc{
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
@@ -599,7 +601,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.playerLayer.frame = self.bounds;
+    self.playerLayer.frame        = self.bounds;
     self.maskView.frame = self.bounds;
 }
 

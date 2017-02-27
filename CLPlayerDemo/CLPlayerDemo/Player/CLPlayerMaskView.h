@@ -21,6 +21,8 @@
 - (void)cl_progressSliderValueChanged:(CLSlider *)slider;
 /**滑动结束*/
 - (void)cl_progressSliderTouchEnded:(CLSlider *)slider;
+/**失败按钮代理*/
+- (void)cl_failButtonAction:(UIButton *)button;
 @end
 
 
@@ -45,6 +47,8 @@
 @property (nonatomic,strong) UIProgressView *progress;
 /**播放进度条*/
 @property (nonatomic,strong) CLSlider *slider;
+/**加载失败按钮*/
+@property (nonatomic,strong) UIButton *failButton;
 /**代理人*/
 @property (nonatomic,weak) id<CLPlayerMaskViewDelegate> delegate;
 

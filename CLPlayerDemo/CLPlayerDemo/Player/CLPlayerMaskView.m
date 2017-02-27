@@ -33,6 +33,7 @@
     [self.bottomToolBar addSubview:self.totalTimeLabel];
     [self.bottomToolBar addSubview:self.progress];
     [self.bottomToolBar addSubview:self.slider];
+    [self addSubview:self.failButton];
     [self makeConstraints];
     
     
@@ -97,6 +98,10 @@
     [self.slider makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.progress);
     }];
+    //失败按钮
+    [self.failButton makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self);
+    }];
 }
 
 
@@ -105,7 +110,7 @@
 //顶部工具条
 - (UIView *) topToolBar{
     if (_topToolBar == nil){
-        _topToolBar = [[UIView alloc]init];
+        _topToolBar = [[UIView alloc] init];
         _topToolBar.userInteractionEnabled = YES;
     }
     return _topToolBar;
@@ -113,7 +118,7 @@
 //底部工具条
 - (UIView *) bottomToolBar{
     if (_bottomToolBar == nil){
-        _bottomToolBar = [[UIView alloc]init];
+        _bottomToolBar = [[UIView alloc] init];
         _bottomToolBar.userInteractionEnabled = YES;
     }
     return _bottomToolBar;
@@ -121,7 +126,7 @@
 //转子
 - (UIActivityIndicatorView *) activity{
     if (_activity == nil){
-        _activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        _activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         [_activity startAnimating];
     }
     return _activity;
@@ -139,7 +144,7 @@
 //播放按钮
 - (UIButton *) playButton{
     if (_playButton == nil){
-        _playButton = [[UIButton alloc]init];
+        _playButton = [[UIButton alloc] init];
         [_playButton setImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
         [_playButton setImage:[self getPictureWithName:@"CLPauseBtn"] forState:UIControlStateSelected];
         [_playButton addTarget:self action:@selector(playButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -149,7 +154,7 @@
 //全屏按钮
 - (UIButton *) fullButton{
     if (_fullButton == nil){
-        _fullButton = [[UIButton alloc]init];
+        _fullButton = [[UIButton alloc] init];
         [_fullButton setImage:[self getPictureWithName:@"CLMaxBtn"] forState:UIControlStateNormal];
         [_fullButton setImage:[self getPictureWithName:@"CLMinBtn"] forState:UIControlStateSelected];
         [_fullButton addTarget:self action:@selector(fullButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -159,7 +164,7 @@
 //当前播放时间
 - (UILabel *) currentTimeLabel{
     if (_currentTimeLabel == nil){
-        _currentTimeLabel = [[UILabel alloc]init];
+        _currentTimeLabel = [[UILabel alloc] init];
         _currentTimeLabel.textColor = [UIColor whiteColor];
         _currentTimeLabel.font      = [UIFont systemFontOfSize:12];
         _currentTimeLabel.text      = @"00:00";
@@ -170,7 +175,7 @@
 //总时间
 - (UILabel *) totalTimeLabel{
     if (_totalTimeLabel == nil){
-        _totalTimeLabel = [[UILabel alloc]init];
+        _totalTimeLabel = [[UILabel alloc] init];
         _totalTimeLabel.textColor = [UIColor whiteColor];
         _totalTimeLabel.font      = [UIFont systemFontOfSize:12];
         _totalTimeLabel.text      = @"00:00";
@@ -181,7 +186,7 @@
 //缓冲条
 - (UIProgressView *) progress{
     if (_progress == nil){
-        _progress = [[UIProgressView alloc]init];
+        _progress = [[UIProgressView alloc] init];
         _progress.trackTintColor = ProgressColor;
         _progress.progressTintColor = ProgressTintColor;
     }
@@ -190,7 +195,7 @@
 //滑动条
 - (CLSlider *) slider{
     if (_slider == nil){
-        _slider = [[CLSlider alloc]init];
+        _slider = [[CLSlider alloc] init];
         // slider开始滑动事件
         [_slider addTarget:self action:@selector(progressSliderTouchBegan:) forControlEvents:UIControlEventTouchDown];
         // slider滑动中事件
@@ -204,6 +209,21 @@
     }
     return _slider;
 }
+//加载失败按钮
+- (UIButton *) failButton
+{
+    if (_failButton == nil) {
+        _failButton = [[UIButton alloc] init];
+        _failButton.hidden = YES;
+        [_failButton setTitle:@"加载失败,点击重试" forState:UIControlStateNormal];
+        [_failButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _failButton.titleLabel.font = [UIFont systemFontOfSize:14.0];
+        _failButton.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
+        [_failButton addTarget:self action:@selector(failButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _failButton;
+}
+
 #pragma mark - 按钮点击事件
 //返回按钮
 - (void)backButtonAction:(UIButton *)button{
@@ -231,7 +251,15 @@
         CLlog(@"没有实现代理或者没有设置代理人");
     }
 }
-
+//失败按钮
+- (void)failButtonAction:(UIButton *)button{
+    self.failButton.hidden = YES;
+    if (_delegate && [_delegate respondsToSelector:@selector(cl_failButtonAction:)]) {
+        [_delegate cl_failButtonAction:button];
+    }else{
+        CLlog(@"没有实现代理或者没有设置代理人");
+    }
+}
 #pragma mark - 滑杆
 //开始滑动
 - (void)progressSliderTouchBegan:(CLSlider *)slider{
