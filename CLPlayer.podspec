@@ -11,10 +11,11 @@ Pod::Spec.new do |s|
   s.author       = { "JmoVxia" => "610934716@qq.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/JmoVxia/CLPlayer.git", :tag => s.version }  
-  s.source_files = 'CLPlayerDemo/CLPlayerDemo/Player/*.{h,m}'
+  s.source_files = 'CLPlayer','CLPlayerDemo/CLPlayerDemo/Player/*.{h,m}'
   s.resource     = 'CLPlayerDemo/CLPlayerDemo/Player/*.{bundle}'
   s.frameworks   = 'Foundation', 'UIKit','MediaPlayer'
   s.public_header_files = 'CLPlayerDemo/CLPlayerDemo/Player/CLPlayer.h'
+  s.source_files = 'CLPlayerDemo/CLPlayerDemo/Player/CLPlayer.h' 
   s.dependency 'Masonry'
   s.requires_arc = true
 
