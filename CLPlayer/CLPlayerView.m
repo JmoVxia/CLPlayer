@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CLPlayerMaskView.h"
 //消失时间
-#define DisappearTime  10
+#define DisappearTime  100
 /**UIScreen width*/
 #define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
 /**UIScreen height*/
@@ -33,9 +33,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 };
 
 
-
-
-
 @interface CLPlayerView ()<CLPlayerMaskViewDelegate>
 
 /**控件原始Farme*/
@@ -47,8 +44,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 /**视频拉伸模式*/
 @property (nonatomic,copy) NSString        *videoFillMode;
 
-/** 是否被用户暂停 */
-@property (nonatomic,assign) BOOL   isPauseByUser;
+
 /**全屏标记*/
 @property (nonatomic,assign) BOOL   isFullScreen;
 /**横屏标记*/
@@ -69,6 +65,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,strong) NSTimer          *timer;
 /**slider定时器*/
 @property (nonatomic,strong) NSTimer          *sliderTimer;
+
 
 /**返回按钮回调*/
 @property (nonatomic,copy) void (^BackBlock) (UIButton *backButton);
@@ -230,7 +227,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     //设置是否隐藏
     statusBar.hidden  = hidden;
 }
-#pragma mark - 缓冲条监听
+#pragma mark - 监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"status"]) {
         
@@ -278,12 +275,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     // 需要先暂停一小会之后再播放，否则网络状况不好的时候时间在走，声音播放不出来
     [self pausePlay];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        // 如果此时用户已经暂停了，则不再需要开启播放了
-        if (self.isPauseByUser) {
-            isBuffering = NO;
-            return;
-        }
         
         [self playVideo];
         // 如果执行了play还是没有播放则说明还没有缓存好，则再次缓存一段时间
@@ -435,13 +426,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 暂停播放
 - (void)pausePlay{
     self.maskView.playButton.selected = NO;
-    _isPauseByUser = YES;
     [_player pause];
 }
 #pragma mark - 播放
 - (void)playVideo{
     self.maskView.playButton.selected = YES;
-    _isPauseByUser = NO;
     [_player play];
 }
 #pragma mark - 重新开始播放
@@ -584,6 +573,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         return;
     }
 }
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    self.playerLayer.frame        = self.bounds;
+    self.maskView.frame = self.bounds;
+}
 #pragma mark - dealloc
 - (void)dealloc{
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
@@ -605,12 +599,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                   object:nil];
     NSLog(@"播放器被销毁了");
 }
--(void)layoutSubviews{
-    [super layoutSubviews];
-    self.playerLayer.frame        = self.bounds;
-    self.maskView.frame = self.bounds;
-}
-
 
 
 

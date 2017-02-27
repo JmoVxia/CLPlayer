@@ -12,7 +12,7 @@
 //间隙
 #define Padding        10
 //顶部底部工具条高度
-#define ToolBarHeight     35
+#define ToolBarHeight     40
 //进度条颜色
 #define ProgressColor     [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000]
 //缓冲颜色
@@ -58,12 +58,12 @@
     //顶部工具条
     [self.topToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.top.equalTo(self);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(ToolBarHeight);
     }];
     //底部工具条
     [self .bottomToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(ToolBarHeight);
     }];
     //转子
     [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,13 +90,13 @@
     //当前播放时间
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.playButton.mas_right).offset(Padding);
-        make.width.mas_equalTo(ToolBarHeight);
+        make.width.mas_equalTo(35);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //总时间
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.fullButton.mas_left).offset(-Padding);
-        make.width.mas_equalTo(ToolBarHeight);
+        make.width.mas_equalTo(35);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //缓冲条
