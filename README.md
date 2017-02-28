@@ -15,6 +15,9 @@
 @property (nonatomic,assign) BOOL repeatPlay;
 /**是否支持横屏，默认No*/
 @property (nonatomic,assign) BOOL isLandscape;
+/**拉伸方式，默认全屏填充*/
+@property (nonatomic,assign) VideoFillMode fillMode;
+
 /**播放*/
 - (void)playVideo;
 /**暂停*/
@@ -38,7 +41,7 @@
 
 + 使用方法
 
-      直接使用cocoapods导入，`pod 'CLPlayer', '~> 1.0.0'`
+      直接使用cocoapods导入，`pod 'CLPlayer'`
 
 + TableView使用方法
 
