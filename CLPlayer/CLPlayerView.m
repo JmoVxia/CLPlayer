@@ -550,28 +550,18 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     return [UIImage imageWithContentsOfFile:path];
 }
 #pragma mark - 根据Cell位置判断是否销毁
-- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell topOffset:(CGFloat)topOffset bottomOffset:(CGFloat)bottomOffset beyond:(BeyondBlock) beyond;{
-    //取出cell位置
-    CGRect rect        = cell.frame;
-    //cell顶部
-    CGFloat cellTop    = rect.origin.y;
-    //cell底部
-    CGFloat cellBottom = rect.origin.y + rect.size.height;
-    
-    
-    if (tableView.contentOffset.y + topOffset > cellBottom){
-        if (beyond){
-            beyond();
-        }
-        return;
+- (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell{
+
+    NSArray *visableCells = tableView.visibleCells;
+    if ([visableCells containsObject:cell]) {
+        //在屏幕上
+    }else{
+        //不在屏幕上
+        [self destroyPlayer];
     }
     
-    if (cellTop > tableView.contentOffset.y + tableView.frame.size.height - bottomOffset){
-        if (beyond){
-            beyond();
-        }
-        return;
-    }
+    
+    
 }
 -(void)layoutSubviews{
     [super layoutSubviews];

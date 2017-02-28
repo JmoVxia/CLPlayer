@@ -150,12 +150,8 @@
         [obj cellOffset];
     }];
 
-    
-    [_playerView calculateWith:_tableView cell:_cell topOffset:64 bottomOffset:0 beyond:^{
-        //销毁播放器
-        [_playerView destroyPlayer];
-        _playerView = nil;
-    }];
+    //计算偏移来销毁播放器
+    [_playerView calculateScrollOffset:self.tableView cell:_cell];
 }
 
 

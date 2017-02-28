@@ -45,15 +45,12 @@ typedef void(^BeyondBlock)();
 - (void)destroyPlayer;
 
 /**
- 根据播放器所在位置计算是否滑出tableView，根据上下偏移量可以精准的计算你想要销毁播放器的位置
+ 根据播放器所在位置计算偏移，添加在TableView上使用
  
  @param tableView tableView
  @param cell 播放器所在cell
- @param topOffset tableview 相对于屏幕顶部的偏移（根据你自己需求设置）
- @param bottomOffset  tableView 相对于屏幕底部的偏移
- @param beyond 超出后的回调
  */
-- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell topOffset:(CGFloat)topOffset bottomOffset:(CGFloat)bottomOffset beyond:(BeyondBlock) beyond;
+- (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell;
 
 
 
