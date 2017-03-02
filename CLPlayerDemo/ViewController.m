@@ -100,8 +100,7 @@
     [_playerView destroyPlayer];
     _playerView = nil;
     
-    CLPlayerView *playerView = [[CLPlayerView alloc] init];
-    playerView.frame = CGRectMake(0, 0, cell.CLwidth, cell.CLheight);
+    CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.CLwidth, cell.CLheight)];
    
     _playerView = playerView;
     [cell.contentView addSubview:_playerView];
@@ -117,10 +116,12 @@
 //    _playerView.fillMode = ResizeAspectFill;
     
     //视频地址
-    _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
+        //播放
+        [_playerView playVideo];
 
-    //播放
-    [_playerView playVideo];
+    });
     
     //返回按钮点击事件回调
     [_playerView backButton:^(UIButton *button) {

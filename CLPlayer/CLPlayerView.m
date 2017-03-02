@@ -175,8 +175,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     //放到最下面，防止遮挡
     [self.layer insertSublayer:_playerLayer atIndex:0];
-
-
+    [self layoutSubviews];
 }
 -(void)setPlayerItem:(AVPlayerItem *)playerItem{
     
