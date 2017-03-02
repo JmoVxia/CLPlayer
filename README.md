@@ -28,13 +28,11 @@
 /**销毁播放器*/
 - (void)destroyPlayer;
 /**
- 根据播放器所在位置计算是否滑出屏幕，
-
+ 根据播放器所在位置计算是否滑出屏幕
  @param tableView Cell所在tableView
  @param cell 播放器所在Cell
- @param beyond 滑出后的回调
  */
-- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell beyond:(BeyondBlock) beyond;
+- (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell;
 
 ```
 
@@ -88,17 +86,14 @@
 }
 
 ```
-    在`tableView`滑动代理中，需要使用`- (void)calculateWith:(UITableView *)tableView cell:(UITableViewCell *)cell beyond:(BeyondBlock) beyond`方法，将`tableView`和播放器所在`cell`传递给播放器，播放器会在内部计算播放器所在位置，在超出屏幕的时候，会调用超出的`block`，在`block`回调中对播放器销毁。
+    在`tableView`滑动代理中，需要使用`- (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell`方法，将`tableView`和播放器所在`cell`传递给播放器，播放器会在内部计算播放器所在位置，在超出屏幕的时候，会对播放器销毁。
 
 ```
 #pragma mark - 滑动代理
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [_playerView calculateWith:self.tableView cell:_cell beyond:^{
-        //销毁播放器
-        [_playerView destroyPlayer];
-        _playerView = nil;
-    }];
+    //计算偏移来销毁播放器
+    [_playerView calculateScrollOffset:self.tableView cell:_cell];
 }
 ```
 #播放器效果图
@@ -112,4 +107,4 @@
 
 #详细请看简书
 
-http://www.jianshu.com/p/83191c7bc840
+http://www.jianshu.com/p/11e05d684c05
