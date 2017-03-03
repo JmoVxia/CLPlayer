@@ -116,10 +116,10 @@
 //    _playerView.fillMode = ResizeAspectFill;
     
     //视频地址
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
         //播放
-        [_playerView playVideo];
+//        [_playerView playVideo];
 
     });
     

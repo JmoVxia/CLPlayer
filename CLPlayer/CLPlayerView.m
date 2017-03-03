@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "CLPlayerMaskView.h"
 //消失时间
-#define DisappearTime  100
+#define DisappearTime  10
 /**UIScreen width*/
 #define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
 /**UIScreen height*/
@@ -51,7 +51,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,assign) BOOL   landscape;
 /**工具条隐藏标记*/
 @property (nonatomic,assign) BOOL   isDisappear;
-
+/**用户点击播放标记*/
+@property (nonatomic,assign) BOOL   isUserPlay;
 
 /**播放器*/
 @property (nonatomic,strong) AVPlayer         *player;
@@ -107,6 +108,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _isLandscape    = NO;
         _landscape      = NO;
         _isDisappear    = NO;
+        _isUserPlay     = NO;
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
@@ -210,7 +212,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         self.maskView.failButton.hidden = NO;
     }else{
         [self.maskView.activity stopAnimating];
-        [self playVideo];
+        if (_isUserPlay) {
+            [self playVideo];
+        }
     }
 }
 #pragma mark - 创建播放器UI
@@ -274,6 +278,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     // 需要先暂停一小会之后再播放，否则网络状况不好的时候时间在走，声音播放不出来
     [self pausePlay];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        
+        if (!_isUserPlay) {
+            isBuffering = NO;
+            return;
+        }
         
         [self playVideo];
         // 如果执行了play还是没有播放则说明还没有缓存好，则再次缓存一段时间
@@ -424,11 +434,13 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 暂停播放
 - (void)pausePlay{
+    _isUserPlay = NO;
     self.maskView.playButton.selected = NO;
     [_player pause];
 }
 #pragma mark - 播放
 - (void)playVideo{
+    _isUserPlay = YES;
     self.maskView.playButton.selected = YES;
     [_player play];
 }
