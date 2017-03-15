@@ -177,7 +177,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     //放到最下面，防止遮挡
     [self.layer insertSublayer:_playerLayer atIndex:0];
-    [self layoutSubviews];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 -(void)setPlayerItem:(AVPlayerItem *)playerItem{
     
@@ -544,7 +545,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 - (void)appDidEnterPlayground:(NSNotification *)note{
     //继续播放
-    [self playVideo];
+    if (_isUserPlay) {
+        [self playVideo];
+    }
 }
 #pragma mark - 获取资源图片
 - (UIImage *)getPictureWithName:(NSString *)name{
