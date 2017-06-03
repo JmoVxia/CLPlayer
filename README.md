@@ -1,8 +1,8 @@
 # 使用AVPlayer自定义支持全屏的播放器
 
-#功能
+# 功能
     本视频播放器主要自定义了带缓冲显示的进度条，可以拖动调节视频播放进度的播放条，具有当前播放时间和总时间的Label，全屏播放功能，定时消失的工具条，视频卡顿监听，视频加载失败处理。支持旋转屏幕自动全屏，可以添加到UItableView上。使用Masonry布局，工具条单独封装出来，方便大家修改。
-#接口与用法
+# 接口与用法
 + 接口
 
 ```
@@ -96,7 +96,7 @@
     [_playerView calculateScrollOffset:self.tableView cell:_cell];
 }
 ```
-#播放器效果图
+# 播放器效果图
 
 ![](https://github.com/JmoVxia/CLPlayer/blob/master/%E6%95%88%E6%9E%9C%E5%9B%BE1.gif)
 ![](https://github.com/JmoVxia/CLPlayer/blob/master/%E6%95%88%E6%9E%9C%E5%9B%BE2.gif)
@@ -105,6 +105,6 @@
 
 
 
-#详细请看简书
+# 详细请看简书
 
 http://www.jianshu.com/p/11e05d684c05
