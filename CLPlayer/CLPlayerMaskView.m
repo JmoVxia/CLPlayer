@@ -47,8 +47,7 @@
     [self.bottomToolBar addSubview:self.slider];
     [self addSubview:self.failButton];
     [self makeConstraints];
-    
-    
+
     self.topToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
     self.bottomToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
     
@@ -178,8 +177,8 @@
     if (_currentTimeLabel == nil){
         _currentTimeLabel = [[UILabel alloc] init];
         _currentTimeLabel.textColor = [UIColor whiteColor];
-        _currentTimeLabel.font      = [UIFont systemFontOfSize:12];
-        _currentTimeLabel.text      = @"00:00";
+        _currentTimeLabel.font = [UIFont systemFontOfSize:12];
+        _currentTimeLabel.text = @"00:00";
         _currentTimeLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _currentTimeLabel;
@@ -189,8 +188,8 @@
     if (_totalTimeLabel == nil){
         _totalTimeLabel = [[UILabel alloc] init];
         _totalTimeLabel.textColor = [UIColor whiteColor];
-        _totalTimeLabel.font      = [UIFont systemFontOfSize:12];
-        _totalTimeLabel.text      = @"00:00";
+        _totalTimeLabel.font = [UIFont systemFontOfSize:12];
+        _totalTimeLabel.text = @"00:00";
         _totalTimeLabel.textAlignment = NSTextAlignmentCenter;
     }
     return _totalTimeLabel;
