@@ -12,7 +12,7 @@
 //间隙
 #define Padding        10
 //顶部底部工具条高度
-#define ToolBarHeight     40
+#define ToolBarHeight     45
 //进度条颜色
 #define ProgressColor     [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000]
 //缓冲颜色

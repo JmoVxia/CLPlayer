@@ -104,7 +104,6 @@
    
     _playerView = playerView;
     [cell.contentView addSubview:_playerView];
-   
     
     //根据旋转自动支持全屏，默认支持
 //        _playerView.autoFullScreen = NO;
@@ -116,13 +115,10 @@
 //    _playerView.fillMode = ResizeAspectFill;
     
     //视频地址
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
-        //播放
-//        [_playerView playVideo];
+    _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
+    //播放
+    [_playerView playVideo];
 
-    });
-    
     //返回按钮点击事件回调
     [_playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");
@@ -130,7 +126,6 @@
     
     //播放完成回调
     [_playerView endPlay:^{
-        
         //销毁播放器
         [_playerView destroyPlayer];
         _playerView = nil;
