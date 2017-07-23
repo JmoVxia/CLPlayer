@@ -85,7 +85,6 @@
     //Cell开始出现的时候修正偏移量，让图片可以全部显示
     [myCell cellOffset];
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 300;
@@ -113,7 +112,12 @@
 //        _playerView.isLandscape    = YES;
     //设置等比例全屏拉伸，多余部分会被剪切
 //    _playerView.fillMode = ResizeAspectFill;
-    
+    //设置进度条背景颜色
+//    _playerView.progressBackgroundColor = [UIColor purpleColor];
+//    //设置进度条缓冲颜色
+//    _playerView.progressBufferColor = [UIColor redColor];
+//    //设置进度条播放完成颜色
+//    _playerView.progressPlayFinishColor = [UIColor greenColor];
     //视频地址
     _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
     //播放
@@ -131,21 +135,16 @@
         _playerView = nil;
         NSLog(@"播放完成");
     }];
- 
 }
-
 #pragma mark - 滑动代理
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
     // visibleCells 获取界面上能显示出来了cell
     NSArray<TableViewCell *> *array = [self.tableView visibleCells];
-    
     //enumerateObjectsUsingBlock 类似于for，但是比for更快
     [array enumerateObjectsUsingBlock:^(TableViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj cellOffset];
     }];
-
     //计算偏移来销毁播放器
     [_playerView calculateScrollOffset:self.tableView cell:_cell];
 }

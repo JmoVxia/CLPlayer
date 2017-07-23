@@ -13,13 +13,6 @@
 #define Padding        10
 //顶部底部工具条高度
 #define ToolBarHeight     45
-//进度条颜色
-#define ProgressColor     [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000]
-//缓冲颜色
-#define ProgressTintColor [UIColor orangeColor]
-//播放完成颜色
-#define PlayFinishColor   [UIColor whiteColor]
-
 
 @interface CLPlayerMaskView ()
 
@@ -114,9 +107,19 @@
         make.center.equalTo(self);
     }];
 }
-
-
-
+#pragma mark -- 设置颜色
+-(void)setProgressBackgroundColor:(UIColor *)progressBackgroundColor{
+    _progressBackgroundColor = progressBackgroundColor;
+    _progress.trackTintColor = progressBackgroundColor;
+}
+-(void)setProgressBufferColor:(UIColor *)progressBufferColor{
+    _progressBufferColor        = progressBufferColor;
+    _progress.progressTintColor = progressBufferColor;
+}
+-(void)setProgressPlayFinishColor:(UIColor *)progressPlayFinishColor{
+    _progressPlayFinishColor      = progressPlayFinishColor;
+    _slider.minimumTrackTintColor = _progressPlayFinishColor;
+}
 #pragma mark - 懒加载
 //顶部工具条
 - (UIView *) topToolBar{
@@ -198,8 +201,6 @@
 - (UIProgressView *) progress{
     if (_progress == nil){
         _progress = [[UIProgressView alloc] init];
-        _progress.trackTintColor = ProgressColor;
-        _progress.progressTintColor = ProgressTintColor;
     }
     return _progress;
 }
@@ -213,8 +214,6 @@
         [_slider addTarget:self action:@selector(progressSliderValueChanged:) forControlEvents:UIControlEventValueChanged];
         // slider结束滑动事件
         [_slider addTarget:self action:@selector(progressSliderTouchEnded:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchCancel | UIControlEventTouchUpOutside];
-        //左边颜色
-        _slider.minimumTrackTintColor = PlayFinishColor;
         //右边颜色
         _slider.maximumTrackTintColor = [UIColor clearColor];
     }

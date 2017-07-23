@@ -30,9 +30,12 @@ typedef void(^BeyondBlock)();
 @property (nonatomic,assign) BOOL isLandscape;
 /**拉伸方式，默认全屏填充*/
 @property (nonatomic,assign) VideoFillMode fillMode;
-
-
-
+/**进度条背景颜色*/
+@property (nonatomic,strong) UIColor *progressBackgroundColor;
+/**缓冲条缓冲进度颜色*/
+@property (nonatomic,strong) UIColor *progressBufferColor;
+/**进度条播放完成颜色*/
+@property (nonatomic,strong) UIColor *progressPlayFinishColor;
 /**播放*/
 - (void)playVideo;
 /**暂停*/

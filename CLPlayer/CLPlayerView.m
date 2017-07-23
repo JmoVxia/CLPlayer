@@ -74,7 +74,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 //遮罩
 - (CLPlayerMaskView *) maskView{
     if (_maskView == nil){
-        _maskView          = [[CLPlayerMaskView alloc] init];
+        _maskView                         = [[CLPlayerMaskView alloc] init];
+        _maskView.progressBackgroundColor = _progressBackgroundColor;
+        _maskView.progressBufferColor     = _progressBufferColor;
+        _maskView.progressPlayFinishColor = _progressPlayFinishColor;
         _maskView.delegate = self;
         [_maskView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
         //计时器，循环执行
@@ -102,6 +105,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _landscape      = NO;
         _isDisappear    = NO;
         _isUserPlay     = NO;
+        
+        _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
+        _progressPlayFinishColor = [UIColor whiteColor];
+        _progressBufferColor     = [UIColor lightGrayColor];
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
@@ -116,9 +123,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(appDidEnterPlayground:)
                                                      name:UIApplicationDidBecomeActiveNotification object:nil];
-        
         [self creatUI];
-
     }
     return self;
 }
@@ -138,6 +143,21 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
             _videoFillMode = AVLayerVideoGravityResize;
             break;
     }
+}
+#pragma mark - 进度条背景颜色
+-(void)setProgressBackgroundColor:(UIColor *)progressBackgroundColor{
+    _progressBackgroundColor = progressBackgroundColor;
+    self.maskView.progressBackgroundColor = progressBackgroundColor;
+}
+#pragma mark -- 进度条缓冲颜色
+-(void)setProgressBufferColor:(UIColor *)progressBufferColor{
+    _progressBufferColor = progressBufferColor;
+    self.maskView.progressBufferColor = progressBufferColor;
+}
+#pragma mark -- 进度条播放完成颜色
+-(void)setProgressPlayFinishColor:(UIColor *)progressPlayFinishColor{
+    _progressPlayFinishColor = progressPlayFinishColor;
+    self.maskView.progressPlayFinishColor = progressPlayFinishColor;
 }
 #pragma mark - 是否自动支持全屏
 - (void)setAutoFullScreen:(BOOL)autoFullScreen{
@@ -539,6 +559,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 根据Cell位置判断是否销毁
 - (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell{
 
+    if (!cell) {
+        return;
+    }
     NSArray *visableCells = tableView.visibleCells;
     if ([visableCells containsObject:cell]) {
         //在屏幕上
@@ -546,9 +569,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         //不在屏幕上
         [self destroyPlayer];
     }
-    
-    
-    
 }
 -(void)layoutSubviews{
     [super layoutSubviews];
