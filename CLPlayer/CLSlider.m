@@ -42,8 +42,8 @@
 }
 //修改滑块位置
 - (CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)rect value:(float)value {
-    rect.origin.x = rect.origin.x - 6 ;
-    rect.size.width = rect.size.width + 12;
+    rect.origin.x = rect.origin.x - 8 ;
+    rect.size.width = rect.size.width + 16;
     CGRect result = [super thumbRectForBounds:bounds trackRect:rect value:value];
     //记录下最终的frame
     _lastBounds = result;

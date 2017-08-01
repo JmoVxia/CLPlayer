@@ -10,9 +10,9 @@
 #import "CLSlider.h"
 #import "Masonry.h"
 //间隙
-#define Padding        10
+#define Padding        8
 //顶部底部工具条高度
-#define ToolBarHeight     45
+#define ToolBarHeight     48
 
 @interface CLPlayerMaskView ()
 
@@ -82,7 +82,7 @@
     //当前播放时间
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.playButton.mas_right).offset(Padding);
-        make.width.mas_equalTo(35);
+//        make.width.mas_equalTo(35);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //缓冲条
@@ -99,7 +99,7 @@
     //总时间
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.fullButton.mas_left).offset(-Padding);
-        make.width.mas_equalTo(35);
+//        make.width.mas_equalTo(35);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //全屏按钮
@@ -182,7 +182,7 @@
     if (_currentTimeLabel == nil){
         _currentTimeLabel = [[UILabel alloc] init];
         _currentTimeLabel.textColor = [UIColor whiteColor];
-        _currentTimeLabel.font = [UIFont systemFontOfSize:12];
+        _currentTimeLabel.font = [UIFont systemFontOfSize:14];
         _currentTimeLabel.text = @"00:00";
         _currentTimeLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -193,7 +193,7 @@
     if (_totalTimeLabel == nil){
         _totalTimeLabel = [[UILabel alloc] init];
         _totalTimeLabel.textColor = [UIColor whiteColor];
-        _totalTimeLabel.font = [UIFont systemFontOfSize:12];
+        _totalTimeLabel.font = [UIFont systemFontOfSize:14];
         _totalTimeLabel.text = @"00:00";
         _totalTimeLabel.textAlignment = NSTextAlignmentCenter;
     }
