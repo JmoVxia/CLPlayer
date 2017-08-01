@@ -126,10 +126,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     _progressPlayFinishColor              = progressPlayFinishColor;
     self.maskView.progressPlayFinishColor = progressPlayFinishColor;
 }
-#pragma mark - 是否自动支持全屏
-- (void)setAutoFullScreen:(BOOL)autoFullScreen{
-    _autoFullScreen = autoFullScreen;
-}
 #pragma mark - 是否支持横屏
 -(void)setIsLandscape:(BOOL)isLandscape{
     _isLandscape = isLandscape;
@@ -163,7 +159,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]){
         _isFullScreen            = NO;
-        _autoFullScreen          = YES;
         _repeatPlay              = NO;
         _isDisappear             = NO;
         _isUserPlay              = NO;
@@ -511,9 +506,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification{
-    if (_autoFullScreen == NO){
-        return;
-    }
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     if (orientation == UIDeviceOrientationLandscapeLeft ||orientation == UIDeviceOrientationLandscapeRight){
         if (_isFullScreen == NO){

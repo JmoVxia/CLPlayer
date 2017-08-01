@@ -22,8 +22,6 @@ typedef void(^BeyondBlock)();
 
 /**视频url*/
 @property (nonatomic,strong) NSURL *url;
-/**旋转自动全屏，默认Yes*/
-@property (nonatomic,assign) BOOL autoFullScreen;
 /**重复播放，默认NO*/
 @property (nonatomic,assign) BOOL repeatPlay;
 /**播放器所在控制器是否支持横屏，默认NO*/

@@ -85,12 +85,10 @@
     _cell = cell;
     //销毁播放器
     [_playerView destroyPlayer];
-    _playerView = nil;
+    
     CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.CLwidth, cell.CLheight)];
     _playerView = playerView;
     [cell.contentView addSubview:_playerView];
-////  根据旋转自动支持全屏，默认支持
-//    _playerView.autoFullScreen = NO;
 ////  重复播放，默认不播放
 //    _playerView.repeatPlay     = YES;
 ////  如果播放器所在页面支持横屏，需要设置为Yes，不支持不需要设置(默认不支持)
