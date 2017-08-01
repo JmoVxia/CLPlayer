@@ -28,14 +28,10 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
-
     [self initDate];
-    
     [self initUI];
-    [self setStatusBarHidden:YES];
 }
 
 - (void)initDate{
@@ -47,7 +43,6 @@
         [model setValuesForKeysWithDictionary:obj];
         [_arrayDS addObject:model];
     }];
-
 }
 - (void)initUI{
     self.navigationItem.title = @"CLPlayer";
@@ -108,8 +103,8 @@
 //    _playerView.progressBufferColor = [UIColor redColor];
 ////  设置进度条播放完成颜色
 //    _playerView.progressPlayFinishColor = [UIColor greenColor];
-////  全屏是否隐藏状态栏
-    _playerView.fullStatusBarHidden = NO;
+////  全屏是否隐藏状态栏，默认隐藏
+//    _playerView.fullStatusBarHidden = NO;
     //视频地址
     _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
     //播放
@@ -137,16 +132,5 @@
     //计算偏移来销毁播放器
     [_playerView calculateScrollOffset:self.tableView cell:_cell];
 }
-
-
-#pragma mark - 隐藏或者显示状态栏方法
-- (void)setStatusBarHidden:(BOOL)hidden{
-    //取出当前控制器的导航条
-    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    //设置是否隐藏
-    statusBar.hidden  = hidden;
-}
-
-
 
 @end

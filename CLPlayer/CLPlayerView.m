@@ -372,9 +372,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 全屏按钮响应事件
 -(void)cl_fullButtonAction:(UIButton *)button{
     if (_isFullScreen == NO){
-        [self fullScreen];
+        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeLeft] forKey:@"orientation"];
     }else{
-        [self originalscreen];
+        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
     }
 }
 #pragma mark - 播放失败按钮点击事件
