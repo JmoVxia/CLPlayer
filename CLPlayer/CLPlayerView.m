@@ -44,7 +44,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,assign) BOOL   isUserPlay;
 /**记录控制器状态栏状态*/
 @property (nonatomic,assign) BOOL   customIsHidden;
-
 /**播放器*/
 @property (nonatomic,strong) AVPlayer         *player;
 /**playerLayer*/
@@ -59,6 +58,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,strong) NSTimer          *sliderTimer;
 /**播放器所在控制器*/
 @property (nonatomic,strong) UIViewController *topViewComtroller;
+/**keyWindow*/
+@property (nonatomic,strong) UIWindow         *keyWindow;
+/**statusBar*/
+@property (nonatomic,strong) UIView           *statusBar;
 /**返回按钮回调*/
 @property (nonatomic,copy) void (^BackBlock) (UIButton *backButton);
 /**播放完成回调*/
@@ -67,7 +70,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @end
 
 @implementation CLPlayerView
-
 #pragma mark - 懒加载
 //遮罩
 - (CLPlayerMaskView *) maskView{
@@ -93,6 +95,21 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     return _maskView;
 }
+/**keyWindow*/
+- (UIWindow *) keyWindow{
+    if (_keyWindow == nil){
+        _keyWindow = [UIApplication sharedApplication].keyWindow;
+    }
+    return _keyWindow;
+}
+/**statusBar*/
+- (UIView *) statusBar{
+    if (_statusBar == nil){
+        _statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    }
+    return _statusBar;
+}
+
 #pragma mark - 进度条背景颜色
 -(void)setProgressBackgroundColor:(UIColor *)progressBackgroundColor{
     _progressBackgroundColor = progressBackgroundColor;
@@ -168,11 +185,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(appDidEnterPlayground:)
                                                      name:UIApplicationDidBecomeActiveNotification object:nil];
-        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-        [keyWindow addSubview:self];
-        _topViewComtroller = [self topViewControllerWithRootViewController:keyWindow.rootViewController];
-        UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-        _customIsHidden = statusBar.isHidden;
+        _topViewComtroller = [self topViewControllerWithRootViewController:self.keyWindow.rootViewController];
+        _customIsHidden = self.statusBar.isHidden;
         [_topViewComtroller isNeedRotation:YES];
         [self creatUI];
     }
@@ -256,10 +270,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 隐藏或者显示状态栏方法
 - (void)setStatusBarHidden:(BOOL)hidden{
-    //取出当前控制器的导航条
-    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
     //设置是否隐藏
-    statusBar.hidden  = hidden;
+    self.statusBar.hidden  = hidden;
 }
 #pragma mark - 监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
@@ -517,8 +529,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     _customFarme  = self.frame;
     _isFullScreen = YES;
     //添加到Window上
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-    [keyWindow addSubview:self];
+    [self.keyWindow addSubview:self];
     self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
     self.maskView.fullButton.selected = YES;
     [self setNeedsLayout];
