@@ -82,7 +82,7 @@
     //当前播放时间
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.playButton.mas_right).offset(Padding);
-//        make.width.mas_equalTo(35);
+        make.width.mas_equalTo(45);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //缓冲条
@@ -99,7 +99,7 @@
     //总时间
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.fullButton.mas_left).offset(-Padding);
-//        make.width.mas_equalTo(35);
+        make.width.mas_equalTo(45);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //全屏按钮
