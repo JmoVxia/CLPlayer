@@ -9,18 +9,13 @@
 #import "CLPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CLPlayerMaskView.h"
+#import "UIViewController+CLRotation.h"
 //消失时间
 #define DisappearTime  10
 /**UIScreen width*/
 #define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
 /**UIScreen height*/
 #define  CLscreenHeight  [UIScreen mainScreen].bounds.size.height
-
-//方向枚举
-typedef NS_ENUM(NSInteger,Direction){
-    Letf = 0,
-    Right,
-};
 
 // 播放器的几种状态
 typedef NS_ENUM(NSInteger, CLPlayerState) {
@@ -43,12 +38,13 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,copy) NSString        *videoFillMode;
 /**全屏标记*/
 @property (nonatomic,assign) BOOL   isFullScreen;
-/**横屏标记*/
-@property (nonatomic,assign) BOOL   landscape;
 /**工具条隐藏标记*/
 @property (nonatomic,assign) BOOL   isDisappear;
 /**用户点击播放标记*/
 @property (nonatomic,assign) BOOL   isUserPlay;
+/**记录控制器状态栏状态*/
+@property (nonatomic,assign) BOOL   customIsHidden;
+
 /**播放器*/
 @property (nonatomic,strong) AVPlayer         *player;
 /**playerLayer*/
@@ -61,6 +57,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,strong) NSTimer          *timer;
 /**slider定时器*/
 @property (nonatomic,strong) NSTimer          *sliderTimer;
+/**播放器所在控制器*/
+@property (nonatomic,strong) UIViewController *topViewComtroller;
 /**返回按钮回调*/
 @property (nonatomic,copy) void (^BackBlock) (UIButton *backButton);
 /**播放完成回调*/
@@ -95,55 +93,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     return _maskView;
 }
-#pragma mark - 初始化
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]){
-        _isFullScreen   = NO;
-        _autoFullScreen = YES;
-        _repeatPlay     = NO;
-        _isLandscape    = NO;
-        _landscape      = NO;
-        _isDisappear    = NO;
-        _isUserPlay     = NO;
-        
-        _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
-        _progressPlayFinishColor = [UIColor whiteColor];
-        _progressBufferColor     = [UIColor lightGrayColor];
-        //开启
-        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-        //注册屏幕旋转通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:[UIDevice currentDevice]];
-        //APP运行状态通知，将要被挂起
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground:)
-                                                     name:UIApplicationWillResignActiveNotification
-                                                   object:nil];
-        // app进入前台
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(appDidEnterPlayground:)
-                                                     name:UIApplicationDidBecomeActiveNotification object:nil];
-        [self creatUI];
-    }
-    return self;
-}
-#pragma mark - 视频拉伸方式
--(void)setFillMode:(VideoFillMode)fillMode{
-    switch (fillMode){
-        case ResizeAspectFill:
-            //原比例拉伸视频，直到两边屏幕都占满，但视频内容有部分会被剪切
-            _videoFillMode = AVLayerVideoGravityResizeAspectFill;
-            break;
-        case ResizeAspect:
-            //按原视频比例显示，是竖屏的就显示出竖屏的，两边留黑
-            _videoFillMode = AVLayerVideoGravityResizeAspect;
-            break;
-        case Resize:
-            //拉伸视频内容达到边框占满，但不按原比例拉伸
-            _videoFillMode = AVLayerVideoGravityResize;
-            break;
-    }
-}
 #pragma mark - 进度条背景颜色
 -(void)setProgressBackgroundColor:(UIColor *)progressBackgroundColor{
     _progressBackgroundColor = progressBackgroundColor;
@@ -166,11 +115,68 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 是否支持横屏
 -(void)setIsLandscape:(BOOL)isLandscape{
     _isLandscape = isLandscape;
-    _landscape   = isLandscape;
+}
+#pragma mark - 视频拉伸方式
+-(void)setFillMode:(VideoFillMode)fillMode{
+    switch (fillMode){
+        case ResizeAspectFill:
+            //原比例拉伸视频，直到两边屏幕都占满，但视频内容有部分会被剪切
+            _videoFillMode = AVLayerVideoGravityResizeAspectFill;
+            break;
+        case ResizeAspect:
+            //按原视频比例显示，是竖屏的就显示出竖屏的，两边留黑
+            _videoFillMode = AVLayerVideoGravityResizeAspect;
+            break;
+        case Resize:
+            //拉伸视频内容达到边框占满，但不按原比例拉伸
+            _videoFillMode = AVLayerVideoGravityResize;
+            break;
+    }
+}
+#pragma mark -- 全屏状态栏是否隐藏
+-(void)setFullStatusBarHidden:(BOOL)fullStatusBarHidden{
+    _fullStatusBarHidden     = fullStatusBarHidden;
 }
 #pragma mark - 重复播放
 - (void)setRepeatPlay:(BOOL)repeatPlay{
     _repeatPlay = repeatPlay;
+}
+#pragma mark - 初始化
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]){
+        _isFullScreen            = NO;
+        _autoFullScreen          = YES;
+        _repeatPlay              = NO;
+        _isDisappear             = NO;
+        _isUserPlay              = NO;
+        _isLandscape             = NO;
+        _fullStatusBarHidden     = YES;
+        _progressPlayFinishColor = [UIColor whiteColor];
+        _progressBufferColor     = [UIColor lightGrayColor];
+        _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
+        //开启
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+        //注册屏幕旋转通知
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:[UIDevice currentDevice]];
+        //APP运行状态通知，将要被挂起
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground:)
+                                                     name:UIApplicationWillResignActiveNotification
+                                                   object:nil];
+        // app进入前台
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(appDidEnterPlayground:)
+                                                     name:UIApplicationDidBecomeActiveNotification object:nil];
+        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+        [keyWindow addSubview:self];
+        _topViewComtroller = [self topViewControllerWithRootViewController:keyWindow.rootViewController];
+        UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+        _customIsHidden = statusBar.isHidden;
+        [_topViewComtroller isNeedRotation:YES];
+        [self creatUI];
+    }
+    return self;
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
@@ -283,7 +289,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         }
     }
 }
-
 #pragma mark - 缓冲较差时候
 //卡顿时会走这里
 - (void)bufferingSomeSecond{
@@ -366,13 +371,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 全屏按钮响应事件
 -(void)cl_fullButtonAction:(UIButton *)button{
-    _isLandscape = NO;
     if (_isFullScreen == NO){
-        [self fullScreenWithDirection:Letf];
+        [self fullScreen];
     }else{
         [self originalscreen];
     }
-    _isLandscape = _landscape;
 }
 #pragma mark - 播放失败按钮点击事件
 -(void)cl_failButtonAction:(UIButton *)button{
@@ -474,20 +477,30 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [_timer invalidate];
     _timer = nil;
 }
+#pragma mark -- 获取顶层控制器
+- (UIViewController*)topViewControllerWithRootViewController:(UIViewController*)rootViewController{
+    if ([rootViewController isKindOfClass:[UITabBarController class]]) {
+        UITabBarController *tabBarController = (UITabBarController *)rootViewController;
+        return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
+    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController* navigationController = (UINavigationController*)rootViewController;
+        return [self topViewControllerWithRootViewController:navigationController.visibleViewController];
+    } else if (rootViewController.presentedViewController) {
+        UIViewController* presentedViewController = rootViewController.presentedViewController;
+        return [self topViewControllerWithRootViewController:presentedViewController];
+    } else {
+        return rootViewController;
+    }
+}
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification{
     if (_autoFullScreen == NO){
         return;
     }
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    if (orientation == UIDeviceOrientationLandscapeLeft){
+    if (orientation == UIDeviceOrientationLandscapeLeft ||orientation == UIDeviceOrientationLandscapeRight){
         if (_isFullScreen == NO){
-            [self fullScreenWithDirection:Letf];
-        }
-    }
-    else if (orientation == UIDeviceOrientationLandscapeRight){
-        if (_isFullScreen == NO){
-            [self fullScreenWithDirection:Right];
+            [self fullScreen];
         }
     }
     else if (orientation == UIDeviceOrientationPortrait){
@@ -497,47 +510,29 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
 }
 #pragma mark - 全屏
-- (void)fullScreenWithDirection:(Direction)direction{
+- (void)fullScreen{
     //记录播放器父类
     _fatherView   = self.superview;
     //记录原始大小
     _customFarme  = self.frame;
     _isFullScreen = YES;
-    [self setStatusBarHidden:YES];
     //添加到Window上
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
-    if (_isLandscape == YES){
-        self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
-    }else{
-        if (direction == Letf){
-            [UIView animateWithDuration:0.25 animations:^{
-                self.transform = CGAffineTransformMakeRotation(M_PI / 2);
-            }];
-        }else{
-            [UIView animateWithDuration:0.25 animations:^{
-                self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
-            }];
-        }
-        self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
-    }
+    self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
     self.maskView.fullButton.selected = YES;
     [self setNeedsLayout];
     [self layoutIfNeeded];
+    [self setStatusBarHidden:_fullStatusBarHidden];
 }
 #pragma mark - 原始大小
 - (void)originalscreen{
-    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
-    _isFullScreen = NO;
-    [self setStatusBarHidden:NO];
-    [UIView animateWithDuration:0.25 animations:^{
-        //还原
-        self.transform = CGAffineTransformMakeRotation(0);
-    }];
     self.frame = _customFarme;
+    _isFullScreen = NO;
     //还原到原有父类上
     [_fatherView addSubview:self];
     self.maskView.fullButton.selected = NO;
+    [self setStatusBarHidden:_customIsHidden];
 }
 #pragma mark - APP活动通知
 - (void)appDidEnterBackground:(NSNotification *)note{
@@ -558,7 +553,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 根据Cell位置判断是否销毁
 - (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell{
-
     if (!cell) {
         return;
     }
@@ -594,9 +588,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
+    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
+    [_topViewComtroller isNeedRotation:_isLandscape];
+    [self setStatusBarHidden:_customIsHidden];
     NSLog(@"播放器被销毁了");
 }
-
-
 
 @end
