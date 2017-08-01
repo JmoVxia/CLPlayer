@@ -78,8 +78,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _maskView.progressBackgroundColor = _progressBackgroundColor;
         _maskView.progressBufferColor     = _progressBufferColor;
         _maskView.progressPlayFinishColor = _progressPlayFinishColor;
-        _maskView.delegate = self;
-        [_maskView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
+        _maskView.delegate                = self;
+        [_maskView addTarget:self
+                      action:@selector(disappearAction:)
+            forControlEvents:UIControlEventTouchUpInside];
         //计时器，循环执行
         _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
                                                         target:self
@@ -87,11 +89,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                       userInfo:nil
                                                        repeats:YES];
         //定时器，工具条消失
-        _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
-                                                  target:self
-                                                selector:@selector(disappear)
-                                                userInfo:nil
-                                                 repeats:NO];
+        _timer       = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+                                                        target:self
+                                                      selector:@selector(disappear)
+                                                      userInfo:nil
+                                                       repeats:NO];
     }
     return _maskView;
 }
@@ -109,20 +111,19 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     return _statusBar;
 }
-
 #pragma mark - 进度条背景颜色
 -(void)setProgressBackgroundColor:(UIColor *)progressBackgroundColor{
-    _progressBackgroundColor = progressBackgroundColor;
+    _progressBackgroundColor              = progressBackgroundColor;
     self.maskView.progressBackgroundColor = progressBackgroundColor;
 }
 #pragma mark -- 进度条缓冲颜色
 -(void)setProgressBufferColor:(UIColor *)progressBufferColor{
-    _progressBufferColor = progressBufferColor;
+    _progressBufferColor              = progressBufferColor;
     self.maskView.progressBufferColor = progressBufferColor;
 }
 #pragma mark -- 进度条播放完成颜色
 -(void)setProgressPlayFinishColor:(UIColor *)progressPlayFinishColor{
-    _progressPlayFinishColor = progressPlayFinishColor;
+    _progressPlayFinishColor              = progressPlayFinishColor;
     self.maskView.progressPlayFinishColor = progressPlayFinishColor;
 }
 #pragma mark - 是否自动支持全屏
@@ -152,7 +153,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark -- 全屏状态栏是否隐藏
 -(void)setFullStatusBarHidden:(BOOL)fullStatusBarHidden{
-    _fullStatusBarHidden     = fullStatusBarHidden;
+    _fullStatusBarHidden = fullStatusBarHidden;
 }
 #pragma mark - 重复播放
 - (void)setRepeatPlay:(BOOL)repeatPlay{
@@ -184,9 +185,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         // app进入前台
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(appDidEnterPlayground:)
-                                                     name:UIApplicationDidBecomeActiveNotification object:nil];
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
         _topViewComtroller = [self topViewControllerWithRootViewController:self.keyWindow.rootViewController];
-        _customIsHidden = self.statusBar.isHidden;
+        _customIsHidden    = self.statusBar.isHidden;
         [_topViewComtroller isNeedRotation:YES];
         [self creatUI];
     }
@@ -310,7 +312,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     isBuffering = YES;
     // 需要先暂停一小会之后再播放，否则网络状况不好的时候时间在走，声音播放不出来
     [self pausePlay];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self playVideo];
         // 如果执行了play还是没有播放则说明还没有缓存好，则再次缓存一段时间
         isBuffering = NO;
@@ -370,6 +372,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         //duration 总时长
         NSInteger durMin     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总分钟
         NSInteger durSec     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总秒
+        
         self.maskView.totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", durMin, durSec];
     }
 }
@@ -384,9 +387,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 全屏按钮响应事件
 -(void)cl_fullButtonAction:(UIButton *)button{
     if (_isFullScreen == NO){
-        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
+        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight]
+                                    forKey:@"orientation"];
     }else{
-        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
+        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait]
+                                    forKey:@"orientation"];
     }
 }
 #pragma mark - 播放失败按钮点击事件
@@ -494,13 +499,13 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     if ([rootViewController isKindOfClass:[UITabBarController class]]) {
         UITabBarController *tabBarController = (UITabBarController *)rootViewController;
         return [self topViewControllerWithRootViewController:tabBarController.selectedViewController];
-    } else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
+    }else if ([rootViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController* navigationController = (UINavigationController*)rootViewController;
         return [self topViewControllerWithRootViewController:navigationController.visibleViewController];
-    } else if (rootViewController.presentedViewController) {
+    }else if (rootViewController.presentedViewController) {
         UIViewController* presentedViewController = rootViewController.presentedViewController;
         return [self topViewControllerWithRootViewController:presentedViewController];
-    } else {
+    }else {
         return rootViewController;
     }
 }
@@ -514,8 +519,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         if (_isFullScreen == NO){
             [self fullScreen];
         }
-    }
-    else if (orientation == UIDeviceOrientationPortrait){
+    }else if (orientation == UIDeviceOrientationPortrait){
         if (_isFullScreen == YES){
             [self originalscreen];
         }
@@ -538,7 +542,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 原始大小
 - (void)originalscreen{
-    self.frame = _customFarme;
+    self.frame    = _customFarme;
     _isFullScreen = NO;
     //还原到原有父类上
     [_fatherView addSubview:self];
@@ -599,7 +603,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
-    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
+    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait]
+                                forKey:@"orientation"];
     [_topViewComtroller isNeedRotation:_isLandscape];
     [self setStatusBarHidden:_customIsHidden];
     NSLog(@"播放器被销毁了");
