@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ViewController.h"
+#import "AAAViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -18,7 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     UINavigationController *nc = [UINavigationController new];
-    ViewController *vc = [ViewController new];
+    AAAViewController *vc = [AAAViewController new];
     [nc addChildViewController:vc];
     
     self.window.rootViewController = nc;

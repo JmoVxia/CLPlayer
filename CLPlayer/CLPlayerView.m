@@ -251,9 +251,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 隐藏或者显示状态栏方法
 - (void)setStatusBarHidden:(BOOL)hidden{
     //取出当前控制器的导航条
-    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    //设置是否隐藏
-    statusBar.hidden  = hidden;
+//    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+//    //设置是否隐藏
+//    statusBar.hidden  = hidden;
 }
 #pragma mark - 监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
@@ -513,12 +513,14 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
             }];
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
         }else{
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
             }];
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:NO];
         }
-        self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
+        self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
     }
     self.maskView.fullButton.selected = YES;
     [self setNeedsLayout];
@@ -526,7 +528,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 原始大小
 - (void)originalscreen{
-    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
     _isFullScreen = NO;
     [self setStatusBarHidden:NO];
     [UIView animateWithDuration:0.25 animations:^{
@@ -594,6 +596,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
     NSLog(@"播放器被销毁了");
+    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
 }
 
 

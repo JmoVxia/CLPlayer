@@ -17,6 +17,10 @@
 		5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B35DDE31DE07F9A00CEB057 /* Date.json */; };
 		5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
+		5BB4D0CD1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0CC1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m */; };
+		5BB4D0D01F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0CF1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m */; };
+		5BB4D0D31F317CF9007A1742 /* UIViewController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0D21F317CF9007A1742 /* UIViewController+CLPlayerRotation.m */; };
+		5BB4D0D61F317E62007A1742 /* AAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0D51F317E62007A1742 /* AAAViewController.m */; };
 		5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDB581B1DDE968700523A8C /* TableViewCell.m */; };
 		5BDEA7151E63F4BB00953D5D /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BDEA70D1E63F4BB00953D5D /* CLPlayer.bundle */; };
 		5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */; };
@@ -42,6 +46,14 @@
 		5B456F8D1E60164000C9599F /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
 		5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5BB4D0CB1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+CLPlayerRotation.h"; sourceTree = "<group>"; };
+		5BB4D0CC1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+CLPlayerRotation.m"; sourceTree = "<group>"; };
+		5BB4D0CE1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+CLPlayerRotation.h"; sourceTree = "<group>"; };
+		5BB4D0CF1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CLPlayerRotation.m"; sourceTree = "<group>"; };
+		5BB4D0D11F317CF9007A1742 /* UIViewController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CLPlayerRotation.h"; sourceTree = "<group>"; };
+		5BB4D0D21F317CF9007A1742 /* UIViewController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CLPlayerRotation.m"; sourceTree = "<group>"; };
+		5BB4D0D41F317E62007A1742 /* AAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAViewController.h; sourceTree = "<group>"; };
+		5BB4D0D51F317E62007A1742 /* AAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAViewController.m; sourceTree = "<group>"; };
 		5BDB581A1DDE968700523A8C /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		5BDB581B1DDE968700523A8C /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		5BDEA70D1E63F4BB00953D5D /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
@@ -101,6 +113,8 @@
 				5B1FC4CA1DC850820036C489 /* AppDelegate.m */,
 				5B456F8D1E60164000C9599F /* UIView+CLSetRect.h */,
 				5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */,
+				5BB4D0D41F317E62007A1742 /* AAAViewController.h */,
+				5BB4D0D51F317E62007A1742 /* AAAViewController.m */,
 				5B1FC4CC1DC850820036C489 /* ViewController.h */,
 				5B1FC4CD1DC850820036C489 /* ViewController.m */,
 				5B35DDE01DE07A5700CEB057 /* Model.h */,
@@ -144,6 +158,12 @@
 				5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */,
 				5BDEA7131E63F4BB00953D5D /* CLSlider.h */,
 				5BDEA7141E63F4BB00953D5D /* CLSlider.m */,
+				5BB4D0CB1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.h */,
+				5BB4D0CC1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m */,
+				5BB4D0CE1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.h */,
+				5BB4D0CF1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m */,
+				5BB4D0D11F317CF9007A1742 /* UIViewController+CLPlayerRotation.h */,
+				5BB4D0D21F317CF9007A1742 /* UIViewController+CLPlayerRotation.m */,
 			);
 			path = CLPlayer;
 			sourceTree = SOURCE_ROOT;
@@ -273,14 +293,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BDEA7171E63F4BB00953D5D /* CLPlayerView.m in Sources */,
+				5BB4D0D01F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m in Sources */,
+				5BB4D0D31F317CF9007A1742 /* UIViewController+CLPlayerRotation.m in Sources */,
 				5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
 				5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
+				5BB4D0CD1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m in Sources */,
 				5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */,
 				5B35DDE21DE07A5700CEB057 /* Model.m in Sources */,
 				5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */,
 				5BDEA7181E63F4BB00953D5D /* CLSlider.m in Sources */,
+				5BB4D0D61F317E62007A1742 /* AAAViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
