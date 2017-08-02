@@ -82,13 +82,13 @@
     //当前播放时间
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.playButton.mas_right).offset(Padding);
-        make.width.mas_equalTo(35);
+        make.width.mas_equalTo(45);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //总时间
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.fullButton.mas_left).offset(-Padding);
-        make.width.mas_equalTo(35);
+        make.width.mas_equalTo(45);
         make.centerY.equalTo(self.bottomToolBar);
     }];
     //缓冲条
@@ -180,7 +180,7 @@
     if (_currentTimeLabel == nil){
         _currentTimeLabel = [[UILabel alloc] init];
         _currentTimeLabel.textColor = [UIColor whiteColor];
-        _currentTimeLabel.font = [UIFont systemFontOfSize:12];
+        _currentTimeLabel.adjustsFontSizeToFitWidth = YES;
         _currentTimeLabel.text = @"00:00";
         _currentTimeLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -191,7 +191,7 @@
     if (_totalTimeLabel == nil){
         _totalTimeLabel = [[UILabel alloc] init];
         _totalTimeLabel.textColor = [UIColor whiteColor];
-        _totalTimeLabel.font = [UIFont systemFontOfSize:12];
+        _totalTimeLabel.adjustsFontSizeToFitWidth = YES;
         _totalTimeLabel.text = @"00:00";
         _totalTimeLabel.textAlignment = NSTextAlignmentCenter;
     }

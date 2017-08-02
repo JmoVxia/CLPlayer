@@ -125,7 +125,6 @@
     [_playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");
     }];
-    
     //播放完成回调
     [_playerView endPlay:^{
         //销毁播放器
