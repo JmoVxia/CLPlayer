@@ -29,23 +29,23 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 /** 播发器的几种状态 */
 @property (nonatomic,assign) CLPlayerState state;
 /**控件原始Farme*/
-@property (nonatomic,assign) CGRect        customFarme;
+@property (nonatomic,assign) CGRect           customFarme;
 /**父类控件*/
-@property (nonatomic,strong) UIView        *fatherView;
+@property (nonatomic,strong) UIView           *fatherView;
 /**视频拉伸模式*/
-@property (nonatomic,copy) NSString        *videoFillMode;
+@property (nonatomic,copy) NSString           *videoFillMode;
 /**状态栏*/
-@property (nonatomic,strong) UIView        *statusBar;
+@property (nonatomic,strong) UIView           *statusBar;
 /**全屏标记*/
-@property (nonatomic,assign) BOOL   isFullScreen;
+@property (nonatomic,assign) BOOL             isFullScreen;
 /**工具条隐藏标记*/
-@property (nonatomic,assign) BOOL   isDisappear;
+@property (nonatomic,assign) BOOL             isDisappear;
 /**用户点击播放标记*/
-@property (nonatomic,assign) BOOL   isUserPlay;
+@property (nonatomic,assign) BOOL             isUserPlay;
 /**是否支持横屏*/
-@property (nonatomic,assign) BOOL   isLandscape;
+@property (nonatomic,assign) BOOL             isLandscape;
 /**记录控制器状态栏状态*/
-@property (nonatomic,assign) BOOL   statusBarHiddenState;
+@property (nonatomic,assign) BOOL             statusBarHiddenState;
 /**播放器*/
 @property (nonatomic,strong) AVPlayer         *player;
 /**playerLayer*/
@@ -144,47 +144,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)setRepeatPlay:(BOOL)repeatPlay{
     _repeatPlay = repeatPlay;
 }
-#pragma mark - 初始化
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]){
-        //初始值
-        _isFullScreen            = NO;
-        _repeatPlay              = NO;
-        _isDisappear             = NO;
-        _isUserPlay              = NO;
-        _fullStatusBarHidden     = YES;
-        //查询控制器是否支持全屏
-        _isLandscape             = [self currentViewController].shouldAutorotate;
-        _statusBarHiddenState    = self.statusBar.isHidden;
-        _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
-        _progressPlayFinishColor = [UIColor whiteColor];
-        _progressBufferColor     = [UIColor lightGrayColor];
-        //开启
-        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-        //注册屏幕旋转通知
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(orientChange:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:[UIDevice currentDevice]];
-        //APP运行状态通知，将要被挂起
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(appDidEnterBackground:)
-                                                     name:UIApplicationWillResignActiveNotification
-                                                   object:nil];
-        // app进入前台
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(appDidEnterPlayground:)
-                                                     name:UIApplicationDidBecomeActiveNotification object:nil];
-        [self creatUI];
-    }
-    return self;
-}
-#pragma mark - 创建播放器UI
-- (void)creatUI{
-    self.backgroundColor = [UIColor blackColor];
-    //最上面的View
-    [self addSubview:self.maskView];
-}
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
     _url                      = url;
@@ -261,6 +220,47 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)setStatusBarHidden:(BOOL)hidden{
     //设置是否隐藏
     self.statusBar.hidden  = hidden;
+}
+#pragma mark - 初始化
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]){
+        //初始值
+        _isFullScreen            = NO;
+        _repeatPlay              = NO;
+        _isDisappear             = NO;
+        _isUserPlay              = NO;
+        _fullStatusBarHidden     = YES;
+        //查询控制器是否支持全屏
+        _isLandscape             = [self currentViewController].shouldAutorotate;
+        _statusBarHiddenState    = self.statusBar.isHidden;
+        _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
+        _progressPlayFinishColor = [UIColor whiteColor];
+        _progressBufferColor     = [UIColor lightGrayColor];
+        //开启
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+        //注册屏幕旋转通知
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(orientChange:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:[UIDevice currentDevice]];
+        //APP运行状态通知，将要被挂起
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(appDidEnterBackground:)
+                                                     name:UIApplicationWillResignActiveNotification
+                                                   object:nil];
+        // app进入前台
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(appDidEnterPlayground:)
+                                                     name:UIApplicationDidBecomeActiveNotification object:nil];
+        [self creatUI];
+    }
+    return self;
+}
+#pragma mark - 创建播放器UI
+- (void)creatUI{
+    self.backgroundColor = [UIColor blackColor];
+    //最上面的View
+    [self addSubview:self.maskView];
 }
 #pragma mark - 监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{

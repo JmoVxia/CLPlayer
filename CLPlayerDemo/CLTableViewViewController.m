@@ -1,19 +1,19 @@
 //
-//  ViewController.m
+//  CLTableViewViewController.m
 //  CLPlayerDemo
 //
-//  Created by JmoVxia on 2016/11/1.
-//  Copyright © 2016年 JmoVxia. All rights reserved.
+//  Created by JmoVxia on 2017/8/2.
+//  Copyright © 2017年 JmoVxia. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "CLTableViewViewController.h"
 #import "CLPlayerView.h"
 #import "TableViewCell.h"
 #import "Model.h"
 #import "UIView+CLSetRect.h"
 #import  "Masonry.h"
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate,UIScrollViewDelegate>
+@interface CLTableViewViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate,UIScrollViewDelegate>
 
 /**tableView*/
 @property (nonatomic,strong) UITableView *tableView;
@@ -26,19 +26,14 @@
 
 @end
 
-@implementation ViewController
+@implementation CLTableViewViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-
     [self initDate];
-    
     [self initUI];
 }
-
-- (void)initDate
-{
+- (void)initDate{
     _arrayDS = [NSMutableArray array];
     NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Date" ofType:@"json"]];
     NSArray *array = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
@@ -47,12 +42,10 @@
         [model setValuesForKeysWithDictionary:obj];
         [_arrayDS addObject:model];
     }];
-
 }
-- (void)initUI
-{
-    self.navigationItem.title = @"CLPlayer";
-    
+- (void)initUI{
+    self.title = @"TableView";
+    self.view.backgroundColor = [UIColor whiteColor];
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CLscreenWidth, CLscreenHeight) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -100,29 +93,29 @@
     _playerView = nil;
     
     CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.CLwidth, cell.CLheight)];
-   
+    
     _playerView = playerView;
     [cell.contentView addSubview:_playerView];
     
     //根据旋转自动支持全屏，默认支持
-//        _playerView.autoFullScreen = NO;
+    //        _playerView.autoFullScreen = NO;
     //重复播放，默认不播放
     //    _playerView.repeatPlay     = YES;
     //设置等比例全屏拉伸，多余部分会被剪切
-//    _playerView.fillMode = ResizeAspectFill;
+    //    _playerView.fillMode = ResizeAspectFill;
     //设置进度条背景颜色
-//    _playerView.progressBackgroundColor = [UIColor purpleColor];
-//    //设置进度条缓冲颜色
-//    _playerView.progressBufferColor = [UIColor redColor];
-//    //设置进度条播放完成颜色
-//    _playerView.progressPlayFinishColor = [UIColor greenColor];
+    //    _playerView.progressBackgroundColor = [UIColor purpleColor];
+    //    //设置进度条缓冲颜色
+    //    _playerView.progressBufferColor = [UIColor redColor];
+    //    //设置进度条播放完成颜色
+    //    _playerView.progressPlayFinishColor = [UIColor greenColor];
     //全屏是否隐藏状态栏
-//    _playerView.fullStatusBarHidden = NO;
+    //    _playerView.fullStatusBarHidden = NO;
     //视频地址
     _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
     //播放
     [_playerView playVideo];
-
+    
     //返回按钮点击事件回调
     [_playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");
@@ -148,19 +141,18 @@
     [_playerView calculateScrollOffset:self.tableView cell:_cell];
 }
 #pragma mark -- 需要页面支持其他方向，需要重写这三个方法，默认所有页面只支持竖屏
-// 是否支持自动转屏
-- (BOOL)shouldAutorotate {
-    return YES;
-}
-// 支持哪些屏幕方向
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAll;
-}
-// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    return UIInterfaceOrientationPortrait;
-}
-
+//// 是否支持自动转屏
+//- (BOOL)shouldAutorotate {
+//    return YES;
+//}
+//// 支持哪些屏幕方向
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+//    return UIInterfaceOrientationMaskAll;
+//}
+//// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
+//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+//    return UIInterfaceOrientationPortrait;
+//}
 
 
 

@@ -10,7 +10,6 @@
 		52CFF55482649C3F8FF48753 /* libPods-CLPlayerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */; };
 		5B1FC4C81DC850820036C489 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4C71DC850820036C489 /* main.m */; };
 		5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CA1DC850820036C489 /* AppDelegate.m */; };
-		5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CD1DC850820036C489 /* ViewController.m */; };
 		5B1FC4D61DC850820036C489 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B1FC4D41DC850820036C489 /* LaunchScreen.storyboard */; };
 		5B1FC4FB1DC850EF0036C489 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5B35DDE21DE07A5700CEB057 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B35DDE11DE07A5700CEB057 /* Model.m */; };
@@ -20,7 +19,9 @@
 		5BB4D0CD1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0CC1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m */; };
 		5BB4D0D01F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0CF1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m */; };
 		5BB4D0D31F317CF9007A1742 /* UIViewController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0D21F317CF9007A1742 /* UIViewController+CLPlayerRotation.m */; };
-		5BB4D0D61F317E62007A1742 /* AAAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0D51F317E62007A1742 /* AAAViewController.m */; };
+		5BB4D0D91F31A1F1007A1742 /* CLTableViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0D81F31A1F1007A1742 /* CLTableViewViewController.m */; };
+		5BB4D0DC1F31A2E3007A1742 /* CLTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0DB1F31A2E3007A1742 /* CLTabBarViewController.m */; };
+		5BB4D0DF1F31A4B1007A1742 /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0DE1F31A4B1007A1742 /* CLViewController.m */; };
 		5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDB581B1DDE968700523A8C /* TableViewCell.m */; };
 		5BDEA7151E63F4BB00953D5D /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BDEA70D1E63F4BB00953D5D /* CLPlayer.bundle */; };
 		5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */; };
@@ -35,8 +36,6 @@
 		5B1FC4C71DC850820036C489 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5B1FC4C91DC850820036C489 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		5B1FC4CA1DC850820036C489 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		5B1FC4CC1DC850820036C489 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		5B1FC4CD1DC850820036C489 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		5B1FC4D51DC850820036C489 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B1FC4D71DC850820036C489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -52,8 +51,12 @@
 		5BB4D0CF1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CLPlayerRotation.m"; sourceTree = "<group>"; };
 		5BB4D0D11F317CF9007A1742 /* UIViewController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CLPlayerRotation.h"; sourceTree = "<group>"; };
 		5BB4D0D21F317CF9007A1742 /* UIViewController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CLPlayerRotation.m"; sourceTree = "<group>"; };
-		5BB4D0D41F317E62007A1742 /* AAAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAAViewController.h; sourceTree = "<group>"; };
-		5BB4D0D51F317E62007A1742 /* AAAViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAAViewController.m; sourceTree = "<group>"; };
+		5BB4D0D71F31A1F1007A1742 /* CLTableViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTableViewViewController.h; sourceTree = "<group>"; };
+		5BB4D0D81F31A1F1007A1742 /* CLTableViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTableViewViewController.m; sourceTree = "<group>"; };
+		5BB4D0DA1F31A2E3007A1742 /* CLTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTabBarViewController.h; sourceTree = "<group>"; };
+		5BB4D0DB1F31A2E3007A1742 /* CLTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTabBarViewController.m; sourceTree = "<group>"; };
+		5BB4D0DD1F31A4B1007A1742 /* CLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewController.h; sourceTree = "<group>"; };
+		5BB4D0DE1F31A4B1007A1742 /* CLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController.m; sourceTree = "<group>"; };
 		5BDB581A1DDE968700523A8C /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		5BDB581B1DDE968700523A8C /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
 		5BDEA70D1E63F4BB00953D5D /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
@@ -109,14 +112,16 @@
 		5B1FC4C51DC850820036C489 /* CLPlayerDemo */ = {
 			isa = PBXGroup;
 			children = (
-				5B1FC4C91DC850820036C489 /* AppDelegate.h */,
-				5B1FC4CA1DC850820036C489 /* AppDelegate.m */,
 				5B456F8D1E60164000C9599F /* UIView+CLSetRect.h */,
 				5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */,
-				5BB4D0D41F317E62007A1742 /* AAAViewController.h */,
-				5BB4D0D51F317E62007A1742 /* AAAViewController.m */,
-				5B1FC4CC1DC850820036C489 /* ViewController.h */,
-				5B1FC4CD1DC850820036C489 /* ViewController.m */,
+				5B1FC4C91DC850820036C489 /* AppDelegate.h */,
+				5B1FC4CA1DC850820036C489 /* AppDelegate.m */,
+				5BB4D0DA1F31A2E3007A1742 /* CLTabBarViewController.h */,
+				5BB4D0DB1F31A2E3007A1742 /* CLTabBarViewController.m */,
+				5BB4D0D71F31A1F1007A1742 /* CLTableViewViewController.h */,
+				5BB4D0D81F31A1F1007A1742 /* CLTableViewViewController.m */,
+				5BB4D0DD1F31A4B1007A1742 /* CLViewController.h */,
+				5BB4D0DE1F31A4B1007A1742 /* CLViewController.m */,
 				5B35DDE01DE07A5700CEB057 /* Model.h */,
 				5B35DDE11DE07A5700CEB057 /* Model.m */,
 				5BDB581A1DDE968700523A8C /* TableViewCell.h */,
@@ -295,7 +300,7 @@
 				5BDEA7171E63F4BB00953D5D /* CLPlayerView.m in Sources */,
 				5BB4D0D01F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m in Sources */,
 				5BB4D0D31F317CF9007A1742 /* UIViewController+CLPlayerRotation.m in Sources */,
-				5B1FC4CE1DC850820036C489 /* ViewController.m in Sources */,
+				5BB4D0DF1F31A4B1007A1742 /* CLViewController.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
 				5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
@@ -304,7 +309,8 @@
 				5B35DDE21DE07A5700CEB057 /* Model.m in Sources */,
 				5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */,
 				5BDEA7181E63F4BB00953D5D /* CLSlider.m in Sources */,
-				5BB4D0D61F317E62007A1742 /* AAAViewController.m in Sources */,
+				5BB4D0D91F31A1F1007A1742 /* CLTableViewViewController.m in Sources */,
+				5BB4D0DC1F31A2E3007A1742 /* CLTabBarViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

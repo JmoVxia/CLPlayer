@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "AAAViewController.h"
+#import "CLTabBarViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -17,13 +17,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    UINavigationController *nc = [UINavigationController new];
-    AAAViewController *vc = [AAAViewController new];
-    [nc addChildViewController:vc];
-    
-    self.window.rootViewController = nc;
+    CLTabBarViewController *tabBarController = [[CLTabBarViewController alloc] init];
+    self.window.rootViewController = tabBarController;
     [self.window makeKeyAndVisible];
-    
     return YES;
 }
 
