@@ -24,6 +24,8 @@ typedef void(^BeyondBlock)();
 @property (nonatomic,strong) NSURL *url;
 /**重复播放，默认No*/
 @property (nonatomic,assign) BOOL repeatPlay;
+/**是否支持横屏,默认NO*/
+@property (nonatomic,assign) BOOL isLandscape;
 /**全屏是否隐藏状态栏，默认YES*/
 @property (nonatomic,assign) BOOL fullStatusBarHidden;
 /**拉伸方式，默认全屏填充*/

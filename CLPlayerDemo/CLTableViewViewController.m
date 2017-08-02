@@ -11,7 +11,6 @@
 #import "TableViewCell.h"
 #import "Model.h"
 #import "UIView+CLSetRect.h"
-#import  "Masonry.h"
 
 @interface CLTableViewViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate,UIScrollViewDelegate>
 

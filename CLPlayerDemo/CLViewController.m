@@ -10,6 +10,8 @@
 #import "CLViewController1.h"
 #import "CLViewController2.h"
 #import "CLViewController3.h"
+#import "CLViewController4.h"
+#import "CLViewController5.h"
 #import "UIView+CLSetRect.h"
 @interface CLViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -54,7 +56,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return 5;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     //复用Cell
@@ -70,9 +72,13 @@
     if (indexPath.row == 0) {
         cell.textLabel.text = @"某个页面需要支持多个方向";
     }else if (indexPath.row == 1){
-        cell.textLabel.text = @"pushViewController";
+        cell.textLabel.text = @"push不支持多方向";
     }else if (indexPath.row == 2){
-        cell.textLabel.text = @"presentViewController";
+        cell.textLabel.text = @"push支持多方向";
+    }else if (indexPath.row == 3){
+        cell.textLabel.text = @"present不支持多方向";
+    }else if (indexPath.row == 4){
+        cell.textLabel.text = @"present支持多方向";
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -84,7 +90,11 @@
     }else if (indexPath.row == 1){
         [self.navigationController pushViewController:[CLViewController2 new] animated:YES];
     }else if (indexPath.row == 2){
+        [self.navigationController pushViewController:[CLViewController4 new] animated:YES];
+    }else if (indexPath.row == 3){
         [self presentViewController:[CLViewController3 new] animated:YES completion:nil];
+    }else if (indexPath.row == 4){
+        [self presentViewController:[CLViewController5 new] animated:YES completion:nil];
     }
 }
 

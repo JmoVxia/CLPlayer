@@ -42,8 +42,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,assign) BOOL             isDisappear;
 /**用户点击播放标记*/
 @property (nonatomic,assign) BOOL             isUserPlay;
-/**是否支持横屏*/
-@property (nonatomic,assign) BOOL             isLandscape;
 /**记录控制器状态栏状态*/
 @property (nonatomic,assign) BOOL             statusBarHiddenState;
 /**播放器*/
@@ -231,11 +229,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _isUserPlay              = NO;
         _fullStatusBarHidden     = YES;
         //查询控制器是否支持全屏
-        _isLandscape             = [self currentViewController].shouldAutorotate;
+        _isLandscape             = NO;
         _statusBarHiddenState    = self.statusBar.isHidden;
         _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
         _progressPlayFinishColor = [UIColor whiteColor];
-        _progressBufferColor     = [UIColor lightGrayColor];
+        _progressBufferColor     = [UIColor colorWithRed:0.84118 green:0.81373 blue:0.80980 alpha:1.00000];
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
@@ -570,24 +568,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     if (_isUserPlay) {
         [self playVideo];
     }
-}
-#pragma mark -- 取出当前控制器
-- (UIViewController*)currentViewController{
-    UIWindow *window = [[UIApplication sharedApplication].delegate window];
-    UIViewController *topViewController = [window rootViewController];
-    while (true) {
-        if (topViewController.presentedViewController) {
-            topViewController = topViewController.presentedViewController;
-        } else if ([topViewController isKindOfClass:[UINavigationController class]] && [(UINavigationController*)topViewController topViewController]) {
-            topViewController = [(UINavigationController *)topViewController topViewController];
-        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
-            UITabBarController *tab = (UITabBarController *)topViewController;
-            topViewController = tab.selectedViewController;
-        } else {
-            break;
-        }
-    }
-    return topViewController;
 }
 #pragma mark - 获取资源图片
 - (UIImage *)getPictureWithName:(NSString *)name{
