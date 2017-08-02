@@ -116,6 +116,8 @@
 //    _playerView.progressBufferColor = [UIColor redColor];
 //    //设置进度条播放完成颜色
 //    _playerView.progressPlayFinishColor = [UIColor greenColor];
+    //全屏是否隐藏状态栏
+//    _playerView.fullStatusBarHidden = NO;
     //视频地址
     _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
     //播放
@@ -146,18 +148,18 @@
     [_playerView calculateScrollOffset:self.tableView cell:_cell];
 }
 #pragma mark -- 需要页面支持其他方向，需要重写这三个方法，默认所有页面只支持竖屏
-//// 是否支持自动转屏
-//- (BOOL)shouldAutorotate {
-//    return YES;
-//}
-//// 支持哪些屏幕方向
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskAll;
-//}
-//// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
-//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-//    return UIInterfaceOrientationPortrait;
-//}
+// 是否支持自动转屏
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+// 支持哪些屏幕方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
+// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
 
 
 

@@ -42,6 +42,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,assign) BOOL   isUserPlay;
 /**是否支持横屏*/
 @property (nonatomic,assign) BOOL   isLandscape;
+/**记录控制器状态栏状态*/
+@property (nonatomic,assign) BOOL   statusBarHiddenState;
 /**播放器*/
 @property (nonatomic,strong) AVPlayer         *player;
 /**playerLayer*/
@@ -88,37 +90,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     return _maskView;
 }
-#pragma mark - 初始化
-- (instancetype)initWithFrame:(CGRect)frame{
-    if (self = [super initWithFrame:frame]){
-        _isFullScreen   = NO;
-        _repeatPlay     = NO;
-        _isDisappear    = NO;
-        _isUserPlay     = NO;
-        _isLandscape    = [self currentViewController].shouldAutorotate;
-        _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
-        _progressPlayFinishColor = [UIColor whiteColor];
-        _progressBufferColor     = [UIColor lightGrayColor];
-        //开启
-        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-        //注册屏幕旋转通知
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(orientChange:)
-                                                     name:UIDeviceOrientationDidChangeNotification
-                                                   object:[UIDevice currentDevice]];
-        //APP运行状态通知，将要被挂起
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(appDidEnterBackground:)
-                                                     name:UIApplicationWillResignActiveNotification
-                                                   object:nil];
-        // app进入前台
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(appDidEnterPlayground:)
-                                                     name:UIApplicationDidBecomeActiveNotification object:nil];
-        [self creatUI];
-    }
-    return self;
-}
 #pragma mark - 视频拉伸方式
 -(void)setFillMode:(VideoFillMode)fillMode{
     switch (fillMode){
@@ -155,9 +126,54 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 -(void)setIsLandscape:(BOOL)isLandscape{
     _isLandscape = isLandscape;
 }
+#pragma mark -- 全屏状态栏是否隐藏
+-(void)setFullStatusBarHidden:(BOOL)fullStatusBarHidden{
+    _fullStatusBarHidden     = fullStatusBarHidden;
+}
 #pragma mark - 重复播放
 - (void)setRepeatPlay:(BOOL)repeatPlay{
     _repeatPlay = repeatPlay;
+}
+#pragma mark - 初始化
+- (instancetype)initWithFrame:(CGRect)frame{
+    if (self = [super initWithFrame:frame]){
+        _isFullScreen   = NO;
+        _repeatPlay     = NO;
+        _isDisappear    = NO;
+        _isUserPlay     = NO;
+        _fullStatusBarHidden = YES;
+        _isLandscape    = [self currentViewController].shouldAutorotate;
+        UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+        _statusBarHiddenState = statusBar.isHidden;
+
+        _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
+        _progressPlayFinishColor = [UIColor whiteColor];
+        _progressBufferColor     = [UIColor lightGrayColor];
+        //开启
+        [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+        //注册屏幕旋转通知
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(orientChange:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:[UIDevice currentDevice]];
+        //APP运行状态通知，将要被挂起
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(appDidEnterBackground:)
+                                                     name:UIApplicationWillResignActiveNotification
+                                                   object:nil];
+        // app进入前台
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(appDidEnterPlayground:)
+                                                     name:UIApplicationDidBecomeActiveNotification object:nil];
+        [self creatUI];
+    }
+    return self;
+}
+#pragma mark - 创建播放器UI
+- (void)creatUI{
+    self.backgroundColor = [UIColor blackColor];
+    //最上面的View
+    [self addSubview:self.maskView];
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
@@ -229,18 +245,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         }
     }
 }
-#pragma mark - 创建播放器UI
-- (void)creatUI{
-    self.backgroundColor = [UIColor blackColor];
-    //最上面的View
-    [self addSubview:self.maskView];
-}
 #pragma mark - 隐藏或者显示状态栏方法
 - (void)setStatusBarHidden:(BOOL)hidden{
     //取出当前控制器的导航条
-//    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-//    //设置是否隐藏
-//    statusBar.hidden  = hidden;
+    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    //设置是否隐藏
+    statusBar.hidden  = hidden;
 }
 #pragma mark - 监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
@@ -323,7 +333,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     CMTime dragedCMTime     = CMTimeMake(dragedSeconds, 1);
     [_player seekToTime:dragedCMTime];
 }
-
 #pragma mark - 计时器事件
 - (void)timeStack{
     if (_playerItem.duration.timescale != 0){
@@ -491,7 +500,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     //记录原始大小
     _customFarme  = self.frame;
     _isFullScreen = YES;
-    [self setStatusBarHidden:YES];
+    [self setStatusBarHidden:_fullStatusBarHidden];
     //添加到Window上
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
@@ -521,9 +530,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 原始大小
 - (void)originalscreen{
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
     _isFullScreen = NO;
-    [self setStatusBarHidden:NO];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+    [self setStatusBarHidden:_statusBarHiddenState];
     if (_isLandscape) {
         [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
     }else{
@@ -574,7 +583,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 根据Cell位置判断是否销毁
 - (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell{
-
     if (!cell) {
         return;
     }
@@ -610,9 +618,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
-    NSLog(@"播放器被销毁了");
     [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+    [self setStatusBarHidden:_statusBarHiddenState];
+    NSLog(@"播放器被销毁了");
 }
 
 
