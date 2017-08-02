@@ -9,7 +9,8 @@
 #import "CLViewController1.h"
 
 @interface CLViewController1 ()
-
+/**imageView*/
+@property (nonatomic,strong) UIImageView *imageView;
 @end
 
 @implementation CLViewController1
@@ -18,8 +19,14 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"本页面支持多个方向";
+    _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Rotation"]];
+    _imageView.center = self.view.center;
+    [self.view addSubview:_imageView];
 }
-#pragma mark -- 重写下面三个方法可以让当前页面支持多个方向
+-(void)viewDidLayoutSubviews{
+    _imageView.center = self.view.center;
+}
+#pragma mark -- 需要设置全局支持旋转方向，然后重写下面三个方法可以让当前页面支持多个方向
 // 是否支持自动转屏
 - (BOOL)shouldAutorotate {
     return YES;
@@ -32,5 +39,4 @@
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return UIInterfaceOrientationPortrait;
 }
-
 @end
