@@ -26,8 +26,6 @@ typedef void(^BeyondBlock)();
 @property (nonatomic,assign) BOOL autoFullScreen;
 /**重复播放，默认No*/
 @property (nonatomic,assign) BOOL repeatPlay;
-/**是否支持横屏，默认No*/
-@property (nonatomic,assign) BOOL isLandscape;
 /**拉伸方式，默认全屏填充*/
 @property (nonatomic,assign) VideoFillMode fillMode;
 /**进度条背景颜色*/

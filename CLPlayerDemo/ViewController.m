@@ -108,8 +108,6 @@
 //        _playerView.autoFullScreen = NO;
     //重复播放，默认不播放
     //    _playerView.repeatPlay     = YES;
-    //如果播放器所在页面支持横屏，需要设置为Yes，不支持不需要设置(默认不支持)
-        _playerView.isLandscape    = YES;
     //设置等比例全屏拉伸，多余部分会被剪切
 //    _playerView.fillMode = ResizeAspectFill;
     //设置进度条背景颜色
@@ -148,20 +146,19 @@
     //计算偏移来销毁播放器
     [_playerView calculateScrollOffset:self.tableView cell:_cell];
 }
-
-
-// 是否支持自动转屏
-- (BOOL)shouldAutorotate {
-    return YES;
-}
-// 支持哪些屏幕方向
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskAll;
-}
-// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
-- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    return UIInterfaceOrientationPortrait;
-}
+#pragma mark -- 需要页面支持其他方向，需要重写这三个方法，默认所有页面只支持竖屏
+//// 是否支持自动转屏
+//- (BOOL)shouldAutorotate {
+//    return YES;
+//}
+//// 支持哪些屏幕方向
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+//    return UIInterfaceOrientationMaskAll;
+//}
+//// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
+//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+//    return UIInterfaceOrientationPortrait;
+//}
 
 
 

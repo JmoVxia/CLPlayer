@@ -12,7 +12,7 @@
 //间隙
 #define Padding        10
 //顶部底部工具条高度
-#define ToolBarHeight     45
+#define ToolBarHeight     50
 
 @interface CLPlayerMaskView ()
 
@@ -41,8 +41,8 @@
     [self addSubview:self.failButton];
     [self makeConstraints];
 
-    self.topToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
-    self.bottomToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.50000f];
+    self.topToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
+    self.bottomToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
     
 }
 #pragma mark - 约束

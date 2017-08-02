@@ -15,13 +15,6 @@
 #define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
 /**UIScreen height*/
 #define  CLscreenHeight  [UIScreen mainScreen].bounds.size.height
-
-//方向枚举
-typedef NS_ENUM(NSInteger,Direction){
-    Letf = 0,
-    Right,
-};
-
 // 播放器的几种状态
 typedef NS_ENUM(NSInteger, CLPlayerState) {
     CLPlayerStateFailed,     // 播放失败
@@ -43,12 +36,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,copy) NSString        *videoFillMode;
 /**全屏标记*/
 @property (nonatomic,assign) BOOL   isFullScreen;
-/**横屏标记*/
-@property (nonatomic,assign) BOOL   landscape;
 /**工具条隐藏标记*/
 @property (nonatomic,assign) BOOL   isDisappear;
 /**用户点击播放标记*/
 @property (nonatomic,assign) BOOL   isUserPlay;
+/**是否支持横屏*/
+@property (nonatomic,assign) BOOL   isLandscape;
 /**播放器*/
 @property (nonatomic,strong) AVPlayer         *player;
 /**playerLayer*/
@@ -78,7 +71,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _maskView.progressBackgroundColor = _progressBackgroundColor;
         _maskView.progressBufferColor     = _progressBufferColor;
         _maskView.progressPlayFinishColor = _progressPlayFinishColor;
-        _maskView.delegate = self;
+        _maskView.delegate                = self;
         [_maskView addTarget:self action:@selector(disappearAction:) forControlEvents:UIControlEventTouchUpInside];
         //计时器，循环执行
         _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
@@ -87,11 +80,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                       userInfo:nil
                                                        repeats:YES];
         //定时器，工具条消失
-        _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
-                                                  target:self
-                                                selector:@selector(disappear)
-                                                userInfo:nil
-                                                 repeats:NO];
+        _timer       = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+                                                        target:self
+                                                      selector:@selector(disappear)
+                                                      userInfo:nil
+                                                       repeats:NO];
     }
     return _maskView;
 }
@@ -101,22 +94,23 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _isFullScreen   = NO;
         _autoFullScreen = YES;
         _repeatPlay     = NO;
-        _isLandscape    = NO;
-        _landscape      = NO;
         _isDisappear    = NO;
         _isUserPlay     = NO;
-        
+        _isLandscape    = [self currentViewController].shouldAutorotate;
+
         _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
         _progressPlayFinishColor = [UIColor whiteColor];
         _progressBufferColor     = [UIColor lightGrayColor];
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientChange:)
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(orientChange:)
                                                      name:UIDeviceOrientationDidChangeNotification
                                                    object:[UIDevice currentDevice]];
         //APP运行状态通知，将要被挂起
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidEnterBackground:)
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(appDidEnterBackground:)
                                                      name:UIApplicationWillResignActiveNotification
                                                    object:nil];
         // app进入前台
@@ -146,17 +140,17 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 进度条背景颜色
 -(void)setProgressBackgroundColor:(UIColor *)progressBackgroundColor{
-    _progressBackgroundColor = progressBackgroundColor;
+    _progressBackgroundColor              = progressBackgroundColor;
     self.maskView.progressBackgroundColor = progressBackgroundColor;
 }
 #pragma mark -- 进度条缓冲颜色
 -(void)setProgressBufferColor:(UIColor *)progressBufferColor{
-    _progressBufferColor = progressBufferColor;
+    _progressBufferColor              = progressBufferColor;
     self.maskView.progressBufferColor = progressBufferColor;
 }
 #pragma mark -- 进度条播放完成颜色
 -(void)setProgressPlayFinishColor:(UIColor *)progressPlayFinishColor{
-    _progressPlayFinishColor = progressPlayFinishColor;
+    _progressPlayFinishColor              = progressPlayFinishColor;
     self.maskView.progressPlayFinishColor = progressPlayFinishColor;
 }
 #pragma mark - 是否自动支持全屏
@@ -166,7 +160,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 是否支持横屏
 -(void)setIsLandscape:(BOOL)isLandscape{
     _isLandscape = isLandscape;
-    _landscape   = isLandscape;
 }
 #pragma mark - 重复播放
 - (void)setRepeatPlay:(BOOL)repeatPlay{
@@ -283,7 +276,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         }
     }
 }
-
 #pragma mark - 缓冲较差时候
 //卡顿时会走这里
 - (void)bufferingSomeSecond{
@@ -349,10 +341,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         NSInteger proMin     = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
         NSInteger proSec     = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
         self.maskView.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", proMin, proSec];
-        
         //duration 总时长
         NSInteger durMin     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总分钟
         NSInteger durSec     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总秒
+        
         self.maskView.totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", durMin, durSec];
     }
 }
@@ -366,13 +358,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 全屏按钮响应事件
 -(void)cl_fullButtonAction:(UIButton *)button{
-    _isLandscape = NO;
     if (_isFullScreen == NO){
-        [self fullScreenWithDirection:Letf];
+        [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
     }else{
         [self originalscreen];
     }
-    _isLandscape = _landscape;
 }
 #pragma mark - 播放失败按钮点击事件
 -(void)cl_failButtonAction:(UIButton *)button{
@@ -481,12 +471,20 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
     if (orientation == UIDeviceOrientationLandscapeLeft){
         if (_isFullScreen == NO){
-            [self fullScreenWithDirection:Letf];
+            if (_isLandscape) {
+                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
+            }else{
+                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
+            }
         }
     }
     else if (orientation == UIDeviceOrientationLandscapeRight){
         if (_isFullScreen == NO){
-            [self fullScreenWithDirection:Right];
+            if (_isLandscape) {
+                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
+            }else{
+                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
+            }
         }
     }
     else if (orientation == UIDeviceOrientationPortrait){
@@ -496,7 +494,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
 }
 #pragma mark - 全屏
-- (void)fullScreenWithDirection:(Direction)direction{
+- (void)fullScreenWithDirection:(UIInterfaceOrientation)direction{
     //记录播放器父类
     _fatherView   = self.superview;
     //记录原始大小
@@ -507,14 +505,18 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
     if (_isLandscape == YES){
+        UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
+        if (currentOrientation != direction) {
+            [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
+        }
         self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
     }else{
-        if (direction == Letf){
+        if (direction == UIInterfaceOrientationLandscapeLeft){
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
             }];
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
-        }else{
+        }else if (direction == UIInterfaceOrientationLandscapeRight) {
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
             }];
@@ -531,10 +533,14 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
     _isFullScreen = NO;
     [self setStatusBarHidden:NO];
-    [UIView animateWithDuration:0.25 animations:^{
-        //还原
-        self.transform = CGAffineTransformMakeRotation(0);
-    }];
+    if (_isLandscape) {
+        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
+    }else{
+        [UIView animateWithDuration:0.25 animations:^{
+            //还原
+            self.transform = CGAffineTransformMakeRotation(0);
+        }];
+    }
     self.frame = _customFarme;
     //还原到原有父类上
     [_fatherView addSubview:self];
@@ -550,6 +556,24 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     if (_isUserPlay) {
         [self playVideo];
     }
+}
+#pragma mark -- 取出当前控制器
+- (UIViewController*)currentViewController{
+    UIWindow *window = [[UIApplication sharedApplication].delegate window];
+    UIViewController *topViewController = [window rootViewController];
+    while (true) {
+        if (topViewController.presentedViewController) {
+            topViewController = topViewController.presentedViewController;
+        } else if ([topViewController isKindOfClass:[UINavigationController class]] && [(UINavigationController*)topViewController topViewController]) {
+            topViewController = [(UINavigationController *)topViewController topViewController];
+        } else if ([topViewController isKindOfClass:[UITabBarController class]]) {
+            UITabBarController *tab = (UITabBarController *)topViewController;
+            topViewController = tab.selectedViewController;
+        } else {
+            break;
+        }
+    }
+    return topViewController;
 }
 #pragma mark - 获取资源图片
 - (UIImage *)getPictureWithName:(NSString *)name{
