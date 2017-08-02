@@ -289,7 +289,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     } else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
         // 当缓冲是空的时候
         if (self.playerItem.playbackBufferEmpty) {
-            self.state = CLPlayerStateBuffering;
             [self bufferingSomeSecond];
         }
     } else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
@@ -464,6 +463,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 销毁播放器
 - (void)destroyPlayer{
     //销毁定时器
+    [self pausePlay];
     [self destroyAllTimer];
     [self.playerLayer removeFromSuperlayer];
     [self removeFromSuperview];
@@ -472,6 +472,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark -- 重置播放器
 - (void)resetPlayer{
+    _isUserPlay = NO;
+    [self pausePlay];
     [self.playerLayer removeFromSuperlayer];
     self.playerLayer = nil;
     self.player      = nil;
@@ -490,6 +492,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                             selector:@selector(disappear)
                                             userInfo:nil
                                              repeats:NO];
+    [self.maskView.activity startAnimating];
 }
 #pragma mark - 取消定时器
 //销毁所有定时器
