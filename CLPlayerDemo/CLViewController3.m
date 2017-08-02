@@ -40,7 +40,7 @@
     //全屏是否隐藏状态栏
     //    _playerView.fullStatusBarHidden = NO;
     //视频地址
-    _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2016/1117/582db0698584d_wpd.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0116/569a048739c11_wpc.mp4"];
     //播放
     [_playerView playVideo];
     
@@ -66,7 +66,9 @@
     
 }
 - (void)back{
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2016/0506/572c023692765_wpc.mp4"];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated{

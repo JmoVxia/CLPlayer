@@ -19,6 +19,9 @@
     //本页面继承自CLViewController2
     //使用代码和CLViewController2中一样，需要增加下面代码，告诉播放器当前页面支持旋转
     self.playerView.isLandscape = YES;
+    
+    
+
 }
 
 #pragma mark -- 需要设置全局支持旋转方向，然后重写下面三个方法可以让当前页面支持多个方向

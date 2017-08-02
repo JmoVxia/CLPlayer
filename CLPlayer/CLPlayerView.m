@@ -144,6 +144,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
+    if ([[NSString stringWithFormat:@"%@",_url] isEqualToString:[NSString stringWithFormat:@"%@",url]]) {
+        return;
+    }
     _url                      = url;
     self.playerItem           = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:_url]];
     //创建
@@ -175,6 +178,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
         [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
         [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+        //重置播放器
+        [self resetPlayer];
     }
     _playerItem = playerItem;
     if (playerItem) {
@@ -198,6 +203,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                         options:NSKeyValueObservingOptionNew
                         context:nil];
     }
+}
+-(void)setPlayer:(AVPlayer *)player{
+    if (_player == player) {
+        return;
+    }
+    
 }
 - (void)setState:(CLPlayerState)state{
     _state = state;
@@ -454,12 +465,31 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)destroyPlayer{
     //销毁定时器
     [self destroyAllTimer];
-    //暂停
-    [_player pause];
     [self.playerLayer removeFromSuperlayer];
     [self removeFromSuperview];
     self.playerLayer = nil;
     self.player      = nil;
+}
+#pragma mark -- 重置播放器
+- (void)resetPlayer{
+    [self.playerLayer removeFromSuperlayer];
+    self.playerLayer = nil;
+    self.player      = nil;
+    self.maskView.slider.value = 0.0;
+    [self.maskView.progress setProgress:0.0];
+    self.maskView.currentTimeLabel.text = @"00:00";
+    self.maskView.totalTimeLabel.text   = @"00:00";
+    //重置工具条
+    [UIView animateWithDuration:0.5 animations:^{
+        self.maskView.topToolBar.alpha    = 1.0;
+        self.maskView.bottomToolBar.alpha = 1.0;
+    }];
+    [self destroyTimer];
+    _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+                                              target:self
+                                            selector:@selector(disappear)
+                                            userInfo:nil
+                                             repeats:NO];
 }
 #pragma mark - 取消定时器
 //销毁所有定时器
