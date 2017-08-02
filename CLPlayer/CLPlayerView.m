@@ -455,11 +455,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [self destroyAllTimer];
     //暂停
     [_player pause];
-    //清除
-    [_player.currentItem cancelPendingSeeks];
-    [_player.currentItem.asset cancelLoading];
-    //移除
+    [self.playerLayer removeFromSuperlayer];
     [self removeFromSuperview];
+    self.playerLayer = nil;
+    self.player = nil;
 }
 #pragma mark - 取消定时器
 //销毁所有定时器
