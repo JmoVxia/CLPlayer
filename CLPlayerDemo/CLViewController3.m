@@ -27,7 +27,7 @@
     
 //    //重复播放，默认不播放
 //    _playerView.repeatPlay = YES;
-//    //当前控制器是否支持旋转
+//    //当前控制器是否支持旋转，当前页面支持旋转的时候需要设置，告知播放器
 //    _playerView.isLandscape = YES;
 //    //设置等比例全屏拉伸，多余部分会被剪切
 //    _playerView.fillMode = ResizeAspectFill;

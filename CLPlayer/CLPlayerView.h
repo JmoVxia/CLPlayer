@@ -28,6 +28,8 @@ typedef void(^BeyondBlock)();
 @property (nonatomic,assign) BOOL isLandscape;
 /**全屏是否隐藏状态栏，默认YES*/
 @property (nonatomic,assign) BOOL fullStatusBarHidden;
+/**是否是全屏*/
+@property (nonatomic,assign,readonly) BOOL isFullScreen;
 /**拉伸方式，默认全屏填充*/
 @property (nonatomic,assign) VideoFillMode fillMode;
 /**进度条背景颜色*/
