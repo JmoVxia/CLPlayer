@@ -144,6 +144,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)setRepeatPlay:(BOOL)repeatPlay{
     _repeatPlay = repeatPlay;
 }
+#pragma mark - 静音
+-(void)setMute:(BOOL)mute{
+    _mute = mute;
+    self.player.muted = _mute;
+}
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
     //相同视频地址不做处理
@@ -232,11 +237,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     if (self = [super initWithFrame:frame]){
         //初始值
         _isFullScreen            = NO;
-        _repeatPlay              = NO;
         _isDisappear             = NO;
         _isUserPlay              = NO;
-        _fullStatusBarHidden     = YES;
         _isUserTapMaxButton      = NO;
+        _fullStatusBarHidden     = YES;
+        _repeatPlay              = NO;
+        _mute                    = NO;
         //查询控制器是否支持全屏
         _isLandscape             = NO;
         _statusBarHiddenState    = self.statusBar.isHidden;
@@ -274,6 +280,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     if ([keyPath isEqualToString:@"status"]) {
         if (self.player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
             self.state = CLPlayerStatePlaying;
+            self.player.muted = self.mute;
         }
         else if (self.player.currentItem.status == AVPlayerItemStatusFailed) {
             self.state = CLPlayerStateFailed;

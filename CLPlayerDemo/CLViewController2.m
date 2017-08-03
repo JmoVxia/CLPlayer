@@ -39,15 +39,16 @@
 //    _playerView.progressPlayFinishColor = [UIColor greenColor];
 //    //全屏是否隐藏状态栏
 //    _playerView.fullStatusBarHidden = NO;
-
+//    //是否静音，默认NO
+//    _playerView.mute = YES;
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0116/569a048739c11_wpc.mp4"];
     //播放
     [_playerView playVideo];
-    
     //返回按钮点击事件回调
     [_playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");
+        //查询是否是全屏状态
         NSLog(@"%d",_playerView.isFullScreen);
     }];
     //播放完成回调
