@@ -25,7 +25,7 @@
 /**tableView*/
 - (UITableView *) tableView{
     if (_tableView == nil){
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, CLscreenWidth, CLscreenHeight - 69 - 44) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, CLscreenWidth, CLscreenHeight - 64 - 49) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.sectionFooterHeight = 0;
@@ -41,7 +41,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"CLPlayer";
     [self.view addSubview:self.tableView];
-    
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     UILabel *label = [[UILabel alloc] init];
     label.text = @"播放器默认全部页面只支持竖屏";

@@ -66,8 +66,8 @@
     
 }
 - (void)back{
-//    [self dismissViewControllerAnimated:YES completion:nil];
-    _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2016/0506/572c023692765_wpc.mp4"];
+    [self dismissViewControllerAnimated:YES completion:nil];
+//    _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2016/0506/572c023692765_wpc.mp4"];
 
 }
 
