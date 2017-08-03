@@ -10,7 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "UIView+CLSetRect.h"
 #define CellHeight   300
-#define ImageViewHeight 450
+#define ImageViewHeight 600
 @interface TableViewCell ()
 
 /**button*/
@@ -53,8 +53,7 @@
 -(void)setModel:(Model *)model
 {
     _model = model;
-    
-    [_pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl]];
+    [_pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
 }
 
@@ -89,8 +88,7 @@
     //位移比例
     CGFloat offsetDig    = 2 * cellOffsetY / self.superview.frame.size.height ;
     //要补偿的位移,self.superview.frame.origin.y是tableView的Y值，这里加上是为了让图片从最上面开始显示
-//    CGFloat superViewY   = CLscreenHeight - self.superview.frame.size.height;
-    CGFloat offset       = -offsetDig * (ImageViewHeight - CellHeight) / 2 + 44;
+    CGFloat offset       = - offsetDig * (ImageViewHeight - CellHeight) / 2;
     
     //让pictureViewY轴方向位移offset
     CGAffineTransform transY = CGAffineTransformMakeTranslation(0,offset);

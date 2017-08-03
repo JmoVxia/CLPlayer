@@ -11,7 +11,7 @@
 #import "TableViewCell.h"
 #import "Model.h"
 #import "UIView+CLSetRect.h"
-
+#import "UIImageView+WebCache.h"
 @interface CLTableViewViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate,UIScrollViewDelegate>
 
 /**tableView*/
@@ -78,6 +78,25 @@
     myCell.model = _arrayDS[indexPath.row];
     //Cell开始出现的时候修正偏移量，让图片可以全部显示
     [myCell cellOffset];
+    //特效
+    if (![[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:myCell.model.pictureUrl]]) {
+        CATransform3D rotation;//3D旋转
+        rotation = CATransform3DMakeTranslation(0 ,50 ,20);
+        //逆时针旋转
+        rotation = CATransform3DScale(rotation, 0.8, 0.9, 1);
+        rotation.m34 = 1.0/ -600;
+        cell.layer.shadowColor = [[UIColor blackColor]CGColor];
+        cell.layer.shadowOffset = CGSizeMake(10, 10);
+        cell.alpha = 0;
+        cell.layer.transform = rotation;
+        [UIView beginAnimations:@"rotation" context:NULL];
+        //旋转时间
+        [UIView setAnimationDuration:0.8];
+        cell.layer.transform = CATransform3DIdentity;
+        cell.alpha = 1;
+        cell.layer.shadowOffset = CGSizeMake(0, 0);
+        [UIView commitAnimations];
+    }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
