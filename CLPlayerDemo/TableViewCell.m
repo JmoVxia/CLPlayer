@@ -20,8 +20,6 @@
 
 @end
 
-
-
 @implementation TableViewCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -32,13 +30,10 @@
     }
     return self;
 }
-
-- (void)initUI
-{
+- (void)initUI{
     //剪裁看不到的
     self.clipsToBounds  = YES;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-
     UIImageView *pictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, - (ImageViewHeight - CellHeight) * 0.5, CLscreenWidth, ImageViewHeight)];
     [self.contentView addSubview:pictureView];
     _pictureView = pictureView;
@@ -49,9 +44,7 @@
     [self.contentView addSubview:button];
     _button = button;
 }
-
--(void)setModel:(Model *)model
-{
+-(void)setModel:(Model *)model{
     _model = model;
     UIImage *placeholderImage = [UIImage imageNamed:@"placeholder"];
     if ([[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:_model.pictureUrl]]) {
@@ -59,27 +52,18 @@
         placeholderImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:model.pictureUrl];
     }
     [_pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl] placeholderImage:placeholderImage];
-    
 }
-
-- (void)playAction:(UIButton *)button
-{
-    if (_videoDelegate && [_videoDelegate respondsToSelector:@selector(PlayVideoWithCell:)])
-    {
+- (void)playAction:(UIButton *)button{
+    if (_videoDelegate && [_videoDelegate respondsToSelector:@selector(PlayVideoWithCell:)]){
         [_videoDelegate PlayVideoWithCell:self];
     }
 }
-
-- (UIImage *)getPictureWithName:(NSString *)name
-{
+- (UIImage *)getPictureWithName:(NSString *)name{
     NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"CLPlayer" ofType:@"bundle"]];
     NSString *path   = [bundle pathForResource:name ofType:@"png"];
     return [UIImage imageWithContentsOfFile:path];
 }
-
-
-- (CGFloat)cellOffset
-{
+- (CGFloat)cellOffset{
     /*
      - (CGRect)convertRect:(CGRect)rect toView:(nullable UIView *)view;
      将rect由rect所在视图转换到目标视图view中，返回在目标视图view中的rect
@@ -88,22 +72,18 @@
     CGRect toWindow      = [self convertRect:self.bounds toView:self.window];
     //获取父视图的中心
     CGPoint windowCenter = self.superview.center;
-    //cell在y轴上的位移  CGRectGetMidY之前讲过,获取中心Y值
+    //cell在y轴上的位移
     CGFloat cellOffsetY  = CGRectGetMidY(toWindow) - windowCenter.y;
     //位移比例
     CGFloat offsetDig    = 2 * cellOffsetY / self.superview.frame.size.height ;
     //要补偿的位移,self.superview.frame.origin.y是tableView的Y值，这里加上是为了让图片从最上面开始显示
     CGFloat offset       = - offsetDig * (ImageViewHeight - CellHeight) / 2;
-    
     //让pictureViewY轴方向位移offset
     CGAffineTransform transY = CGAffineTransformMakeTranslation(0,offset);
     _pictureView.transform   = transY;
-    
     return offset;
 }
-
--(void)layoutSubviews
-{
+-(void)layoutSubviews{
     [super layoutSubviews];
     _button.CLcenterX     = self.CLwidth/2.0;
     _button.CLcenterY     = self.CLheight/2.0;

@@ -78,16 +78,16 @@
         //逆时针旋转
         rotation = CATransform3DScale(rotation, 0.8, 0.9, 1);
         rotation.m34 = 1.0/ -600;
-        cell.layer.shadowColor = [[UIColor blackColor]CGColor];
-        cell.layer.shadowOffset = CGSizeMake(10, 10);
-        cell.alpha = 0;
-        cell.layer.transform = rotation;
+        myCell.layer.shadowColor = [[UIColor blackColor]CGColor];
+        myCell.layer.shadowOffset = CGSizeMake(10, 10);
+        myCell.alpha = 0;
+        myCell.layer.transform = rotation;
         [UIView beginAnimations:@"rotation" context:NULL];
         //旋转时间
         [UIView setAnimationDuration:0.8];
-        cell.layer.transform = CATransform3DIdentity;
-        cell.alpha = 1;
-        cell.layer.shadowOffset = CGSizeMake(0, 0);
+        myCell.layer.transform = CATransform3DIdentity;
+        myCell.alpha = 1;
+        myCell.layer.shadowOffset = CGSizeMake(0, 0);
         [UIView commitAnimations];
     }
 }
