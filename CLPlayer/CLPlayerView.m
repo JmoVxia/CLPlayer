@@ -204,12 +204,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                         context:nil];
     }
 }
--(void)setPlayer:(AVPlayer *)player{
-    if (_player == player) {
-        return;
-    }
-    
-}
 - (void)setState:(CLPlayerState)state{
     _state = state;
     if (state == CLPlayerStateBuffering) {

@@ -53,7 +53,12 @@
 -(void)setModel:(Model *)model
 {
     _model = model;
-    [_pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl] placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    UIImage *placeholderImage = [UIImage imageNamed:@"placeholder"];
+    if ([[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:_model.pictureUrl]]) {
+        //本地存在图片,替换占位图片
+        placeholderImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:model.pictureUrl];
+    }
+    [_pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl] placeholderImage:placeholderImage];
     
 }
 

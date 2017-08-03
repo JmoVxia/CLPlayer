@@ -49,36 +49,29 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, CLscreenWidth, CLscreenHeight - 64 - 49) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.sectionFooterHeight = 0;
-    self.tableView.sectionHeaderHeight = 0;
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.tableView];
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _arrayDS.count;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *Index = @"Cell";
     TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:Index];
-    if (!cell)
-    {
+    if (!cell){
         cell = [[TableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Index];
     }
     cell.videoDelegate = self;
     return cell;
 }
 //在willDisplayCell里面处理数据能优化tableview的滑动流畅性
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     TableViewCell * myCell = (TableViewCell *)cell;
     myCell.model = _arrayDS[indexPath.row];
     //Cell开始出现的时候修正偏移量，让图片可以全部显示
     [myCell cellOffset];
-    //特效
+    //第一次加载动画
     if (![[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:myCell.model.pictureUrl]]) {
         CATransform3D rotation;//3D旋转
         rotation = CATransform3DMakeTranslation(0 ,50 ,20);
@@ -98,44 +91,34 @@
         [UIView commitAnimations];
     }
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 300;
 }
 #pragma mark - 点击播放代理
-- (void)PlayVideoWithCell:(TableViewCell *)cell;
-{
+- (void)PlayVideoWithCell:(TableViewCell *)cell;{
     //记录被点击的Cell
     _cell = cell;
-    
     //销毁播放器
     [_playerView destroyPlayer];
-    _playerView = nil;
-    
     CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.CLwidth, cell.CLheight)];
-    
     _playerView = playerView;
     [cell.contentView addSubview:_playerView];
-    
-    //根据旋转自动支持全屏，默认支持
-    //        _playerView.autoFullScreen = NO;
-    //重复播放，默认不播放
-    //    _playerView.repeatPlay     = YES;
-    //设置等比例全屏拉伸，多余部分会被剪切
-    //    _playerView.fillMode = ResizeAspectFill;
-    //设置进度条背景颜色
-    //    _playerView.progressBackgroundColor = [UIColor purpleColor];
-    //    //设置进度条缓冲颜色
-    //    _playerView.progressBufferColor = [UIColor redColor];
-    //    //设置进度条播放完成颜色
-    //    _playerView.progressPlayFinishColor = [UIColor greenColor];
-    //全屏是否隐藏状态栏
-    //    _playerView.fullStatusBarHidden = NO;
+//    //重复播放，默认不播放
+//    _playerView.repeatPlay = YES;
+//    //设置等比例全屏拉伸，多余部分会被剪切
+//    _playerView.fillMode = ResizeAspectFill;
+//    //设置进度条背景颜色
+//    _playerView.progressBackgroundColor = [UIColor purpleColor];
+//    //设置进度条缓冲颜色
+//    _playerView.progressBufferColor = [UIColor redColor];
+//    //设置进度条播放完成颜色
+//    _playerView.progressPlayFinishColor = [UIColor greenColor];
+//    //全屏是否隐藏状态栏
+//    _playerView.fullStatusBarHidden = NO;
     //视频地址
     _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
     //播放
     [_playerView playVideo];
-    
     //返回按钮点击事件回调
     [_playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");
@@ -149,8 +132,7 @@
     }];
 }
 #pragma mark - 滑动代理
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     // visibleCells 获取界面上能显示出来了cell
     NSArray<TableViewCell *> *array = [self.tableView visibleCells];
     //enumerateObjectsUsingBlock 类似于for，但是比for更快
