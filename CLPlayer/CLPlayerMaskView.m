@@ -31,6 +31,7 @@
     [self addSubview:self.topToolBar];
     [self addSubview:self.bottomToolBar];
     [self addSubview:self.activity];
+    [self addSubview:self.failButton];
     [self.topToolBar addSubview:self.backButton];
     [self.bottomToolBar addSubview:self.playButton];
     [self.bottomToolBar addSubview:self.fullButton];
@@ -38,8 +39,6 @@
     [self.bottomToolBar addSubview:self.totalTimeLabel];
     [self.bottomToolBar addSubview:self.progress];
     [self.bottomToolBar addSubview:self.slider];
-    [self addSubview:self.failButton];
-    [self makeConstraints];
 
     self.topToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
     self.bottomToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
@@ -295,6 +294,11 @@
     }else{
         NSLog(@"没有实现代理或者没有设置代理人");
     }
+}
+#pragma mark - 布局
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    [self makeConstraints];
 }
 #pragma mark - 获取资源图片
 - (UIImage *)getPictureWithName:(NSString *)name{
