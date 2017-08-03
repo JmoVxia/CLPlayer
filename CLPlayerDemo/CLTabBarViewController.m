@@ -7,6 +7,7 @@
 //
 
 #import "CLTabBarViewController.h"
+#import "CLNavigationViewController.h"
 #import "CLTableViewViewController.h"
 #import "CLViewController.h"
 
@@ -51,9 +52,10 @@
     UIImage *selImage = [[UIImage imageNamed:selImageName]imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)];
     chilidVC.tabBarItem.selectedImage = selImage;
     //添加导航控制器
-    UINavigationController *navVC = [[UINavigationController alloc]initWithRootViewController:chilidVC];
+    CLNavigationViewController *navVC = [[CLNavigationViewController alloc]initWithRootViewController:chilidVC];
     [self addChildViewController:navVC];
 }
+
 
 
 
