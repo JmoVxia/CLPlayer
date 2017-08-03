@@ -560,7 +560,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         if (_isUserTapMaxButton) {
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         }
-        self.frame = CGRectMake(0, 0, keyWindow.frame.size.width, keyWindow.frame.size.height);
+        if (keyWindow.frame.size.width < keyWindow.frame.size.height) {
+            self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
+        }else{
+            self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
+        }
     }else{
         //播放器所在控制器不支持旋转，采用旋转view的方式实现
         if (direction == UIInterfaceOrientationLandscapeLeft){
@@ -574,7 +578,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
             }];
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:NO];
         }
-        self.frame = CGRectMake(0, 0, keyWindow.frame.size.height, keyWindow.frame.size.width);
+        self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
     }
     self.maskView.fullButton.selected = YES;
     [self setNeedsLayout];

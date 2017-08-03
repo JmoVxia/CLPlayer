@@ -87,6 +87,7 @@
     [super layoutSubviews];
     _button.CLcenterX     = self.CLwidth/2.0;
     _button.CLcenterY     = self.CLheight/2.0;
+    _pictureView.CLwidth  = self.CLwidth;
 }
 
 

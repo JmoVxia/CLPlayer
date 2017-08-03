@@ -12,6 +12,7 @@
 #import "Model.h"
 #import "UIView+CLSetRect.h"
 #import "UIImageView+WebCache.h"
+#import "Masonry.h"
 @interface CLTableViewViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate,UIScrollViewDelegate>
 
 /**tableView*/
@@ -105,6 +106,8 @@
     [cell.contentView addSubview:_playerView];
 //    //重复播放，默认不播放
 //    _playerView.repeatPlay = YES;
+//    //当前控制器是否支持旋转
+    _playerView.isLandscape = YES;
 //    //设置等比例全屏拉伸，多余部分会被剪切
 //    _playerView.fillMode = ResizeAspectFill;
 //    //设置进度条背景颜色
@@ -142,19 +145,25 @@
     //计算偏移来销毁播放器
     [_playerView calculateScrollOffset:self.tableView cell:_cell];
 }
+-(void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.view);
+    }];
+}
 #pragma mark -- 需要页面支持其他方向，需要重写这三个方法，默认所有页面只支持竖屏
-//// 是否支持自动转屏
-//- (BOOL)shouldAutorotate {
-//    return YES;
-//}
-//// 支持哪些屏幕方向
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskAll;
-//}
-//// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
-//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-//    return UIInterfaceOrientationPortrait;
-//}
+// 是否支持自动转屏
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+// 支持哪些屏幕方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
+// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
 
 
 

@@ -25,20 +25,21 @@
     _playerView = playerView;
     [self.view addSubview:_playerView];
     
-    //根据旋转自动支持全屏，默认支持
-    //        _playerView.autoFullScreen = NO;
-    //重复播放，默认不播放
-    //    _playerView.repeatPlay     = YES;
-    //设置等比例全屏拉伸，多余部分会被剪切
-    //    _playerView.fillMode = ResizeAspectFill;
-    //设置进度条背景颜色
-    //    _playerView.progressBackgroundColor = [UIColor purpleColor];
-    //    //设置进度条缓冲颜色
-    //    _playerView.progressBufferColor = [UIColor redColor];
-    //    //设置进度条播放完成颜色
-    //    _playerView.progressPlayFinishColor = [UIColor greenColor];
-    //全屏是否隐藏状态栏
-    //    _playerView.fullStatusBarHidden = NO;
+//    //重复播放，默认不播放
+//    _playerView.repeatPlay = YES;
+//    //当前控制器是否支持旋转
+//    _playerView.isLandscape = YES;
+//    //设置等比例全屏拉伸，多余部分会被剪切
+//    _playerView.fillMode = ResizeAspectFill;
+//    //设置进度条背景颜色
+//    _playerView.progressBackgroundColor = [UIColor purpleColor];
+//    //设置进度条缓冲颜色
+//    _playerView.progressBufferColor = [UIColor redColor];
+//    //设置进度条播放完成颜色
+//    _playerView.progressPlayFinishColor = [UIColor greenColor];
+//    //全屏是否隐藏状态栏
+//    _playerView.fullStatusBarHidden = NO;
+
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0116/569a048739c11_wpc.mp4"];
     //播放
