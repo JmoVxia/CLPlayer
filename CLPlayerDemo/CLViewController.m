@@ -41,7 +41,7 @@
     self.navigationItem.title = @"CLPlayer";
     [self.view addSubview:self.tableView];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    self.hidesBottomBarWhenPushed = YES;
     UILabel *label = [[UILabel alloc] init];
     label.text = @"播放器默认全部页面只支持竖屏";
     label.textColor = [UIColor redColor];

@@ -57,19 +57,16 @@
     }];
 
     UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, 450, 90, 90)];
-    [but setTitle:@"下一个" forState:UIControlStateNormal];
+    [but setTitle:@"切换视频" forState:UIControlStateNormal];
     but.backgroundColor = [UIColor lightGrayColor];
     but.CLcenterX = self.view.CLcenterX;
     [but addTarget:self action:@selector(next) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:but];
-    
-    
 }
 - (void)next{
     _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2015/0820/55d5addd8d4c9_wpc.mp4"];
+    [_playerView playVideo];
 }
-
-
 -(void)viewDidDisappear:(BOOL)animated{
     [_playerView destroyPlayer];
     _playerView = nil;

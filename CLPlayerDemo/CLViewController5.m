@@ -17,7 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //本页面继承自CLViewController3
-    self.view.backgroundColor = [UIColor orangeColor];
     //使用代码和CLViewController3中一样，需要增加下面代码，告诉播放器当前页面支持旋转
     self.playerView.isLandscape = YES;
 }

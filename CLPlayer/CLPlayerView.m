@@ -44,6 +44,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic,assign) BOOL             isUserPlay;
 /**记录控制器状态栏状态*/
 @property (nonatomic,assign) BOOL             statusBarHiddenState;
+/**点击最大化标记*/
+@property (nonatomic,assign) BOOL             isUserTapMaxButton;
 /**播放器*/
 @property (nonatomic,strong) AVPlayer         *player;
 /**playerLayer*/
@@ -234,6 +236,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _isDisappear             = NO;
         _isUserPlay              = NO;
         _fullStatusBarHidden     = YES;
+        _isUserTapMaxButton      = NO;
         //查询控制器是否支持全屏
         _isLandscape             = NO;
         _statusBarHiddenState    = self.statusBar.isHidden;
@@ -385,6 +388,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 全屏按钮响应事件
 -(void)cl_fullButtonAction:(UIButton *)button{
     if (_isFullScreen == NO){
+        _isUserTapMaxButton = YES;
         [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
     }else{
         [self originalscreen];
@@ -552,12 +556,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
     if (_isLandscape == YES){
-        //播放器所在控制器支持旋转，直接旋转页面
-        UIInterfaceOrientation currentOrientation = [UIApplication sharedApplication].statusBarOrientation;
-        if (currentOrientation != direction) {
+        //手动点击需要旋转方向
+        if (_isUserTapMaxButton) {
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         }
-        self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
+        self.frame = CGRectMake(0, 0, keyWindow.frame.size.width, keyWindow.frame.size.height);
     }else{
         //播放器所在控制器不支持旋转，采用旋转view的方式实现
         if (direction == UIInterfaceOrientationLandscapeLeft){
@@ -571,7 +574,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
             }];
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:NO];
         }
-        self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
+        self.frame = CGRectMake(0, 0, keyWindow.frame.size.height, keyWindow.frame.size.width);
     }
     self.maskView.fullButton.selected = YES;
     [self setNeedsLayout];
@@ -580,6 +583,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 原始大小
 - (void)originalscreen{
     _isFullScreen = NO;
+    _isUserTapMaxButton = NO;
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
     [self setStatusBarHidden:_statusBarHiddenState];
     if (_isLandscape) {
