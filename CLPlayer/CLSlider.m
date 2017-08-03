@@ -29,7 +29,6 @@
     }
     return self;
 }
-
 - (void)setup {
     UIImage *thumbImage = [self getPictureWithName:@"CLRound"];
     [self setThumbImage:thumbImage forState:UIControlStateHighlighted];

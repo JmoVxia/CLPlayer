@@ -39,10 +39,8 @@
     [self.bottomToolBar addSubview:self.totalTimeLabel];
     [self.bottomToolBar addSubview:self.progress];
     [self.bottomToolBar addSubview:self.slider];
-
     self.topToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
     self.bottomToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
-    
 }
 #pragma mark - 约束
 - (void)makeConstraints{
@@ -232,7 +230,6 @@
     }
     return _failButton;
 }
-
 #pragma mark - 按钮点击事件
 //返回按钮
 - (void)backButtonAction:(UIButton *)button{

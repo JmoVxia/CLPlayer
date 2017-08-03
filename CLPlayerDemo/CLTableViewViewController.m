@@ -13,16 +13,17 @@
 #import "UIView+CLSetRect.h"
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
-@interface CLTableViewViewController ()<UITableViewDelegate,UITableViewDataSource,VideoDelegate,UIScrollViewDelegate>
+
+@interface CLTableViewViewController () <UITableViewDelegate, UITableViewDataSource, VideoDelegate, UIScrollViewDelegate>
 
 /**tableView*/
-@property (nonatomic,strong) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 /**数据源*/
-@property (nonatomic,strong) NSMutableArray *arrayDS;
+@property (nonatomic, strong) NSMutableArray *arrayDS;
 /**CLplayer*/
-@property (nonatomic,weak) CLPlayerView *playerView;
+@property (nonatomic, weak) CLPlayerView *playerView;
 /**记录Cell*/
-@property (nonatomic,assign) TableViewCell *cell;
+@property (nonatomic, assign) TableViewCell *cell;
 
 @end
 
@@ -53,6 +54,9 @@
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.tableView];
+//    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+//    statusBar.hidden = YES;
+
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _arrayDS.count;

@@ -311,7 +311,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 缓冲较差时候
 //卡顿时会走这里
 - (void)bufferingSomeSecond{
-    self.state               = CLPlayerStateBuffering;
+    self.state = CLPlayerStateBuffering;
     // 需要先暂停一小会之后再播放，否则网络状况不好的时候时间在走，声音播放不出来
     [self pausePlay];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -341,16 +341,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 //结束
 -(void)cl_progressSliderTouchEnded:(CLSlider *)slider{
-//    // 计算缓冲进度
-//    NSTimeInterval timeInterval = [self availableDuration];
-//    CMTime duration             = self.playerItem.duration;
-//    CGFloat totalDuration       = CMTimeGetSeconds(duration);
-//    if (timeInterval / totalDuration < slider.value) {
-//        [self bufferingSomeSecond];
-//    }else{
-//        //继续播放
-//        [self playVideo];
-//    }
     if (!self.playerItem.isPlaybackLikelyToKeepUp) {
         [self bufferingSomeSecond];
     }else{
@@ -651,6 +641,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }else{
         //不在屏幕上
         [self destroyPlayer];
+        NSLog(@"%f",tableView.contentOffset.y);
     }
 }
 #pragma mark -- layoutSubviews
