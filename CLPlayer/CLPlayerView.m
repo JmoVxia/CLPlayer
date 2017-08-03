@@ -144,6 +144,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
+    //相同视频地址不做处理
     if ([[NSString stringWithFormat:@"%@",_url] isEqualToString:[NSString stringWithFormat:@"%@",url]]) {
         return;
     }
@@ -324,12 +325,22 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 -(void)cl_progressSliderTouchBegan:(CLSlider *)slider{
     //暂停
     [self pausePlay];
+    //销毁定时消失工具条定时器
     [self destroyTimer];
 }
 //结束
 -(void)cl_progressSliderTouchEnded:(CLSlider *)slider{
-    //继续播放
-    [self playVideo];
+    // 计算缓冲进度
+    NSTimeInterval timeInterval = [self availableDuration];
+    CMTime duration             = self.playerItem.duration;
+    CGFloat totalDuration       = CMTimeGetSeconds(duration);
+    if (timeInterval / totalDuration < slider.value) {
+        self.state = CLPlayerStateBuffering;
+    }else{
+        //继续播放
+        [self playVideo];
+    }
+    //重新添加工具条定时消失定时器
     _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
                                               target:self
                                             selector:@selector(disappear)
