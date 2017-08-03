@@ -47,7 +47,7 @@
     self.title = @"TableView";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, CLscreenWidth, CLscreenHeight - 64 - 49) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -107,7 +107,7 @@
 //    //重复播放，默认不播放
 //    _playerView.repeatPlay = YES;
 //    //当前控制器是否支持旋转，当前页面支持旋转的时候需要设置，告知播放器
-//    _playerView.isLandscape = YES;
+    _playerView.isLandscape = YES;
 //    //设置等比例全屏拉伸，多余部分会被剪切
 //    _playerView.fillMode = ResizeAspectFill;
 //    //设置进度条背景颜色
@@ -148,22 +148,24 @@
 -(void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.top.equalTo(self.navigationController.navigationBar.mas_bottom);
+        make.bottom.equalTo(self.view.mas_bottom).offset(-49);
+        make.width.equalTo(self.view);
     }];
 }
-//#pragma mark -- 需要页面支持其他方向，需要重写这三个方法，默认所有页面只支持竖屏
-//// 是否支持自动转屏
-//- (BOOL)shouldAutorotate {
-//    return YES;
-//}
-//// 支持哪些屏幕方向
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskAll;
-//}
-//// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
-//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-//    return UIInterfaceOrientationPortrait;
-//}
+#pragma mark -- 需要页面支持其他方向，需要重写这三个方法，默认所有页面只支持竖屏
+// 是否支持自动转屏
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+// 支持哪些屏幕方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
+}
+// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
 
 
 

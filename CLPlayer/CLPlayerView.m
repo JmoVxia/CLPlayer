@@ -27,45 +27,49 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @interface CLPlayerView ()<CLPlayerMaskViewDelegate>
 
 /** 播发器的几种状态 */
-@property (nonatomic,assign) CLPlayerState state;
+@property (nonatomic, assign) CLPlayerState    state;
 /**控件原始Farme*/
-@property (nonatomic,assign) CGRect           customFarme;
+@property (nonatomic, assign) CGRect           customFarme;
 /**父类控件*/
-@property (nonatomic,strong) UIView           *fatherView;
+@property (nonatomic, strong) UIView           *fatherView;
 /**视频拉伸模式*/
-@property (nonatomic,copy) NSString           *videoFillMode;
+@property (nonatomic, copy) NSString           *videoFillMode;
 /**状态栏*/
-@property (nonatomic,strong) UIView           *statusBar;
+@property (nonatomic, strong) UIView           *statusBar;
 /**全屏标记*/
-@property (nonatomic,assign) BOOL             isFullScreen;
+@property (nonatomic, assign) BOOL             isFullScreen;
 /**工具条隐藏标记*/
-@property (nonatomic,assign) BOOL             isDisappear;
+@property (nonatomic, assign) BOOL             isDisappear;
 /**用户点击播放标记*/
-@property (nonatomic,assign) BOOL             isUserPlay;
+@property (nonatomic, assign) BOOL             isUserPlay;
 /**记录控制器状态栏状态*/
-@property (nonatomic,assign) BOOL             statusBarHiddenState;
+@property (nonatomic, assign) BOOL             statusBarHiddenState;
 /**点击最大化标记*/
-@property (nonatomic,assign) BOOL             isUserTapMaxButton;
+@property (nonatomic, assign) BOOL             isUserTapMaxButton;
+/**播放完成标记*/
+@property (nonatomic, assign) BOOL             isEnd;
 /**播放器*/
-@property (nonatomic,strong) AVPlayer         *player;
+@property (nonatomic, strong) AVPlayer         *player;
 /**playerLayer*/
-@property (nonatomic,strong) AVPlayerLayer    *playerLayer;
+@property (nonatomic, strong) AVPlayerLayer    *playerLayer;
 /**播放器item*/
-@property (nonatomic,strong) AVPlayerItem     *playerItem;
+@property (nonatomic, strong) AVPlayerItem     *playerItem;
 /**遮罩*/
-@property (nonatomic,strong) CLPlayerMaskView *maskView;
+@property (nonatomic, strong) CLPlayerMaskView *maskView;
 /**轻拍定时器*/
-@property (nonatomic,strong) NSTimer          *timer;
+@property (nonatomic, strong) NSTimer          *timer;
 /**slider定时器*/
-@property (nonatomic,strong) NSTimer          *sliderTimer;
+@property (nonatomic, strong) NSTimer          *sliderTimer;
+
 /**返回按钮回调*/
-@property (nonatomic,copy) void (^BackBlock) (UIButton *backButton);
+@property (nonatomic, copy) void (^BackBlock) (UIButton *backButton);
 /**播放完成回调*/
-@property (nonatomic,copy) void (^EndBlock) ();
+@property (nonatomic, copy) void (^EndBlock) ();
 
 @end
 
 @implementation CLPlayerView
+
 #pragma mark - 懒加载
 //遮罩
 - (CLPlayerMaskView *) maskView{
@@ -230,7 +234,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 隐藏或者显示状态栏方法
 - (void)setStatusBarHidden:(BOOL)hidden{
     //设置是否隐藏
-    self.statusBar.hidden  = hidden;
+    self.statusBar.hidden = hidden;
 }
 #pragma mark - 初始化
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -241,6 +245,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _isUserPlay              = NO;
         _isUserTapMaxButton      = NO;
         _fullStatusBarHidden     = YES;
+        _isEnd                   = NO;
         _repeatPlay              = NO;
         _mute                    = NO;
         //查询控制器是否支持全屏
@@ -293,12 +298,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [self.maskView.progress setProgress:timeInterval / totalDuration animated:NO];
     } else if ([keyPath isEqualToString:@"playbackBufferEmpty"]) {
         // 当缓冲是空的时候
-        if (self.playerItem.playbackBufferEmpty) {
+        if (self.playerItem.isPlaybackBufferEmpty) {
             [self bufferingSomeSecond];
         }
     } else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
         // 当缓冲好的时候
-        if (self.playerItem.playbackLikelyToKeepUp && self.state == CLPlayerStateBuffering){
+        if (self.playerItem.isPlaybackLikelyToKeepUp && self.state == CLPlayerStateBuffering){
             self.state = CLPlayerStatePlaying;
         }
     }
@@ -307,15 +312,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 //卡顿时会走这里
 - (void)bufferingSomeSecond{
     self.state               = CLPlayerStateBuffering;
-    __block BOOL isBuffering = NO;
-    if (isBuffering) return;
-    isBuffering = YES;
     // 需要先暂停一小会之后再播放，否则网络状况不好的时候时间在走，声音播放不出来
     [self pausePlay];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self playVideo];
         // 如果执行了play还是没有播放则说明还没有缓存好，则再次缓存一段时间
-        isBuffering = NO;
         if (!self.playerItem.isPlaybackLikelyToKeepUp) {
             [self bufferingSomeSecond];
         }
@@ -340,12 +341,18 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 //结束
 -(void)cl_progressSliderTouchEnded:(CLSlider *)slider{
-    // 计算缓冲进度
-    NSTimeInterval timeInterval = [self availableDuration];
-    CMTime duration             = self.playerItem.duration;
-    CGFloat totalDuration       = CMTimeGetSeconds(duration);
-    if (timeInterval / totalDuration < slider.value) {
-        self.state = CLPlayerStateBuffering;
+//    // 计算缓冲进度
+//    NSTimeInterval timeInterval = [self availableDuration];
+//    CMTime duration             = self.playerItem.duration;
+//    CGFloat totalDuration       = CMTimeGetSeconds(duration);
+//    if (timeInterval / totalDuration < slider.value) {
+//        [self bufferingSomeSecond];
+//    }else{
+//        //继续播放
+//        [self playVideo];
+//    }
+    if (!self.playerItem.isPlaybackLikelyToKeepUp) {
+        [self bufferingSomeSecond];
     }else{
         //继续播放
         [self playVideo];
@@ -370,18 +377,17 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)timeStack{
     if (_playerItem.duration.timescale != 0){
         //总共时长
-        self.maskView.slider.maximumValue = 1;
+        self.maskView.slider.maximumValue   = 1;
         //当前进度
-        self.maskView.slider.value        = CMTimeGetSeconds([_playerItem currentTime]) / (_playerItem.duration.value / _playerItem.duration.timescale);
+        self.maskView.slider.value          = CMTimeGetSeconds([_playerItem currentTime]) / (_playerItem.duration.value / _playerItem.duration.timescale);
         //当前时长进度progress
-        NSInteger proMin     = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
-        NSInteger proSec     = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
+        NSInteger proMin                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
+        NSInteger proSec                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
         self.maskView.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)proMin, (long)proSec];
         //duration 总时长
-        NSInteger durMin     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总分钟
-        NSInteger durSec     = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总秒
-        
-        self.maskView.totalTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)durMin, (long)durSec];
+        NSInteger durMin                    = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总分钟
+        NSInteger durSec                    = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总秒
+        self.maskView.totalTimeLabel.text   = [NSString stringWithFormat:@"%02ld:%02ld", (long)durMin, (long)durSec];
     }
 }
 #pragma mark - 播放暂停按钮方法
@@ -439,6 +445,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 播放完成
 - (void)moviePlayDidEnd:(id)sender{
+    _isEnd = YES;
     if (_repeatPlay == NO){
         [self pausePlay];
     }else{
@@ -469,10 +476,15 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)playVideo{
     _isUserPlay = YES;
     self.maskView.playButton.selected = YES;
-    [_player play];
+    if (_isEnd) {
+        [self resetPlay];
+    }else{
+        [_player play];
+    }
 }
 #pragma mark - 重新开始播放
 - (void)resetPlay{
+    _isEnd = NO;
     [_player seekToTime:CMTimeMake(0, 1)];
     [self playVideo];
 }

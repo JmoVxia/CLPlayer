@@ -20,26 +20,28 @@ typedef void(^BeyondBlock)();
 
 @interface CLPlayerView : UIView
 
-/**视频url*/
-@property (nonatomic, strong) NSURL *url;
+
 /**重复播放，默认No*/
-@property (nonatomic, assign) BOOL repeatPlay;
+@property (nonatomic, assign) BOOL           repeatPlay;
 /**是否支持横屏,默认NO*/
-@property (nonatomic, assign) BOOL isLandscape;
+@property (nonatomic, assign) BOOL           isLandscape;
 /**全屏是否隐藏状态栏，默认YES*/
-@property (nonatomic, assign) BOOL fullStatusBarHidden;
+@property (nonatomic, assign) BOOL           fullStatusBarHidden;
 /** 静音（默认为NO）*/
-@property (nonatomic, assign) BOOL mute;
+@property (nonatomic, assign) BOOL           mute;
 /**是否是全屏*/
 @property (nonatomic, assign, readonly) BOOL isFullScreen;
 /**拉伸方式，默认全屏填充*/
-@property (nonatomic, assign) VideoFillMode fillMode;
+@property (nonatomic, assign) VideoFillMode  fillMode;
+/**视频url*/
+@property (nonatomic, strong) NSURL          *url;
 /**进度条背景颜色*/
-@property (nonatomic, strong) UIColor *progressBackgroundColor;
+@property (nonatomic, strong) UIColor        *progressBackgroundColor;
 /**缓冲条缓冲进度颜色*/
-@property (nonatomic, strong) UIColor *progressBufferColor;
+@property (nonatomic, strong) UIColor        *progressBufferColor;
 /**进度条播放完成颜色*/
-@property (nonatomic, strong) UIColor *progressPlayFinishColor;
+@property (nonatomic, strong) UIColor        *progressPlayFinishColor;
+
 /**播放*/
 - (void)playVideo;
 /**暂停*/
@@ -50,7 +52,6 @@ typedef void(^BeyondBlock)();
 - (void)endPlay:(EndBolck) end;
 /**销毁播放器*/
 - (void)destroyPlayer;
-
 /**
  根据播放器所在位置计算偏移，添加在TableView上使用
  

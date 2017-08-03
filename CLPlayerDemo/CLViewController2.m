@@ -54,8 +54,8 @@
     //播放完成回调
     [_playerView endPlay:^{
         //销毁播放器
-        [_playerView destroyPlayer];
-        _playerView = nil;
+//        [_playerView destroyPlayer];
+//        _playerView = nil;
         NSLog(@"播放完成");
     }];
 
