@@ -2,16 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "study01.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic_navbar_knowledge_active_24dp@2x.png",
+      "filename" : "study01@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ic_navbar_knowledge_active_24dp@3x.png",
+      "filename" : "study01@3x.png",
       "scale" : "3x"
     }
   ],
