@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
     s.platform     = :ios, '7.0'
     s.source       = {:git => 'https://github.com/JmoVxia/CLPlayer.git', :tag => s.version}
     s.source_files = 'CLPlayer/**/*.{h,m}'
-    s.resource     = 'CLPlayer/CLPlayer.bundle'
+    s.resource     = 'CLPlayer/Resource/CLPlayer.bundle'
     s.framework    = 'UIKit','MediaPlayer'
     s.dependency 'Masonry' 
     s.requires_arc = true
