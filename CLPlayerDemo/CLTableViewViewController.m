@@ -28,36 +28,46 @@
 @end
 
 @implementation CLTableViewViewController
-
+#pragma mark - 懒加载
+/**数据源*/
+- (NSMutableArray *) arrayDS{
+    if (_arrayDS == nil){
+        _arrayDS = [[NSMutableArray alloc] init];
+        NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Date" ofType:@"json"]];
+        NSArray *array = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
+        [array enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            Model *model = [Model new];
+            [model setValuesForKeysWithDictionary:obj];
+            [_arrayDS addObject:model];
+        }];
+    }
+    return _arrayDS;
+}
+/**tableView*/
+- (UITableView *) tableView{
+    if (_tableView == nil){
+        _tableView = [[UITableView alloc] init];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+        _tableView.showsVerticalScrollIndicator = NO;
+    }
+    return _tableView;
+}
+#pragma mark - 视图加载完毕
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initDate];
     [self initUI];
-}
-- (void)initDate{
-    _arrayDS = [NSMutableArray array];
-    NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Date" ofType:@"json"]];
-    NSArray *array = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
-    [array enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        Model *model = [Model new];
-        [model setValuesForKeysWithDictionary:obj];
-        [_arrayDS addObject:model];
-    }];
 }
 - (void)initUI{
     self.navigationItem.title = @"CLPlayer";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.tableView = [[UITableView alloc] init];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.tableView];
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _arrayDS.count;
+    return self.arrayDS.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     static NSString *Index = @"Cell";
@@ -75,7 +85,7 @@
 //在willDisplayCell里面处理数据能优化tableview的滑动流畅性，cell将要出现的时候调用
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     TableViewCell * myCell = (TableViewCell *)cell;
-    myCell.model = _arrayDS[indexPath.row];
+    myCell.model = self.arrayDS[indexPath.row];
     //Cell开始出现的时候修正偏移量，让图片可以全部显示
     [myCell cellOffset];
     //第一次加载动画
