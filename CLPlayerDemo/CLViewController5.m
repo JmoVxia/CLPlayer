@@ -40,7 +40,7 @@
 //    //全屏是否隐藏状态栏
 //    _playerView.fullStatusBarHidden = NO;
     //视频地址
-    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1117/5cd90c96-acb0-11e6-b83b-d4ae5296039d_wpc.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://baobab.wdjcdn.com/14585683555005644d.mp4"];
     //播放
     [_playerView playVideo];
     
@@ -66,6 +66,10 @@
 }
 - (void)back{
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    [_playerView destroyPlayer];
+    _playerView = nil;
 }
 #pragma mark -- 需要设置全局支持旋转方向，然后重写下面三个方法可以让当前页面支持多个方向
 // 是否支持自动转屏

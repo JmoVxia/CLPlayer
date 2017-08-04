@@ -43,7 +43,7 @@
 //    //是否静音，默认NO
 //    _playerView.mute = YES;
     //视频地址
-    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1203/58425ad2a0c1d_wpd.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://baobab.wdjcdn.com/14587093851044544c.mp4"];
     //播放
     [_playerView playVideo];
     //返回按钮点击事件回调
@@ -68,7 +68,7 @@
     [self.view addSubview:but];
 }
 - (void)next{
-    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0709/5781023a979d7_wpd.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://baobab.wdjcdn.com/1458715233692shouwang_x264.mp4"];
     [_playerView playVideo];
 }
 -(void)viewDidDisappear:(BOOL)animated{
