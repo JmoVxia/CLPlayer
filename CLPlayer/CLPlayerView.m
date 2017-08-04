@@ -630,20 +630,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     NSString *path   = [bundle pathForResource:name ofType:@"png"];
     return [UIImage imageWithContentsOfFile:path];
 }
-#pragma mark - 根据Cell位置判断是否销毁
-- (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell{
-    if (!cell) {
-        return;
-    }
-    NSArray *visableCells = tableView.visibleCells;
-    if ([visableCells containsObject:cell]) {
-        //在屏幕上
-    }else{
-        //不在屏幕上
-        [self destroyPlayer];
-        NSLog(@"%f",tableView.contentOffset.y);
-    }
-}
 #pragma mark -- layoutSubviews
 -(void)layoutSubviews{
     [super layoutSubviews];

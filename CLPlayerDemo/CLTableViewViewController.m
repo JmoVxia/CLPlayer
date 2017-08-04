@@ -54,10 +54,8 @@
     self.tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
     self.tableView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.tableView];
-//    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-//    statusBar.hidden = YES;
-
 }
+#pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _arrayDS.count;
 }
@@ -70,7 +68,11 @@
     cell.videoDelegate = self;
     return cell;
 }
-//在willDisplayCell里面处理数据能优化tableview的滑动流畅性
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 300;
+}
+//在willDisplayCell里面处理数据能优化tableview的滑动流畅性，cell将要出现的时候调用
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     TableViewCell * myCell = (TableViewCell *)cell;
     myCell.model = _arrayDS[indexPath.row];
@@ -96,11 +98,17 @@
         [UIView commitAnimations];
     }
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 300;
+//cell离开tableView时调用
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    //因为复用，同一个cell可能会走多次
+    if ([_cell isEqual:cell]) {
+        //区分是否是播放器所在cell
+        [_playerView destroyPlayer];
+        _cell = nil;
+    }
 }
 #pragma mark - 点击播放代理
-- (void)PlayVideoWithCell:(TableViewCell *)cell;{
+- (void)PlayVideoWithCell:(TableViewCell *)cell{
     //记录被点击的Cell
     _cell = cell;
     //销毁播放器
@@ -135,6 +143,7 @@
         //销毁播放器
         [_playerView destroyPlayer];
         _playerView = nil;
+        _cell = nil;
         NSLog(@"播放完成");
     }];
 }
@@ -146,9 +155,8 @@
     [array enumerateObjectsUsingBlock:^(TableViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj cellOffset];
     }];
-    //计算偏移来销毁播放器
-    [_playerView calculateScrollOffset:self.tableView cell:_cell];
 }
+#pragma mark - 布局
 -(void)viewDidLayoutSubviews{
     [super viewDidLayoutSubviews];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

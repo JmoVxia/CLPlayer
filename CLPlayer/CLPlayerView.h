@@ -20,7 +20,6 @@ typedef void(^BeyondBlock)();
 
 @interface CLPlayerView : UIView
 
-
 /**重复播放，默认No*/
 @property (nonatomic, assign) BOOL           repeatPlay;
 /**是否支持横屏,默认NO*/
@@ -52,14 +51,6 @@ typedef void(^BeyondBlock)();
 - (void)endPlay:(EndBolck) end;
 /**销毁播放器*/
 - (void)destroyPlayer;
-/**
- 根据播放器所在位置计算偏移，添加在TableView上使用
- 
- @param tableView tableView
- @param cell 播放器所在cell
- */
-- (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell;
-
 
 
 
