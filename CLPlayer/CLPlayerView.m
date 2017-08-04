@@ -222,7 +222,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [self.maskView.activity startAnimating];
     }else if (state == CLPlayerStateFailed){
         [self.maskView.activity stopAnimating];
+#ifdef DEBUG
         NSLog(@"加载失败");
+#endif
         self.maskView.failButton.hidden = NO;
     }else{
         [self.maskView.activity stopAnimating];
@@ -661,7 +663,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
     //恢复默认状态栏显示与否
     [self setStatusBarHidden:_statusBarHiddenState];
+#ifdef DEBUG
     NSLog(@"播放器被销毁了");
+#endif
 }
 
 @end
