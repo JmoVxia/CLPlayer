@@ -13,6 +13,7 @@
 #import "UIView+CLSetRect.h"
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
+static NSString *tableViewCellIdentifier = @"tableViewCellIdentifier";
 
 @interface CLTableViewViewController () <UITableViewDelegate, UITableViewDataSource, VideoDelegate, UIScrollViewDelegate>
 
@@ -51,6 +52,7 @@
         _tableView.dataSource = self;
         _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
+        [_tableView registerClass:[TableViewCell class] forCellReuseIdentifier:tableViewCellIdentifier];
     }
     return _tableView;
 }
@@ -70,11 +72,7 @@
     return self.arrayDS.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *Index = @"Cell";
-    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:Index];
-    if (!cell){
-        cell = [[TableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Index];
-    }
+    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellIdentifier forIndexPath:indexPath];
     cell.videoDelegate = self;
     return cell;
 }

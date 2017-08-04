@@ -155,10 +155,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
-    //相同视频地址不做处理
-    if ([[NSString stringWithFormat:@"%@",_url] isEqualToString:[NSString stringWithFormat:@"%@",url]]) {
-        return;
-    }
     _url                      = url;
     self.playerItem           = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:_url]];
     //创建
@@ -175,8 +171,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     //放到最下面，防止遮挡
     [self.layer insertSublayer:_playerLayer atIndex:0];
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
 }
 -(void)setPlayerItem:(AVPlayerItem *)playerItem{
     if (_playerItem == playerItem){
@@ -226,6 +220,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         NSLog(@"加载失败");
 #endif
         self.maskView.failButton.hidden = NO;
+        self.maskView.playButton.selected = NO;
     }else{
         [self.maskView.activity stopAnimating];
         if (_isUserPlay) {
@@ -401,9 +396,14 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 播放失败按钮点击事件
 -(void)cl_failButtonAction:(UIButton *)button{
-    [self setUrl:_url];
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
+    [self.maskView.activity startAnimating];
+    self.maskView.playButton.selected = YES;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self setUrl:_url];
+        [self setNeedsLayout];
+        [self layoutIfNeeded];
+        [self playVideo];
+    });
 }
 #pragma mark - 点击响应
 - (void)disappearAction:(UIButton *)button{
