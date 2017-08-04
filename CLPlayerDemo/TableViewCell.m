@@ -46,12 +46,17 @@
 }
 -(void)setModel:(Model *)model{
     _model = model;
-    UIImage *placeholderImage = [UIImage imageNamed:@"placeholder"];
-    if ([[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:_model.pictureUrl]]) {
-        //本地存在图片,替换占位图片
-        placeholderImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:model.pictureUrl];
-    }
-    [_pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl] placeholderImage:placeholderImage];
+    __block UIImage *placeholderImage = [UIImage imageNamed:@"placeholder"];
+    [[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:_model.pictureUrl] completion:^(BOOL isInCache) {
+        if (isInCache) {
+            //本地存在图片,替换占位图片
+            placeholderImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:model.pictureUrl];
+        }
+        //主线程
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl] placeholderImage:placeholderImage];
+        });
+    }];
 }
 - (void)playAction:(UIButton *)button{
     if (_videoDelegate && [_videoDelegate respondsToSelector:@selector(PlayVideoWithCell:)]){
