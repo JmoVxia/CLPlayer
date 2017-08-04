@@ -8,6 +8,6 @@
 
 #import "CLViewController2.h"
 
-@interface CLViewController4 : CLViewController2
+@interface CLViewController4 : UIViewController
 
 @end

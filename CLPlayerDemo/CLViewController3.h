@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CLPlayerView.h"
 
 @interface CLViewController3 : UIViewController
-/**CLplayer*/
-@property (nonatomic,weak) CLPlayerView *playerView;
 
 @end

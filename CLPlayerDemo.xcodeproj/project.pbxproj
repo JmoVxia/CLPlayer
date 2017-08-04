@@ -12,13 +12,9 @@
 		5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CA1DC850820036C489 /* AppDelegate.m */; };
 		5B1FC4D61DC850820036C489 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B1FC4D41DC850820036C489 /* LaunchScreen.storyboard */; };
 		5B1FC4FB1DC850EF0036C489 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		5B35DDE21DE07A5700CEB057 /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B35DDE11DE07A5700CEB057 /* Model.m */; };
 		5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B35DDE31DE07F9A00CEB057 /* Date.json */; };
 		5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
-		5BB4D0CD1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0CC1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m */; };
-		5BB4D0D01F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0CF1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m */; };
-		5BB4D0D31F317CF9007A1742 /* UIViewController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0D21F317CF9007A1742 /* UIViewController+CLPlayerRotation.m */; };
 		5BB4D0D91F31A1F1007A1742 /* CLTableViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0D81F31A1F1007A1742 /* CLTableViewViewController.m */; };
 		5BB4D0DC1F31A2E3007A1742 /* CLTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0DB1F31A2E3007A1742 /* CLTabBarViewController.m */; };
 		5BB4D0DF1F31A4B1007A1742 /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0DE1F31A4B1007A1742 /* CLViewController.m */; };
@@ -28,8 +24,12 @@
 		5BB4D0EB1F31B775007A1742 /* CLViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0EA1F31B775007A1742 /* CLViewController4.m */; };
 		5BB4D0EE1F31B7A2007A1742 /* CLViewController5.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0ED1F31B7A2007A1742 /* CLViewController5.m */; };
 		5BB4D0F41F331FA1007A1742 /* CLNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0F31F331FA1007A1742 /* CLNavigationViewController.m */; };
-		5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDB581B1DDE968700523A8C /* TableViewCell.m */; };
-		5BDEA7151E63F4BB00953D5D /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BDEA70D1E63F4BB00953D5D /* CLPlayer.bundle */; };
+		5BB4D0F91F3455D0007A1742 /* CLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0F81F3455D0007A1742 /* CLModel.m */; };
+		5BB4D0FE1F34565F007A1742 /* CLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0FD1F34565F007A1742 /* CLTableViewCell.m */; };
+		5BB4D1081F345A7D007A1742 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BB4D1071F345A7D007A1742 /* CLPlayer.bundle */; };
+		5BB4D11A1F345AE0007A1742 /* UINavigationController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D1151F345AE0007A1742 /* UINavigationController+CLPlayerRotation.m */; };
+		5BB4D11B1F345AE0007A1742 /* UITabBarController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D1171F345AE0007A1742 /* UITabBarController+CLPlayerRotation.m */; };
+		5BB4D11C1F345AE0007A1742 /* UIViewController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D1191F345AE0007A1742 /* UIViewController+CLPlayerRotation.m */; };
 		5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */; };
 		5BDEA7171E63F4BB00953D5D /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEA7121E63F4BB00953D5D /* CLPlayerView.m */; };
 		5BDEA7181E63F4BB00953D5D /* CLSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEA7141E63F4BB00953D5D /* CLSlider.m */; };
@@ -45,18 +45,10 @@
 		5B1FC4D51DC850820036C489 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B1FC4D71DC850820036C489 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		5B35DDE01DE07A5700CEB057 /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
-		5B35DDE11DE07A5700CEB057 /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		5B35DDE31DE07F9A00CEB057 /* Date.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Date.json; sourceTree = "<group>"; };
 		5B456F8D1E60164000C9599F /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
 		5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5BB4D0CB1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+CLPlayerRotation.h"; sourceTree = "<group>"; };
-		5BB4D0CC1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+CLPlayerRotation.m"; sourceTree = "<group>"; };
-		5BB4D0CE1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+CLPlayerRotation.h"; sourceTree = "<group>"; };
-		5BB4D0CF1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CLPlayerRotation.m"; sourceTree = "<group>"; };
-		5BB4D0D11F317CF9007A1742 /* UIViewController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CLPlayerRotation.h"; sourceTree = "<group>"; };
-		5BB4D0D21F317CF9007A1742 /* UIViewController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CLPlayerRotation.m"; sourceTree = "<group>"; };
 		5BB4D0D71F31A1F1007A1742 /* CLTableViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTableViewViewController.h; sourceTree = "<group>"; };
 		5BB4D0D81F31A1F1007A1742 /* CLTableViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTableViewViewController.m; sourceTree = "<group>"; };
 		5BB4D0DA1F31A2E3007A1742 /* CLTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTabBarViewController.h; sourceTree = "<group>"; };
@@ -75,9 +67,17 @@
 		5BB4D0ED1F31B7A2007A1742 /* CLViewController5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController5.m; sourceTree = "<group>"; };
 		5BB4D0F21F331FA1007A1742 /* CLNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNavigationViewController.h; sourceTree = "<group>"; };
 		5BB4D0F31F331FA1007A1742 /* CLNavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLNavigationViewController.m; sourceTree = "<group>"; };
-		5BDB581A1DDE968700523A8C /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
-		5BDB581B1DDE968700523A8C /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
-		5BDEA70D1E63F4BB00953D5D /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
+		5BB4D0F71F3455D0007A1742 /* CLModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLModel.h; sourceTree = "<group>"; };
+		5BB4D0F81F3455D0007A1742 /* CLModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLModel.m; sourceTree = "<group>"; };
+		5BB4D0FC1F34565F007A1742 /* CLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTableViewCell.h; sourceTree = "<group>"; };
+		5BB4D0FD1F34565F007A1742 /* CLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTableViewCell.m; sourceTree = "<group>"; };
+		5BB4D1071F345A7D007A1742 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
+		5BB4D1141F345AE0007A1742 /* UINavigationController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+CLPlayerRotation.h"; sourceTree = "<group>"; };
+		5BB4D1151F345AE0007A1742 /* UINavigationController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CLPlayerRotation.m"; sourceTree = "<group>"; };
+		5BB4D1161F345AE0007A1742 /* UITabBarController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+CLPlayerRotation.h"; sourceTree = "<group>"; };
+		5BB4D1171F345AE0007A1742 /* UITabBarController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBarController+CLPlayerRotation.m"; sourceTree = "<group>"; };
+		5BB4D1181F345AE0007A1742 /* UIViewController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CLPlayerRotation.h"; sourceTree = "<group>"; };
+		5BB4D1191F345AE0007A1742 /* UIViewController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CLPlayerRotation.m"; sourceTree = "<group>"; };
 		5BDEA70F1E63F4BB00953D5D /* CLPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerMaskView.h; sourceTree = "<group>"; };
 		5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerMaskView.m; sourceTree = "<group>"; };
 		5BDEA7111E63F4BB00953D5D /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
@@ -130,32 +130,9 @@
 		5B1FC4C51DC850820036C489 /* CLPlayerDemo */ = {
 			isa = PBXGroup;
 			children = (
-				5B456F8D1E60164000C9599F /* UIView+CLSetRect.h */,
-				5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */,
 				5B1FC4C91DC850820036C489 /* AppDelegate.h */,
 				5B1FC4CA1DC850820036C489 /* AppDelegate.m */,
-				5BB4D0DA1F31A2E3007A1742 /* CLTabBarViewController.h */,
-				5BB4D0DB1F31A2E3007A1742 /* CLTabBarViewController.m */,
-				5BB4D0F21F331FA1007A1742 /* CLNavigationViewController.h */,
-				5BB4D0F31F331FA1007A1742 /* CLNavigationViewController.m */,
-				5BB4D0D71F31A1F1007A1742 /* CLTableViewViewController.h */,
-				5BB4D0D81F31A1F1007A1742 /* CLTableViewViewController.m */,
-				5BB4D0DD1F31A4B1007A1742 /* CLViewController.h */,
-				5BB4D0DE1F31A4B1007A1742 /* CLViewController.m */,
-				5BB4D0E01F31ACCC007A1742 /* CLViewController1.h */,
-				5BB4D0E11F31ACCC007A1742 /* CLViewController1.m */,
-				5BB4D0E31F31AEC8007A1742 /* CLViewController2.h */,
-				5BB4D0E41F31AEC8007A1742 /* CLViewController2.m */,
-				5BB4D0E61F31AED1007A1742 /* CLViewController3.h */,
-				5BB4D0E71F31AED1007A1742 /* CLViewController3.m */,
-				5BB4D0E91F31B775007A1742 /* CLViewController4.h */,
-				5BB4D0EA1F31B775007A1742 /* CLViewController4.m */,
-				5BB4D0EC1F31B7A2007A1742 /* CLViewController5.h */,
-				5BB4D0ED1F31B7A2007A1742 /* CLViewController5.m */,
-				5B35DDE01DE07A5700CEB057 /* Model.h */,
-				5B35DDE11DE07A5700CEB057 /* Model.m */,
-				5BDB581A1DDE968700523A8C /* TableViewCell.h */,
-				5BDB581B1DDE968700523A8C /* TableViewCell.m */,
+				5BB4D1001F34594E007A1742 /* Class */,
 				5BDEA70C1E63F4BB00953D5D /* CLPlayer */,
 				5B1FC4C61DC850820036C489 /* Supporting Files */,
 			);
@@ -183,22 +160,165 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5BB4D0F51F345441007A1742 /* TabbarController */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0DA1F31A2E3007A1742 /* CLTabBarViewController.h */,
+				5BB4D0DB1F31A2E3007A1742 /* CLTabBarViewController.m */,
+			);
+			name = TabbarController;
+			sourceTree = "<group>";
+		};
+		5BB4D0F61F3454A7007A1742 /* NavigationViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0F21F331FA1007A1742 /* CLNavigationViewController.h */,
+				5BB4D0F31F331FA1007A1742 /* CLNavigationViewController.m */,
+			);
+			name = NavigationViewController;
+			sourceTree = "<group>";
+		};
+		5BB4D0FA1F345635007A1742 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0F71F3455D0007A1742 /* CLModel.h */,
+				5BB4D0F81F3455D0007A1742 /* CLModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		5BB4D0FB1F345642007A1742 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0FC1F34565F007A1742 /* CLTableViewCell.h */,
+				5BB4D0FD1F34565F007A1742 /* CLTableViewCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		5BB4D0FF1F345925007A1742 /* TableViewViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0D71F31A1F1007A1742 /* CLTableViewViewController.h */,
+				5BB4D0D81F31A1F1007A1742 /* CLTableViewViewController.m */,
+			);
+			name = TableViewViewController;
+			sourceTree = "<group>";
+		};
+		5BB4D1001F34594E007A1742 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D1011F3459A3007A1742 /* Gategory */,
+				5BB4D0F51F345441007A1742 /* TabbarController */,
+				5BB4D0F61F3454A7007A1742 /* NavigationViewController */,
+				5BB4D0FF1F345925007A1742 /* TableViewViewController */,
+				5BB4D11D1F345B05007A1742 /* ViewController */,
+				5BB4D0FB1F345642007A1742 /* View */,
+				5BB4D0FA1F345635007A1742 /* Model */,
+			);
+			name = Class;
+			sourceTree = "<group>";
+		};
+		5BB4D1011F3459A3007A1742 /* Gategory */ = {
+			isa = PBXGroup;
+			children = (
+				5B456F8D1E60164000C9599F /* UIView+CLSetRect.h */,
+				5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */,
+			);
+			name = Gategory;
+			sourceTree = "<group>";
+		};
+		5BB4D1061F345A7D007A1742 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D1071F345A7D007A1742 /* CLPlayer.bundle */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		5BB4D1131F345AE0007A1742 /* CLPlayerGategory */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D1141F345AE0007A1742 /* UINavigationController+CLPlayerRotation.h */,
+				5BB4D1151F345AE0007A1742 /* UINavigationController+CLPlayerRotation.m */,
+				5BB4D1161F345AE0007A1742 /* UITabBarController+CLPlayerRotation.h */,
+				5BB4D1171F345AE0007A1742 /* UITabBarController+CLPlayerRotation.m */,
+				5BB4D1181F345AE0007A1742 /* UIViewController+CLPlayerRotation.h */,
+				5BB4D1191F345AE0007A1742 /* UIViewController+CLPlayerRotation.m */,
+			);
+			path = CLPlayerGategory;
+			sourceTree = "<group>";
+		};
+		5BB4D11D1F345B05007A1742 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0DD1F31A4B1007A1742 /* CLViewController.h */,
+				5BB4D0DE1F31A4B1007A1742 /* CLViewController.m */,
+				5BB4D11E1F345B2C007A1742 /* 页面支持多方向 */,
+				5BB4D11F1F345B97007A1742 /* Push不支持多方向 */,
+				5BB4D1201F345BC7007A1742 /* push支持多方向 */,
+				5BB4D1211F345BF0007A1742 /* Present不支持多方向 */,
+				5BB4D1221F345C0D007A1742 /* Present支持多方向 */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		5BB4D11E1F345B2C007A1742 /* 页面支持多方向 */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0E01F31ACCC007A1742 /* CLViewController1.h */,
+				5BB4D0E11F31ACCC007A1742 /* CLViewController1.m */,
+			);
+			name = "页面支持多方向";
+			sourceTree = "<group>";
+		};
+		5BB4D11F1F345B97007A1742 /* Push不支持多方向 */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0E31F31AEC8007A1742 /* CLViewController2.h */,
+				5BB4D0E41F31AEC8007A1742 /* CLViewController2.m */,
+			);
+			name = "Push不支持多方向";
+			sourceTree = "<group>";
+		};
+		5BB4D1201F345BC7007A1742 /* push支持多方向 */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0E91F31B775007A1742 /* CLViewController4.h */,
+				5BB4D0EA1F31B775007A1742 /* CLViewController4.m */,
+			);
+			name = "push支持多方向";
+			sourceTree = "<group>";
+		};
+		5BB4D1211F345BF0007A1742 /* Present不支持多方向 */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0E61F31AED1007A1742 /* CLViewController3.h */,
+				5BB4D0E71F31AED1007A1742 /* CLViewController3.m */,
+			);
+			name = "Present不支持多方向";
+			sourceTree = "<group>";
+		};
+		5BB4D1221F345C0D007A1742 /* Present支持多方向 */ = {
+			isa = PBXGroup;
+			children = (
+				5BB4D0EC1F31B7A2007A1742 /* CLViewController5.h */,
+				5BB4D0ED1F31B7A2007A1742 /* CLViewController5.m */,
+			);
+			name = "Present支持多方向";
+			sourceTree = "<group>";
+		};
 		5BDEA70C1E63F4BB00953D5D /* CLPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				5BDEA70D1E63F4BB00953D5D /* CLPlayer.bundle */,
 				5BDEA7111E63F4BB00953D5D /* CLPlayerView.h */,
 				5BDEA7121E63F4BB00953D5D /* CLPlayerView.m */,
 				5BDEA70F1E63F4BB00953D5D /* CLPlayerMaskView.h */,
 				5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */,
 				5BDEA7131E63F4BB00953D5D /* CLSlider.h */,
 				5BDEA7141E63F4BB00953D5D /* CLSlider.m */,
-				5BB4D0CB1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.h */,
-				5BB4D0CC1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m */,
-				5BB4D0CE1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.h */,
-				5BB4D0CF1F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m */,
-				5BB4D0D11F317CF9007A1742 /* UIViewController+CLPlayerRotation.h */,
-				5BB4D0D21F317CF9007A1742 /* UIViewController+CLPlayerRotation.m */,
+				5BB4D1061F345A7D007A1742 /* Resource */,
+				5BB4D1131F345AE0007A1742 /* CLPlayerGategory */,
 			);
 			path = CLPlayer;
 			sourceTree = SOURCE_ROOT;
@@ -268,7 +388,7 @@
 				5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */,
 				5B1FC4D61DC850820036C489 /* LaunchScreen.storyboard in Resources */,
 				5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */,
-				5BDEA7151E63F4BB00953D5D /* CLPlayer.bundle in Resources */,
+				5BB4D1081F345A7D007A1742 /* CLPlayer.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,20 +451,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				5BDEA7171E63F4BB00953D5D /* CLPlayerView.m in Sources */,
-				5BB4D0D01F317CE2007A1742 /* UINavigationController+CLPlayerRotation.m in Sources */,
-				5BB4D0D31F317CF9007A1742 /* UIViewController+CLPlayerRotation.m in Sources */,
+				5BB4D0FE1F34565F007A1742 /* CLTableViewCell.m in Sources */,
 				5BB4D0DF1F31A4B1007A1742 /* CLViewController.m in Sources */,
+				5BB4D0F91F3455D0007A1742 /* CLModel.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
-				5BDB581C1DDE968700523A8C /* TableViewCell.m in Sources */,
+				5BB4D11B1F345AE0007A1742 /* UITabBarController+CLPlayerRotation.m in Sources */,
+				5BB4D11A1F345AE0007A1742 /* UINavigationController+CLPlayerRotation.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
 				5BB4D0E81F31AED1007A1742 /* CLViewController3.m in Sources */,
-				5BB4D0CD1F317CC3007A1742 /* UITabBarController+CLPlayerRotation.m in Sources */,
 				5BB4D0E21F31ACCC007A1742 /* CLViewController1.m in Sources */,
 				5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */,
-				5B35DDE21DE07A5700CEB057 /* Model.m in Sources */,
 				5BB4D0EE1F31B7A2007A1742 /* CLViewController5.m in Sources */,
 				5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */,
 				5BDEA7181E63F4BB00953D5D /* CLSlider.m in Sources */,
+				5BB4D11C1F345AE0007A1742 /* UIViewController+CLPlayerRotation.m in Sources */,
 				5BB4D0EB1F31B775007A1742 /* CLViewController4.m in Sources */,
 				5BB4D0D91F31A1F1007A1742 /* CLTableViewViewController.m in Sources */,
 				5BB4D0F41F331FA1007A1742 /* CLNavigationViewController.m in Sources */,

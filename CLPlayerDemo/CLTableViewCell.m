@@ -1,50 +1,59 @@
 //
-//  TableViewCell.m
+//  CLTableViewCell.m
 //  CLPlayerDemo
 //
-//  Created by JmoVxia on 2016/11/18.
-//  Copyright © 2016年 JmoVxia. All rights reserved.
+//  Created by JmoVxia on 2017/8/4.
+//  Copyright © 2017年 JmoVxia. All rights reserved.
 //
 
-#import "TableViewCell.h"
+#import "CLTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "UIView+CLSetRect.h"
+
 #define CellHeight   300
 #define ImageViewHeight 600
-@interface TableViewCell ()
+
+@interface CLTableViewCell ()
 
 /**button*/
-@property (nonatomic,weak) UIButton *button;
+@property (nonatomic,strong) UIButton *button;
 /**picture*/
-@property (nonatomic,weak) UIImageView *pictureView;
+@property (nonatomic,strong) UIImageView *pictureView;
 
 @end
 
-@implementation TableViewCell
-
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
-    {
+@implementation CLTableViewCell
+#pragma mark - 懒加载
+/**button*/
+- (UIButton *) button{
+    if (_button == nil){
+        _button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+        [_button setBackgroundImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
+        [_button addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _button;
+}
+/**pictureView*/
+- (UIImageView *) pictureView{
+    if (_pictureView == nil){
+        _pictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, - (ImageViewHeight - CellHeight) * 0.5, CLscreenWidth, ImageViewHeight)];    }
+    return _pictureView;
+}
+#pragma mark - 入口
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]){
         [self initUI];
     }
     return self;
 }
 - (void)initUI{
     //剪裁看不到的
-    self.clipsToBounds  = YES;
-    self.selectionStyle = UITableViewCellSelectionStyleNone;
-    UIImageView *pictureView = [[UIImageView alloc] initWithFrame:CGRectMake(0, - (ImageViewHeight - CellHeight) * 0.5, CLscreenWidth, ImageViewHeight)];
-    [self.contentView addSubview:pictureView];
-    _pictureView = pictureView;
-    
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
-    [button setBackgroundImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(playAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:button];
-    _button = button;
+    self.clipsToBounds       = YES;
+    self.selectionStyle      = UITableViewCellSelectionStyleNone;
+    [self.contentView addSubview:self.pictureView];
+    [self.contentView addSubview:self.button];
 }
--(void)setModel:(Model *)model{
+-(void)setModel:(CLModel *)model{
     _model = model;
     __block UIImage *placeholderImage = [UIImage imageNamed:@"placeholder"];
     [[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:_model.pictureUrl] completion:^(BOOL isInCache) {
@@ -59,8 +68,8 @@
     }];
 }
 - (void)playAction:(UIButton *)button{
-    if (_videoDelegate && [_videoDelegate respondsToSelector:@selector(PlayVideoWithCell:)]){
-        [_videoDelegate PlayVideoWithCell:self];
+    if (_delegate && [_delegate respondsToSelector:@selector(cl_tableViewCellPlayVideoWithCell:)]){
+        [_delegate cl_tableViewCellPlayVideoWithCell:self];
     }
 }
 - (UIImage *)getPictureWithName:(NSString *)name{
@@ -94,6 +103,5 @@
     _button.CLcenterY     = self.CLheight/2.0;
     _pictureView.CLwidth  = self.CLwidth;
 }
-
 
 @end

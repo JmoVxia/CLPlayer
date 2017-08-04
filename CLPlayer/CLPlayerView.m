@@ -171,6 +171,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     }
     //放到最下面，防止遮挡
     [self.layer insertSublayer:_playerLayer atIndex:0];
+    [self setNeedsLayout];
+    [self layoutIfNeeded];
 }
 -(void)setPlayerItem:(AVPlayerItem *)playerItem{
     if (_playerItem == playerItem){
@@ -400,8 +402,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     self.maskView.playButton.selected = YES;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setUrl:_url];
-        [self setNeedsLayout];
-        [self layoutIfNeeded];
         [self playVideo];
     });
 }

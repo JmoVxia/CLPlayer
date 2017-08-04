@@ -7,9 +7,11 @@
 //
 
 #import "CLViewController2.h"
+#import "CLPlayerView.h"
 #import "UIView+CLSetRect.h"
 @interface CLViewController2 ()
-
+/**CLplayer*/
+@property (nonatomic,weak) CLPlayerView *playerView;
 @end
 
 @implementation CLViewController2
@@ -18,7 +20,6 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"pushViewController";
-    
     
     CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 90, self.view.CLwidth, 300)];
     
@@ -42,7 +43,7 @@
 //    //是否静音，默认NO
 //    _playerView.mute = YES;
     //视频地址
-    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0116/569a048739c11_wpc.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1203/58425ad2a0c1d_wpd.mp4"];
     //播放
     [_playerView playVideo];
     //返回按钮点击事件回调
@@ -67,7 +68,7 @@
     [self.view addSubview:but];
 }
 - (void)next{
-    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2015/0820/55d5addd8d4c9_wpc.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0709/5781023a979d7_wpd.mp4"];
     [_playerView playVideo];
 }
 -(void)viewDidDisappear:(BOOL)animated{

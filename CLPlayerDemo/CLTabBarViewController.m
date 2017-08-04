@@ -20,8 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    [self addOneChildVC:[CLViewController new] title:@"View" imageName:@"search" selImageName:@"nosearch"];
-    [self addOneChildVC:[CLTableViewViewController new] title:@"TableView" imageName:@"personal" selImageName:@"nopersonal"];
+    [self addOneChildVC:[CLViewController new] title:@"View" imageName:@"ic_navbar_discovery_24dp" selImageName:@"ic_navbar_discovery_active_24dp"];
+    [self addOneChildVC:[CLTableViewViewController new] title:@"TableView" imageName:@"ic_navbar_knowledge_24dp" selImageName:@"ic_navbar_knowledge_active_24dp"];
     self.selectedIndex = 0;
 
 }

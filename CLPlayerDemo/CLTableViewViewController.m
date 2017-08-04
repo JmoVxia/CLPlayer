@@ -8,14 +8,15 @@
 
 #import "CLTableViewViewController.h"
 #import "CLPlayerView.h"
-#import "TableViewCell.h"
-#import "Model.h"
+#import "CLTableViewCell.h"
+#import "CLModel.h"
 #import "UIView+CLSetRect.h"
 #import "UIImageView+WebCache.h"
 #import "Masonry.h"
-static NSString *tableViewCellIdentifier = @"tableViewCellIdentifier";
 
-@interface CLTableViewViewController () <UITableViewDelegate, UITableViewDataSource, VideoDelegate, UIScrollViewDelegate>
+static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
+
+@interface CLTableViewViewController () <UITableViewDelegate, UITableViewDataSource, CLTableViewCellDelegate, UIScrollViewDelegate>
 
 /**tableView*/
 @property (nonatomic, strong) UITableView *tableView;
@@ -37,7 +38,7 @@ static NSString *tableViewCellIdentifier = @"tableViewCellIdentifier";
         NSData *JSONData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Date" ofType:@"json"]];
         NSArray *array = [NSJSONSerialization JSONObjectWithData:JSONData options:NSJSONReadingAllowFragments error:nil];
         [array enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            Model *model = [Model new];
+            CLModel *model = [CLModel new];
             [model setValuesForKeysWithDictionary:obj];
             [_arrayDS addObject:model];
         }];
@@ -52,7 +53,7 @@ static NSString *tableViewCellIdentifier = @"tableViewCellIdentifier";
         _tableView.dataSource = self;
         _tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
         _tableView.showsVerticalScrollIndicator = NO;
-        [_tableView registerClass:[TableViewCell class] forCellReuseIdentifier:tableViewCellIdentifier];
+        [_tableView registerClass:[CLTableViewCell class] forCellReuseIdentifier:CLTableViewCellIdentifier];
     }
     return _tableView;
 }
@@ -72,8 +73,8 @@ static NSString *tableViewCellIdentifier = @"tableViewCellIdentifier";
     return self.arrayDS.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tableViewCellIdentifier forIndexPath:indexPath];
-    cell.videoDelegate = self;
+    CLTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CLTableViewCellIdentifier forIndexPath:indexPath];
+    cell.delegate = self;
     return cell;
 }
 #pragma mark - UITableViewDelegate
@@ -82,7 +83,7 @@ static NSString *tableViewCellIdentifier = @"tableViewCellIdentifier";
 }
 //在willDisplayCell里面处理数据能优化tableview的滑动流畅性，cell将要出现的时候调用
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    TableViewCell * myCell = (TableViewCell *)cell;
+    CLTableViewCell * myCell = (CLTableViewCell *)cell;
     myCell.model = self.arrayDS[indexPath.row];
     //Cell开始出现的时候修正偏移量，让图片可以全部显示
     [myCell cellOffset];
@@ -121,7 +122,7 @@ static NSString *tableViewCellIdentifier = @"tableViewCellIdentifier";
     }
 }
 #pragma mark - 点击播放代理
-- (void)PlayVideoWithCell:(TableViewCell *)cell{
+- (void)cl_tableViewCellPlayVideoWithCell:(CLTableViewCell *)cell{
     //记录被点击的Cell
     _cell = cell;
     //销毁播放器
@@ -163,9 +164,9 @@ static NSString *tableViewCellIdentifier = @"tableViewCellIdentifier";
 #pragma mark - 滑动代理
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     // visibleCells 获取界面上能显示出来了cell
-    NSArray<TableViewCell *> *array = [self.tableView visibleCells];
+    NSArray<CLTableViewCell *> *array = [self.tableView visibleCells];
     //enumerateObjectsUsingBlock 类似于for，但是比for更快
-    [array enumerateObjectsUsingBlock:^(TableViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+    [array enumerateObjectsUsingBlock:^(CLTableViewCell * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj cellOffset];
     }];
 }
@@ -191,7 +192,5 @@ static NSString *tableViewCellIdentifier = @"tableViewCellIdentifier";
 //- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
 //    return UIInterfaceOrientationPortrait;
 //}
-
-
 
 @end
