@@ -1,4 +1,4 @@
 target 'CLPlayerDemo' do
-pod 'SDWebImage'
+    #pod 'SDWebImage'
 pod 'Masonry'
 end
