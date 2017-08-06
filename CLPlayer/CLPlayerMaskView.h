@@ -25,6 +25,7 @@
 - (void)cl_failButtonAction:(UIButton *)button;
 @end
 
+#import "AIPlayerButton.h"
 
 @interface CLPlayerMaskView : UIButton
 /**顶部工具条*/
@@ -36,7 +37,7 @@
 /**顶部工具条返回按钮*/
 @property (nonatomic,strong) UIButton *backButton;
 /**底部工具条播放按钮*/
-@property (nonatomic,strong) UIButton *playButton;
+@property (nonatomic,strong) AIPlayerButton *playButton;
 /**底部工具条全屏按钮*/
 @property (nonatomic,strong) UIButton *fullButton;
 /**底部工具条当前播放时间*/

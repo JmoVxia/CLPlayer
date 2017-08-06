@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		453E2AA71F372C7B0003AB0C /* AIPlayerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 453E2AA61F372C7B0003AB0C /* AIPlayerButton.m */; };
 		52CFF55482649C3F8FF48753 /* libPods-CLPlayerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */; };
 		5B1FC4C81DC850820036C489 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4C71DC850820036C489 /* main.m */; };
 		5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CA1DC850820036C489 /* AppDelegate.m */; };
@@ -38,6 +39,8 @@
 /* Begin PBXFileReference section */
 		133621D737F2050001C8A017 /* Pods-CLPlayerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLPlayerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLPlayerDemo/Pods-CLPlayerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLPlayerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		453E2AA51F372C7B0003AB0C /* AIPlayerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIPlayerButton.h; sourceTree = "<group>"; };
+		453E2AA61F372C7B0003AB0C /* AIPlayerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIPlayerButton.m; sourceTree = "<group>"; };
 		5B1FC4C31DC850820036C489 /* CLPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1FC4C71DC850820036C489 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5B1FC4C91DC850820036C489 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -311,6 +314,8 @@
 		5BDEA70C1E63F4BB00953D5D /* CLPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				453E2AA51F372C7B0003AB0C /* AIPlayerButton.h */,
+				453E2AA61F372C7B0003AB0C /* AIPlayerButton.m */,
 				5BDEA7111E63F4BB00953D5D /* CLPlayerView.h */,
 				5BDEA7121E63F4BB00953D5D /* CLPlayerView.m */,
 				5BDEA70F1E63F4BB00953D5D /* CLPlayerMaskView.h */,
@@ -466,6 +471,7 @@
 				5BDEA7181E63F4BB00953D5D /* CLSlider.m in Sources */,
 				5BB4D11C1F345AE0007A1742 /* UIViewController+CLPlayerRotation.m in Sources */,
 				5BB4D0EB1F31B775007A1742 /* CLViewController4.m in Sources */,
+				453E2AA71F372C7B0003AB0C /* AIPlayerButton.m in Sources */,
 				5BB4D0D91F31A1F1007A1742 /* CLTableViewViewController.m in Sources */,
 				5BB4D0F41F331FA1007A1742 /* CLNavigationViewController.m in Sources */,
 				5BB4D0E51F31AEC8007A1742 /* CLViewController2.m in Sources */,
