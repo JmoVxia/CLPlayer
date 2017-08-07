@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AIPlayerButton.h"
 #import "CLSlider.h"
 @protocol CLPlayerMaskViewDelegate <NSObject>
 /**返回按钮代理*/
@@ -24,8 +25,6 @@
 /**失败按钮代理*/
 - (void)cl_failButtonAction:(UIButton *)button;
 @end
-
-#import "AIPlayerButton.h"
 
 @interface CLPlayerMaskView : UIButton
 /**顶部工具条*/

@@ -157,7 +157,13 @@
     bezierPath3.lineWidth     = 4;
     return bezierPath3;
 }
-
+-(void)setSelected:(BOOL)selected{
+    if (selected) {
+        [self changeToPlayingAnimation];
+    }else{
+        [self changeToStopAnimation];
+    }
+}
 /**
  变为暂停
  */
