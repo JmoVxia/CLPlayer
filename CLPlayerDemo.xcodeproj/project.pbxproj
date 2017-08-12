@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		453E2AA71F372C7B0003AB0C /* AIPlayerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 453E2AA61F372C7B0003AB0C /* AIPlayerButton.m */; };
+		453E2AAA1F3C97900003AB0C /* AILoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 453E2AA91F3C97900003AB0C /* AILoadingView.m */; };
 		52CFF55482649C3F8FF48753 /* libPods-CLPlayerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */; };
 		5B1FC4C81DC850820036C489 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4C71DC850820036C489 /* main.m */; };
 		5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CA1DC850820036C489 /* AppDelegate.m */; };
@@ -41,6 +42,8 @@
 		188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLPlayerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		453E2AA51F372C7B0003AB0C /* AIPlayerButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIPlayerButton.h; sourceTree = "<group>"; };
 		453E2AA61F372C7B0003AB0C /* AIPlayerButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIPlayerButton.m; sourceTree = "<group>"; };
+		453E2AA81F3C97900003AB0C /* AILoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AILoadingView.h; sourceTree = "<group>"; };
+		453E2AA91F3C97900003AB0C /* AILoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AILoadingView.m; sourceTree = "<group>"; };
 		5B1FC4C31DC850820036C489 /* CLPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1FC4C71DC850820036C489 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5B1FC4C91DC850820036C489 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -314,6 +317,8 @@
 		5BDEA70C1E63F4BB00953D5D /* CLPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				453E2AA81F3C97900003AB0C /* AILoadingView.h */,
+				453E2AA91F3C97900003AB0C /* AILoadingView.m */,
 				453E2AA51F372C7B0003AB0C /* AIPlayerButton.h */,
 				453E2AA61F372C7B0003AB0C /* AIPlayerButton.m */,
 				5BDEA7111E63F4BB00953D5D /* CLPlayerView.h */,
@@ -458,6 +463,7 @@
 				5BDEA7171E63F4BB00953D5D /* CLPlayerView.m in Sources */,
 				5BB4D0FE1F34565F007A1742 /* CLTableViewCell.m in Sources */,
 				5BB4D0DF1F31A4B1007A1742 /* CLViewController.m in Sources */,
+				453E2AAA1F3C97900003AB0C /* AILoadingView.m in Sources */,
 				5BB4D0F91F3455D0007A1742 /* CLModel.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
 				5BB4D11B1F345AE0007A1742 /* UITabBarController+CLPlayerRotation.m in Sources */,

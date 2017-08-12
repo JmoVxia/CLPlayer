@@ -215,16 +215,18 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)setState:(CLPlayerState)state{
     _state = state;
     if (state == CLPlayerStateBuffering) {
-        [self.maskView.activity startAnimating];
+        [self.maskView.activity starAnimation];
     }else if (state == CLPlayerStateFailed){
-        [self.maskView.activity stopAnimating];
+        [self.maskView.activity stopAnimation];
+        self.maskView.activity.hidden     = YES;
 #ifdef DEBUG
         NSLog(@"加载失败");
 #endif
-        self.maskView.failButton.hidden = NO;
+        self.maskView.failButton.hidden   = NO;
         self.maskView.playButton.selected = NO;
     }else{
-        [self.maskView.activity stopAnimating];
+        [self.maskView.activity stopAnimation];
+        self.maskView.activity.hidden     = YES;
         if (_isUserPlay) {
             [self playVideo];
         }
@@ -398,7 +400,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 播放失败按钮点击事件
 -(void)cl_failButtonAction:(UIButton *)button{
-    [self.maskView.activity startAnimating];
+    [self.maskView.activity starAnimation];
     self.maskView.playButton.selected = YES;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self setUrl:_url];
@@ -512,7 +514,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                             selector:@selector(disappear)
                                             userInfo:nil
                                              repeats:NO];
-    [self.maskView.activity startAnimating];
+    [self.maskView.activity starAnimation];
 }
 #pragma mark - 取消定时器
 //销毁所有定时器
