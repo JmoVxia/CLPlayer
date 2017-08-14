@@ -218,15 +218,13 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [self.maskView.activity starAnimation];
     }else if (state == CLPlayerStateFailed){
         [self.maskView.activity stopAnimation];
-        self.maskView.activity.hidden     = YES;
+        self.maskView.failButton.hidden   = NO;
+        self.maskView.playButton.selected = NO;
 #ifdef DEBUG
         NSLog(@"加载失败");
 #endif
-        self.maskView.failButton.hidden   = NO;
-        self.maskView.playButton.selected = NO;
     }else{
         [self.maskView.activity stopAnimation];
-        self.maskView.activity.hidden     = YES;
         if (_isUserPlay) {
             [self playVideo];
         }

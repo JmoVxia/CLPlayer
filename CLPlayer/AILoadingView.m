@@ -82,12 +82,14 @@
     if (self.loadingLayer.animationKeys.count > 0) {
         return;
     }
+    self.hidden = NO;
     self.enable = YES;
     [self loadingAnimation];
 }
 - (void)stopAnimation {
-    [self.loadingLayer removeAllAnimations];
+    self.hidden = YES;
     self.enable = NO;
+    [self.loadingLayer removeAllAnimations];
 }
 - (void)setStrokeColor:(UIColor *)strokeColor {
     _strokeColor                   = strokeColor;
