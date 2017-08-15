@@ -158,10 +158,11 @@
     return _backButton;
 }
 //播放按钮
-- (AIPlayerButton *) playButton{
+- (UIButton *) playButton{
     if (_playButton == nil){
-        _playButton = [[AIPlayerButton alloc] init];
-        _playButton.strokeColor    = [UIColor whiteColor];
+        _playButton = [[UIButton alloc] init];
+        [_playButton setImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
+        [_playButton setImage:[self getPictureWithName:@"CLPauseBtn"] forState:UIControlStateSelected];
         [_playButton addTarget:self action:@selector(playButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playButton;

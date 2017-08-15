@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AIPlayerButton.h"
 #import "CLSlider.h"
 #import "AILoadingView.h"
 @protocol CLPlayerMaskViewDelegate <NSObject>
@@ -37,7 +36,7 @@
 /**顶部工具条返回按钮*/
 @property (nonatomic,strong) UIButton *backButton;
 /**底部工具条播放按钮*/
-@property (nonatomic,strong) AIPlayerButton *playButton;
+@property (nonatomic,strong) UIButton *playButton;
 /**底部工具条全屏按钮*/
 @property (nonatomic,strong) UIButton *fullButton;
 /**底部工具条当前播放时间*/
