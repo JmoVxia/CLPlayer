@@ -42,6 +42,8 @@
 //    _playerView.progressPlayFinishColor = [UIColor greenColor];
 //    //全屏是否隐藏状态栏
 //    _playerView.fullStatusBarHidden = NO;
+    //    //转子颜色
+    //    _playerView.strokeColor = [UIColor redColor];
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1117/5cd90c96-acb0-11e6-b83b-d4ae5296039d_wpc.mp4"];
     //播放

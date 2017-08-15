@@ -40,6 +40,8 @@ typedef void(^BeyondBlock)();
 @property (nonatomic, strong) UIColor        *progressBufferColor;
 /**进度条播放完成颜色*/
 @property (nonatomic, strong) UIColor        *progressPlayFinishColor;
+/**转子线条颜色*/
+@property (nonatomic, strong) UIColor        *strokeColor;
 
 /**播放*/
 - (void)playVideo;

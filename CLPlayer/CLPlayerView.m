@@ -136,6 +136,11 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     _progressPlayFinishColor              = progressPlayFinishColor;
     self.maskView.progressPlayFinishColor = progressPlayFinishColor;
 }
+#pragma mark - 转子颜色
+-(void)setStrokeColor:(UIColor *)strokeColor{
+    _strokeColor                       = strokeColor;
+    self.maskView.activity.strokeColor = strokeColor;
+}
 #pragma mark - 是否支持横屏
 -(void)setIsLandscape:(BOOL)isLandscape{
     _isLandscape = isLandscape;
@@ -489,6 +494,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     [self removeFromSuperview];
     self.playerLayer = nil;
     self.player      = nil;
+    self.maskView    = nil;
 }
 #pragma mark -- 重置播放器
 - (void)resetPlayer{

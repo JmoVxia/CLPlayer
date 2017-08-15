@@ -42,6 +42,8 @@
 //    _playerView.fullStatusBarHidden = NO;
 //    //是否静音，默认NO
 //    _playerView.mute = YES;
+//    //转子颜色
+//    _playerView.strokeColor = [UIColor redColor];
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://baobab.wdjcdn.com/14587093851044544c.mp4"];
     //播放

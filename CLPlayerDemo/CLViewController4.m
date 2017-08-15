@@ -42,6 +42,8 @@
 //    _playerView.fullStatusBarHidden = NO;
 //    //是否静音，默认NO
 //    _playerView.mute = YES;
+    //    //转子颜色
+    //    _playerView.strokeColor = [UIColor redColor];
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1203/58425ad2a0c1d_wpd.mp4"];
     //播放

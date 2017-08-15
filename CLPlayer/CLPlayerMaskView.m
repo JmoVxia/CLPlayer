@@ -58,7 +58,7 @@
     //转子
     [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.size.mas_equalTo(CGSizeMake(30, 30));
+        make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
     //返回按钮
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {

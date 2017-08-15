@@ -41,7 +41,7 @@
 }
 - (void)createUI {
     self.loadingLayer             = [CAShapeLayer layer];
-    self.loadingLayer.lineWidth   = 3.;
+    self.loadingLayer.lineWidth   = 2.;
     self.loadingLayer.fillColor   = [UIColor clearColor].CGColor;
     self.loadingLayer.strokeColor = [UIColor blackColor].CGColor;
     [self.layer addSublayer:self.loadingLayer];
@@ -71,14 +71,12 @@
         return;
     }
     _index++;
-//    NSLog(@"---用于测试是否循环调用----");
-    self.loadingLayer.path                 = [self cycleBezierPathIndex:_index %3].CGPath;
+    self.loadingLayer.path = [self cycleBezierPathIndex:_index %3].CGPath;
     [self loadingAnimation];
 }
 
 #pragma mark -public
 - (void)starAnimation {
-//    NSLog(@"-----%ld",self.loadingLayer.animationKeys.count);
     if (self.loadingLayer.animationKeys.count > 0) {
         return;
     }
