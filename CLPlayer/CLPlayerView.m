@@ -126,12 +126,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     _progressBackgroundColor              = progressBackgroundColor;
     self.maskView.progressBackgroundColor = progressBackgroundColor;
 }
-#pragma mark -- 进度条缓冲颜色
+#pragma mark - 进度条缓冲颜色
 -(void)setProgressBufferColor:(UIColor *)progressBufferColor{
     _progressBufferColor              = progressBufferColor;
     self.maskView.progressBufferColor = progressBufferColor;
 }
-#pragma mark -- 进度条播放完成颜色
+#pragma mark - 进度条播放完成颜色
 -(void)setProgressPlayFinishColor:(UIColor *)progressPlayFinishColor{
     _progressPlayFinishColor              = progressPlayFinishColor;
     self.maskView.progressPlayFinishColor = progressPlayFinishColor;
@@ -145,7 +145,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 -(void)setIsLandscape:(BOOL)isLandscape{
     _isLandscape = isLandscape;
 }
-#pragma mark -- 全屏状态栏是否隐藏
+#pragma mark - 全屏状态栏是否隐藏
 -(void)setFullStatusBarHidden:(BOOL)fullStatusBarHidden{
     _fullStatusBarHidden = fullStatusBarHidden;
 }
@@ -496,7 +496,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     self.player      = nil;
     self.maskView    = nil;
 }
-#pragma mark -- 重置播放器
+#pragma mark - 重置播放器
 - (void)resetPlayer{
     _isUserPlay = NO;
     [self pausePlay];
@@ -638,7 +638,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     NSString *path   = [bundle pathForResource:name ofType:@"png"];
     return [UIImage imageWithContentsOfFile:path];
 }
-#pragma mark -- layoutSubviews
+#pragma mark - layoutSubviews
 -(void)layoutSubviews{
     [super layoutSubviews];
     self.playerLayer.frame = self.bounds;

@@ -39,8 +39,8 @@
 //    _playerView.progressPlayFinishColor = [UIColor greenColor];
 //    //全屏是否隐藏状态栏
 //    _playerView.fullStatusBarHidden = NO;
-    //    //转子颜色
-    //    _playerView.strokeColor = [UIColor redColor];
+//    //转子颜色
+//    _playerView.strokeColor = [UIColor redColor];
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://baobab.wdjcdn.com/14585683555005644d.mp4"];
     //播放
