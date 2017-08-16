@@ -6,16 +6,28 @@
 + 接口
 
 ```
-/**视频url*/
-@property (nonatomic,strong) NSURL *url;
-/**旋转自动全屏，默认Yes*/
-@property (nonatomic,assign) BOOL autoFullScreen;
 /**重复播放，默认No*/
-@property (nonatomic,assign) BOOL repeatPlay;
-/**是否支持横屏，默认No*/
-@property (nonatomic,assign) BOOL isLandscape;
+@property (nonatomic, assign) BOOL           repeatPlay;
+/**是否支持横屏,默认NO*/
+@property (nonatomic, assign) BOOL           isLandscape;
+/**全屏是否隐藏状态栏，默认YES*/
+@property (nonatomic, assign) BOOL           fullStatusBarHidden;
+/** 静音（默认为NO）*/
+@property (nonatomic, assign) BOOL           mute;
+/**是否是全屏*/
+@property (nonatomic, assign, readonly) BOOL isFullScreen;
 /**拉伸方式，默认全屏填充*/
-@property (nonatomic,assign) VideoFillMode fillMode;
+@property (nonatomic, assign) VideoFillMode  fillMode;
+/**视频url*/
+@property (nonatomic, strong) NSURL          *url;
+/**进度条背景颜色*/
+@property (nonatomic, strong) UIColor        *progressBackgroundColor;
+/**缓冲条缓冲进度颜色*/
+@property (nonatomic, strong) UIColor        *progressBufferColor;
+/**进度条播放完成颜色*/
+@property (nonatomic, strong) UIColor        *progressPlayFinishColor;
+/**转子线条颜色*/
+@property (nonatomic, strong) UIColor        *strokeColor;
 
 /**播放*/
 - (void)playVideo;
@@ -27,12 +39,6 @@
 - (void)endPlay:(EndBolck) end;
 /**销毁播放器*/
 - (void)destroyPlayer;
-/**
- 根据播放器所在位置计算是否滑出屏幕
- @param tableView Cell所在tableView
- @param cell 播放器所在Cell
- */
-- (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell;
 
 ```
 
@@ -44,67 +50,53 @@
 
 ```
 #pragma mark - 点击播放代理
-- (void)PlayVideoWithCell:(TableViewCell *)cell;
-{
-//记录被点击的cell
-    _cell = cell;
-    
-    //销毁播放器
-    [_playerView destroyPlayer];
-    _playerView = nil;
-    
-    _playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.width, cell.height)];
-    [cell.contentView addSubview:_playerView];
-    
-    //根据旋转自动支持全屏，默认支持
-    //    playerView.autoFullScreen = NO;
-    //重复播放，默认不播放
-    //    playerView.repeatPlay     = YES;
-    //如果播放器所在页面支持横屏，需要设置为Yes，不支持不需要设置(默认不支持)
-    //    playerView.isLandscape    = YES;
-    
-    //视频地址
-    _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
-    
-    //播放
-    [_playerView playVideo];
-    
-    //返回按钮点击事件回调
-    [_playerView backButton:^(UIButton *button) {
-        NSLog(@"返回按钮被点击");
-    }];
-    
-    //播放完成回调
-    [_playerView endPlay:^{
-        
-        //销毁播放器
-        [_playerView destroyPlayer];
-        _playerView = nil;
-        NSLog(@"播放完成");
-    }];
- 
+- (void)cl_tableViewCellPlayVideoWithCell:(CLTableViewCell *)cell{
+    //记录被点击的Cell
+    _cell = cell;
+    //销毁播放器
+    [_playerView destroyPlayer];
+    CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 0, cell.CLwidth, cell.CLheight)];
+    _playerView = playerView;
+    [cell.contentView addSubview:_playerView];
+    //视频地址
+    _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
+    //播放
+    [_playerView playVideo];
+    //返回按钮点击事件回调
+    [_playerView backButton:^(UIButton *button) {
+        NSLog(@"返回按钮被点击");
+    }];
+    //播放完成回调
+    [_playerView endPlay:^{
+        //销毁播放器
+        [_playerView destroyPlayer];
+        _playerView = nil;
+        _cell = nil;
+        NSLog(@"播放完成");
+    }];
 }
 
 ```
-    在`tableView`滑动代理中，需要使用`- (void)calculateScrollOffset:(UITableView *)tableView cell:(UITableViewCell *)cell`方法，将`tableView`和播放器所在`cell`传递给播放器，播放器会在内部计算播放器所在位置，在超出屏幕的时候，会对播放器销毁。
+    在`tableView`滑动代理中，需要在`- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath`方法中判断当前cell时候滑出，滑出后需要销毁播放器。
 
 ```
-#pragma mark - 滑动代理
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    //计算偏移来销毁播放器
-    [_playerView calculateScrollOffset:self.tableView cell:_cell];
+//cell离开tableView时调用
+- (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    //因为复用，同一个cell可能会走多次
+    if ([_cell isEqual:cell]) {
+        //区分是否是播放器所在cell,销毁时将指针置空
+        [_playerView destroyPlayer];
+        _cell = nil;
+    }
 }
 ```
 # 播放器效果图
 
 ![](https://github.com/JmoVxia/CLPlayer/blob/master/%E6%95%88%E6%9E%9C%E5%9B%BE1.gif)
-![](https://github.com/JmoVxia/CLPlayer/blob/master/%E6%95%88%E6%9E%9C%E5%9B%BE2.gif)
-![](https://github.com/JmoVxia/CLPlayer/blob/master/%E6%95%88%E6%9E%9C%E5%9B%BE3.gif)
 
 
 
 
 # 详细请看简书
 
-http://www.jianshu.com/p/11e05d684c05
+http://www.jianshu.com/p/f9240b8a6e90
