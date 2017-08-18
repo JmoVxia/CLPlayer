@@ -468,8 +468,12 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 返回按钮
 -(void)cl_backButtonAction:(UIButton *)button{
-    if (self.BackBlock){
-        self.BackBlock(button);
+    if (_isFullScreen) {
+        [self originalscreen];
+    }else{        
+        if (self.BackBlock){
+            self.BackBlock(button);
+        }
     }
 }
 - (void)backButton:(BackButtonBlock) backButton;{

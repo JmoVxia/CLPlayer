@@ -49,7 +49,7 @@ typedef void(^BeyondBlock)();
 - (void)playVideo;
 /**暂停*/
 - (void)pausePlay;
-/**返回按钮回调方法*/
+/**返回按钮回调方法，只有小屏会调用，全屏点击会回到小屏*/
 - (void)backButton:(BackButtonBlock) backButton;
 /**播放完成回调*/
 - (void)endPlay:(EndBolck) end;

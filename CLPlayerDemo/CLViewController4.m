@@ -44,15 +44,15 @@
 //    _playerView.mute = YES;
 //    //转子颜色
 //    _playerView.strokeColor = [UIColor redColor];
+//    //工具条消失时间，默认10s
+//    _playerView.toolBarDisappearTime = 15;
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1203/58425ad2a0c1d_wpd.mp4"];
     //播放
     [_playerView playVideo];
-    //返回按钮点击事件回调
+    //返回按钮点击事件回调,小屏状态才会调用，全屏默认变为小屏
     [_playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");
-        //查询是否是全屏状态
-        NSLog(@"%d",_playerView.isFullScreen);
     }];
     //播放完成回调
     [_playerView endPlay:^{

@@ -41,12 +41,13 @@
 //    _playerView.fullStatusBarHidden = NO;
 //    //转子颜色
 //    _playerView.strokeColor = [UIColor redColor];
+//    //工具条消失时间，默认10s
+//    _playerView.toolBarDisappearTime = 15;
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://baobab.wdjcdn.com/14585683555005644d.mp4"];
     //播放
     [_playerView playVideo];
-    
-    //返回按钮点击事件回调
+    //返回按钮点击事件回调,小屏状态才会调用，全屏默认变为小屏
     [_playerView backButton:^(UIButton *button) {
         NSLog(@"返回按钮被点击");
     }];
@@ -57,7 +58,6 @@
         _playerView = nil;
         NSLog(@"播放完成");
     }];
-    
     
     UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, 450, 90, 90)];
     [but setTitle:@"退出" forState:UIControlStateNormal];
