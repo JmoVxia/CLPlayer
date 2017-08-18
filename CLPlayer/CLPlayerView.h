@@ -28,6 +28,8 @@ typedef void(^BeyondBlock)();
 @property (nonatomic, assign) BOOL           fullStatusBarHidden;
 /** 静音（默认为NO）*/
 @property (nonatomic, assign) BOOL           mute;
+/**工具条消失时间，默认10s*/
+@property (nonatomic, assign) NSInteger      toolBarDisappearTime;
 /**是否是全屏*/
 @property (nonatomic, assign, readonly) BOOL isFullScreen;
 /**拉伸方式，默认全屏填充*/

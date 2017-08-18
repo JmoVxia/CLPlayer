@@ -9,8 +9,6 @@
 #import "CLPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CLPlayerMaskView.h"
-//消失时间
-#define DisappearTime  10
 /**UIScreen width*/
 #define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
 /**UIScreen height*/
@@ -89,7 +87,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                       userInfo:nil
                                                        repeats:YES];
         //定时器，工具条消失
-        _timer       = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+        _timer       = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
                                                         target:self
                                                       selector:@selector(disappear)
                                                       userInfo:nil
@@ -157,6 +155,17 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 -(void)setMute:(BOOL)mute{
     _mute = mute;
     self.player.muted = _mute;
+}
+#pragma mark - 工具条消失时间
+-(void)setToolBarDisappearTime:(NSInteger)toolBarDisappearTime{
+    _toolBarDisappearTime = toolBarDisappearTime;
+    [self destroyTimer];
+    //定时器，工具条消失
+    _timer         = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
+                                                    target:self
+                                                  selector:@selector(disappear)
+                                                  userInfo:nil
+                                                   repeats:NO];
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
@@ -255,6 +264,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         //查询控制器是否支持全屏
         _isLandscape             = NO;
         _statusBarHiddenState    = self.statusBar.isHidden;
+        _toolBarDisappearTime    = 10;
         _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
         _progressPlayFinishColor = [UIColor whiteColor];
         _progressBufferColor     = [UIColor colorWithRed:0.84118 green:0.81373 blue:0.80980 alpha:1.00000];
@@ -352,7 +362,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [self playVideo];
     }
     //重新添加工具条定时消失定时器
-    _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+    _timer = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
                                               target:self
                                             selector:@selector(disappear)
                                             userInfo:nil
@@ -421,7 +431,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         }];
     }else{
         //添加定时消失
-        _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+        _timer = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
                                                   target:self
                                                 selector:@selector(disappear)
                                                 userInfo:nil
@@ -439,6 +449,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         self.maskView.topToolBar.alpha    = 0;
         self.maskView.bottomToolBar.alpha = 0;
     }];
+    _isDisappear = YES;
 }
 #pragma mark - 播放完成
 - (void)moviePlayDidEnd:(id)sender{
@@ -498,7 +509,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 重置播放器
 - (void)resetPlayer{
-    _isUserPlay = NO;
+    _isUserPlay  = NO;
+    _isDisappear = NO;
     [self pausePlay];
     [self.playerLayer removeFromSuperlayer];
     self.playerLayer = nil;
@@ -513,7 +525,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         self.maskView.bottomToolBar.alpha = 1.0;
     }];
     [self destroyTimer];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:DisappearTime
+    _timer = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
                                               target:self
                                             selector:@selector(disappear)
                                             userInfo:nil
