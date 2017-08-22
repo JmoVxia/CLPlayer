@@ -32,7 +32,7 @@ typedef void(^BeyondBlock)();
 @property (nonatomic, assign) NSInteger      toolBarDisappearTime;
 /**是否是全屏*/
 @property (nonatomic, assign, readonly) BOOL isFullScreen;
-/**是否播放*/
+/**是否正在播放*/
 @property (nonatomic, assign, readonly) BOOL isPlay;
 /**拉伸方式，默认全屏填充*/
 @property (nonatomic, assign) VideoFillMode  fillMode;
