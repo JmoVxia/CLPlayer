@@ -46,6 +46,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 @property (nonatomic, assign) BOOL             isUserTapMaxButton;
 /**播放完成标记*/
 @property (nonatomic, assign) BOOL             isEnd;
+/**是否播放*/
+@property (nonatomic, assign) BOOL             isPlay;
 /**播放器*/
 @property (nonatomic, strong) AVPlayer         *player;
 /**playerLayer*/
@@ -263,6 +265,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _mute                    = NO;
         //查询控制器是否支持全屏
         _isLandscape             = NO;
+        _isPlay                  = NO;
         _statusBarHiddenState    = self.statusBar.isHidden;
         _toolBarDisappearTime    = 10;
         _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
@@ -481,12 +484,14 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 暂停播放
 - (void)pausePlay{
+    _isPlay                           = NO;
     self.maskView.playButton.selected = NO;
     [_player pause];
 }
 #pragma mark - 播放
 - (void)playVideo{
-    _isUserPlay = YES;
+    _isUserPlay                       = YES;
+    _isPlay                           = YES;
     self.maskView.playButton.selected = YES;
     if (_isEnd) {
         [self resetPlay];
