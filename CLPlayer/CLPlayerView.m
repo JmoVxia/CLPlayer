@@ -94,6 +94,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
                                                       selector:@selector(disappear)
                                                       userInfo:nil
                                                        repeats:NO];
+        //封面圖片
+        _coverImageView = _maskView.coverImageView;
     }
     return _maskView;
 }
@@ -144,6 +146,10 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 是否支持横屏
 -(void)setIsLandscape:(BOOL)isLandscape{
     _isLandscape = isLandscape;
+}
+#pragma mark - 是否自動旋轉
+-(void)setAutoRotate:(BOOL)autoRotate{
+    _autoRotate = autoRotate;
 }
 #pragma mark - 全屏状态栏是否隐藏
 -(void)setFullStatusBarHidden:(BOOL)fullStatusBarHidden{
@@ -265,6 +271,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         _mute                    = NO;
         //查询控制器是否支持全屏
         _isLandscape             = NO;
+        _autoRotate              = YES;
         _isPlay                  = NO;
         _statusBarHiddenState    = self.statusBar.isHidden;
         _toolBarDisappearTime    = 10;
@@ -395,6 +402,14 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         NSInteger durMin                    = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总分钟
         NSInteger durSec                    = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总秒
         self.maskView.totalTimeLabel.text   = [NSString stringWithFormat:@"%02ld:%02ld", (long)durMin, (long)durSec];
+        AVURLAsset *urlAsset = (AVURLAsset *)_playerItem.asset;
+        NSArray *audioExt = @[@"mp3", @"wav", @"m4a", @"wma"];
+        if (urlAsset != nil && [audioExt containsObject:[urlAsset.URL.pathExtension lowercaseString]] ) {
+            self.maskView.coverImageView.hidden = false;
+        } else {
+            self.maskView.coverImageView.hidden = true;
+        }
+        
     }
 }
 #pragma mark - 播放暂停按钮方法
@@ -556,29 +571,31 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification{
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    if (orientation == UIDeviceOrientationLandscapeLeft){
-        if (_isFullScreen == NO){
-            if (_isLandscape) {
-                //播放器所在控制器页面支持旋转情况下，和正常情况是相反的
-                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
-            }else{
-                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
+    if (_autoRotate) {
+        UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+        if (orientation == UIDeviceOrientationLandscapeLeft){
+            if (_isFullScreen == NO){
+                if (_isLandscape) {
+                    //播放器所在控制器页面支持旋转情况下，和正常情况是相反的
+                    [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
+                }else{
+                    [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
+                }
             }
         }
-    }
-    else if (orientation == UIDeviceOrientationLandscapeRight){
-        if (_isFullScreen == NO){
-            if (_isLandscape) {
-                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
-            }else{
-                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
+        else if (orientation == UIDeviceOrientationLandscapeRight){
+            if (_isFullScreen == NO){
+                if (_isLandscape) {
+                    [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
+                }else{
+                    [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
+                }
             }
         }
-    }
-    else if (orientation == UIDeviceOrientationPortrait){
-        if (_isFullScreen == YES){
-            [self originalscreen];
+        else if (orientation == UIDeviceOrientationPortrait){
+            if (_isFullScreen == YES){
+                [self originalscreen];
+            }
         }
     }
 }

@@ -49,6 +49,8 @@
 @property (nonatomic,strong) CLSlider *slider;
 /**加载失败按钮*/
 @property (nonatomic,strong) UIButton *failButton;
+/**封面圖片*/
+@property (nonatomic,strong) UIImageView *coverImageView;
 /**代理人*/
 @property (nonatomic,weak) id<CLPlayerMaskViewDelegate> delegate;
 /**进度条背景颜色*/

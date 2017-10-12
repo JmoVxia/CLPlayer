@@ -28,6 +28,7 @@
     return self;
 }
 - (void)initViews{
+    [self addSubview:self.coverImageView];
     [self addSubview:self.topToolBar];
     [self addSubview:self.bottomToolBar];
     [self addSubview:self.activity];
@@ -54,6 +55,10 @@
     [self .bottomToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.equalTo(self);
         make.height.mas_equalTo(ToolBarHeight);
+    }];
+    //封面圖片
+    [self.coverImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.right.bottom.equalTo(self);
     }];
     //转子
     [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -234,6 +239,15 @@
         [_failButton addTarget:self action:@selector(failButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _failButton;
+}
+//封面圖片
+- (UIImageView *)coverImageView {
+    if (_coverImageView == nil){
+        _coverImageView = [[UIImageView alloc] init];
+        _coverImageView.backgroundColor = [UIColor blackColor];
+        _coverImageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    return _coverImageView;
 }
 #pragma mark - 按钮点击事件
 //返回按钮
