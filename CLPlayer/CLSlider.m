@@ -30,7 +30,7 @@
     return self;
 }
 - (void)setup {
-    UIImage *thumbImage = [self getPictureWithName:@"CLRound"];
+    UIImage *thumbImage = [self imageWithImage:[self getPictureWithName:@"CLRound"] scaledToSize:CGSizeMake(25, 25)];
     [self setThumbImage:thumbImage forState:UIControlStateHighlighted];
     [self setThumbImage:thumbImage forState:UIControlStateNormal];
 }
@@ -86,6 +86,14 @@
     NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"CLPlayer" ofType:@"bundle"]];
     NSString *path   = [bundle pathForResource:name ofType:@"png"];
     return [UIImage imageWithContentsOfFile:path];
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 

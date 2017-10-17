@@ -24,6 +24,8 @@ typedef void(^BeyondBlock)();
 @property (nonatomic, assign) BOOL           repeatPlay;
 /**是否支持横屏,默认NO*/
 @property (nonatomic, assign) BOOL           isLandscape;
+/**自動旋轉,默認YES*/
+@property (nonatomic, assign) BOOL           autoRotate;
 /**全屏是否隐藏状态栏，默认YES*/
 @property (nonatomic, assign) BOOL           fullStatusBarHidden;
 /** 静音（默认为NO）*/
@@ -38,6 +40,8 @@ typedef void(^BeyondBlock)();
 @property (nonatomic, assign) VideoFillMode  fillMode;
 /**视频url*/
 @property (nonatomic, strong) NSURL          *url;
+/**封面圖片*/
+@property (nonatomic, strong) UIImageView    *coverImageView;
 /**进度条背景颜色*/
 @property (nonatomic, strong) UIColor        *progressBackgroundColor;
 /**缓冲条缓冲进度颜色*/
