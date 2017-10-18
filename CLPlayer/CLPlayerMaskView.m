@@ -31,7 +31,6 @@
     [self addSubview:self.topToolBar];
     [self addSubview:self.bottomToolBar];
     [self addSubview:self.activity];
-//    self.activity.hidden = YES;
     [self addSubview:self.failButton];
     [self.topToolBar addSubview:self.backButton];
     [self.bottomToolBar addSubview:self.playButton];
@@ -141,9 +140,7 @@
     if (_activity == nil){
         _activity = [[AILoadingView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
         _activity.strokeColor = [UIColor whiteColor];
-//        _activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         [_activity starAnimation];
-        _activity.hidden      = NO;
     }
     return _activity;
 }
