@@ -58,11 +58,12 @@
     strokeEndAnimation.toValue             = @1.;
     strokeEndAnimation.duration            = self.duration * 0.5;
     
-    CAAnimationGroup *strokeAniamtionGroup = [CAAnimationGroup animation];
-    strokeAniamtionGroup.duration          = self.duration;
-    
-    strokeAniamtionGroup.delegate          = self;
-    strokeAniamtionGroup.animations        = @[strokeEndAnimation,strokeStartAnimation];
+    CAAnimationGroup *strokeAniamtionGroup   = [CAAnimationGroup animation];
+    strokeAniamtionGroup.duration            = self.duration;
+    strokeAniamtionGroup.delegate            = self;
+    strokeAniamtionGroup.animations          = @[strokeEndAnimation,strokeStartAnimation];
+    strokeAniamtionGroup.removedOnCompletion = NO;
+    strokeAniamtionGroup.fillMode            = kCAFillModeForwards;
     [self.loadingLayer addAnimation:strokeAniamtionGroup forKey:@"strokeAniamtionGroup"];
 }
 #pragma mark -CAAnimationDelegate
@@ -87,6 +88,7 @@
 - (void)stopAnimation {
     self.hidden = YES;
     self.enable = NO;
+    self.index  = 0;
     [self.loadingLayer removeAllAnimations];
 }
 - (void)setStrokeColor:(UIColor *)strokeColor {

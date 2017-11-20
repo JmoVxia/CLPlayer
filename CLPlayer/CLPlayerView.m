@@ -428,21 +428,11 @@ typedef NS_ENUM(NSInteger, PanDirection){
             break;
     }
 }
-
-/**
- *  pan垂直移动的方法
- *
- *  @param value void
- */
+#pragma mark - 滑动调节音量和亮度
 - (void)verticalMoved:(CGFloat)value {
     self.isVolume ? (self.volumeViewSlider.value -= value / 10000) : ([UIScreen mainScreen].brightness -= value / 10000);
 }
-
-/**
- *  pan水平移动的方法
- *
- *  @param value void
- */
+#pragma mark - 水平移动调节进度
 - (void)horizontalMoved:(CGFloat)value {
     // 每次滑动需要叠加时间
     self.sumTime += value / 200;
