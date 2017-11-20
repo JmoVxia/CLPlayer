@@ -289,9 +289,15 @@ typedef NS_ENUM(NSInteger, PanDirection){
         _isPlaying               = NO;
         _statusBarHiddenState    = self.statusBar.isHidden;
         _toolBarDisappearTime    = 10;
-        _progressBackgroundColor = [UIColor colorWithRed:0.54118 green:0.51373 blue:0.50980 alpha:1.00000];
+        _progressBackgroundColor = [UIColor colorWithRed:0.54118
+                                                   green:0.51373
+                                                    blue:0.50980
+                                                   alpha:1.00000];
         _progressPlayFinishColor = [UIColor whiteColor];
-        _progressBufferColor     = [UIColor colorWithRed:0.84118 green:0.81373 blue:0.80980 alpha:1.00000];
+        _progressBufferColor     = [UIColor colorWithRed:0.84118
+                                                   green:0.81373
+                                                    blue:0.80980
+                                                   alpha:1.00000];
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
@@ -326,7 +332,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
         if (self.player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
             // 加载完成后，再添加平移手势
             // 添加平移手势，用来控制音量、亮度、快进快退
-            UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panDirection:)];
+            UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self
+                                                                                           action:@selector(panDirection:)];
             panRecognizer.delegate                = self;
             [panRecognizer setMaximumNumberOfTouches:1];
             [panRecognizer setDelaysTouchesBegan:YES];
@@ -455,12 +462,13 @@ typedef NS_ENUM(NSInteger, PanDirection){
     if (value == 0) {
         return;
     }
-    self.isDragged = YES;
+    self.isDragged          = YES;
     //计算出拖动的当前秒数
     NSInteger dragedSeconds = floorf(self.sumTime);
     //转换成CMTime才能给player来控制播放进度
     CMTime dragedCMTime     = CMTimeMake(dragedSeconds, 1);
     [_player seekToTime:dragedCMTime];
+    
     NSInteger proMin                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
     NSInteger proSec                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
     self.maskView.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)proMin, (long)proSec];
@@ -683,8 +691,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
     _isDisappear = NO;
     [self pausePlay];
     [self.playerLayer removeFromSuperlayer];
-    self.playerLayer = nil;
-    self.player      = nil;
+    self.playerLayer           = nil;
+    self.player                = nil;
     self.maskView.slider.value = 0.0;
     [self.maskView.progress setProgress:0.0];
     self.maskView.currentTimeLabel.text = @"00:00";
@@ -757,7 +765,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
     if (_isLandscape == YES){
         //手动点击需要旋转方向
         if (_isUserTapMaxButton) {
-            [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
+            [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight]
+                                        forKey:@"orientation"];
         }
         if (keyWindow.frame.size.width < keyWindow.frame.size.height) {
             self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
@@ -770,12 +779,14 @@ typedef NS_ENUM(NSInteger, PanDirection){
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
             }];
-            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight
+                                                              animated:NO];
         }else if (direction == UIInterfaceOrientationLandscapeRight) {
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
             }];
-            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:NO];
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft
+                                                              animated:NO];
         }
         self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
     }
@@ -785,13 +796,15 @@ typedef NS_ENUM(NSInteger, PanDirection){
 }
 #pragma mark - 原始大小
 - (void)originalscreen{
-    _isFullScreen = NO;
+    _isFullScreen       = NO;
     _isUserTapMaxButton = NO;
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait
+                                                      animated:NO];
     [self setStatusBarHidden:_statusBarHiddenState];
     if (_isLandscape) {
         //还原为竖屏
-        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
+        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait]
+                                    forKey:@"orientation"];
     }else{
         //还原
         [UIView animateWithDuration:0.25 animations:^{
@@ -823,10 +836,14 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - dealloc
 - (void)dealloc{
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    [_playerItem removeObserver:self forKeyPath:@"status"];
-    [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
-    [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
-    [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+    [_playerItem removeObserver:self
+                     forKeyPath:@"status"];
+    [_playerItem removeObserver:self
+                     forKeyPath:@"loadedTimeRanges"];
+    [_playerItem removeObserver:self
+                     forKeyPath:@"playbackBufferEmpty"];
+    [_playerItem removeObserver:self
+                     forKeyPath:@"playbackLikelyToKeepUp"];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:AVPlayerItemDidPlayToEndTimeNotification
                                                   object:_player.currentItem];
@@ -840,9 +857,11 @@ typedef NS_ENUM(NSInteger, PanDirection){
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
     //回到竖屏
-    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
+    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait]
+                                forKey:@"orientation"];
     //重置状态条
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait
+                                                      animated:NO];
     //恢复默认状态栏显示与否
     [self setStatusBarHidden:_statusBarHiddenState];
 #ifdef DEBUG
