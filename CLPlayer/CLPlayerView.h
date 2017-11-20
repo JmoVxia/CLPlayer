@@ -15,8 +15,7 @@ typedef NS_ENUM(NSInteger,VideoFillMode){
 };
 
 typedef void(^BackButtonBlock)(UIButton *button);
-typedef void(^EndBolck)();
-typedef void(^BeyondBlock)();
+typedef void(^EndBolck)(void);
 
 @interface CLPlayerView : UIView
 
@@ -51,7 +50,7 @@ typedef void(^BeyondBlock)();
 - (void)playVideo;
 /**暂停*/
 - (void)pausePlay;
-/**返回按钮回调方法，只有小屏会调用，全屏点击会回到小屏*/
+/**返回按钮回调方法，只有小屏会调用，全屏点击默认回到小屏*/
 - (void)backButton:(BackButtonBlock) backButton;
 /**播放完成回调*/
 - (void)endPlay:(EndBolck) end;

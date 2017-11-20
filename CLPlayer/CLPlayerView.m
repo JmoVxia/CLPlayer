@@ -8,6 +8,7 @@
 
 #import "CLPlayerView.h"
 #import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
 #import "CLPlayerMaskView.h"
 /**UIScreen width*/
 #define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
@@ -21,8 +22,13 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     CLPlayerStateStopped,    // 停止播放
     CLPlayerStatePause       // 暂停播放
 };
+// 枚举值，包含水平移动方向和垂直移动方向
+typedef NS_ENUM(NSInteger, PanDirection){
+    PanDirectionHorizontalMoved, // 横向移动
+    PanDirectionVerticalMoved    // 纵向移动
+};
 
-@interface CLPlayerView ()<CLPlayerMaskViewDelegate>
+@interface CLPlayerView ()<CLPlayerMaskViewDelegate,UIGestureRecognizerDelegate>
 
 /** 播发器的几种状态 */
 @property (nonatomic, assign) CLPlayerState    state;
@@ -61,10 +67,21 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 /**slider定时器*/
 @property (nonatomic, strong) NSTimer          *sliderTimer;
 
+/** 用来保存快进的总时长 */
+@property (nonatomic, assign) CGFloat          sumTime;
+/** 定义一个实例变量，保存枚举值 */
+@property (nonatomic, assign) PanDirection     panDirection;
+/** 是否在调节音量*/
+@property (nonatomic, assign) BOOL             isVolume;
+/** 是否正在拖拽 */
+@property (nonatomic, assign) BOOL             isDragged;
+/**音量滑杆*/
+@property (nonatomic, strong) UISlider         *volumeViewSlider;
+
 /**返回按钮回调*/
 @property (nonatomic, copy) void (^BackBlock) (UIButton *backButton);
 /**播放完成回调*/
-@property (nonatomic, copy) void (^EndBlock) ();
+@property (nonatomic, copy) void (^EndBlock) (void);
 
 @end
 
@@ -155,7 +172,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 }
 #pragma mark - 静音
 -(void)setMute:(BOOL)mute{
-    _mute = mute;
+    _mute             = mute;
     self.player.muted = _mute;
 }
 #pragma mark - 工具条消失时间
@@ -163,7 +180,7 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     _toolBarDisappearTime = toolBarDisappearTime;
     [self destroyTimer];
     //定时器，工具条消失
-    _timer         = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
+    _timer                = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
                                                     target:self
                                                   selector:@selector(disappear)
                                                   userInfo:nil
@@ -198,10 +215,14 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:AVPlayerItemDidPlayToEndTimeNotification
                                                       object:_playerItem];
-        [_playerItem removeObserver:self forKeyPath:@"status"];
-        [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
-        [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
-        [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
+        [_playerItem removeObserver:self
+                         forKeyPath:@"status"];
+        [_playerItem removeObserver:self
+                         forKeyPath:@"loadedTimeRanges"];
+        [_playerItem removeObserver:self
+                         forKeyPath:@"playbackBufferEmpty"];
+        [_playerItem removeObserver:self
+                         forKeyPath:@"playbackLikelyToKeepUp"];
         //重置播放器
         [self resetPlayer];
     }
@@ -294,6 +315,8 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 #pragma mark - 创建播放器UI
 - (void)creatUI{
     self.backgroundColor = [UIColor blackColor];
+    // 获取系统音量
+    [self configureVolume];
     //最上面的View
     [self addSubview:self.maskView];
 }
@@ -301,7 +324,16 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
     if ([keyPath isEqualToString:@"status"]) {
         if (self.player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
-            self.state = CLPlayerStatePlaying;
+            // 加载完成后，再添加平移手势
+            // 添加平移手势，用来控制音量、亮度、快进快退
+            UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panDirection:)];
+            panRecognizer.delegate                = self;
+            [panRecognizer setMaximumNumberOfTouches:1];
+            [panRecognizer setDelaysTouchesBegan:YES];
+            [panRecognizer setDelaysTouchesEnded:YES];
+            [panRecognizer setCancelsTouchesInView:YES];
+            [self.maskView addGestureRecognizer:panRecognizer];
+            self.state        = CLPlayerStatePlaying;
             self.player.muted = self.mute;
         }
         else if (self.player.currentItem.status == AVPlayerItemStatusFailed) {
@@ -322,6 +354,142 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
         // 当缓冲好的时候
         if (self.playerItem.isPlaybackLikelyToKeepUp && self.state == CLPlayerStateBuffering){
             self.state = CLPlayerStatePlaying;
+        }
+    }
+}
+#pragma mark - UIPanGestureRecognizer手势方法
+- (void)panDirection:(UIPanGestureRecognizer *)pan {
+    //根据在view上Pan的位置，确定是调音量还是亮度
+    CGPoint locationPoint = [pan locationInView:self];
+    // 我们要响应水平移动和垂直移动
+    // 根据上次和本次移动的位置，算出一个速率的point
+    CGPoint veloctyPoint  = [pan velocityInView:self];
+    // 判断是垂直移动还是水平移动
+    switch (pan.state) {
+        case UIGestureRecognizerStateBegan:{ // 开始移动
+            // 使用绝对值来判断移动的方向
+            CGFloat x = fabs(veloctyPoint.x);
+            CGFloat y = fabs(veloctyPoint.y);
+            if (x > y) { // 水平移动
+                [self cl_progressSliderTouchBegan:nil];
+                // 取消隐藏
+                self.panDirection = PanDirectionHorizontalMoved;
+                // 给sumTime初值
+                CMTime time       = self.player.currentTime;
+                self.sumTime      = time.value/time.timescale;
+            }
+            else if (x < y){ // 垂直移动
+                self.panDirection = PanDirectionVerticalMoved;
+                // 开始滑动的时候,状态改为正在控制音量
+                if (locationPoint.x > self.bounds.size.width / 2) {
+                    self.isVolume = YES;
+                }else { // 状态改为显示亮度调节
+                    self.isVolume = NO;
+                }
+            }
+            break;
+        }
+        case UIGestureRecognizerStateChanged:{ // 正在移动
+            switch (self.panDirection) {
+                case PanDirectionHorizontalMoved:{
+                    [self horizontalMoved:veloctyPoint.x]; // 水平移动的方法只要x方向的值
+                    break;
+                }
+                case PanDirectionVerticalMoved:{
+                    [self verticalMoved:veloctyPoint.y]; // 垂直移动方法只要y方向的值
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case UIGestureRecognizerStateEnded:{ // 移动停止
+            // 移动结束也需要判断垂直或者平移
+            // 比如水平移动结束时，要快进到指定位置，如果这里没有判断，当我们调节音量完之后，会出现屏幕跳动的bug
+            switch (self.panDirection) {
+                case PanDirectionHorizontalMoved:{
+                    // 把sumTime滞空，不然会越加越多
+                    self.sumTime = 0;
+                    [self cl_progressSliderTouchEnded:nil];
+                    break;
+                }
+                case PanDirectionVerticalMoved:{
+                    // 垂直移动结束后，把状态改为不再控制音量
+                    self.isVolume = NO;
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        default:
+            break;
+    }
+}
+
+/**
+ *  pan垂直移动的方法
+ *
+ *  @param value void
+ */
+- (void)verticalMoved:(CGFloat)value {
+    self.isVolume ? (self.volumeViewSlider.value -= value / 10000) : ([UIScreen mainScreen].brightness -= value / 10000);
+}
+
+/**
+ *  pan水平移动的方法
+ *
+ *  @param value void
+ */
+- (void)horizontalMoved:(CGFloat)value {
+    // 每次滑动需要叠加时间
+    self.sumTime += value / 200;
+    // 需要限定sumTime的范围
+    CMTime totalTime           = self.playerItem.duration;
+    CGFloat totalMovieDuration = (CGFloat)totalTime.value/totalTime.timescale;
+    if (self.sumTime > totalMovieDuration){
+        self.sumTime = totalMovieDuration;
+    }
+    if (self.sumTime < 0) {
+        self.sumTime = 0;
+    }
+    BOOL style = false;
+    if (value > 0) {
+        style = YES;
+    }
+    if (value < 0) {
+        style = NO;
+    }
+    if (value == 0) {
+        return;
+    }
+    self.isDragged = YES;
+    //计算出拖动的当前秒数
+    NSInteger dragedSeconds = floorf(self.sumTime);
+    //转换成CMTime才能给player来控制播放进度
+    CMTime dragedCMTime     = CMTimeMake(dragedSeconds, 1);
+    [_player seekToTime:dragedCMTime];
+    NSInteger proMin                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
+    NSInteger proSec                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
+    self.maskView.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)proMin, (long)proSec];
+}
+#pragma mark - 手势代理
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    if ([touch.view isDescendantOfView:self.maskView.bottomToolBar]) {
+        return NO;
+    }
+    return YES;
+}
+#pragma mark - 获取系统音量
+- (void)configureVolume {
+    MPVolumeView *volumeView = [[MPVolumeView alloc] init];
+    _volumeViewSlider        = nil;
+    for (UIView *view in [volumeView subviews]){
+        if ([view.class.description isEqualToString:@"MPVolumeSlider"]){
+            _volumeViewSlider = (UISlider *)view;
+            break;
         }
     }
 }
@@ -379,6 +547,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     //转换成CMTime才能给player来控制播放进度
     CMTime dragedCMTime     = CMTimeMake(dragedSeconds, 1);
     [_player seekToTime:dragedCMTime];
+    NSInteger proMin                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
+    NSInteger proSec                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
+    self.maskView.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)proMin, (long)proSec];
 }
 #pragma mark - 计时器事件
 - (void)timeStack{
@@ -652,12 +823,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     if (_isUserPlay) {
         [self playVideo];
     }
-}
-#pragma mark - 获取资源图片
-- (UIImage *)getPictureWithName:(NSString *)name{
-    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle mainBundle] pathForResource:@"CLPlayer" ofType:@"bundle"]];
-    NSString *path   = [bundle pathForResource:name ofType:@"png"];
-    return [UIImage imageWithContentsOfFile:path];
 }
 #pragma mark - layoutSubviews
 -(void)layoutSubviews{
