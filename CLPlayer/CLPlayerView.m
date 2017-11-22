@@ -462,17 +462,16 @@ typedef NS_ENUM(NSInteger, PanDirection){
     if (value == 0) {
         return;
     }
-    self.isDragged          = YES;
+    self.isDragged             = YES;
     //计算出拖动的当前秒数
-    CGFloat dragedSeconds   = self.sumTime;
+    CGFloat dragedSeconds      = self.sumTime;
     //滑杆进度
-    CGFloat sliderValue     = dragedSeconds / totalMovieDuration;
+    CGFloat sliderValue        = dragedSeconds / totalMovieDuration;
     //设置滑杆
     self.maskView.slider.value = sliderValue;
     //转换成CMTime才能给player来控制播放进度
-    CMTime dragedCMTime     = CMTimeMake(dragedSeconds, 1);
+    CMTime dragedCMTime        = CMTimeMake(dragedSeconds, 1);
     [_player seekToTime:dragedCMTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
-
     NSInteger proMin                    = (NSInteger)CMTimeGetSeconds(dragedCMTime) / 60;//当前秒
     NSInteger proSec                    = (NSInteger)CMTimeGetSeconds(dragedCMTime) % 60;//当前分钟
     self.maskView.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)proMin, (long)proSec];
@@ -528,6 +527,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
 }
 //结束
 -(void)cl_progressSliderTouchEnded:(CLSlider *)slider{
+    if (slider.value != 1) {
+        _isEnd = NO;
+    }
     if (!self.playerItem.isPlaybackLikelyToKeepUp) {
         [self bufferingSomeSecond];
     }else{
@@ -666,7 +668,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     _isUserPlay                       = YES;
     _isPlaying                        = YES;
     self.maskView.playButton.selected = YES;
-    if (_isEnd) {
+    if (_isEnd && self.maskView.slider.value == 1) {
         [self resetPlay];
     }else{
         [_player play];
@@ -675,7 +677,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - 重新开始播放
 - (void)resetPlay{
     _isEnd = NO;
-    [_player seekToTime:CMTimeMake(0, 1)];
+    [_player seekToTime:CMTimeMake(0, 1) toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
     [self playVideo];
 }
 #pragma mark - 销毁播放器
