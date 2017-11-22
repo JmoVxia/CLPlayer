@@ -44,7 +44,7 @@
 //    //工具条消失时间，默认10s
 //    _playerView.toolBarDisappearTime = 15;
     //视频地址
-    _playerView.url = [NSURL URLWithString:@"http://baobab.wdjcdn.com/14585683555005644d.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2017/0830/b0e248268d4b11e79e13842b2b4c75ab_wpd.mp4"];
     //播放
     [_playerView playVideo];
     //返回按钮点击事件回调,小屏状态才会调用，全屏默认变为小屏
