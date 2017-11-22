@@ -31,9 +31,8 @@
 		5BB4D0F91F3455D0007A1742 /* CLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0F81F3455D0007A1742 /* CLModel.m */; };
 		5BB4D0FE1F34565F007A1742 /* CLTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0FD1F34565F007A1742 /* CLTableViewCell.m */; };
 		5BB4D1081F345A7D007A1742 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5BB4D1071F345A7D007A1742 /* CLPlayer.bundle */; };
-		5BB55CDB1FC521F200CC8327 /* GCDTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB55CDA1FC521F100CC8327 /* GCDTimer.m */; };
+		5BB55D0A1FC549A800CC8327 /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB55D081FC549A700CC8327 /* CLPlayerView.m */; };
 		5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */; };
-		5BDEA7171E63F4BB00953D5D /* CLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEA7121E63F4BB00953D5D /* CLPlayerView.m */; };
 		5BDEA7181E63F4BB00953D5D /* CLSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BDEA7141E63F4BB00953D5D /* CLSlider.m */; };
 /* End PBXBuildFile section */
 
@@ -82,12 +81,10 @@
 		5BB4D0FC1F34565F007A1742 /* CLTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLTableViewCell.h; sourceTree = "<group>"; };
 		5BB4D0FD1F34565F007A1742 /* CLTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLTableViewCell.m; sourceTree = "<group>"; };
 		5BB4D1071F345A7D007A1742 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
-		5BB55CD91FC521F100CC8327 /* GCDTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDTimer.h; sourceTree = "<group>"; };
-		5BB55CDA1FC521F100CC8327 /* GCDTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDTimer.m; sourceTree = "<group>"; };
+		5BB55D081FC549A700CC8327 /* CLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerView.m; sourceTree = "<group>"; };
+		5BB55D091FC549A800CC8327 /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
 		5BDEA70F1E63F4BB00953D5D /* CLPlayerMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerMaskView.h; sourceTree = "<group>"; };
 		5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerMaskView.m; sourceTree = "<group>"; };
-		5BDEA7111E63F4BB00953D5D /* CLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLPlayerView.h; sourceTree = "<group>"; };
-		5BDEA7121E63F4BB00953D5D /* CLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLPlayerView.m; sourceTree = "<group>"; };
 		5BDEA7131E63F4BB00953D5D /* CLSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLSlider.h; sourceTree = "<group>"; };
 		5BDEA7141E63F4BB00953D5D /* CLSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLSlider.m; sourceTree = "<group>"; };
 		BA727F0172B5759313BFAF15 /* Pods-CLPlayerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLPlayerDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLPlayerDemo/Pods-CLPlayerDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -304,16 +301,14 @@
 		5BDEA70C1E63F4BB00953D5D /* CLPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				5BDEA7111E63F4BB00953D5D /* CLPlayerView.h */,
-				5BDEA7121E63F4BB00953D5D /* CLPlayerView.m */,
+				5BB55D091FC549A800CC8327 /* CLPlayerView.h */,
+				5BB55D081FC549A700CC8327 /* CLPlayerView.m */,
 				5BDEA70F1E63F4BB00953D5D /* CLPlayerMaskView.h */,
 				5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */,
 				5BDEA7131E63F4BB00953D5D /* CLSlider.h */,
 				5BDEA7141E63F4BB00953D5D /* CLSlider.m */,
 				453E2AA81F3C97900003AB0C /* AILoadingView.h */,
 				453E2AA91F3C97900003AB0C /* AILoadingView.m */,
-				5BB55CD91FC521F100CC8327 /* GCDTimer.h */,
-				5BB55CDA1FC521F100CC8327 /* GCDTimer.m */,
 				5BA0AF501F4292670097B9B2 /* UINavigationController+CLPlayerRotation.h */,
 				5BA0AF511F4292670097B9B2 /* UINavigationController+CLPlayerRotation.m */,
 				5BA0AF521F4292670097B9B2 /* UITabBarController+CLPlayerRotation.h */,
@@ -452,7 +447,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5BDEA7171E63F4BB00953D5D /* CLPlayerView.m in Sources */,
 				5BB4D0FE1F34565F007A1742 /* CLTableViewCell.m in Sources */,
 				5BB4D0DF1F31A4B1007A1742 /* CLViewController.m in Sources */,
 				5BA0AF561F4292670097B9B2 /* UINavigationController+CLPlayerRotation.m in Sources */,
@@ -460,10 +454,10 @@
 				5BA0AF571F4292670097B9B2 /* UITabBarController+CLPlayerRotation.m in Sources */,
 				5BB4D0F91F3455D0007A1742 /* CLModel.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
-				5BB55CDB1FC521F200CC8327 /* GCDTimer.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
 				5BB4D0E81F31AED1007A1742 /* CLViewController3.m in Sources */,
 				5BB4D0E21F31ACCC007A1742 /* CLViewController1.m in Sources */,
+				5BB55D0A1FC549A800CC8327 /* CLPlayerView.m in Sources */,
 				5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */,
 				5BB4D0EE1F31B7A2007A1742 /* CLViewController5.m in Sources */,
 				5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */,

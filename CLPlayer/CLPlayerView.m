@@ -10,7 +10,6 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "CLPlayerMaskView.h"
-#import "GCDTimer.h"
 /**UIScreen width*/
 #define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
 /**UIScreen height*/
@@ -66,7 +65,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
 /**轻拍定时器*/
 @property (nonatomic, strong) NSTimer          *timer;
 /**slider定时器*/
-@property (nonatomic, strong) GCDTimer         *sliderTimer;
+@property (nonatomic, strong) NSTimer          *sliderTimer;
 
 /** 用来保存快进的总时长 */
 @property (nonatomic, assign) CGFloat          sumTime;
@@ -100,12 +99,12 @@ typedef NS_ENUM(NSInteger, PanDirection){
         [_maskView addTarget:self
                       action:@selector(disappearAction:)
             forControlEvents:UIControlEventTouchUpInside];
-        //进度条计时器
-        _sliderTimer = [[GCDTimer alloc] init];
-        [_sliderTimer event:^{
-            [self timeStack];
-        } timeIntervalWithSecs:1.0f];
-        
+        //计时器，循环执行
+        _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
+                                                        target:self
+                                                      selector:@selector(timeStack)
+                                                      userInfo:nil
+                                                       repeats:YES];
         //定时器，工具条消失
         _timer       = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
                                                         target:self
@@ -466,8 +465,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
     self.isDragged          = YES;
     //计算出拖动的当前秒数
     NSInteger dragedSeconds = floorf(self.sumTime);
-    //计算slider进度
+    //滑杆进度
     CGFloat sliderValue = dragedSeconds / totalMovieDuration;
+    //设置滑杆
     self.maskView.slider.value = sliderValue;
     //转换成CMTime才能给player来控制播放进度
     CMTime dragedCMTime     = CMTimeMake(dragedSeconds, 1);
@@ -660,7 +660,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
     _isPlaying                        = NO;
     self.maskView.playButton.selected = NO;
     [_player pause];
-    [_sliderTimer pause];
 }
 #pragma mark - 播放
 - (void)playVideo{
@@ -671,7 +670,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
         [self resetPlay];
     }else{
         [_player play];
-        [_sliderTimer start];
     }
 }
 #pragma mark - 重新开始播放
@@ -719,7 +717,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - 取消定时器
 //销毁所有定时器
 - (void)destroyAllTimer{
-    [_sliderTimer destroy];
+    [_sliderTimer invalidate];
     [_timer invalidate];
     _sliderTimer = nil;
     _timer       = nil;
