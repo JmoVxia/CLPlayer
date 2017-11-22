@@ -464,17 +464,17 @@ typedef NS_ENUM(NSInteger, PanDirection){
     }
     self.isDragged          = YES;
     //计算出拖动的当前秒数
-    NSInteger dragedSeconds = floorf(self.sumTime);
+    CGFloat dragedSeconds   = self.sumTime;
     //滑杆进度
-    CGFloat sliderValue = dragedSeconds / totalMovieDuration;
+    CGFloat sliderValue     = dragedSeconds / totalMovieDuration;
     //设置滑杆
     self.maskView.slider.value = sliderValue;
     //转换成CMTime才能给player来控制播放进度
     CMTime dragedCMTime     = CMTimeMake(dragedSeconds, 1);
-    [_player seekToTime:dragedCMTime];
-    
-    NSInteger proMin                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
-    NSInteger proSec                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
+    [_player seekToTime:dragedCMTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+
+    NSInteger proMin                    = (NSInteger)CMTimeGetSeconds(dragedCMTime) / 60;//当前秒
+    NSInteger proSec                    = (NSInteger)CMTimeGetSeconds(dragedCMTime) % 60;//当前分钟
     self.maskView.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)proMin, (long)proSec];
 }
 #pragma mark - 手势代理
@@ -545,12 +545,12 @@ typedef NS_ENUM(NSInteger, PanDirection){
 -(void)cl_progressSliderValueChanged:(CLSlider *)slider{
     //计算出拖动的当前秒数
     CGFloat total           = (CGFloat)_playerItem.duration.value / _playerItem.duration.timescale;
-    NSInteger dragedSeconds = floorf(total * slider.value);
+    CGFloat dragedSeconds   = total * slider.value;
     //转换成CMTime才能给player来控制播放进度
     CMTime dragedCMTime     = CMTimeMake(dragedSeconds, 1);
-    [_player seekToTime:dragedCMTime];
-    NSInteger proMin                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
-    NSInteger proSec                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
+    [_player seekToTime:dragedCMTime toleranceBefore:kCMTimeZero toleranceAfter:kCMTimeZero];
+    NSInteger proMin                    = (NSInteger)CMTimeGetSeconds(dragedCMTime) / 60;//当前秒
+    NSInteger proSec                    = (NSInteger)CMTimeGetSeconds(dragedCMTime) % 60;//当前分钟
     self.maskView.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)proMin, (long)proSec];
 }
 #pragma mark - 计时器事件
