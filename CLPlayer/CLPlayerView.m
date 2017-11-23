@@ -10,10 +10,18 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import "CLPlayerMaskView.h"
+#import "CLGCDTimerManager.h"
+
+static NSString *sliderTimerString = @"sliderTimerString";
+static NSString *tapTimerString = @"tapTimer";
+
+
 /**UIScreen width*/
 #define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
 /**UIScreen height*/
 #define  CLscreenHeight  [UIScreen mainScreen].bounds.size.height
+
+
 // 播放器的几种状态
 typedef NS_ENUM(NSInteger, CLPlayerState) {
     CLPlayerStateFailed,     // 播放失败
@@ -63,9 +71,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
 /**遮罩*/
 @property (nonatomic, strong) CLPlayerMaskView *maskView;
 /**轻拍定时器*/
-@property (nonatomic, strong) NSTimer          *timer;
+//@property (nonatomic, strong) NSTimer          *timer;
 /**slider定时器*/
-@property (nonatomic, strong) NSTimer          *sliderTimer;
+//@property (nonatomic, strong) NSTimer          *sliderTimer;
 
 /** 用来保存快进的总时长 */
 @property (nonatomic, assign) CGFloat          sumTime;
@@ -100,17 +108,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
                       action:@selector(disappearAction:)
             forControlEvents:UIControlEventTouchUpInside];
         //计时器，循环执行
-        _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f
-                                                        target:self
-                                                      selector:@selector(timeStack)
-                                                      userInfo:nil
-                                                       repeats:YES];
-        //定时器，工具条消失
-        _timer       = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
-                                                        target:self
-                                                      selector:@selector(disappear)
-                                                      userInfo:nil
-                                                       repeats:NO];
+        [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:sliderTimerString timeInterval:1.0f delaySecs:0 queue:dispatch_get_main_queue() repeats:YES actionType:CLAbandonPreviousAction action:^{
+            [self timeStack];
+        }];
     }
     return _maskView;
 }
@@ -180,11 +180,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
     _toolBarDisappearTime = toolBarDisappearTime;
     [self destroyTimer];
     //定时器，工具条消失
-    _timer                = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
-                                                    target:self
-                                                  selector:@selector(disappear)
-                                                  userInfo:nil
-                                                   repeats:NO];
+    [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:tapTimerString timeInterval:toolBarDisappearTime delaySecs:toolBarDisappearTime queue:dispatch_get_main_queue() repeats:YES actionType:CLAbandonPreviousAction action:^{
+        [self disappear];
+    }];
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
@@ -288,7 +286,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
         _isLandscape             = NO;
         _isPlaying               = NO;
         _statusBarHiddenState    = self.statusBar.isHidden;
-        _toolBarDisappearTime    = 10;
         _progressBackgroundColor = [UIColor colorWithRed:0.54118
                                                    green:0.51373
                                                     blue:0.50980
@@ -315,6 +312,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
                                                  selector:@selector(appDidEnterPlayground:)
                                                      name:UIApplicationDidBecomeActiveNotification object:nil];
         [self creatUI];
+        //添加工具条定时消失
+        self.toolBarDisappearTime = 10;
     }
     return self;
 }
@@ -537,11 +536,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
         [self playVideo];
     }
     //重新添加工具条定时消失定时器
-    _timer = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
-                                              target:self
-                                            selector:@selector(disappear)
-                                            userInfo:nil
-                                             repeats:NO];
+    self.toolBarDisappearTime = _toolBarDisappearTime;
 }
 //拖拽中
 -(void)cl_progressSliderValueChanged:(CLSlider *)slider{
@@ -609,11 +604,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
         }];
     }else{
         //添加定时消失
-        _timer = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
-                                                  target:self
-                                                selector:@selector(disappear)
-                                                userInfo:nil
-                                                 repeats:NO];
+        self.toolBarDisappearTime = _toolBarDisappearTime;
         [UIView animateWithDuration:0.5 animations:^{
             self.maskView.topToolBar.alpha    = 1.0;
             self.maskView.bottomToolBar.alpha = 1.0;
@@ -709,25 +700,18 @@ typedef NS_ENUM(NSInteger, PanDirection){
         self.maskView.bottomToolBar.alpha = 1.0;
     }];
     [self destroyTimer];
-    _timer = [NSTimer scheduledTimerWithTimeInterval:_toolBarDisappearTime
-                                              target:self
-                                            selector:@selector(disappear)
-                                            userInfo:nil
-                                             repeats:NO];
+    self.toolBarDisappearTime = _toolBarDisappearTime;
     [self.maskView.activity starAnimation];
 }
 #pragma mark - 取消定时器
 //销毁所有定时器
 - (void)destroyAllTimer{
-    [_sliderTimer invalidate];
-    [_timer invalidate];
-    _sliderTimer = nil;
-    _timer       = nil;
+    [[CLGCDTimerManager sharedManager] cancelTimerWithName:sliderTimerString];
+    [[CLGCDTimerManager sharedManager] cancelTimerWithName:tapTimerString];
 }
 //销毁定时消失定时器
 - (void)destroyTimer{
-    [_timer invalidate];
-    _timer = nil;
+    [[CLGCDTimerManager sharedManager] cancelTimerWithName:tapTimerString];
 }
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification{
