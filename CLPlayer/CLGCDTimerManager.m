@@ -112,7 +112,6 @@
         queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     }
     CLGCDTimer *GCDTimer = self.timerObjectCache[timerName];
-    GCDTimer.isRuning = NO;
     if (!GCDTimer) {
         GCDTimer = [[CLGCDTimer alloc] initDispatchTimerWithName:timerName
                                                  timeInterval:interval
@@ -135,6 +134,7 @@
     if (!timer_t) {
         timer_t = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, GCDTimer.serialQueue);
         dispatch_resume(timer_t);
+        GCDTimer.isRuning = YES;
         [self.timerContainer setObject:timer_t forKey:timerName];
     }
 }
@@ -206,23 +206,23 @@
     if (!GCDTimer.isRuning) {
         [self resumeTimer:timerName];
     }
-    dispatch_source_t timer = self.timerContainer[timerName];
-    if (!timer) {
+    dispatch_source_t timer_t = self.timerContainer[timerName];
+    if (!timer_t) {
         return;
     }
     [self.timerContainer removeObjectForKey:timerName];
-    dispatch_source_cancel(timer);
+    dispatch_source_cancel(timer_t);
     [self.timerObjectCache removeObjectForKey:timerName];
 }
 #pragma mark - 暂停定时器
 - (void)suspendTimer:(NSString *)timerName {
     CLGCDTimer *GCDTimer = self.timerObjectCache[timerName];
     if (GCDTimer.isRuning) {
-        dispatch_source_t timer = self.timerContainer[timerName];
-        if (!timer) {
+        dispatch_source_t timer_t = self.timerContainer[timerName];
+        if (!timer_t) {
             return;
         }
-        dispatch_suspend(timer);
+        dispatch_suspend(timer_t);
         GCDTimer.isRuning = NO;
     }
 }
@@ -230,11 +230,11 @@
 - (void)resumeTimer:(NSString *)timerName {
     CLGCDTimer *GCDTimer = self.timerObjectCache[timerName];
     if (!GCDTimer.isRuning) {
-        dispatch_source_t timer = self.timerContainer[timerName];
-        if (!timer) {
+        dispatch_source_t timer_t = self.timerContainer[timerName];
+        if (!timer_t) {
             return;
         }
-        dispatch_resume(timer);
+        dispatch_resume(timer_t);
         GCDTimer.isRuning = YES;
     }
 }
