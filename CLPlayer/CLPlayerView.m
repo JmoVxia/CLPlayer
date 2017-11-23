@@ -108,7 +108,13 @@ typedef NS_ENUM(NSInteger, PanDirection){
                       action:@selector(disappearAction:)
             forControlEvents:UIControlEventTouchUpInside];
         //计时器，循环执行
-        [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:sliderTimerString timeInterval:1.0f delaySecs:0 queue:dispatch_get_main_queue() repeats:YES actionType:CLAbandonPreviousAction action:^{
+        [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:sliderTimerString
+                                                             timeInterval:1.0f
+                                                                delaySecs:0
+                                                                    queue:dispatch_get_main_queue()
+                                                                  repeats:YES
+                                                               actionType:CLAbandonPreviousAction
+                                                                   action:^{
             [self timeStack];
         }];
     }
@@ -180,7 +186,13 @@ typedef NS_ENUM(NSInteger, PanDirection){
     _toolBarDisappearTime = toolBarDisappearTime;
     [self destroyTimer];
     //定时器，工具条消失
-    [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:tapTimerString timeInterval:toolBarDisappearTime delaySecs:toolBarDisappearTime queue:dispatch_get_main_queue() repeats:YES actionType:CLAbandonPreviousAction action:^{
+    [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:tapTimerString
+                                                         timeInterval:toolBarDisappearTime
+                                                            delaySecs:toolBarDisappearTime
+                                                                queue:dispatch_get_main_queue()
+                                                              repeats:YES
+                                                           actionType:CLAbandonPreviousAction
+                                                               action:^{
         [self disappear];
     }];
 }
@@ -653,6 +665,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     _isPlaying                        = NO;
     self.maskView.playButton.selected = NO;
     [_player pause];
+    [[CLGCDTimerManager sharedManager] suspendTimer:sliderTimerString];
 }
 #pragma mark - 播放
 - (void)playVideo{
@@ -663,6 +676,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
         [self resetPlay];
     }else{
         [_player play];
+        [[CLGCDTimerManager sharedManager] resumeTimer:sliderTimerString];
     }
 }
 #pragma mark - 重新开始播放
