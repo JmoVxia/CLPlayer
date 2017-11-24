@@ -19,20 +19,20 @@ typedef void(^EndBolck)(void);
 
 @interface CLPlayerView : UIView
 
-/**重复播放，默认No*/
+/**重复播放,默认No*/
 @property (nonatomic, assign) BOOL           repeatPlay;
 /**是否支持横屏,默认NO*/
 @property (nonatomic, assign) BOOL           isLandscape;
-/**全屏是否隐藏状态栏，默认YES*/
+/**全屏是否隐藏状态栏,默认YES*/
 @property (nonatomic, assign) BOOL           fullStatusBarHidden;
-/** 静音（默认为NO）*/
+/**静音,默认为NO*/
 @property (nonatomic, assign) BOOL           mute;
-/**工具条消失时间，默认10s*/
-@property (nonatomic, assign) NSInteger      toolBarDisappearTime;
 /**是否是全屏*/
 @property (nonatomic, assign, readonly) BOOL isFullScreen;
 /**是否正在播放*/
 @property (nonatomic, assign, readonly) BOOL isPlaying;
+/**工具条消失时间，默认10s*/
+@property (nonatomic, assign) NSInteger      toolBarDisappearTime;
 /**拉伸方式，默认全屏填充*/
 @property (nonatomic, assign) VideoFillMode  fillMode;
 /**视频url*/

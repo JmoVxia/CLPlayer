@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, CLGCDTimerType) {
-    CLAbandonPreviousAction, // 废除同一个timer之前的任务
+    CLAbandonPreviousAction = 0, // 废除同一个timer之前的任务
     CLMergePreviousAction   // 将同一个timer之前的任务合并到新的任务中
 };
 
