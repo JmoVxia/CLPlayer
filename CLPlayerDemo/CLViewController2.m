@@ -39,13 +39,13 @@
 //    //设置进度条播放完成颜色
 //    _playerView.progressPlayFinishColor = [UIColor greenColor];
 //    //全屏是否隐藏状态栏
-//    _playerView.fullStatusBarHidden = NO;
+    _playerView.fullStatusBarHidden = NO;
 //    //是否静音，默认NO
 //    _playerView.mute = YES;
 //    //转子颜色
-//    _playerView.strokeColor = [UIColor redColor];
+    _playerView.strokeColor = [UIColor redColor];
 //    //工具条消失时间，默认10s
-//    _playerView.toolBarDisappearTime = 15;
+    _playerView.toolBarDisappearTime = 5;
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2017/0829/59a4f3d89123f_wpdm.mp4"];
     //播放
@@ -58,7 +58,6 @@
     [_playerView endPlay:^{
         //销毁播放器
 //        [_playerView destroyPlayer];
-//        _playerView = nil;
         NSLog(@"播放完成");
     }];
 
@@ -75,7 +74,6 @@
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [_playerView destroyPlayer];
-    _playerView = nil;
 }
 
 

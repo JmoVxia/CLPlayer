@@ -59,7 +59,6 @@
     [_playerView endPlay:^{
         //销毁播放器
         [_playerView destroyPlayer];
-        _playerView = nil;
         NSLog(@"播放完成");
     }];
     
@@ -77,7 +76,6 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [_playerView destroyPlayer];
-    _playerView = nil;
 }
 
 
