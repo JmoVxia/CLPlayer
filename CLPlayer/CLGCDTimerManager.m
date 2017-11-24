@@ -134,7 +134,6 @@
     if (!timer_t) {
         timer_t = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, GCDTimer.serialQueue);
         dispatch_resume(timer_t);
-        GCDTimer.isRuning = YES;
         [self.timerContainer setObject:timer_t forKey:timerName];
     }
 }
@@ -202,13 +201,13 @@
 }
 #pragma mark - 取消定时器
 - (void)cancelTimerWithName:(NSString *)timerName {
-    CLGCDTimer *GCDTimer = self.timerObjectCache[timerName];
-    if (!GCDTimer.isRuning) {
-        [self resumeTimer:timerName];
-    }
     dispatch_source_t timer_t = self.timerContainer[timerName];
     if (!timer_t) {
         return;
+    }
+    CLGCDTimer *GCDTimer = self.timerObjectCache[timerName];
+    if (!GCDTimer.isRuning) {
+        [self resumeTimer:timerName];
     }
     [self.timerContainer removeObjectForKey:timerName];
     dispatch_source_cancel(timer_t);
@@ -216,24 +215,24 @@
 }
 #pragma mark - 暂停定时器
 - (void)suspendTimer:(NSString *)timerName {
+    dispatch_source_t timer_t = self.timerContainer[timerName];
+    if (!timer_t) {
+        return;
+    }
     CLGCDTimer *GCDTimer = self.timerObjectCache[timerName];
     if (GCDTimer.isRuning) {
-        dispatch_source_t timer_t = self.timerContainer[timerName];
-        if (!timer_t) {
-            return;
-        }
         dispatch_suspend(timer_t);
         GCDTimer.isRuning = NO;
     }
 }
 #pragma mark - 恢复定时器
 - (void)resumeTimer:(NSString *)timerName {
+    dispatch_source_t timer_t = self.timerContainer[timerName];
+    if (!timer_t) {
+        return;
+    }
     CLGCDTimer *GCDTimer = self.timerObjectCache[timerName];
     if (!GCDTimer.isRuning) {
-        dispatch_source_t timer_t = self.timerContainer[timerName];
-        if (!timer_t) {
-            return;
-        }
         dispatch_resume(timer_t);
         GCDTimer.isRuning = YES;
     }

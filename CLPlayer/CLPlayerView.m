@@ -12,8 +12,8 @@
 #import "CLPlayerMaskView.h"
 #import "CLGCDTimerManager.h"
 
-static NSString *sliderTimerString = @"sliderTimerString";
-static NSString *tapTimerString = @"tapTimer";
+static NSString *CLPlayer_sliderTimer = @"CLPlayer_sliderTimer";
+static NSString *CLPlayer_tapTimer = @"CLPlayer_tapTimer";
 
 
 /**UIScreen width*/
@@ -70,11 +70,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
 @property (nonatomic, strong) AVPlayerItem     *playerItem;
 /**遮罩*/
 @property (nonatomic, strong) CLPlayerMaskView *maskView;
-/**轻拍定时器*/
-//@property (nonatomic, strong) NSTimer          *timer;
-/**slider定时器*/
-//@property (nonatomic, strong) NSTimer          *sliderTimer;
-
 /** 用来保存快进的总时长 */
 @property (nonatomic, assign) CGFloat          sumTime;
 /** 定义一个实例变量，保存枚举值 */
@@ -108,7 +103,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
                       action:@selector(disappearAction:)
             forControlEvents:UIControlEventTouchUpInside];
         //计时器，循环执行
-        [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:sliderTimerString
+        [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:CLPlayer_sliderTimer
                                                              timeInterval:1.0f
                                                                 delaySecs:0
                                                                     queue:dispatch_get_main_queue()
@@ -184,9 +179,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - 工具条消失时间
 -(void)setToolBarDisappearTime:(NSInteger)toolBarDisappearTime{
     _toolBarDisappearTime = toolBarDisappearTime;
-    [self destroyTimer];
+    [self destroyToolBarTimer];
     //定时器，工具条消失
-    [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:tapTimerString
+    [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:CLPlayer_tapTimer
                                                          timeInterval:toolBarDisappearTime
                                                             delaySecs:toolBarDisappearTime
                                                                 queue:dispatch_get_main_queue()
@@ -534,7 +529,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     //暂停
     [self pausePlay];
     //销毁定时消失工具条定时器
-    [self destroyTimer];
+    [self destroyToolBarTimer];
 }
 //结束
 -(void)cl_progressSliderTouchEnded:(CLSlider *)slider{
@@ -586,6 +581,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
     }else{
         [self playVideo];
     }
+    //重新添加工具条定时消失定时器
+    self.toolBarDisappearTime = _toolBarDisappearTime;
 }
 #pragma mark - 全屏按钮响应事件
 -(void)cl_fullButtonAction:(UIButton *)button{
@@ -595,6 +592,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
     }else{
         [self originalscreen];
     }
+    //重新添加工具条定时消失定时器
+    self.toolBarDisappearTime = _toolBarDisappearTime;
 }
 #pragma mark - 播放失败按钮点击事件
 -(void)cl_failButtonAction:(UIButton *)button{
@@ -608,15 +607,16 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - 点击响应
 - (void)disappearAction:(UIButton *)button{
     //取消定时消失
-    [self destroyTimer];
+    [self destroyToolBarTimer];
     if (_isDisappear == NO){
         [UIView animateWithDuration:0.5 animations:^{
             self.maskView.topToolBar.alpha    = 0;
             self.maskView.bottomToolBar.alpha = 0;
         }];
     }else{
-        //添加定时消失
+        //重新添加工具条定时消失定时器
         self.toolBarDisappearTime = _toolBarDisappearTime;
+        //重置定时消失
         [UIView animateWithDuration:0.5 animations:^{
             self.maskView.topToolBar.alpha    = 1.0;
             self.maskView.bottomToolBar.alpha = 1.0;
@@ -656,6 +656,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
             self.BackBlock(button);
         }
     }
+    //重新添加工具条定时消失定时器
+    self.toolBarDisappearTime = _toolBarDisappearTime;
 }
 - (void)backButton:(BackButtonBlock) backButton;{
     self.BackBlock = backButton;
@@ -665,7 +667,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     _isPlaying                        = NO;
     self.maskView.playButton.selected = NO;
     [_player pause];
-    [[CLGCDTimerManager sharedManager] suspendTimer:sliderTimerString];
+    [[CLGCDTimerManager sharedManager] suspendTimer:CLPlayer_sliderTimer];
 }
 #pragma mark - 播放
 - (void)playVideo{
@@ -676,7 +678,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
         [self resetPlay];
     }else{
         [_player play];
-        [[CLGCDTimerManager sharedManager] resumeTimer:sliderTimerString];
+        [[CLGCDTimerManager sharedManager] resumeTimer:CLPlayer_sliderTimer];
     }
 }
 #pragma mark - 重新开始播放
@@ -708,24 +710,25 @@ typedef NS_ENUM(NSInteger, PanDirection){
     [self.maskView.progress setProgress:0.0];
     self.maskView.currentTimeLabel.text = @"00:00";
     self.maskView.totalTimeLabel.text   = @"00:00";
-    //重置工具条
+    //重新添加工具条定时消失定时器
+    self.toolBarDisappearTime = _toolBarDisappearTime;
+    //重置定时消失
     [UIView animateWithDuration:0.5 animations:^{
         self.maskView.topToolBar.alpha    = 1.0;
         self.maskView.bottomToolBar.alpha = 1.0;
     }];
-    [self destroyTimer];
-    self.toolBarDisappearTime = _toolBarDisappearTime;
+    [self destroyToolBarTimer];
     [self.maskView.activity starAnimation];
 }
 #pragma mark - 取消定时器
 //销毁所有定时器
 - (void)destroyAllTimer{
-    [[CLGCDTimerManager sharedManager] cancelTimerWithName:sliderTimerString];
-    [[CLGCDTimerManager sharedManager] cancelTimerWithName:tapTimerString];
+    [[CLGCDTimerManager sharedManager] cancelTimerWithName:CLPlayer_sliderTimer];
+    [[CLGCDTimerManager sharedManager] cancelTimerWithName:CLPlayer_tapTimer];
 }
 //销毁定时消失定时器
-- (void)destroyTimer{
-    [[CLGCDTimerManager sharedManager] cancelTimerWithName:tapTimerString];
+- (void)destroyToolBarTimer{
+    [[CLGCDTimerManager sharedManager] cancelTimerWithName:CLPlayer_tapTimer];
 }
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification{
