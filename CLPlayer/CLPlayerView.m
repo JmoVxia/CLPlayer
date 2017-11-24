@@ -108,10 +108,10 @@ typedef NS_ENUM(NSInteger, PanDirection){
                                                                 delaySecs:0
                                                                     queue:dispatch_get_main_queue()
                                                                   repeats:YES
-                                                               actionType:CLAbandonPreviousAction
                                                                    action:^{
             [self timeStack];
         }];
+        [[CLGCDTimerManager sharedManager] startTimer:CLPlayer_sliderTimer];
     }
     return _maskView;
 }
@@ -186,10 +186,10 @@ typedef NS_ENUM(NSInteger, PanDirection){
                                                             delaySecs:toolBarDisappearTime
                                                                 queue:dispatch_get_main_queue()
                                                               repeats:YES
-                                                           actionType:CLAbandonPreviousAction
                                                                action:^{
         [self disappear];
     }];
+    [[CLGCDTimerManager sharedManager] startTimer:CLPlayer_tapTimer];
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
@@ -385,6 +385,11 @@ typedef NS_ENUM(NSInteger, PanDirection){
             CGFloat y = fabs(veloctyPoint.y);
             if (x > y) { // 水平移动
                 [self cl_progressSliderTouchBegan:nil];
+                //显示遮罩
+                [UIView animateWithDuration:0.5 animations:^{
+                    self.maskView.topToolBar.alpha    = 1.0;
+                    self.maskView.bottomToolBar.alpha = 1.0;
+                }];
                 // 取消隐藏
                 self.panDirection = PanDirectionHorizontalMoved;
                 // 给sumTime初值
