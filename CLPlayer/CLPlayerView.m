@@ -78,6 +78,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
 @property (nonatomic, assign) BOOL             isVolume;
 /** 是否正在拖拽 */
 @property (nonatomic, assign) BOOL             isDragged;
+/**缓冲判断*/
+@property (nonatomic, assign) BOOL             isBuffering;
 /**音量滑杆*/
 @property (nonatomic, strong) UISlider         *volumeViewSlider;
 
@@ -220,14 +222,10 @@ typedef NS_ENUM(NSInteger, PanDirection){
         [[NSNotificationCenter defaultCenter] removeObserver:self
                                                         name:AVPlayerItemDidPlayToEndTimeNotification
                                                       object:_playerItem];
-        [_playerItem removeObserver:self
-                         forKeyPath:@"status"];
-        [_playerItem removeObserver:self
-                         forKeyPath:@"loadedTimeRanges"];
-        [_playerItem removeObserver:self
-                         forKeyPath:@"playbackBufferEmpty"];
-        [_playerItem removeObserver:self
-                         forKeyPath:@"playbackLikelyToKeepUp"];
+        [_playerItem removeObserver:self forKeyPath:@"status"];
+        [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+        [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
+        [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
         //重置播放器
         [self resetPlayer];
     }
@@ -237,7 +235,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
                                                  selector:@selector(moviePlayDidEnd:)
                                                      name:AVPlayerItemDidPlayToEndTimeNotification
                                                    object:playerItem];
-        [playerItem addObserver:self forKeyPath:@"status"
+        [playerItem addObserver:self
+                     forKeyPath:@"status"
                         options:NSKeyValueObservingOptionNew
                         context:nil];
         [playerItem addObserver:self
@@ -317,7 +316,8 @@ typedef NS_ENUM(NSInteger, PanDirection){
         // app进入前台
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(appDidEnterPlayground:)
-                                                     name:UIApplicationDidBecomeActiveNotification object:nil];
+                                                     name:UIApplicationDidBecomeActiveNotification
+                                                   object:nil];
         [self creatUI];
         //添加工具条定时消失
         self.toolBarDisappearTime = 10;
@@ -338,8 +338,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
         if (self.player.currentItem.status == AVPlayerItemStatusReadyToPlay) {
             // 加载完成后，再添加平移手势
             // 添加平移手势，用来控制音量、亮度、快进快退
-            UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self
-                                                                                           action:@selector(panDirection:)];
+            UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(panDirection:)];
             panRecognizer.delegate                = self;
             [panRecognizer setMaximumNumberOfTouches:1];
             [panRecognizer setDelaysTouchesBegan:YES];
@@ -506,18 +505,29 @@ typedef NS_ENUM(NSInteger, PanDirection){
     }
 }
 #pragma mark - 缓冲较差时候
-//卡顿时会走这里
+//卡顿缓冲几秒
 - (void)bufferingSomeSecond{
-    self.state = CLPlayerStateBuffering;
+    self.state   = CLPlayerStateBuffering;
+    _isBuffering = NO;
+    if (_isBuffering){
+        return;
+    }
+    _isBuffering = YES;
     // 需要先暂停一小会之后再播放，否则网络状况不好的时候时间在走，声音播放不出来
-    [self pausePlay];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self playVideo];
-        // 如果执行了play还是没有播放则说明还没有缓存好，则再次缓存一段时间
-        if (!self.playerItem.isPlaybackLikelyToKeepUp) {
-            [self bufferingSomeSecond];
-        }
-    });
+    [self.player pause];
+    //延迟执行
+    [self performSelector:@selector(bufferingSomeSecondEnd)
+               withObject:@"Buffering"
+               afterDelay:3];
+}
+//卡顿缓冲结束
+- (void)bufferingSomeSecondEnd{
+    [self playVideo];
+    // 如果执行了play还是没有播放则说明还没有缓存好，则再次缓存一段时间
+    _isBuffering = NO;
+    if (!self.playerItem.isPlaybackLikelyToKeepUp) {
+        [self bufferingSomeSecond];
+    }
 }
 //计算缓冲进度
 - (NSTimeInterval)availableDuration{
@@ -604,10 +614,14 @@ typedef NS_ENUM(NSInteger, PanDirection){
 -(void)cl_failButtonAction:(UIButton *)button{
     [self.maskView.activity starAnimation];
     self.maskView.playButton.selected = YES;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self setUrl:_url];
-        [self playVideo];
-    });
+    [self performSelector:@selector(failButtonResetPlay)
+               withObject:@"FailButtonResetPlay"
+               afterDelay:1];
+}
+//播放失败后重新播放
+- (void)failButtonResetPlay{
+    [self setUrl:_url];
+    [self playVideo];
 }
 #pragma mark - 点击响应
 - (void)disappearAction:(UIButton *)button{
@@ -694,9 +708,18 @@ typedef NS_ENUM(NSInteger, PanDirection){
 }
 #pragma mark - 销毁播放器
 - (void)destroyPlayer{
-    //销毁定时器
     [self pausePlay];
+    //销毁定时器
     [self destroyAllTimer];
+    //取消延迟执行的缓冲结束代码
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(bufferingSomeSecondEnd)
+                                               object:@"Buffering"];
+    //取消播放失败延迟执行代码
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(failButtonResetPlay)
+                                               object:@"FailButtonResetPlay"];
+    //移除
     [self.playerLayer removeFromSuperlayer];
     [self removeFromSuperview];
     self.playerLayer = nil;
@@ -777,8 +800,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     if (_isLandscape == YES){
         //手动点击需要旋转方向
         if (_isUserTapMaxButton) {
-            [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight]
-                                        forKey:@"orientation"];
+            [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         }
         if (keyWindow.frame.size.width < keyWindow.frame.size.height) {
             self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
@@ -791,14 +813,12 @@ typedef NS_ENUM(NSInteger, PanDirection){
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
             }];
-            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight
-                                                              animated:NO];
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
         }else if (direction == UIInterfaceOrientationLandscapeRight) {
             [UIView animateWithDuration:0.25 animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
             }];
-            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft
-                                                              animated:NO];
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:NO];
         }
         self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
     }
@@ -810,13 +830,11 @@ typedef NS_ENUM(NSInteger, PanDirection){
 - (void)originalscreen{
     _isFullScreen       = NO;
     _isUserTapMaxButton = NO;
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait
-                                                      animated:NO];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
     [self setStatusBarHidden:_statusBarHiddenState];
     if (_isLandscape) {
         //还原为竖屏
-        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait]
-                                    forKey:@"orientation"];
+        [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
     }else{
         //还原
         [UIView animateWithDuration:0.25 animations:^{
@@ -848,14 +866,10 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - dealloc
 - (void)dealloc{
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
-    [_playerItem removeObserver:self
-                     forKeyPath:@"status"];
-    [_playerItem removeObserver:self
-                     forKeyPath:@"loadedTimeRanges"];
-    [_playerItem removeObserver:self
-                     forKeyPath:@"playbackBufferEmpty"];
-    [_playerItem removeObserver:self
-                     forKeyPath:@"playbackLikelyToKeepUp"];
+    [_playerItem removeObserver:self forKeyPath:@"status"];
+    [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
+    [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
+    [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:AVPlayerItemDidPlayToEndTimeNotification
                                                   object:_player.currentItem];
@@ -869,11 +883,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
                                                     name:UIApplicationDidBecomeActiveNotification
                                                   object:nil];
     //回到竖屏
-    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait]
-                                forKey:@"orientation"];
+    [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
     //重置状态条
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait
-                                                      animated:NO];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
     //恢复默认状态栏显示与否
     [self setStatusBarHidden:_statusBarHiddenState];
 #ifdef DEBUG
