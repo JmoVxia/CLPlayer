@@ -223,7 +223,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
         [_playerItem removeObserver:self forKeyPath:@"status"];
         [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
         [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
-        [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
         //重置播放器
         [self resetPlayer];
     }
@@ -243,10 +242,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
                         context:nil];
         [playerItem addObserver:self
                      forKeyPath:@"playbackBufferEmpty"
-                        options:NSKeyValueObservingOptionNew
-                        context:nil];
-        [playerItem addObserver:self
-                     forKeyPath:@"playbackLikelyToKeepUp"
                         options:NSKeyValueObservingOptionNew
                         context:nil];
     }
@@ -360,11 +355,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
         // 当缓冲是空的时候
         if (self.playerItem.isPlaybackBufferEmpty) {
             [self bufferingSomeSecond];
-        }
-    } else if ([keyPath isEqualToString:@"playbackLikelyToKeepUp"]) {
-        // 当缓冲好的时候
-        if (self.playerItem.isPlaybackLikelyToKeepUp && self.state == CLPlayerStateBuffering){
-            self.state = CLPlayerStatePlaying;
         }
     }
 }
@@ -878,7 +868,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
     [_playerItem removeObserver:self forKeyPath:@"status"];
     [_playerItem removeObserver:self forKeyPath:@"loadedTimeRanges"];
     [_playerItem removeObserver:self forKeyPath:@"playbackBufferEmpty"];
-    [_playerItem removeObserver:self forKeyPath:@"playbackLikelyToKeepUp"];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:AVPlayerItemDidPlayToEndTimeNotification
                                                   object:_player.currentItem];
