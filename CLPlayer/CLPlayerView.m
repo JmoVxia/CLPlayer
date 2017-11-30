@@ -28,7 +28,6 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     CLPlayerStateBuffering,  // 缓冲中
     CLPlayerStatePlaying,    // 播放中
     CLPlayerStateStopped,    // 停止播放
-    CLPlayerStatePause       // 暂停播放
 };
 // 枚举值，包含水平移动方向和垂直移动方向
 typedef NS_ENUM(NSInteger, PanDirection){
@@ -507,7 +506,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     //延迟执行
     [self performSelector:@selector(bufferingSomeSecondEnd)
                withObject:@"Buffering"
-               afterDelay:3];
+               afterDelay:5];
 }
 //卡顿缓冲结束
 - (void)bufferingSomeSecondEnd{
@@ -662,7 +661,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
 -(void)cl_backButtonAction:(UIButton *)button{
     if (_isFullScreen) {
         [self originalscreen];
-    }else{        
+    }else{
         if (self.BackBlock){
             self.BackBlock(button);
         }
@@ -675,7 +674,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
 }
 #pragma mark - 暂停播放
 - (void)pausePlay{
-    self.state                        = CLPlayerStatePause;
     self.maskView.playButton.selected = NO;
     [_player pause];
     [[CLGCDTimerManager sharedManager] suspendTimer:CLPlayer_sliderTimer];
@@ -892,3 +890,4 @@ typedef NS_ENUM(NSInteger, PanDirection){
 }
 
 @end
+
