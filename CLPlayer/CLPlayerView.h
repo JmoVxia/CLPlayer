@@ -29,8 +29,6 @@ typedef void(^EndBolck)(void);
 @property (nonatomic, assign) BOOL           mute;
 /**是否是全屏*/
 @property (nonatomic, assign, readonly) BOOL isFullScreen;
-/**是否正在播放*/
-@property (nonatomic, assign, readonly) BOOL isPlaying;
 /**工具条消失时间，默认10s*/
 @property (nonatomic, assign) NSInteger      toolBarDisappearTime;
 /**拉伸方式，默认全屏填充*/

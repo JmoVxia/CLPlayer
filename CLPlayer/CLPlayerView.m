@@ -60,8 +60,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
 @property (nonatomic, assign) BOOL             isUserTapMaxButton;
 /**播放完成标记*/
 @property (nonatomic, assign) BOOL             isEnd;
-/**是否播放*/
-@property (nonatomic, assign) BOOL             isPlaying;
 /**播放器*/
 @property (nonatomic, strong) AVPlayer         *player;
 /**playerLayer*/
@@ -254,6 +252,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
     }
 }
 - (void)setState:(CLPlayerState)state{
+    if (_state == state) {
+        return;
+    }
     _state = state;
     if (state == CLPlayerStateBuffering) {
         [self.maskView.activity starAnimation];
@@ -290,7 +291,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
         _mute                    = NO;
         //查询控制器是否支持全屏
         _isLandscape             = NO;
-        _isPlaying               = NO;
         _statusBarHiddenState    = self.statusBar.isHidden;
         _progressBackgroundColor = [UIColor colorWithRed:0.54118
                                                    green:0.51373
@@ -345,7 +345,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
             [panRecognizer setDelaysTouchesEnded:YES];
             [panRecognizer setCancelsTouchesInView:YES];
             [self.maskView addGestureRecognizer:panRecognizer];
-            self.state        = CLPlayerStatePlaying;
             self.player.muted = self.mute;
         }
         else if (self.player.currentItem.status == AVPlayerItemStatusFailed) {
@@ -514,7 +513,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     }
     _isBuffering = YES;
     // 需要先暂停一小会之后再播放，否则网络状况不好的时候时间在走，声音播放不出来
-    [self.player pause];
+    [self pausePlay];
     //延迟执行
     [self performSelector:@selector(bufferingSomeSecondEnd)
                withObject:@"Buffering"
@@ -575,15 +574,18 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - 计时器事件
 - (void)timeStack{
     if (_playerItem.duration.timescale != 0){
-        //总共时长
+        //设置进度条
         self.maskView.slider.maximumValue   = 1;
-        //当前进度
         self.maskView.slider.value          = CMTimeGetSeconds([_playerItem currentTime]) / (_playerItem.duration.value / _playerItem.duration.timescale);
-        //当前时长进度progress
+        //判断是否真正的在播放
+        if (self.playerItem.isPlaybackLikelyToKeepUp && self.maskView.slider.value > 0) {
+            self.state = CLPlayerStatePlaying;
+        }
+        //当前时长
         NSInteger proMin                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) / 60;//当前秒
         NSInteger proSec                    = (NSInteger)CMTimeGetSeconds([_player currentTime]) % 60;//当前分钟
         self.maskView.currentTimeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)proMin, (long)proSec];
-        //duration 总时长
+        //总时长
         NSInteger durMin                    = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale / 60;//总分钟
         NSInteger durSec                    = (NSInteger)_playerItem.duration.value / _playerItem.duration.timescale % 60;//总秒
         self.maskView.totalTimeLabel.text   = [NSString stringWithFormat:@"%02ld:%02ld", (long)durMin, (long)durSec];
@@ -683,7 +685,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
 }
 #pragma mark - 暂停播放
 - (void)pausePlay{
-    _isPlaying                        = NO;
+    self.state                        = CLPlayerStatePause;
     self.maskView.playButton.selected = NO;
     [_player pause];
     [[CLGCDTimerManager sharedManager] suspendTimer:CLPlayer_sliderTimer];
@@ -691,7 +693,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - 播放
 - (void)playVideo{
     _isUserPlay                       = YES;
-    _isPlaying                        = YES;
     self.maskView.playButton.selected = YES;
     if (_isEnd && self.maskView.slider.value == 1) {
         [self resetPlay];
@@ -728,24 +729,31 @@ typedef NS_ENUM(NSInteger, PanDirection){
 }
 #pragma mark - 重置播放器
 - (void)resetPlayer{
+    //重置状态
+    self.state   = CLPlayerStateStopped;
     _isUserPlay  = NO;
     _isDisappear = NO;
+    //移除之前的
     [self pausePlay];
     [self.playerLayer removeFromSuperlayer];
     self.playerLayer           = nil;
     self.player                = nil;
+    //还原进度条和缓冲条
     self.maskView.slider.value = 0.0;
     [self.maskView.progress setProgress:0.0];
+    //重置时间
     self.maskView.currentTimeLabel.text = @"00:00";
     self.maskView.totalTimeLabel.text   = @"00:00";
-    //重新添加工具条定时消失定时器
-    self.toolBarDisappearTime = _toolBarDisappearTime;
+    //销毁定时消失工具条
+    [self destroyToolBarTimer];
     //重置定时消失
     [UIView animateWithDuration:0.5 animations:^{
         self.maskView.topToolBar.alpha    = 1.0;
         self.maskView.bottomToolBar.alpha = 1.0;
     }];
-    [self destroyToolBarTimer];
+    //重新添加工具条定时消失定时器
+    self.toolBarDisappearTime = _toolBarDisappearTime;
+    //开始转子
     [self.maskView.activity starAnimation];
 }
 #pragma mark - 取消定时器

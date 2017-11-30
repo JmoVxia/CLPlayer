@@ -45,7 +45,7 @@
 //    //转子颜色
     _playerView.strokeColor = [UIColor redColor];
 //    //工具条消失时间，默认10s
-    _playerView.toolBarDisappearTime = 20;
+    _playerView.toolBarDisappearTime = 5;
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2017/0829/59a4f3d89123f_wpdm.mp4"];
     //播放
@@ -70,7 +70,7 @@
 }
 - (void)next{
     _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1203/58425ad2a0c1d_wpd.mp4"];
-    [_playerView playVideo];
+//    [_playerView playVideo];
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [_playerView destroyPlayer];
