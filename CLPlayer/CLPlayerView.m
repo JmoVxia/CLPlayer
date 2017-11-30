@@ -744,6 +744,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     //重置时间
     self.maskView.currentTimeLabel.text = @"00:00";
     self.maskView.totalTimeLabel.text   = @"00:00";
+    [[CLGCDTimerManager sharedManager] resumeTimer:CLPlayer_sliderTimer];
     //销毁定时消失工具条
     [self destroyToolBarTimer];
     //重置定时消失
