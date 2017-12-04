@@ -21,8 +21,10 @@ typedef void(^EndBolck)(void);
 
 /**重复播放,默认No*/
 @property (nonatomic, assign) BOOL           repeatPlay;
-/**是否支持横屏,默认NO*/
+/**当前页面是否支持横屏,默认NO*/
 @property (nonatomic, assign) BOOL           isLandscape;
+/**自动旋转，默认Yes*/
+@property (nonatomic, assign) BOOL           autoRotate;
 /**全屏是否隐藏状态栏,默认YES*/
 @property (nonatomic, assign) BOOL           fullStatusBarHidden;
 /**静音,默认为NO*/

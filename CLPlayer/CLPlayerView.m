@@ -166,6 +166,10 @@ typedef NS_ENUM(NSInteger, PanDirection){
 -(void)setFullStatusBarHidden:(BOOL)fullStatusBarHidden{
     _fullStatusBarHidden = fullStatusBarHidden;
 }
+#pragma mark - 自动旋转
+-(void)setAutoRotate:(BOOL)autoRotate{
+    _autoRotate = autoRotate;
+}
 #pragma mark - 重复播放
 - (void)setRepeatPlay:(BOOL)repeatPlay{
     _repeatPlay = repeatPlay;
@@ -279,12 +283,12 @@ typedef NS_ENUM(NSInteger, PanDirection){
         _isDisappear             = NO;
         _isUserPlay              = NO;
         _isUserTapMaxButton      = NO;
-        _fullStatusBarHidden     = YES;
         _isEnd                   = NO;
         _repeatPlay              = NO;
         _mute                    = NO;
-        //查询控制器是否支持全屏
         _isLandscape             = NO;
+        _autoRotate              = YES;
+        _fullStatusBarHidden     = YES;
         _statusBarHiddenState    = self.statusBar.isHidden;
         _progressBackgroundColor = [UIColor colorWithRed:0.54118
                                                    green:0.51373
@@ -757,29 +761,31 @@ typedef NS_ENUM(NSInteger, PanDirection){
 }
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification{
-    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
-    if (orientation == UIDeviceOrientationLandscapeLeft){
-        if (_isFullScreen == NO){
-            if (_isLandscape) {
-                //播放器所在控制器页面支持旋转情况下，和正常情况是相反的
-                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
-            }else{
-                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
+    if (_autoRotate) {
+        UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+        if (orientation == UIDeviceOrientationLandscapeLeft){
+            if (_isFullScreen == NO){
+                if (_isLandscape) {
+                    //播放器所在控制器页面支持旋转情况下，和正常情况是相反的
+                    [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
+                }else{
+                    [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
+                }
             }
         }
-    }
-    else if (orientation == UIDeviceOrientationLandscapeRight){
-        if (_isFullScreen == NO){
-            if (_isLandscape) {
-                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
-            }else{
-                [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
+        else if (orientation == UIDeviceOrientationLandscapeRight){
+            if (_isFullScreen == NO){
+                if (_isLandscape) {
+                    [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
+                }else{
+                    [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
+                }
             }
         }
-    }
-    else if (orientation == UIDeviceOrientationPortrait){
-        if (_isFullScreen == YES){
-            [self originalscreen];
+        else if (orientation == UIDeviceOrientationPortrait){
+            if (_isFullScreen == YES){
+                [self originalscreen];
+            }
         }
     }
 }
