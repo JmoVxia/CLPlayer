@@ -13,6 +13,8 @@
 @property(nonatomic,strong)CAShapeLayer *loadingLayer;
 /** 当前的index*/
 @property(nonatomic,assign)NSInteger index;
+/**结束*/
+@property (nonatomic, assign) BOOL realFinish;
 
 @end
 @implementation AILoadingView
@@ -68,6 +70,7 @@
 #pragma mark -CAAnimationDelegate
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
     if (self.isHidden) {
+        _realFinish = YES;
         return;
     }
     _index++;
@@ -81,6 +84,9 @@
         return;
     }
     self.hidden = NO;
+    if (_realFinish) {
+        [self loadingAnimation];
+    }
 }
 - (void)stopAnimation {
     self.hidden = YES;
