@@ -13,8 +13,7 @@
 @property(nonatomic,strong)CAShapeLayer *loadingLayer;
 /** 当前的index*/
 @property(nonatomic,assign)NSInteger index;
-/** 是否能用*/
-@property(nonatomic,assign,getter=isEnable)BOOL enable;
+
 @end
 @implementation AILoadingView
 
@@ -23,7 +22,6 @@
     self = [super initWithFrame:frame];
     if (self) {
         _index    = 0;
-        _enable   = YES;
         _duration = 2.;
         [self createUI];
     }
@@ -43,9 +41,10 @@
     self.loadingLayer             = [CAShapeLayer layer];
     self.loadingLayer.lineWidth   = 2.;
     self.loadingLayer.fillColor   = [UIColor clearColor].CGColor;
-    self.loadingLayer.strokeColor = [UIColor blackColor].CGColor;
+    self.loadingLayer.strokeColor = [UIColor whiteColor].CGColor;
     [self.layer addSublayer:self.loadingLayer];
     self.loadingLayer.lineCap     = kCALineCapRound;
+    [self loadingAnimation];
 }
 - (void)loadingAnimation {
     CABasicAnimation *strokeStartAnimation = [CABasicAnimation animationWithKeyPath:@"strokeStart"];
@@ -68,7 +67,7 @@
 }
 #pragma mark -CAAnimationDelegate
 -(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
-    if (!self.isEnable) {
+    if (self.isHidden) {
         return;
     }
     _index++;
@@ -82,12 +81,9 @@
         return;
     }
     self.hidden = NO;
-    self.enable = YES;
-    [self loadingAnimation];
 }
 - (void)stopAnimation {
     self.hidden = YES;
-    self.enable = NO;
     self.index  = 0;
     [self.loadingLayer removeAllAnimations];
 }
