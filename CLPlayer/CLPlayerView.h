@@ -25,33 +25,33 @@ typedef void(^EndBolck)(void);
 @interface CLPlayerView : UIView
 
 /**重复播放,默认No*/
-@property (nonatomic, assign) BOOL           repeatPlay;
+@property (nonatomic, assign) BOOL                 repeatPlay;
 /**当前页面是否支持横屏,默认NO*/
-@property (nonatomic, assign) BOOL           isLandscape;
+@property (nonatomic, assign) BOOL                 isLandscape;
 /**自动旋转，默认Yes*/
-@property (nonatomic, assign) BOOL           autoRotate;
+@property (nonatomic, assign) BOOL                 autoRotate;
 /**全屏是否隐藏状态栏,默认YES*/
-@property (nonatomic, assign) BOOL           fullStatusBarHidden;
+@property (nonatomic, assign) BOOL                 fullStatusBarHidden;
 /**静音,默认为NO*/
-@property (nonatomic, assign) BOOL           mute;
+@property (nonatomic, assign) BOOL                 mute;
 /**是否是全屏*/
-@property (nonatomic, assign, readonly) BOOL isFullScreen;
+@property (nonatomic, assign, readonly) BOOL       isFullScreen;
 /**工具条消失时间，默认10s*/
-@property (nonatomic, assign) NSInteger      toolBarDisappearTime;
+@property (nonatomic, assign) NSInteger            toolBarDisappearTime;
 /**拉伸方式，默认全屏填充*/
-@property (nonatomic, assign) VideoFillMode  videoFillMode;
+@property (nonatomic, assign) VideoFillMode        videoFillMode;
 /**隐藏顶部工具条，默认不隐藏*/
 @property (nonatomic, assign) TopToolBarHiddenType topToolBarHiddenType;
 /**视频url*/
-@property (nonatomic, strong) NSURL          *url;
+@property (nonatomic, strong) NSURL                *url;
 /**进度条背景颜色*/
-@property (nonatomic, strong) UIColor        *progressBackgroundColor;
+@property (nonatomic, strong) UIColor              *progressBackgroundColor;
 /**缓冲条缓冲进度颜色*/
-@property (nonatomic, strong) UIColor        *progressBufferColor;
+@property (nonatomic, strong) UIColor              *progressBufferColor;
 /**进度条播放完成颜色*/
-@property (nonatomic, strong) UIColor        *progressPlayFinishColor;
+@property (nonatomic, strong) UIColor              *progressPlayFinishColor;
 /**转子线条颜色*/
-@property (nonatomic, strong) UIColor        *strokeColor;
+@property (nonatomic, strong) UIColor              *strokeColor;
 
 /**播放*/
 - (void)playVideo;

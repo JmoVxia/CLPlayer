@@ -48,6 +48,8 @@
     _playerView.strokeColor = [UIColor redColor];
 //    //工具条消失时间，默认10s
     _playerView.toolBarDisappearTime = 20;
+//    //顶部工具条隐藏样式，默认不隐藏
+//    _playerView.topToolBarHiddenType = TopToolBarHiddenSmall;
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2017/0829/59a4f3d89123f_wpdm.mp4"];
     //播放

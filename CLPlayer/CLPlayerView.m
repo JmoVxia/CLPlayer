@@ -124,17 +124,35 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - 视频拉伸方式
 -(void)setVideoFillMode:(VideoFillMode)videoFillMode{
     switch (videoFillMode){
-        case VideoFillModeResizeAspectFill:
-            //原比例拉伸视频，直到两边屏幕都占满，但视频内容有部分会被剪切
-            _fillMode = AVLayerVideoGravityResizeAspectFill;
+        case VideoFillModeResize:
+            //拉伸视频内容达到边框占满，但不按原比例拉伸
+            _fillMode = AVLayerVideoGravityResize;
             break;
         case VideoFillModeResizeAspect:
             //按原视频比例显示，是竖屏的就显示出竖屏的，两边留黑
             _fillMode = AVLayerVideoGravityResizeAspect;
             break;
-        case VideoFillModeResize:
-            //拉伸视频内容达到边框占满，但不按原比例拉伸
-            _fillMode = AVLayerVideoGravityResize;
+        case VideoFillModeResizeAspectFill:
+            //原比例拉伸视频，直到两边屏幕都占满，但视频内容有部分会被剪切
+            _fillMode = AVLayerVideoGravityResizeAspectFill;
+            break;
+    }
+}
+#pragma mark - 顶部工具条隐藏方式
+-(void)setTopToolBarHiddenType:(TopToolBarHiddenType)topToolBarHiddenType{
+    _topToolBarHiddenType = topToolBarHiddenType;
+    switch (topToolBarHiddenType) {
+        case TopToolBarHiddenCustom:
+            //不隐藏
+            self.maskView.topToolBar.hidden = NO;
+            break;
+        case TopToolBarHiddenAll:
+            //小屏和全屏都隐藏
+            self.maskView.topToolBar.hidden = YES;
+            break;
+        case TopToolBarHiddenSmall:
+            //小屏隐藏，全屏不隐藏
+            self.maskView.topToolBar.hidden = !self.isFullScreen;
             break;
     }
 }
@@ -166,11 +184,6 @@ typedef NS_ENUM(NSInteger, PanDirection){
 -(void)setFullStatusBarHidden:(BOOL)fullStatusBarHidden{
     _fullStatusBarHidden = fullStatusBarHidden;
 }
-#pragma mark - 是否隐藏顶部工具条
-//- (void)setHiddenTopToolBar:(BOOL)hiddenTopToolBar{
-//    _hiddenTopToolBar = hiddenTopToolBar;
-//    self.maskView.topToolBar.hidden = hiddenTopToolBar;
-//}
 #pragma mark - 自动旋转
 -(void)setAutoRotate:(BOOL)autoRotate{
     _autoRotate = autoRotate;
@@ -282,27 +295,28 @@ typedef NS_ENUM(NSInteger, PanDirection){
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]){
         //初始值
-        _isFullScreen            = NO;
-        _isDisappear             = NO;
-        _isUserPlay              = NO;
-        _isUserTapMaxButton      = NO;
-        _isEnd                   = NO;
-        _repeatPlay              = NO;
-        _mute                    = NO;
-        _isLandscape             = NO;
-        _autoRotate              = YES;
-        _fullStatusBarHidden     = YES;
-        _statusBarHiddenState    = self.statusBar.isHidden;
-        _progressBackgroundColor = [UIColor colorWithRed:0.54118
+        _isFullScreen             = NO;
+        _isDisappear              = NO;
+        _isUserPlay               = NO;
+        _isUserTapMaxButton       = NO;
+        _isEnd                    = NO;
+        _repeatPlay               = NO;
+        _mute                     = NO;
+        _isLandscape              = NO;
+        _autoRotate               = YES;
+        _fullStatusBarHidden      = YES;
+        _statusBarHiddenState     = self.statusBar.isHidden;
+        _progressBackgroundColor  = [UIColor colorWithRed:0.54118
                                                    green:0.51373
                                                     blue:0.50980
                                                    alpha:1.00000];
-        _progressPlayFinishColor = [UIColor whiteColor];
-        _progressBufferColor     = [UIColor colorWithRed:0.84118
+        _progressPlayFinishColor  = [UIColor whiteColor];
+        _progressBufferColor      = [UIColor colorWithRed:0.84118
                                                    green:0.81373
                                                     blue:0.80980
                                                    alpha:1.00000];
-        self.videoFillMode       = VideoFillModeResize;
+        self.videoFillMode        = VideoFillModeResize;
+        self.topToolBarHiddenType = TopToolBarHiddenCustom;
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
@@ -796,10 +810,11 @@ typedef NS_ENUM(NSInteger, PanDirection){
 #pragma mark - 全屏
 - (void)fullScreenWithDirection:(UIInterfaceOrientation)direction{
     //记录播放器父类
-    _fatherView   = self.superview;
+    _fatherView               = self.superview;
     //记录原始大小
-    _customFarme  = self.frame;
-    _isFullScreen = YES;
+    _customFarme              = self.frame;
+    _isFullScreen             = YES;
+    self.topToolBarHiddenType = _topToolBarHiddenType;
     [self setStatusBarHidden:_fullStatusBarHidden];
     //添加到Window上
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
@@ -835,8 +850,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
 }
 #pragma mark - 原始大小
 - (void)originalscreen{
-    _isFullScreen       = NO;
-    _isUserTapMaxButton = NO;
+    _isFullScreen             = NO;
+    _isUserTapMaxButton       = NO;
+    self.topToolBarHiddenType = _topToolBarHiddenType;
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
     [self setStatusBarHidden:_statusBarHiddenState];
     if (_isLandscape) {
