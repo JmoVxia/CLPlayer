@@ -47,7 +47,7 @@
 //    //工具条消失时间，默认10s
 //    _playerView.toolBarDisappearTime = 15;
     //顶部工具条隐藏样式，默认不隐藏
-    _playerView.topToolBarHiddenType = TopToolBarHiddenAll;
+//    _playerView.topToolBarHiddenType = TopToolBarHiddenAll;
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1117/5cd90c96-acb0-11e6-b83b-d4ae5296039d_wpc.mp4"];
     //播放

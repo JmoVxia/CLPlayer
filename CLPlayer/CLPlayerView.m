@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     }
     return _maskView;
 }
-/**statusBar*/
+/**状态栏*/
 - (UIView *) statusBar{
     if (_statusBar == nil){
         _statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
