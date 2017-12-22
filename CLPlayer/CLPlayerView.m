@@ -30,9 +30,9 @@ typedef NS_ENUM(NSInteger, CLPlayerState) {
     CLPlayerStateStopped,    // 停止播放
 };
 // 枚举值，包含水平移动方向和垂直移动方向
-typedef NS_ENUM(NSInteger, PanDirection){
-    PanDirectionHorizontalMoved, // 横向移动
-    PanDirectionVerticalMoved    // 纵向移动
+typedef NS_ENUM(NSInteger, CLPanDirection){
+    CLPanDirectionHorizontalMoved, // 横向移动
+    CLPanDirectionVerticalMoved,   // 纵向移动
 };
 
 @interface CLPlayerView ()<CLPlayerMaskViewDelegate,UIGestureRecognizerDelegate>
@@ -70,7 +70,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
 /** 用来保存快进的总时长 */
 @property (nonatomic, assign) CGFloat          sumTime;
 /** 定义一个实例变量，保存枚举值 */
-@property (nonatomic, assign) PanDirection     panDirection;
+@property (nonatomic, assign) CLPanDirection   panDirection;
 /** 是否在调节音量*/
 @property (nonatomic, assign) BOOL             isVolume;
 /** 是否正在拖拽 */
@@ -175,6 +175,14 @@ typedef NS_ENUM(NSInteger, PanDirection){
 -(void)setStrokeColor:(UIColor *)strokeColor{
     _strokeColor                       = strokeColor;
     self.maskView.activity.strokeColor = strokeColor;
+}
+#pragma mark - 小屏是否需要手势控制
+-(void)setSmallGestureControl:(BOOL)smallGestureControl{
+    _smallGestureControl = smallGestureControl;
+}
+#pragma mark - 全屏是否需要手势控制
+-(void)setFullGestureControl:(BOOL)fullGestureControl{
+    _fullGestureControl = fullGestureControl;
 }
 #pragma mark - 是否支持横屏
 -(void)setIsLandscape:(BOOL)isLandscape{
@@ -303,8 +311,10 @@ typedef NS_ENUM(NSInteger, PanDirection){
         _repeatPlay               = NO;
         _mute                     = NO;
         _isLandscape              = NO;
+        _smallGestureControl      = NO;
         _autoRotate               = YES;
         _fullStatusBarHidden      = YES;
+        _fullGestureControl       = YES;
         _statusBarHiddenState     = self.statusBar.isHidden;
         _progressBackgroundColor  = [UIColor colorWithRed:0.54118
                                                    green:0.51373
@@ -400,13 +410,13 @@ typedef NS_ENUM(NSInteger, PanDirection){
                     self.maskView.bottomToolBar.alpha = 1.0;
                 }];
                 // 取消隐藏
-                self.panDirection = PanDirectionHorizontalMoved;
+                self.panDirection = CLPanDirectionHorizontalMoved;
                 // 给sumTime初值
                 CMTime time       = self.player.currentTime;
                 self.sumTime      = time.value/time.timescale;
             }
             else if (x < y){ // 垂直移动
-                self.panDirection = PanDirectionVerticalMoved;
+                self.panDirection = CLPanDirectionVerticalMoved;
                 // 开始滑动的时候,状态改为正在控制音量
                 if (locationPoint.x > self.bounds.size.width / 2) {
                     self.isVolume = YES;
@@ -418,11 +428,11 @@ typedef NS_ENUM(NSInteger, PanDirection){
         }
         case UIGestureRecognizerStateChanged:{ // 正在移动
             switch (self.panDirection) {
-                case PanDirectionHorizontalMoved:{
+                case CLPanDirectionHorizontalMoved:{
                     [self horizontalMoved:veloctyPoint.x]; // 水平移动的方法只要x方向的值
                     break;
                 }
-                case PanDirectionVerticalMoved:{
+                case CLPanDirectionVerticalMoved:{
                     [self verticalMoved:veloctyPoint.y]; // 垂直移动方法只要y方向的值
                     break;
                 }
@@ -435,13 +445,13 @@ typedef NS_ENUM(NSInteger, PanDirection){
             // 移动结束也需要判断垂直或者平移
             // 比如水平移动结束时，要快进到指定位置，如果这里没有判断，当我们调节音量完之后，会出现屏幕跳动的bug
             switch (self.panDirection) {
-                case PanDirectionHorizontalMoved:{
+                case CLPanDirectionHorizontalMoved:{
                     // 把sumTime滞空，不然会越加越多
                     self.sumTime = 0;
                     [self cl_progressSliderTouchEnded:nil];
                     break;
                 }
-                case PanDirectionVerticalMoved:{
+                case CLPanDirectionVerticalMoved:{
                     // 垂直移动结束后，把状态改为不再控制音量
                     self.isVolume = NO;
                     break;
@@ -457,6 +467,9 @@ typedef NS_ENUM(NSInteger, PanDirection){
 }
 #pragma mark - 滑动调节音量和亮度
 - (void)verticalMoved:(CGFloat)value {
+    if ((!_smallGestureControl && !_isFullScreen) || (!_fullGestureControl && _isFullScreen)) {
+        return;
+    }
     self.isVolume ? (self.volumeViewSlider.value -= value / 10000) : ([UIScreen mainScreen].brightness -= value / 10000);
 }
 #pragma mark - 水平移动调节进度
