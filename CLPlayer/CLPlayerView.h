@@ -9,9 +9,14 @@
 #import <UIKit/UIKit.h>
 
 typedef NS_ENUM(NSInteger,VideoFillMode){
-    Resize = 0,          //拉伸占满整个播放器，不按原比例拉伸
-    ResizeAspect,        //按原视频比例显示，是竖屏的就显示出竖屏的，两边留黑
-    ResizeAspectFill,    //按照原比例拉伸占满整个播放器，但视频内容超出部分会被剪切
+    VideoFillModeResize = 0,       //拉伸占满整个播放器，不按原比例拉伸
+    VideoFillModeResizeAspect,     //按原视频比例显示，是竖屏的就显示出竖屏的，两边留黑
+    VideoFillModeResizeAspectFill, //按照原比例拉伸占满整个播放器，但视频内容超出部分会被剪切
+};
+typedef NS_ENUM(NSUInteger, TopToolBarHiddenType) {
+    TopToolBarHiddenCustom = 0, //不隐藏
+    TopToolBarHiddenAll,        //小屏和全屏都隐藏
+    TopToolBarHiddenSmall,      //小屏隐藏，全屏不隐藏
 };
 
 typedef void(^BackButtonBlock)(UIButton *button);
@@ -34,7 +39,9 @@ typedef void(^EndBolck)(void);
 /**工具条消失时间，默认10s*/
 @property (nonatomic, assign) NSInteger      toolBarDisappearTime;
 /**拉伸方式，默认全屏填充*/
-@property (nonatomic, assign) VideoFillMode  fillMode;
+@property (nonatomic, assign) VideoFillMode  videoFillMode;
+/**隐藏顶部工具条，默认不隐藏*/
+@property (nonatomic, assign) TopToolBarHiddenType topToolBarHiddenType;
 /**视频url*/
 @property (nonatomic, strong) NSURL          *url;
 /**进度条背景颜色*/

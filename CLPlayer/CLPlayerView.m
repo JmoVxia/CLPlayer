@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
 /**父类控件*/
 @property (nonatomic, strong) UIView           *fatherView;
 /**视频拉伸模式*/
-@property (nonatomic, copy) NSString           *videoFillMode;
+@property (nonatomic, copy) NSString           *fillMode;
 /**状态栏*/
 @property (nonatomic, strong) UIView           *statusBar;
 /**全屏标记*/
@@ -122,19 +122,19 @@ typedef NS_ENUM(NSInteger, PanDirection){
     return _statusBar;
 }
 #pragma mark - 视频拉伸方式
--(void)setFillMode:(VideoFillMode)fillMode{
-    switch (fillMode){
-        case ResizeAspectFill:
+-(void)setVideoFillMode:(VideoFillMode)videoFillMode{
+    switch (videoFillMode){
+        case VideoFillModeResizeAspectFill:
             //原比例拉伸视频，直到两边屏幕都占满，但视频内容有部分会被剪切
-            _videoFillMode = AVLayerVideoGravityResizeAspectFill;
+            _fillMode = AVLayerVideoGravityResizeAspectFill;
             break;
-        case ResizeAspect:
+        case VideoFillModeResizeAspect:
             //按原视频比例显示，是竖屏的就显示出竖屏的，两边留黑
-            _videoFillMode = AVLayerVideoGravityResizeAspect;
+            _fillMode = AVLayerVideoGravityResizeAspect;
             break;
-        case Resize:
+        case VideoFillModeResize:
             //拉伸视频内容达到边框占满，但不按原比例拉伸
-            _videoFillMode = AVLayerVideoGravityResize;
+            _fillMode = AVLayerVideoGravityResize;
             break;
     }
 }
@@ -166,6 +166,11 @@ typedef NS_ENUM(NSInteger, PanDirection){
 -(void)setFullStatusBarHidden:(BOOL)fullStatusBarHidden{
     _fullStatusBarHidden = fullStatusBarHidden;
 }
+#pragma mark - 是否隐藏顶部工具条
+//- (void)setHiddenTopToolBar:(BOOL)hiddenTopToolBar{
+//    _hiddenTopToolBar = hiddenTopToolBar;
+//    self.maskView.topToolBar.hidden = hiddenTopToolBar;
+//}
 #pragma mark - 自动旋转
 -(void)setAutoRotate:(BOOL)autoRotate{
     _autoRotate = autoRotate;
@@ -207,9 +212,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
     AVAudioSession * session  = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     [session setActive:YES error:nil];
-    if (_videoFillMode){
-        _playerLayer.videoGravity = _videoFillMode;
-    }
+    _playerLayer.videoGravity = _fillMode;
     //放到最下面，防止遮挡
     [self.layer insertSublayer:_playerLayer atIndex:0];
     [self setNeedsLayout];
@@ -299,6 +302,7 @@ typedef NS_ENUM(NSInteger, PanDirection){
                                                    green:0.81373
                                                     blue:0.80980
                                                    alpha:1.00000];
+        self.videoFillMode       = VideoFillModeResize;
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
