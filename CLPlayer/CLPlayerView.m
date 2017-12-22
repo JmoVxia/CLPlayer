@@ -832,7 +832,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     //添加到Window上
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
-    if (_isLandscape == YES){
+    if (_isLandscape){
         //手动点击需要旋转方向
         if (_isUserTapMaxButton) {
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
@@ -844,16 +844,17 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         }
     }else{
         //播放器所在控制器不支持旋转，采用旋转view的方式实现
+        CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
         if (direction == UIInterfaceOrientationLandscapeLeft){
-            [UIView animateWithDuration:0.25 animations:^{
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:YES];
+            [UIView animateWithDuration:duration animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
             }];
-            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
         }else if (direction == UIInterfaceOrientationLandscapeRight) {
-            [UIView animateWithDuration:0.25 animations:^{
+            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
+            [UIView animateWithDuration:duration animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
             }];
-            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:NO];
         }
         self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
     }
@@ -866,14 +867,15 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     _isFullScreen             = NO;
     _isUserTapMaxButton       = NO;
     self.topToolBarHiddenType = _topToolBarHiddenType;
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:YES];
     [self setStatusBarHidden:_statusBarHiddenState];
     if (_isLandscape) {
         //还原为竖屏
         [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
     }else{
         //还原
-        [UIView animateWithDuration:0.25 animations:^{
+        CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
+        [UIView animateWithDuration:duration animations:^{
             self.transform = CGAffineTransformMakeRotation(0);
         }];
     }
@@ -920,7 +922,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     //回到竖屏
     [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
     //重置状态条
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:NO];
+    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:YES];
     //恢复默认状态栏显示与否
     [self setStatusBarHidden:_statusBarHiddenState];
 #ifdef DEBUG
