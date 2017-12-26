@@ -15,13 +15,6 @@
 static NSString *CLPlayer_sliderTimer = @"CLPlayer_sliderTimer";
 static NSString *CLPlayer_tapTimer = @"CLPlayer_tapTimer";
 
-
-/**UIScreen width*/
-#define  CLscreenWidth   [UIScreen mainScreen].bounds.size.width
-/**UIScreen height*/
-#define  CLscreenHeight  [UIScreen mainScreen].bounds.size.height
-
-
 // 播放器的几种状态
 typedef NS_ENUM(NSInteger, CLPlayerState) {
     CLPlayerStateFailed,     // 播放失败
@@ -836,11 +829,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         if (_isUserTapMaxButton) {
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         }
-        if (keyWindow.frame.size.width < keyWindow.frame.size.height) {
-            self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
-        }else{
-            self.frame = CGRectMake(0, 0, CLscreenWidth, CLscreenHeight);
-        }
         [self setStatusBarHidden:_fullStatusBarHidden];
     }else{
         //播放器所在控制器不支持旋转，采用旋转view的方式实现
@@ -861,8 +849,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                 [self setStatusBarHidden:_fullStatusBarHidden];
             }];
         }
-        self.frame = CGRectMake(0, 0, CLscreenHeight, CLscreenWidth);
     }
+    self.frame = keyWindow.bounds;
     self.maskView.fullButton.selected = YES;
     [self setNeedsLayout];
     [self layoutIfNeeded];
