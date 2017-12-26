@@ -467,9 +467,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 #pragma mark - 滑动调节音量和亮度
 - (void)verticalMoved:(CGFloat)value {
-    if ((!_smallGestureControl && !_isFullScreen) || (!_fullGestureControl && _isFullScreen)) {
-        return;
-    }
     self.isVolume ? (self.volumeViewSlider.value -= value / 10000) : ([UIScreen mainScreen].brightness -= value / 10000);
 }
 #pragma mark - 水平移动调节进度
@@ -511,6 +508,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 #pragma mark - 手势代理
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
+    if ((!_smallGestureControl && !_isFullScreen) || (!_fullGestureControl && _isFullScreen)) {
+        return NO;
+    }
     if ([touch.view isDescendantOfView:self.maskView.bottomToolBar]) {
         return NO;
     }
