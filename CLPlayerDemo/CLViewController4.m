@@ -39,7 +39,7 @@
 //    //设置进度条播放完成颜色
 //    _playerView.progressPlayFinishColor = [UIColor greenColor];
 //    //全屏是否隐藏状态栏
-//    _playerView.fullStatusBarHidden = NO;
+    _playerView.fullStatusBarHidden = NO;
 //    //是否静音，默认NO
 //    _playerView.mute = YES;
 //    //转子颜色
