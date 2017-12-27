@@ -37,15 +37,18 @@
 //    _playerView.progressBufferColor = [UIColor redColor];
 //    //设置进度条播放完成颜色
 //    _playerView.progressPlayFinishColor = [UIColor greenColor];
-//    //全屏是否隐藏状态栏
-//    _playerView.fullStatusBarHidden = NO;
+//    //全屏是否隐藏状态栏，默认一直不隐藏
+    _playerView.fullStatusBarHiddenType = FullStatusBarHiddenAlways;
 //    //转子颜色
 //    _playerView.strokeColor = [UIColor redColor];
 //    //工具条消失时间，默认10s
 //    _playerView.toolBarDisappearTime = 15;
 //    //顶部工具条隐藏样式，默认不隐藏
     _playerView.topToolBarHiddenType = TopToolBarHiddenNever;
-//    _playerView.fullGestureControl = NO;
+//  全屏手势控制，默认Yes
+    _playerView.fullGestureControl = NO;
+//    小屏手势控制，默认NO
+    _playerView.smallGestureControl = YES;
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2017/0830/b0e248268d4b11e79e13842b2b4c75ab_wpd.mp4"];
     //播放
