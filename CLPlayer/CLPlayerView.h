@@ -34,9 +34,9 @@ typedef void(^EndBolck)(void);
 @property (nonatomic, assign) BOOL                 fullStatusBarHidden;
 /**静音,默认为NO*/
 @property (nonatomic, assign) BOOL                 mute;
-/**小屏手势控制音量亮度,默认NO*/
+/**小屏手势控制,默认NO*/
 @property (nonatomic, assign) BOOL                 smallGestureControl;
-/**全屏手势控制音量亮度,默认Yes*/
+/**全屏手势控制,默认Yes*/
 @property (nonatomic, assign) BOOL                 fullGestureControl;;
 /**是否是全屏*/
 @property (nonatomic, assign, readonly) BOOL       isFullScreen;

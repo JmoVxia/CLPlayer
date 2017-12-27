@@ -402,6 +402,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                     self.maskView.topToolBar.alpha    = 1.0;
                     self.maskView.bottomToolBar.alpha = 1.0;
                 }];
+                if (!_fullStatusBarHidden && _isFullScreen) {
+                    [self setStatusBarHidden:NO];
+                }
                 // 取消隐藏
                 self.panDirection = CLPanDirectionHorizontalMoved;
                 // 给sumTime初值
@@ -610,7 +613,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 #pragma mark - 播放暂停按钮方法
 -(void)cl_playButtonAction:(UIButton *)button{
-    if (button.selected == NO){
+    if (!button.selected){
         [self pausePlay];
     }else{
         [self playVideo];
@@ -620,7 +623,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 #pragma mark - 全屏按钮响应事件
 -(void)cl_fullButtonAction:(UIButton *)button{
-    if (_isFullScreen == NO){
+    if (!_isFullScreen){
         _isUserTapMaxButton = YES;
         [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
     }else{
@@ -646,7 +649,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 - (void)disappearAction:(UIButton *)button{
     //取消定时消失
     [self destroyToolBarTimer];
-    if (_isDisappear == NO){
+    if (!_isDisappear){
         [UIView animateWithDuration:0.5 animations:^{
             self.maskView.topToolBar.alpha    = 0;
             self.maskView.bottomToolBar.alpha = 0;
@@ -660,6 +663,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             self.maskView.bottomToolBar.alpha = 1.0;
         }];
     }
+    if (!_fullStatusBarHidden && _isFullScreen) {
+        [self setStatusBarHidden:!_isDisappear];
+    }
     _isDisappear = !_isDisappear;
 }
 #pragma mark - 定时消失
@@ -668,12 +674,15 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         self.maskView.topToolBar.alpha    = 0;
         self.maskView.bottomToolBar.alpha = 0;
     }];
+    if (!_fullStatusBarHidden && _isFullScreen) {
+        [self setStatusBarHidden:YES];
+    }
     _isDisappear = YES;
 }
 #pragma mark - 播放完成
 - (void)moviePlayDidEnd:(id)sender{
     _isEnd = YES;
-    if (_repeatPlay == NO){
+    if (!_repeatPlay){
         [self pausePlay];
     }else{
         [self resetPlay];
@@ -788,7 +797,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     if (_autoRotate) {
         UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
         if (orientation == UIDeviceOrientationLandscapeLeft){
-            if (_isFullScreen == NO){
+            if (!_isFullScreen){
                 if (_isLandscape) {
                     //播放器所在控制器页面支持旋转情况下，和正常情况是相反的
                     [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
@@ -798,7 +807,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             }
         }
         else if (orientation == UIDeviceOrientationLandscapeRight){
-            if (_isFullScreen == NO){
+            if (!_isFullScreen){
                 if (_isLandscape) {
                     [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
                 }else{
@@ -807,7 +816,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             }
         }
         else if (orientation == UIDeviceOrientationPortrait){
-            if (_isFullScreen == YES){
+            if (_isFullScreen){
                 [self originalscreen];
             }
         }
