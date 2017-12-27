@@ -875,8 +875,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             }];
         }
     }
-    self.frame = keyWindow.bounds;
     self.maskView.fullButton.selected = YES;
+    self.frame                        = keyWindow.bounds;
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }

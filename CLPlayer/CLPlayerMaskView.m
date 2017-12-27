@@ -39,7 +39,7 @@
     [self.bottomToolBar addSubview:self.totalTimeLabel];
     [self.bottomToolBar addSubview:self.progress];
     [self.bottomToolBar addSubview:self.slider];
-    self.topToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
+    self.topToolBar.backgroundColor    = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
     self.bottomToolBar.backgroundColor = [UIColor colorWithRed:0.00000f green:0.00000f blue:0.00000f alpha:0.20000f];
 }
 #pragma mark - 约束
@@ -122,7 +122,7 @@
 //顶部工具条
 - (UIView *) topToolBar{
     if (_topToolBar == nil){
-        _topToolBar = [[UIView alloc] init];
+        _topToolBar                        = [[UIView alloc] init];
         _topToolBar.userInteractionEnabled = YES;
     }
     return _topToolBar;
@@ -130,7 +130,7 @@
 //底部工具条
 - (UIView *) bottomToolBar{
     if (_bottomToolBar == nil){
-        _bottomToolBar = [[UIView alloc] init];
+        _bottomToolBar                        = [[UIView alloc] init];
         _bottomToolBar.userInteractionEnabled = YES;
     }
     return _bottomToolBar;
@@ -138,7 +138,7 @@
 //转子
 - (AILoadingView *) activity{
     if (_activity == nil){
-        _activity = [[AILoadingView alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+        _activity             = [[AILoadingView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
         _activity.strokeColor = [UIColor whiteColor];
         [_activity starAnimation];
     }
@@ -177,22 +177,22 @@
 //当前播放时间
 - (UILabel *) currentTimeLabel{
     if (_currentTimeLabel == nil){
-        _currentTimeLabel = [[UILabel alloc] init];
-        _currentTimeLabel.textColor = [UIColor whiteColor];
+        _currentTimeLabel                           = [[UILabel alloc] init];
+        _currentTimeLabel.textColor                 = [UIColor whiteColor];
         _currentTimeLabel.adjustsFontSizeToFitWidth = YES;
-        _currentTimeLabel.text = @"00:00";
-        _currentTimeLabel.textAlignment = NSTextAlignmentCenter;
+        _currentTimeLabel.text                      = @"00:00";
+        _currentTimeLabel.textAlignment             = NSTextAlignmentCenter;
     }
     return _currentTimeLabel;
 }
 //总时间
 - (UILabel *) totalTimeLabel{
     if (_totalTimeLabel == nil){
-        _totalTimeLabel = [[UILabel alloc] init];
-        _totalTimeLabel.textColor = [UIColor whiteColor];
+        _totalTimeLabel                           = [[UILabel alloc] init];
+        _totalTimeLabel.textColor                 = [UIColor whiteColor];
         _totalTimeLabel.adjustsFontSizeToFitWidth = YES;
-        _totalTimeLabel.text = @"00:00";
-        _totalTimeLabel.textAlignment = NSTextAlignmentCenter;
+        _totalTimeLabel.text                      = @"00:00";
+        _totalTimeLabel.textAlignment             = NSTextAlignmentCenter;
     }
     return _totalTimeLabel;
 }
@@ -222,7 +222,7 @@
 - (UIButton *) failButton
 {
     if (_failButton == nil) {
-        _failButton = [[UIButton alloc] init];
+        _failButton        = [[UIButton alloc] init];
         _failButton.hidden = YES;
         [_failButton setTitle:@"加载失败,点击重试" forState:UIControlStateNormal];
         [_failButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -262,8 +262,8 @@
 //失败按钮
 - (void)failButtonAction:(UIButton *)button{
     self.failButton.hidden = YES;
-    [self.activity starAnimation];
     self.activity.hidden   = NO;
+    [self.activity starAnimation];
     if (_delegate && [_delegate respondsToSelector:@selector(cl_failButtonAction:)]) {
         [_delegate cl_failButtonAction:button];
     }else{

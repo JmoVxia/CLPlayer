@@ -39,7 +39,7 @@
 //    //设置进度条播放完成颜色
 //    _playerView.progressPlayFinishColor = [UIColor greenColor];
 //    //全屏是否隐藏状态栏，默认一直不隐藏
-    _playerView.fullStatusBarHiddenType = FullStatusBarHiddenNever;
+    _playerView.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
 //    //是否静音，默认NO
 //    _playerView.mute = YES;
 //    //转子颜色
@@ -47,7 +47,7 @@
 //    //工具条消失时间，默认10s
 //    _playerView.toolBarDisappearTime = 15;
     //顶部工具条隐藏样式，默认不隐藏
-    _playerView.topToolBarHiddenType = TopToolBarHiddenNever;
+    _playerView.topToolBarHiddenType = TopToolBarHiddenSmall;
 //    //  全屏手势控制，默认Yes
 //    _playerView.fullGestureControl = NO;
 //    //    小屏手势控制，默认NO

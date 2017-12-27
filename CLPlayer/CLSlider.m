@@ -12,16 +12,11 @@
 #define SLIDER_Y_BOUND 40
 
 @interface CLSlider ()
-
 /**lastBounds*/
 @property (nonatomic,assign) CGRect lastBounds;
-
-
 @end
 
-
 @implementation CLSlider
-
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
@@ -41,11 +36,11 @@
 }
 //修改滑块位置
 - (CGRect)thumbRectForBounds:(CGRect)bounds trackRect:(CGRect)rect value:(float)value {
-    rect.origin.x = rect.origin.x - 6 ;
+    rect.origin.x   = rect.origin.x - 6 ;
     rect.size.width = rect.size.width + 12;
-    CGRect result = [super thumbRectForBounds:bounds trackRect:rect value:value];
+    CGRect result   = [super thumbRectForBounds:bounds trackRect:rect value:value];
     //记录下最终的frame
-    _lastBounds = result;
+    _lastBounds     = result;
     return result;
 }
 //检查点击事件点击范围是否能够交给self处理
