@@ -116,6 +116,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 #pragma mark - 视频拉伸方式
 -(void)setVideoFillMode:(VideoFillMode)videoFillMode{
+    _videoFillMode = videoFillMode;
     switch (videoFillMode){
         case VideoFillModeResize:
             //拉伸视频内容达到边框占满，但不按原比例拉伸
@@ -135,11 +136,11 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 -(void)setTopToolBarHiddenType:(TopToolBarHiddenType)topToolBarHiddenType{
     _topToolBarHiddenType = topToolBarHiddenType;
     switch (topToolBarHiddenType) {
-        case TopToolBarHiddenCustom:
+        case TopToolBarHiddenNever:
             //不隐藏
             self.maskView.topToolBar.hidden = NO;
             break;
-        case TopToolBarHiddenAll:
+        case TopToolBarHiddenAlways:
             //小屏和全屏都隐藏
             self.maskView.topToolBar.hidden = YES;
             break;
@@ -148,6 +149,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             self.maskView.topToolBar.hidden = !self.isFullScreen;
             break;
     }
+}
+-(void)setFullStatusBarHiddenType:(FullStatusBarHiddenType)fullStatusBarHiddenType{
+    _fullStatusBarHiddenType = fullStatusBarHiddenType;
 }
 #pragma mark - 进度条背景颜色
 -(void)setProgressBackgroundColor:(UIColor *)progressBackgroundColor{
@@ -180,10 +184,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 #pragma mark - 是否支持横屏
 -(void)setIsLandscape:(BOOL)isLandscape{
     _isLandscape = isLandscape;
-}
-#pragma mark - 全屏状态栏是否隐藏
--(void)setFullStatusBarHidden:(BOOL)fullStatusBarHidden{
-    _fullStatusBarHidden = fullStatusBarHidden;
 }
 #pragma mark - 自动旋转
 -(void)setAutoRotate:(BOOL)autoRotate{
@@ -296,30 +296,30 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]){
         //初始值
-        _isFullScreen             = NO;
-        _isDisappear              = NO;
-        _isUserPlay               = NO;
-        _isUserTapMaxButton       = NO;
-        _isEnd                    = NO;
-        _repeatPlay               = NO;
-        _mute                     = NO;
-        _isLandscape              = NO;
-        _smallGestureControl      = NO;
-        _autoRotate               = YES;
-        _fullStatusBarHidden      = YES;
-        _fullGestureControl       = YES;
-        _statusBarHiddenState     = self.statusBar.isHidden;
-        _progressBackgroundColor  = [UIColor colorWithRed:0.54118
+        _isFullScreen            = NO;
+        _isDisappear             = NO;
+        _isUserPlay              = NO;
+        _isUserTapMaxButton      = NO;
+        _isEnd                   = NO;
+        _repeatPlay              = NO;
+        _mute                    = NO;
+        _isLandscape             = NO;
+        _smallGestureControl     = NO;
+        _autoRotate              = YES;
+        _fullGestureControl      = YES;
+        _statusBarHiddenState    = self.statusBar.isHidden;
+        _progressBackgroundColor = [UIColor colorWithRed:0.54118
                                                    green:0.51373
                                                     blue:0.50980
                                                    alpha:1.00000];
-        _progressPlayFinishColor  = [UIColor whiteColor];
-        _progressBufferColor      = [UIColor colorWithRed:0.84118
+        _progressPlayFinishColor = [UIColor whiteColor];
+        _progressBufferColor     = [UIColor colorWithRed:0.84118
                                                    green:0.81373
                                                     blue:0.80980
                                                    alpha:1.00000];
-        self.videoFillMode        = VideoFillModeResize;
-        self.topToolBarHiddenType = TopToolBarHiddenCustom;
+        self.videoFillMode           = VideoFillModeResize;
+        self.topToolBarHiddenType    = TopToolBarHiddenNever;
+        self.fullStatusBarHiddenType = FullStatusBarHiddenNever;
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
@@ -402,7 +402,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                     self.maskView.topToolBar.alpha    = 1.0;
                     self.maskView.bottomToolBar.alpha = 1.0;
                 }];
-                if (!_fullStatusBarHidden && _isFullScreen) {
+                if (_fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
                     [self setStatusBarHidden:NO];
                 }
                 // 取消隐藏
@@ -663,7 +663,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             self.maskView.bottomToolBar.alpha = 1.0;
         }];
     }
-    if (!_fullStatusBarHidden && _isFullScreen) {
+    if (_fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
         [self setStatusBarHidden:!_isDisappear];
     }
     _isDisappear = !_isDisappear;
@@ -674,7 +674,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         self.maskView.topToolBar.alpha    = 0;
         self.maskView.bottomToolBar.alpha = 0;
     }];
-    if (!_fullStatusBarHidden && _isFullScreen) {
+    if (_fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
         [self setStatusBarHidden:YES];
     }
     _isDisappear = YES;
@@ -838,7 +838,11 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         if (_isUserTapMaxButton) {
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         }
-        [self setStatusBarHidden:_fullStatusBarHidden];
+        if (_fullStatusBarHiddenType == FullStatusBarHiddenAlways) {
+            [self setStatusBarHidden:YES];
+        }else if (_fullStatusBarHiddenType == FullStatusBarHiddenNever){
+            [self setStatusBarHidden:NO];
+        }
     }else{
         //播放器所在控制器不支持旋转，采用旋转view的方式实现
         [self setStatusBarHidden:YES];
@@ -848,14 +852,26 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             [UIView animateWithDuration:duration animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
             }completion:^(BOOL finished) {
-                [self setStatusBarHidden:_fullStatusBarHidden];
+                if (_fullStatusBarHiddenType == FullStatusBarHiddenAlways) {
+                    [self setStatusBarHidden:YES];
+                }else if (_fullStatusBarHiddenType == FullStatusBarHiddenNever){
+                    [self setStatusBarHidden:NO];
+                }else{
+                    [self setStatusBarHidden:_isDisappear];
+                }
             }];
         }else if (direction == UIInterfaceOrientationLandscapeRight) {
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
             [UIView animateWithDuration:duration animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
             }completion:^(BOOL finished) {
-                [self setStatusBarHidden:_fullStatusBarHidden];
+                if (_fullStatusBarHiddenType == FullStatusBarHiddenAlways) {
+                    [self setStatusBarHidden:YES];
+                }else if (_fullStatusBarHiddenType == FullStatusBarHiddenNever){
+                    [self setStatusBarHidden:NO];
+                }else{
+                    [self setStatusBarHidden:_isDisappear];
+                }
             }];
         }
     }
