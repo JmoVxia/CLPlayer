@@ -38,7 +38,7 @@
 //    //设置进度条播放完成颜色
 //    _playerView.progressPlayFinishColor = [UIColor greenColor];
 //    //全屏是否隐藏状态栏，默认一直不隐藏
-    _playerView.fullStatusBarHiddenType = FullStatusBarHiddenAlways;
+    _playerView.fullStatusBarHiddenType = FullStatusBarHiddenNever;
 //    //转子颜色
 //    _playerView.strokeColor = [UIColor redColor];
 //    //工具条消失时间，默认10s

@@ -838,11 +838,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         if (_isUserTapMaxButton) {
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         }
-        if (_fullStatusBarHiddenType == FullStatusBarHiddenAlways) {
-            [self setStatusBarHidden:YES];
-        }else if (_fullStatusBarHiddenType == FullStatusBarHiddenNever){
-            [self setStatusBarHidden:NO];
-        }
+        [self hiddenStatusBarWithFullStatusBarHiddenType];
     }else{
         //播放器所在控制器不支持旋转，采用旋转view的方式实现
         [self setStatusBarHidden:YES];
@@ -852,26 +848,14 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             [UIView animateWithDuration:duration animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
             }completion:^(BOOL finished) {
-                if (_fullStatusBarHiddenType == FullStatusBarHiddenAlways) {
-                    [self setStatusBarHidden:YES];
-                }else if (_fullStatusBarHiddenType == FullStatusBarHiddenNever){
-                    [self setStatusBarHidden:NO];
-                }else{
-                    [self setStatusBarHidden:_isDisappear];
-                }
+                [self hiddenStatusBarWithFullStatusBarHiddenType];
             }];
         }else if (direction == UIInterfaceOrientationLandscapeRight) {
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
             [UIView animateWithDuration:duration animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
             }completion:^(BOOL finished) {
-                if (_fullStatusBarHiddenType == FullStatusBarHiddenAlways) {
-                    [self setStatusBarHidden:YES];
-                }else if (_fullStatusBarHiddenType == FullStatusBarHiddenNever){
-                    [self setStatusBarHidden:NO];
-                }else{
-                    [self setStatusBarHidden:_isDisappear];
-                }
+                [self hiddenStatusBarWithFullStatusBarHiddenType];
             }];
         }
     }
@@ -879,6 +863,20 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     self.frame                        = keyWindow.bounds;
     [self setNeedsLayout];
     [self layoutIfNeeded];
+}
+#pragma mark - 根据状态隐藏状态栏
+- (void)hiddenStatusBarWithFullStatusBarHiddenType{
+    switch (_fullStatusBarHiddenType) {
+        case FullStatusBarHiddenNever:
+            [self setStatusBarHidden:NO];
+            break;
+        case FullStatusBarHiddenAlways:
+            [self setStatusBarHidden:YES];
+            break;
+            case FullStatusBarHiddenFollowToolBar:
+            [self setStatusBarHidden:_isDisappear];
+            break;
+    }
 }
 #pragma mark - 原始大小
 - (void)originalscreen{
