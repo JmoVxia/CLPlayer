@@ -25,8 +25,8 @@
 		5BB4D0DF1F31A4B1007A1742 /* CLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0DE1F31A4B1007A1742 /* CLViewController.m */; };
 		5BB4D0E21F31ACCC007A1742 /* CLViewController1.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0E11F31ACCC007A1742 /* CLViewController1.m */; };
 		5BB4D0E51F31AEC8007A1742 /* CLViewController2.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0E41F31AEC8007A1742 /* CLViewController2.m */; };
-		5BB4D0E81F31AED1007A1742 /* CLViewController3.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0E71F31AED1007A1742 /* CLViewController3.m */; };
-		5BB4D0EB1F31B775007A1742 /* CLViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0EA1F31B775007A1742 /* CLViewController4.m */; };
+		5BB4D0E81F31AED1007A1742 /* CLViewController4.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0E71F31AED1007A1742 /* CLViewController4.m */; };
+		5BB4D0EB1F31B775007A1742 /* CLViewController3.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0EA1F31B775007A1742 /* CLViewController3.m */; };
 		5BB4D0EE1F31B7A2007A1742 /* CLViewController5.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0ED1F31B7A2007A1742 /* CLViewController5.m */; };
 		5BB4D0F41F331FA1007A1742 /* CLNavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0F31F331FA1007A1742 /* CLNavigationViewController.m */; };
 		5BB4D0F91F3455D0007A1742 /* CLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BB4D0F81F3455D0007A1742 /* CLModel.m */; };
@@ -71,10 +71,10 @@
 		5BB4D0E11F31ACCC007A1742 /* CLViewController1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController1.m; sourceTree = "<group>"; };
 		5BB4D0E31F31AEC8007A1742 /* CLViewController2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewController2.h; sourceTree = "<group>"; };
 		5BB4D0E41F31AEC8007A1742 /* CLViewController2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController2.m; sourceTree = "<group>"; };
-		5BB4D0E61F31AED1007A1742 /* CLViewController3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewController3.h; sourceTree = "<group>"; };
-		5BB4D0E71F31AED1007A1742 /* CLViewController3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController3.m; sourceTree = "<group>"; };
-		5BB4D0E91F31B775007A1742 /* CLViewController4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewController4.h; sourceTree = "<group>"; };
-		5BB4D0EA1F31B775007A1742 /* CLViewController4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController4.m; sourceTree = "<group>"; };
+		5BB4D0E61F31AED1007A1742 /* CLViewController4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewController4.h; sourceTree = "<group>"; };
+		5BB4D0E71F31AED1007A1742 /* CLViewController4.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController4.m; sourceTree = "<group>"; };
+		5BB4D0E91F31B775007A1742 /* CLViewController3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewController3.h; sourceTree = "<group>"; };
+		5BB4D0EA1F31B775007A1742 /* CLViewController3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController3.m; sourceTree = "<group>"; };
 		5BB4D0EC1F31B7A2007A1742 /* CLViewController5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLViewController5.h; sourceTree = "<group>"; };
 		5BB4D0ED1F31B7A2007A1742 /* CLViewController5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLViewController5.m; sourceTree = "<group>"; };
 		5BB4D0F21F331FA1007A1742 /* CLNavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLNavigationViewController.h; sourceTree = "<group>"; };
@@ -277,8 +277,8 @@
 		5BB4D1201F345BC7007A1742 /* push支持多方向 */ = {
 			isa = PBXGroup;
 			children = (
-				5BB4D0E91F31B775007A1742 /* CLViewController4.h */,
-				5BB4D0EA1F31B775007A1742 /* CLViewController4.m */,
+				5BB4D0E91F31B775007A1742 /* CLViewController3.h */,
+				5BB4D0EA1F31B775007A1742 /* CLViewController3.m */,
 			);
 			name = "push支持多方向";
 			sourceTree = "<group>";
@@ -286,8 +286,8 @@
 		5BB4D1211F345BF0007A1742 /* Present不支持多方向 */ = {
 			isa = PBXGroup;
 			children = (
-				5BB4D0E61F31AED1007A1742 /* CLViewController3.h */,
-				5BB4D0E71F31AED1007A1742 /* CLViewController3.m */,
+				5BB4D0E61F31AED1007A1742 /* CLViewController4.h */,
+				5BB4D0E71F31AED1007A1742 /* CLViewController4.m */,
 			);
 			name = "Present不支持多方向";
 			sourceTree = "<group>";
@@ -460,7 +460,7 @@
 				5BB4D0F91F3455D0007A1742 /* CLModel.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
 				5B1FC4C81DC850820036C489 /* main.m in Sources */,
-				5BB4D0E81F31AED1007A1742 /* CLViewController3.m in Sources */,
+				5BB4D0E81F31AED1007A1742 /* CLViewController4.m in Sources */,
 				5BB4D0E21F31ACCC007A1742 /* CLViewController1.m in Sources */,
 				5BB55D0A1FC549A800CC8327 /* CLPlayerView.m in Sources */,
 				5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */,
@@ -468,7 +468,7 @@
 				5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */,
 				5BDEA7181E63F4BB00953D5D /* CLSlider.m in Sources */,
 				5B8A38BF1FC7FC28008B153B /* CLGCDTimerManager.m in Sources */,
-				5BB4D0EB1F31B775007A1742 /* CLViewController4.m in Sources */,
+				5BB4D0EB1F31B775007A1742 /* CLViewController3.m in Sources */,
 				5BB4D0D91F31A1F1007A1742 /* CLTableViewViewController.m in Sources */,
 				5BB4D0F41F331FA1007A1742 /* CLNavigationViewController.m in Sources */,
 				5BB4D0E51F31AEC8007A1742 /* CLViewController2.m in Sources */,

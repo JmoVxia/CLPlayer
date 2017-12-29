@@ -6,7 +6,7 @@
 //  Copyright © 2017年 JmoVxia. All rights reserved.
 //
 
-#import "CLViewController2.h"
+#import <UIKit/UIKit.h>
 
 @interface CLViewController4 : UIViewController
 

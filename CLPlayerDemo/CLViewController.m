@@ -88,9 +88,9 @@
     }else if (indexPath.row == 1){
         [self.navigationController pushViewController:[CLViewController2 new] animated:YES];
     }else if (indexPath.row == 2){
-        [self.navigationController pushViewController:[CLViewController4 new] animated:YES];
+        [self.navigationController pushViewController:[CLViewController3 new] animated:YES];
     }else if (indexPath.row == 3){
-        [self presentViewController:[CLViewController3 new] animated:YES completion:nil];
+        [self presentViewController:[CLViewController4 new] animated:YES completion:nil];
     }else if (indexPath.row == 4){
         [self presentViewController:[CLViewController5 new] animated:YES completion:nil];
     }
