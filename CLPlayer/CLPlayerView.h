@@ -72,7 +72,4 @@ typedef void(^EndBolck)(void);
 /**销毁播放器*/
 - (void)destroyPlayer;
 
-
-
-
 @end
