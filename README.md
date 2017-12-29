@@ -54,7 +54,7 @@
 
 + 使用方法
      
- ### cocoapods导入，`pod 'CLPlayer'`
+      cocoapods导入，`pod 'CLPlayer'`
 
 + TableView使用方法
 
