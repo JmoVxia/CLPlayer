@@ -18,6 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"pushViewController";
     
     CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 90, self.view.CLwidth, 300)];
