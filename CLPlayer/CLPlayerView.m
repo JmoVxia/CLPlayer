@@ -859,8 +859,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             }];
         }
     }
-    self.maskView.fullButton.selected = YES;
-    self.frame                        = keyWindow.bounds;
+    self.maskView.fullButton.selected     = YES;
+    self.frame                            = keyWindow.bounds;
+    self.statusBar.userInteractionEnabled = NO;
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
@@ -901,7 +902,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     self.frame = _customFarme;
     //还原到原有父类上
     [_fatherView addSubview:self];
-    self.maskView.fullButton.selected = NO;
+    self.maskView.fullButton.selected     = NO;
+    self.statusBar.userInteractionEnabled = YES;
 }
 #pragma mark - APP活动通知
 - (void)appDidEnterBackground:(NSNotification *)note{
