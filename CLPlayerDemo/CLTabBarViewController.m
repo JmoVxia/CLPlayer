@@ -19,11 +19,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     [self addOneChildVC:[CLViewController new] title:@"View" imageName:@"study01" selImageName:@"study"];
     [self addOneChildVC:[CLTableViewViewController new] title:@"TableView" imageName:@"task01" selImageName:@"task"];
     self.selectedIndex = 0;
-
+    
 }
 /**
  *  添加自控制器

@@ -25,13 +25,13 @@
     
     _playerView = playerView;
     [self.view addSubview:_playerView];
-//    //全屏是否隐藏状态栏，默认一直不隐藏
+    //全屏是否隐藏状态栏，默认一直不隐藏
     _playerView.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
-//    //转子颜色
+    //转子颜色
     _playerView.strokeColor = [UIColor redColor];
-//    //工具条消失时间，默认10s
+    //工具条消失时间，默认10s
     _playerView.toolBarDisappearTime = 8;
-//    //顶部工具条隐藏样式，默认不隐藏
+    //顶部工具条隐藏样式，默认不隐藏
     _playerView.topToolBarHiddenType = TopToolBarHiddenSmall;
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2017/0829/59a4f3d89123f_wpdm.mp4"];
@@ -45,7 +45,7 @@
     [_playerView endPlay:^{
         NSLog(@"播放完成");
     }];
-
+    
     UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, 450, 90, 90)];
     [but setTitle:@"切换视频" forState:UIControlStateNormal];
     but.backgroundColor = [UIColor lightGrayColor];

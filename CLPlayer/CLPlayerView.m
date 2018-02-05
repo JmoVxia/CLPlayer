@@ -101,8 +101,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                                                                     queue:dispatch_get_main_queue()
                                                                   repeats:YES
                                                                    action:^{
-            [self timeStack];
-        }];
+                                                                       [self timeStack];
+                                                                   }];
         [[CLGCDTimerManager sharedManager] startTimer:CLPlayer_sliderTimer];
     }
     return _maskView;
@@ -209,8 +209,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                                                                 queue:dispatch_get_main_queue()
                                                               repeats:YES
                                                                action:^{
-        [self disappear];
-    }];
+                                                                   [self disappear];
+                                                               }];
     [[CLGCDTimerManager sharedManager] startTimer:CLPlayer_tapTimer];
 }
 #pragma mark - 传入播放地址
@@ -874,7 +874,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         case FullStatusBarHiddenAlways:
             [self setStatusBarHidden:YES];
             break;
-            case FullStatusBarHiddenFollowToolBar:
+        case FullStatusBarHiddenFollowToolBar:
             [self setStatusBarHidden:_isDisappear];
             break;
     }

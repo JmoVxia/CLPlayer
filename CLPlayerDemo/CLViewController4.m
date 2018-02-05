@@ -27,7 +27,7 @@
     
     _playerView = playerView;
     [self.view addSubview:_playerView];
-//    //全屏是否隐藏状态栏，默认一直不隐藏
+    //全屏是否隐藏状态栏，默认一直不隐藏
     _playerView.fullStatusBarHiddenType = FullStatusBarHiddenAlways;
     //顶部工具条隐藏样式，默认不隐藏
     _playerView.topToolBarHiddenType = TopToolBarHiddenAlways;

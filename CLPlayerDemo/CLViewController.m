@@ -36,7 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"CLPlayer";
     [self.view addSubview:self.tableView];

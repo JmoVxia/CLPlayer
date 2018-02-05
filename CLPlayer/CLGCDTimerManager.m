@@ -101,11 +101,11 @@
     CLGCDTimer *GCDTimer = self.timerObjectCache[timerName];
     if (!GCDTimer) {
         GCDTimer = [[CLGCDTimer alloc] initDispatchTimerWithName:timerName
-                                                 timeInterval:interval
-                                                    delaySecs:delaySecs
-                                                        queue:queue
-                                                      repeats:repeats
-                                                       action:action];
+                                                    timeInterval:interval
+                                                       delaySecs:delaySecs
+                                                           queue:queue
+                                                         repeats:repeats
+                                                          action:action];
         self.timerObjectCache[timerName] = GCDTimer;
     } else {
         [GCDTimer addActionBlock:action];
