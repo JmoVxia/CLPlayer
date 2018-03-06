@@ -91,9 +91,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         _maskView.progressBufferColor     = _progressBufferColor;
         _maskView.progressPlayFinishColor = _progressPlayFinishColor;
         _maskView.delegate                = self;
-        [_maskView addTarget:self
-                      action:@selector(disappearAction:)
-            forControlEvents:UIControlEventTouchUpInside];
+        //创建并添加点击手势（点击事件、添加手势）
+        UITapGestureRecognizer*tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disappearAction:)];
+        [_maskView addGestureRecognizer:tap];
         //计时器，循环执行
         [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:CLPlayer_sliderTimer
                                                              timeInterval:1.0f

@@ -26,7 +26,7 @@
 - (void)cl_failButtonAction:(UIButton *)button;
 @end
 
-@interface CLPlayerMaskView : UIButton
+@interface CLPlayerMaskView : UIView
 /**顶部工具条*/
 @property (nonatomic,strong) UIView *topToolBar;
 /**底部工具条*/

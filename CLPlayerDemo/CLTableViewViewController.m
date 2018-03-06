@@ -134,6 +134,7 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
     _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
     _playerView.topToolBarHiddenType = TopToolBarHiddenSmall;
     _playerView.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
+//    _playerView.smallGestureControl = YES;
     //播放
     [_playerView playVideo];
     //返回按钮点击事件回调
