@@ -46,63 +46,63 @@
 - (void)makeConstraints{
     //顶部工具条
     [self.topToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.equalTo(self);
+        make.left.right.top.mas_equalTo(self);
         make.height.mas_equalTo(ToolBarHeight);
     }];
     //底部工具条
     [self .bottomToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.equalTo(self);
+        make.left.right.bottom.mas_equalTo(self);
         make.height.mas_equalTo(ToolBarHeight);
     }];
     //转子
     [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self);
+        make.center.mas_equalTo(self);
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
     //返回按钮
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(Padding);
         make.bottom.mas_equalTo(-Padding);
-        make.width.equalTo(self.backButton.mas_height);
+        make.width.mas_equalTo(self.backButton.mas_height);
     }];
     //播放按钮
     [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(Padding);
         make.bottom.mas_equalTo(-Padding);
-        make.width.equalTo(self.backButton.mas_height);
+        make.width.mas_equalTo(self.backButton.mas_height);
     }];
     //全屏按钮
     [self.fullButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.mas_equalTo(-Padding);
         make.top.mas_equalTo(Padding);
-        make.width.equalTo(self.backButton.mas_height);
+        make.width.mas_equalTo(self.backButton.mas_height);
     }];
     //当前播放时间
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.playButton.mas_right).offset(Padding);
+        make.left.mas_equalTo(self.playButton.mas_right).mas_offset(Padding);
         make.width.mas_equalTo(45);
-        make.centerY.equalTo(self.bottomToolBar);
+        make.centerY.mas_equalTo(self.bottomToolBar);
     }];
     //总时间
     [self.totalTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.fullButton.mas_left).offset(-Padding);
+        make.right.mas_equalTo(self.fullButton.mas_left).mas_offset(-Padding);
         make.width.mas_equalTo(45);
-        make.centerY.equalTo(self.bottomToolBar);
+        make.centerY.mas_equalTo(self.bottomToolBar);
     }];
     //缓冲条
     [self.progress mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.currentTimeLabel.mas_right).offset(Padding);
-        make.right.equalTo(self.totalTimeLabel.mas_left).offset(-Padding);
+        make.left.mas_equalTo(self.currentTimeLabel.mas_right).mas_offset(Padding);
+        make.right.mas_equalTo(self.totalTimeLabel.mas_left).mas_offset(-Padding);
         make.height.mas_equalTo(2);
-        make.centerY.equalTo(self.bottomToolBar);
+        make.centerY.mas_equalTo(self.bottomToolBar);
     }];
     //滑杆
     [self.slider mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.progress);
+        make.edges.mas_equalTo(self.progress);
     }];
     //失败按钮
     [self.failButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(self);
+        make.center.mas_equalTo(self);
     }];
 }
 #pragma mark -- 设置颜色
