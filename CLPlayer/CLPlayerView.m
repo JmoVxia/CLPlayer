@@ -171,7 +171,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 #pragma mark - 转子颜色
 -(void)setStrokeColor:(UIColor *)strokeColor{
     _strokeColor                       = strokeColor;
-    self.maskView.activity.strokeColor = strokeColor;
+    self.maskView.loadingView.strokeColor = strokeColor;
 }
 #pragma mark - 小屏是否需要手势控制
 -(void)setSmallGestureControl:(BOOL)smallGestureControl{
@@ -272,16 +272,16 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     }
     _state = state;
     if (state == CLPlayerStateBuffering) {
-        [self.maskView.activity starAnimation];
+        [self.maskView.loadingView starAnimation];
     }else if (state == CLPlayerStateFailed){
-        [self.maskView.activity stopAnimation];
+        [self.maskView.loadingView stopAnimation];
         self.maskView.failButton.hidden   = NO;
         self.maskView.playButton.selected = NO;
 #ifdef DEBUG
         NSLog(@"加载失败");
 #endif
     }else{
-        [self.maskView.activity stopAnimation];
+        [self.maskView.loadingView stopAnimation];
         if (_isUserPlay) {
             [self playVideo];
         }
@@ -634,7 +634,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 #pragma mark - 播放失败按钮点击事件
 -(void)cl_failButtonAction:(UIButton *)button{
-    [self.maskView.activity starAnimation];
+    [self.maskView.loadingView starAnimation];
     self.maskView.playButton.selected = YES;
     [self performSelector:@selector(failButtonResetPlay)
                withObject:@"FailButtonResetPlay"
@@ -745,6 +745,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     [NSObject cancelPreviousPerformRequestsWithTarget:self
                                              selector:@selector(failButtonResetPlay)
                                                object:@"FailButtonResetPlay"];
+    //销毁转子动画
+    [self.maskView.loadingView destroyAnimation];
     //移除
     [self.playerLayer removeFromSuperlayer];
     [self removeFromSuperview];
@@ -780,7 +782,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     //重新添加工具条定时消失定时器
     self.toolBarDisappearTime = _toolBarDisappearTime;
     //开始转子
-    [self.maskView.activity starAnimation];
+    [self.maskView.loadingView starAnimation];
 }
 #pragma mark - 取消定时器
 //销毁所有定时器

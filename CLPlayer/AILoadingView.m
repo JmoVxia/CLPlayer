@@ -19,8 +19,7 @@
 @end
 @implementation AILoadingView
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
+- (instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
         _index    = 0;
@@ -29,17 +28,11 @@
     }
     return self;
 }
--(void)layoutSubviews {
-    [super layoutSubviews];
-    UIBezierPath *path      = [self cycleBezierPathIndex:_index];
-    self.loadingLayer.path  = path.CGPath;
-}
-
-- (UIBezierPath*)cycleBezierPathIndex:(NSInteger)index {
+- (UIBezierPath*)cycleBezierPathIndex:(NSInteger)index{
     UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.bounds.size.width * 0.5, self.bounds.size.height *0.5) radius:self.bounds.size.width * 0.5 startAngle:index * (M_PI* 2)/3  endAngle:index * (M_PI* 2)/3 + 2*M_PI * 4/3 clockwise:YES];
     return path;
 }
-- (void)createUI {
+- (void)createUI{
     self.loadingLayer             = [CAShapeLayer layer];
     self.loadingLayer.lineWidth   = 2.;
     self.loadingLayer.fillColor   = [UIColor clearColor].CGColor;
@@ -48,7 +41,7 @@
     self.loadingLayer.lineCap     = kCALineCapRound;
     [self loadingAnimation];
 }
-- (void)loadingAnimation {
+- (void)loadingAnimation{
     CABasicAnimation *strokeStartAnimation = [CABasicAnimation animationWithKeyPath:@"strokeStart"];
     strokeStartAnimation.fromValue         = @0;
     strokeStartAnimation.toValue           = @1.;
@@ -68,7 +61,7 @@
     [self.loadingLayer addAnimation:strokeAniamtionGroup forKey:@"strokeAniamtionGroup"];
 }
 #pragma mark -CAAnimationDelegate
--(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+-(void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
     if (self.isHidden) {
         _realFinish = YES;
         return;
@@ -79,7 +72,7 @@
 }
 
 #pragma mark -public
-- (void)starAnimation {
+- (void)starAnimation{
     if (self.loadingLayer.animationKeys.count > 0) {
         return;
     }
@@ -88,15 +81,29 @@
         [self loadingAnimation];
     }
 }
-- (void)stopAnimation {
+- (void)stopAnimation{
     self.hidden = YES;
     self.index  = 0;
     [self.loadingLayer removeAllAnimations];
 }
-- (void)setStrokeColor:(UIColor *)strokeColor {
+- (void)setStrokeColor:(UIColor *)strokeColor{
     _strokeColor                   = strokeColor;
     self.loadingLayer.strokeColor  = strokeColor.CGColor;
 }
-
+- (void)destroyAnimation{
+    [self stopAnimation];
+    [self.loadingLayer removeFromSuperlayer];
+    self.loadingLayer = nil;
+}
+-(void)layoutSubviews{
+    [super layoutSubviews];
+    UIBezierPath *path      = [self cycleBezierPathIndex:_index];
+    self.loadingLayer.path  = path.CGPath;
+}
+-(void)dealloc{
+#ifdef DEBUG
+    NSLog(@"转子动画销毁了");
+#endif
+}
 
 @end

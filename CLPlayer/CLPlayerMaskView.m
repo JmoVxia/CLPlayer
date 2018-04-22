@@ -30,7 +30,7 @@
 - (void)initViews{
     [self addSubview:self.topToolBar];
     [self addSubview:self.bottomToolBar];
-    [self addSubview:self.activity];
+    [self addSubview:self.loadingView];
     [self addSubview:self.failButton];
     [self.topToolBar addSubview:self.backButton];
     [self.bottomToolBar addSubview:self.playButton];
@@ -55,7 +55,7 @@
         make.height.mas_equalTo(ToolBarHeight);
     }];
     //转子
-    [self.activity mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.loadingView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self);
         make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
@@ -136,13 +136,13 @@
     return _bottomToolBar;
 }
 //转子
-- (AILoadingView *) activity{
-    if (_activity == nil){
-        _activity             = [[AILoadingView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        _activity.strokeColor = [UIColor whiteColor];
-        [_activity starAnimation];
+- (AILoadingView *) loadingView{
+    if (_loadingView == nil){
+        _loadingView             = [[AILoadingView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        _loadingView.strokeColor = [UIColor whiteColor];
+        [_loadingView starAnimation];
     }
-    return _activity;
+    return _loadingView;
 }
 //返回按钮
 - (UIButton *) backButton{
@@ -262,8 +262,8 @@
 //失败按钮
 - (void)failButtonAction:(UIButton *)button{
     self.failButton.hidden = YES;
-    self.activity.hidden   = NO;
-    [self.activity starAnimation];
+    self.loadingView.hidden   = NO;
+    [self.loadingView starAnimation];
     if (_delegate && [_delegate respondsToSelector:@selector(cl_failButtonAction:)]) {
         [_delegate cl_failButtonAction:button];
     }else{

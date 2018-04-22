@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = 'CLPlayer'
-    s.version      = '1.2.1'
+    s.version      = '1.2.2'
     s.summary      = 'AVPlayer定制的视频播放器'
     s.homepage     = 'https://github.com/JmoVxia/CLPlayer'
     s.license      = 'MIT'

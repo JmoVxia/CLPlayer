@@ -32,7 +32,7 @@
 /**底部工具条*/
 @property (nonatomic,strong) UIView *bottomToolBar;
 /**转子*/
-@property (nonatomic,strong) AILoadingView *activity;
+@property (nonatomic,strong) AILoadingView *loadingView;
 /**顶部工具条返回按钮*/
 @property (nonatomic,strong) UIButton *backButton;
 /**底部工具条播放按钮*/
