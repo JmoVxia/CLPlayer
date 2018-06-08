@@ -27,6 +27,7 @@
     [self.view addSubview:_playerView];
     //全屏是否隐藏状态栏，默认一直不隐藏
     _playerView.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
+    //后台返回是否继续播放
     _playerView.backPlay = NO;
     //转子颜色
     _playerView.strokeColor = [UIColor redColor];

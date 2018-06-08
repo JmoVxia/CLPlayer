@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 @property (nonatomic, copy) NSString           *fillMode;
 /**状态栏*/
 @property (nonatomic, strong) UIView           *statusBar;
-/**全屏标记*/
+/**是否是全屏*/
 @property (nonatomic, assign) BOOL             isFullScreen;
 /**工具条隐藏标记*/
 @property (nonatomic, assign) BOOL             isDisappear;
