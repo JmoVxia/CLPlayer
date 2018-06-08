@@ -198,6 +198,10 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     _mute             = mute;
     self.player.muted = _mute;
 }
+#pragma mark — 后台返回是否需要自动播放
+-(void)setBackPlay:(BOOL)backPlay{
+    _backPlay = backPlay;
+}
 #pragma mark - 工具条消失时间
 -(void)setToolBarDisappearTime:(NSInteger)toolBarDisappearTime{
     _toolBarDisappearTime = toolBarDisappearTime;
@@ -298,7 +302,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         //初始值
         _isFullScreen            = NO;
         _isDisappear             = NO;
-        _isUserPlay              = NO;
         _isUserTapMaxButton      = NO;
         _isEnd                   = NO;
         _repeatPlay              = NO;
@@ -307,6 +310,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         _smallGestureControl     = NO;
         _autoRotate              = YES;
         _fullGestureControl      = YES;
+        _backPlay                = YES;
+        _isUserPlay              = YES;
         _statusBarHiddenState    = self.statusBar.isHidden;
         _progressBackgroundColor = [UIColor colorWithRed:0.54118
                                                    green:0.51373
@@ -614,8 +619,10 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 #pragma mark - 播放暂停按钮方法
 -(void)cl_playButtonAction:(UIButton *)button{
     if (!button.selected){
+        _isUserPlay = NO;
         [self pausePlay];
     }else{
+        _isUserPlay = YES;
         [self playVideo];
     }
     //重新添加工具条定时消失定时器
@@ -717,7 +724,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 #pragma mark - 播放
 - (void)playVideo{
-    _isUserPlay                       = YES;
     self.maskView.playButton.selected = YES;
     if (_isEnd && self.maskView.slider.value == 1) {
         [self resetPlay];
@@ -758,7 +764,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 - (void)resetPlayer{
     //重置状态
     self.state   = CLPlayerStateStopped;
-    _isUserPlay  = NO;
+    _isUserPlay  = YES;
     _isDisappear = NO;
     //移除之前的
     [self pausePlay];
@@ -898,7 +904,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         [UIView animateWithDuration:duration animations:^{
             self.transform = CGAffineTransformMakeRotation(0);
         }completion:^(BOOL finished) {
-            [self setStatusBarHidden:_statusBarHiddenState];
+            [self setStatusBarHidden:self->_statusBarHiddenState];
         }];
     }
     self.frame = _customFarme;
@@ -914,7 +920,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 - (void)appDidEnterPlayground:(NSNotification *)note{
     //继续播放
-    if (_isUserPlay) {
+    if (_isUserPlay && _backPlay) {
         [self playVideo];
     }
 }

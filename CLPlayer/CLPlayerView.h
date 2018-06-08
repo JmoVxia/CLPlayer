@@ -28,6 +28,8 @@ typedef void(^EndBolck)(void);
 
 @interface CLPlayerView : UIView
 
+/**后台返回是否自动播放，默认Yes,会跟随用户，如果是播放状态进入后台，返回会继续播放*/
+@property (nonatomic, assign) BOOL                    backPlay;
 /**重复播放,默认No*/
 @property (nonatomic, assign) BOOL                    repeatPlay;
 /**当前页面是否支持横屏,默认NO*/
