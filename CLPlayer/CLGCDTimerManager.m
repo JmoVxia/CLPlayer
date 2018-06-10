@@ -10,23 +10,23 @@
 
 @interface CLGCDTimer ()
 /**响应*/
-@property (nonatomic, copy) dispatch_block_t   action;
+@property (nonatomic, copy) dispatch_block_t    action;
 /**线程*/
-@property (nonatomic, strong) dispatch_queue_t serialQueue;
-/**定时器名字*/
-@property (nonatomic, strong) NSString         *timerName;
-/**响应数组*/
-@property (nonatomic, strong) NSArray          *actionBlockArray;
-/**是否重复*/
-@property (nonatomic, assign) BOOL             repeat;
-/**执行时间*/
-@property (nonatomic, assign) NSTimeInterval   timeInterval;
-/**延迟时间*/
-@property (nonatomic, assign) float            delaySecs;
-/**是否正在运行*/
-@property (nonatomic, assign) BOOL             isRuning;
+@property (nonatomic, strong) dispatch_queue_t  serialQueue;
 /**timer_t*/
-@property (nonatomic,strong) dispatch_source_t timer_t;
+@property (nonatomic, strong) dispatch_source_t timer_t;
+/**定时器名字*/
+@property (nonatomic, strong) NSString          *timerName;
+/**响应数组*/
+@property (nonatomic, strong) NSArray           *actionBlockArray;
+/**是否重复*/
+@property (nonatomic, assign) BOOL              repeat;
+/**是否正在运行*/
+@property (nonatomic, assign) BOOL              isRuning;
+/**延迟时间*/
+@property (nonatomic, assign) float             delaySecs;
+/**执行时间*/
+@property (nonatomic, assign) NSTimeInterval    timeInterval;
 
 @end
 
@@ -90,10 +90,6 @@
                             queue:(dispatch_queue_t)queue
                           repeats:(BOOL)repeats
                            action:(dispatch_block_t)action {
-    NSParameterAssert(timerName);
-    if (nil == queue) {
-        queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    }
     CLGCDTimer *GCDTimer = self.timerObjectCache[timerName];
     if (!GCDTimer) {
         GCDTimer = [[CLGCDTimer alloc] initDispatchTimerWithName:timerName
