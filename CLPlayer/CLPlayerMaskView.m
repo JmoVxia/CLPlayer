@@ -263,7 +263,6 @@
 - (void)failButtonAction:(UIButton *)button{
     self.failButton.hidden = YES;
     self.loadingView.hidden   = NO;
-    [self.loadingView starAnimation];
     if (_delegate && [_delegate respondsToSelector:@selector(cl_failButtonAction:)]) {
         [_delegate cl_failButtonAction:button];
     }else{
