@@ -219,6 +219,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
+    [self resetPlayer];
     _url                      = url;
     self.playerItem           = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:_url]];
     //创建
@@ -641,14 +642,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 #pragma mark - 播放失败按钮点击事件
 -(void)cl_failButtonAction:(UIButton *)button{
-    [self.maskView.loadingView starAnimation];
-    self.maskView.playButton.selected = YES;
-    [self performSelector:@selector(failButtonResetPlay)
-               withObject:@"FailButtonResetPlay"
-               afterDelay:1];
-}
-//播放失败后重新播放
-- (void)failButtonResetPlay{
     [self setUrl:_url];
     [self playVideo];
 }
@@ -747,10 +740,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     [NSObject cancelPreviousPerformRequestsWithTarget:self
                                              selector:@selector(bufferingSomeSecondEnd)
                                                object:@"Buffering"];
-    //取消播放失败延迟执行代码
-    [NSObject cancelPreviousPerformRequestsWithTarget:self
-                                             selector:@selector(failButtonResetPlay)
-                                               object:@"FailButtonResetPlay"];
     //销毁转子动画
     [self.maskView.loadingView destroyAnimation];
     //移除
@@ -786,7 +775,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         self.maskView.bottomToolBar.alpha = 1.0;
     }];
     //重新添加工具条定时消失定时器
-    self.toolBarDisappearTime = _toolBarDisappearTime;
+    self.toolBarDisappearTime       = _toolBarDisappearTime;
+    self.maskView.failButton.hidden = YES;
     //开始转子
     [self.maskView.loadingView starAnimation];
 }
