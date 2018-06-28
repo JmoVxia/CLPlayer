@@ -119,7 +119,8 @@
 - (void)destroyAnimation{
     [self.loadingLayer removeAllAnimations];
     [self.loadingLayer removeFromSuperlayer];
-    self.loadingLayer = nil;
+    self.loadingLayer         = nil;
+    self.strokeAniamtionGroup = nil;
 }
 -(void)dealloc{
 #ifdef DEBUG
