@@ -40,7 +40,7 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
         [array enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             CLModel *model = [CLModel new];
             [model setValuesForKeysWithDictionary:obj];
-            [_arrayDS addObject:model];
+            [self->_arrayDS addObject:model];
         }];
     }
     return _arrayDS;

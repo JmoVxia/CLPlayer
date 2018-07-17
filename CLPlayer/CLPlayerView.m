@@ -745,6 +745,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     //移除
     [self.playerLayer removeFromSuperlayer];
     [self removeFromSuperview];
+    self.maskView.loadingView = nil;
     self.playerLayer = nil;
     self.player      = nil;
     self.maskView    = nil;

@@ -117,7 +117,7 @@
     self.loadingLayer.strokeColor  = strokeColor.CGColor;
 }
 - (void)destroyAnimation{
-    [self.loadingLayer removeAllAnimations];
+    [self stopAnimation];
     [self.loadingLayer removeFromSuperlayer];
     self.loadingLayer         = nil;
     self.strokeAniamtionGroup = nil;
