@@ -12,9 +12,6 @@
 #import "CLPlayerMaskView.h"
 #import "CLGCDTimerManager.h"
 
-static NSString *CLPlayer_sliderTimer = @"CLPlayer_sliderTimer";
-static NSString *CLPlayer_tapTimer = @"CLPlayer_tapTimer";
-
 // 播放器的几种状态
 typedef NS_ENUM(NSInteger, CLPlayerState) {
     CLPlayerStateFailed,     // 播放失败
@@ -72,6 +69,12 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 @property (nonatomic, assign) BOOL             isBuffering;
 /**音量滑杆*/
 @property (nonatomic, strong) UISlider         *volumeViewSlider;
+/*进度条定时器*/
+@property (nonatomic, strong) CLGCDTimer       *sliderTimer;
+/*点击定时器*/
+@property (nonatomic, strong) CLGCDTimer       *tapTimer;
+
+
 
 /**返回按钮回调*/
 @property (nonatomic, copy) void (^BackBlock) (UIButton *backButton);
@@ -95,15 +98,15 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         UITapGestureRecognizer*tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disappearAction:)];
         [_maskView addGestureRecognizer:tap];
         //计时器，循环执行
-        [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:CLPlayer_sliderTimer
-                                                             timeInterval:1.0f
-                                                                delaySecs:0
-                                                                    queue:dispatch_get_main_queue()
-                                                                  repeats:YES
-                                                                   action:^{
-                                                                       [self timeStack];
-                                                                   }];
-        [[CLGCDTimerManager sharedManager] startTimer:CLPlayer_sliderTimer];
+        __weak __typeof(self) weakSelf = self;
+        _sliderTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:1.0f
+                                                                   delaySecs:0 queue:dispatch_get_main_queue()
+                                                                     repeats:YES
+                                                                      action:^{
+                                                                          __typeof(&*weakSelf) strongSelf = weakSelf;
+                                                                          [strongSelf timeStack];
+                                                                      }];
+        [_sliderTimer startTimer];
     }
     return _maskView;
 }
@@ -207,15 +210,16 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     _toolBarDisappearTime = toolBarDisappearTime;
     [self destroyToolBarTimer];
     //定时器，工具条消失
-    [[CLGCDTimerManager sharedManager] scheduledDispatchTimerWithName:CLPlayer_tapTimer
-                                                         timeInterval:toolBarDisappearTime
+    __weak __typeof(self) weakSelf = self;
+    _tapTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:toolBarDisappearTime
                                                             delaySecs:toolBarDisappearTime
                                                                 queue:dispatch_get_main_queue()
                                                               repeats:YES
                                                                action:^{
-                                                                   [self disappear];
+                                                                   __typeof(&*weakSelf) strongSelf = weakSelf;
+                                                                   [strongSelf disappear];
                                                                }];
-    [[CLGCDTimerManager sharedManager] startTimer:CLPlayer_tapTimer];
+    [_tapTimer startTimer];
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
@@ -713,7 +717,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 - (void)pausePlay{
     self.maskView.playButton.selected = NO;
     [_player pause];
-    [[CLGCDTimerManager sharedManager] suspendTimer:CLPlayer_sliderTimer];
+    [_sliderTimer suspendTimer];
 }
 #pragma mark - 播放
 - (void)playVideo{
@@ -722,7 +726,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         [self resetPlay];
     }else{
         [_player play];
-        [[CLGCDTimerManager sharedManager] resumeTimer:CLPlayer_sliderTimer];
+        [_sliderTimer resumeTimer];
     }
 }
 #pragma mark - 重新开始播放
@@ -767,7 +771,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     //重置时间
     self.maskView.currentTimeLabel.text = @"00:00";
     self.maskView.totalTimeLabel.text   = @"00:00";
-    [[CLGCDTimerManager sharedManager] resumeTimer:CLPlayer_sliderTimer];
+    [_sliderTimer resumeTimer];
     //销毁定时消失工具条
     [self destroyToolBarTimer];
     //重置定时消失
@@ -784,12 +788,12 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 #pragma mark - 取消定时器
 //销毁所有定时器
 - (void)destroyAllTimer{
-    [[CLGCDTimerManager sharedManager] cancelTimerWithName:CLPlayer_sliderTimer];
-    [[CLGCDTimerManager sharedManager] cancelTimerWithName:CLPlayer_tapTimer];
+    [_sliderTimer cancelTimer];
+    [_tapTimer cancelTimer];
 }
 //销毁定时消失定时器
 - (void)destroyToolBarTimer{
-    [[CLGCDTimerManager sharedManager] cancelTimerWithName:CLPlayer_tapTimer];
+    [_tapTimer cancelTimer];
 }
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification{

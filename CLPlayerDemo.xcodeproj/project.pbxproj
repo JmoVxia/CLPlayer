@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C9020A7210EE96A00687A7E /* CLGCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C9020A5210EE96A00687A7E /* CLGCDTimerManager.m */; };
 		453E2AAA1F3C97900003AB0C /* AILoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 453E2AA91F3C97900003AB0C /* AILoadingView.m */; };
 		52CFF55482649C3F8FF48753 /* libPods-CLPlayerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */; };
 		5B1FC4C81DC850820036C489 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4C71DC850820036C489 /* main.m */; };
@@ -16,7 +17,6 @@
 		5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B35DDE31DE07F9A00CEB057 /* Date.json */; };
 		5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
-		5B8A38BF1FC7FC28008B153B /* CLGCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B8A38BE1FC7FC28008B153B /* CLGCDTimerManager.m */; };
 		5BA0AF561F4292670097B9B2 /* UINavigationController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0AF511F4292670097B9B2 /* UINavigationController+CLPlayerRotation.m */; };
 		5BA0AF571F4292670097B9B2 /* UITabBarController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0AF531F4292670097B9B2 /* UITabBarController+CLPlayerRotation.m */; };
 		5BA0AF581F4292670097B9B2 /* UIViewController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0AF551F4292670097B9B2 /* UIViewController+CLPlayerRotation.m */; };
@@ -38,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C9020A5210EE96A00687A7E /* CLGCDTimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLGCDTimerManager.m; sourceTree = "<group>"; };
+		0C9020A6210EE96A00687A7E /* CLGCDTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLGCDTimerManager.h; sourceTree = "<group>"; };
 		133621D737F2050001C8A017 /* Pods-CLPlayerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLPlayerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLPlayerDemo/Pods-CLPlayerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLPlayerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		453E2AA81F3C97900003AB0C /* AILoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AILoadingView.h; sourceTree = "<group>"; };
@@ -53,8 +55,6 @@
 		5B456F8D1E60164000C9599F /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
 		5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		5B8A38BD1FC7FC28008B153B /* CLGCDTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLGCDTimerManager.h; sourceTree = "<group>"; };
-		5B8A38BE1FC7FC28008B153B /* CLGCDTimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLGCDTimerManager.m; sourceTree = "<group>"; };
 		5BA0AF501F4292670097B9B2 /* UINavigationController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+CLPlayerRotation.h"; sourceTree = "<group>"; };
 		5BA0AF511F4292670097B9B2 /* UINavigationController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CLPlayerRotation.m"; sourceTree = "<group>"; };
 		5BA0AF521F4292670097B9B2 /* UITabBarController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBarController+CLPlayerRotation.h"; sourceTree = "<group>"; };
@@ -304,8 +304,8 @@
 		5BDEA70C1E63F4BB00953D5D /* CLPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				5B8A38BD1FC7FC28008B153B /* CLGCDTimerManager.h */,
-				5B8A38BE1FC7FC28008B153B /* CLGCDTimerManager.m */,
+				0C9020A6210EE96A00687A7E /* CLGCDTimerManager.h */,
+				0C9020A5210EE96A00687A7E /* CLGCDTimerManager.m */,
 				5BB55D091FC549A800CC8327 /* CLPlayerView.h */,
 				5BB55D081FC549A700CC8327 /* CLPlayerView.m */,
 				5BDEA70F1E63F4BB00953D5D /* CLPlayerMaskView.h */,
@@ -359,7 +359,7 @@
 				TargetAttributes = {
 					5B1FC4C21DC850820036C489 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 533J5B8T42;
+						DevelopmentTeam = 9EF445E886;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -467,7 +467,7 @@
 				5BB4D0EE1F31B7A2007A1742 /* CLViewController5.m in Sources */,
 				5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */,
 				5BDEA7181E63F4BB00953D5D /* CLSlider.m in Sources */,
-				5B8A38BF1FC7FC28008B153B /* CLGCDTimerManager.m in Sources */,
+				0C9020A7210EE96A00687A7E /* CLGCDTimerManager.m in Sources */,
 				5BB4D0EB1F31B775007A1742 /* CLViewController3.m in Sources */,
 				5BB4D0D91F31A1F1007A1742 /* CLTableViewViewController.m in Sources */,
 				5BB4D0F41F331FA1007A1742 /* CLNavigationViewController.m in Sources */,
@@ -605,7 +605,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 533J5B8T42;
+				DEVELOPMENT_TEAM = 9EF445E886;
 				INFOPLIST_FILE = CLPlayerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -621,7 +621,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 533J5B8T42;
+				DEVELOPMENT_TEAM = 9EF445E886;
 				INFOPLIST_FILE = CLPlayerDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
