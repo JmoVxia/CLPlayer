@@ -15,8 +15,6 @@
 @property (nonatomic, strong) dispatch_queue_t serialQueue;
 /**定时器名字*/
 @property (nonatomic, strong) NSString         *timerName;
-/**响应数组*/
-@property (nonatomic, strong) NSMutableArray   *actionBlockArray;
 /**是否重复*/
 @property (nonatomic, assign) BOOL             repeat;
 /**执行时间*/
@@ -50,17 +48,15 @@
         self.serialQueue           = dispatch_queue_create([[NSString stringWithFormat:@"CLGCDTimer.%p", self] cStringUsingEncoding:NSASCIIStringEncoding], DISPATCH_QUEUE_SERIAL);
         self.timer_t               = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.serialQueue);
         dispatch_set_target_queue(self.serialQueue, queue);
-        NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:action, nil];
-        self.actionBlockArray = array;
     }
     return self;
 }
 
 - (instancetype)initDispatchTimerWithTimeInterval:(double)interval
-                                delaySecs:(float)delaySecs
-                                    queue:(dispatch_queue_t)queue
-                                  repeats:(BOOL)repeats
-                                   action:(dispatch_block_t)action{
+                                        delaySecs:(float)delaySecs
+                                            queue:(dispatch_queue_t)queue
+                                          repeats:(BOOL)repeats
+                                           action:(dispatch_block_t)action{
     if (self = [super init]) {
         self.timeInterval = interval;
         self.delaySecs    = delaySecs;
@@ -71,16 +67,8 @@
         self.serialQueue           = dispatch_queue_create([[NSString stringWithFormat:@"CLGCDTimer.%p", self] cStringUsingEncoding:NSASCIIStringEncoding], DISPATCH_QUEUE_SERIAL);
         self.timer_t               = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.serialQueue);
         dispatch_set_target_queue(self.serialQueue, queue);
-        NSMutableArray *array = [[NSMutableArray alloc] initWithObjects:action, nil];
-        self.actionBlockArray = array;
     }
     return self;
-}
-
-- (void)addActionBlock:(dispatch_block_t)action{
-    NSMutableArray *array = [self.actionBlockArray mutableCopy];
-    [array removeAllObjects];
-    [array addObject:action];
 }
 - (void)replaceOldAction:(dispatch_block_t)action {
     self.action = action;
@@ -106,13 +94,10 @@
 /**执行一次定时器响应*/
 - (void)responseOnceTimer {
     self.isRuning    = YES;
-    [self.actionBlockArray enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger __unused idx, BOOL *_Nonnull __unused stop) {
-        dispatch_block_t action = obj;
-        if (action) {
-            action();
-            self.actionTimes ++;
-        }
-    }];
+    if (self.action) {
+        self.action();
+        self.actionTimes ++;
+    }
     self.isRuning = NO;
 }
 /**取消定时器*/
@@ -145,8 +130,6 @@
         }
     });
 }
-
-
 @end
 
 @interface CLGCDTimerManager ()
@@ -201,11 +184,11 @@
                                                           action:action];
         [self setTimer:GCDTimer name:string];
     } else {
-        [GCDTimer addActionBlock:action];
         GCDTimer.timeInterval = interval;
         GCDTimer.delaySecs    = delaySecs;
         GCDTimer.serialQueue  = queue;
         GCDTimer.repeat       = repeats;
+        GCDTimer.action       = action;
     }
 }
 #pragma mark - 创建定时器
@@ -256,13 +239,10 @@
     __strong NSString *string = timerName;
     CLGCDTimer *GCDTimer = [self timer:string];
     GCDTimer.isRuning    = YES;
-    [GCDTimer.actionBlockArray enumerateObjectsUsingBlock:^(id _Nonnull obj, NSUInteger __unused idx, BOOL *_Nonnull __unused stop) {
-        dispatch_block_t action = obj;
-        if (action) {
-            action();
-            GCDTimer.actionTimes ++;
-        }
-    }];
+    if (GCDTimer.action) {
+        GCDTimer.action();
+        GCDTimer.actionTimes ++;
+    }
     GCDTimer.isRuning = NO;
 }
 #pragma mark - 取消定时器
@@ -318,6 +298,7 @@
     [self.timerObjectCache setObject:timer forKey:name];
     dispatch_semaphore_signal(self.semaphore);
 }
+
 
 
 @end
