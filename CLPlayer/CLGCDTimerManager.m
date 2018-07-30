@@ -41,7 +41,6 @@
                                   repeats:(BOOL)repeats
                                    action:(dispatch_block_t)action{
     if (self = [super init]) {
-        NSLog(@"创建定时器");
         self.timeInterval = interval;
         self.delaySecs    = delaySecs;
         self.repeat       = repeats;
@@ -63,7 +62,6 @@
                                   repeats:(BOOL)repeats
                                    action:(dispatch_block_t)action{
     if (self = [super init]) {
-        NSLog(@"创建定时器");
         self.timeInterval = interval;
         self.delaySecs    = delaySecs;
         self.repeat       = repeats;
@@ -89,7 +87,6 @@
 }
 /**开始定时器*/
 - (void)startTimer {
-    NSLog(@"开始定时器");
     //拿到当前线程线程
     dispatch_async(self.serialQueue, ^{
         dispatch_source_set_timer(self.timer_t, dispatch_time(DISPATCH_TIME_NOW, (NSInteger)(self.delaySecs * NSEC_PER_SEC)),(NSInteger)(self.timeInterval * NSEC_PER_SEC), 0 * NSEC_PER_SEC);
@@ -122,7 +119,6 @@
 - (void)cancelTimer {
     //拿到当前线程线程
     dispatch_async(self.serialQueue, ^{
-        NSLog(@"取消定时器");
         if (!self.isRuning) {
             [self resumeTimer];
         }
@@ -149,6 +145,8 @@
         }
     });
 }
+
+
 @end
 
 @interface CLGCDTimerManager ()
@@ -202,9 +200,7 @@
                                                          repeats:repeats
                                                           action:action];
         [self setTimer:GCDTimer name:string];
-        NSLog(@"创建定时器成功");
     } else {
-        NSLog(@"创建定时器失败");
         [GCDTimer addActionBlock:action];
         GCDTimer.timeInterval = interval;
         GCDTimer.delaySecs    = delaySecs;
@@ -322,7 +318,6 @@
     [self.timerObjectCache setObject:timer forKey:name];
     dispatch_semaphore_signal(self.semaphore);
 }
-
 
 
 @end

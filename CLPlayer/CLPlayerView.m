@@ -98,17 +98,39 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         UITapGestureRecognizer*tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disappearAction:)];
         [_maskView addGestureRecognizer:tap];
         //计时器，循环执行
-        __weak __typeof(self) weakSelf = self;
-        _sliderTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:1.0f
-                                                                   delaySecs:0 queue:dispatch_get_main_queue()
-                                                                     repeats:YES
-                                                                      action:^{
-                                                                          __typeof(&*weakSelf) strongSelf = weakSelf;
-                                                                          [strongSelf timeStack];
-                                                                      }];
-        [_sliderTimer startTimer];
+        [self.sliderTimer startTimer];
     }
     return _maskView;
+}
+//进度条定时器
+- (CLGCDTimer *) sliderTimer{
+    if (_sliderTimer == nil){
+        __weak __typeof(self) weakSelf = self;
+        _sliderTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:1.0f
+                                                    delaySecs:0 queue:dispatch_get_main_queue()
+                                                      repeats:YES
+                                                       action:^{
+                                                           __typeof(&*weakSelf) strongSelf = weakSelf;
+                                                           [strongSelf timeStack];
+                                                       }];
+    }
+    return _sliderTimer;
+}
+//手势定时器
+- (CLGCDTimer *) tapTimer{
+    if (_tapTimer == nil){
+        __weak __typeof(self) weakSelf = self;
+        _tapTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:_toolBarDisappearTime
+                                                                delaySecs:_toolBarDisappearTime
+                                                                    queue:dispatch_get_main_queue()
+                                                                  repeats:YES
+                                                                   action:^{
+                                                                       __typeof(&*weakSelf) strongSelf = weakSelf;
+                                                                       [strongSelf disappear];
+                                                                   }];
+        
+    }
+    return _tapTimer;
 }
 /**状态栏*/
 - (UIView *) statusBar{
@@ -209,17 +231,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 -(void)setToolBarDisappearTime:(NSInteger)toolBarDisappearTime{
     _toolBarDisappearTime = toolBarDisappearTime;
     [self destroyToolBarTimer];
-    //定时器，工具条消失
-    __weak __typeof(self) weakSelf = self;
-    _tapTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:toolBarDisappearTime
-                                                            delaySecs:toolBarDisappearTime
-                                                                queue:dispatch_get_main_queue()
-                                                              repeats:YES
-                                                               action:^{
-                                                                   __typeof(&*weakSelf) strongSelf = weakSelf;
-                                                                   [strongSelf disappear];
-                                                               }];
-    [_tapTimer startTimer];
+    [self.tapTimer startTimer];
 }
 #pragma mark - 传入播放地址
 - (void)setUrl:(NSURL *)url{
@@ -717,7 +729,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 - (void)pausePlay{
     self.maskView.playButton.selected = NO;
     [_player pause];
-    [_sliderTimer suspendTimer];
+    [self.sliderTimer suspendTimer];
 }
 #pragma mark - 播放
 - (void)playVideo{
@@ -726,7 +738,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         [self resetPlay];
     }else{
         [_player play];
-        [_sliderTimer resumeTimer];
+        [self.sliderTimer resumeTimer];
     }
 }
 #pragma mark - 重新开始播放
@@ -771,7 +783,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     //重置时间
     self.maskView.currentTimeLabel.text = @"00:00";
     self.maskView.totalTimeLabel.text   = @"00:00";
-    [_sliderTimer resumeTimer];
+    [self.sliderTimer resumeTimer];
     //销毁定时消失工具条
     [self destroyToolBarTimer];
     //重置定时消失
@@ -788,12 +800,15 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 #pragma mark - 取消定时器
 //销毁所有定时器
 - (void)destroyAllTimer{
-    [_sliderTimer cancelTimer];
-    [_tapTimer cancelTimer];
+    [self.sliderTimer cancelTimer];
+    [self.tapTimer cancelTimer];
+    self.sliderTimer = nil;
+    self.tapTimer    = nil;
 }
 //销毁定时消失定时器
 - (void)destroyToolBarTimer{
-    [_tapTimer cancelTimer];
+    [self.tapTimer cancelTimer];
+    self.tapTimer = nil;
 }
 #pragma mark - 屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification{
