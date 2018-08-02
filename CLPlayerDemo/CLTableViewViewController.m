@@ -144,9 +144,9 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
     //播放完成回调
     [_playerView endPlay:^{
         //销毁播放器
-        [_playerView destroyPlayer];
-        _playerView = nil;
-        _cell = nil;
+        [self->_playerView destroyPlayer];
+        self->_playerView = nil;
+        self->_cell = nil;
         NSLog(@"播放完成");
     }];
 }

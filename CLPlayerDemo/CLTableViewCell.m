@@ -63,7 +63,7 @@
         }
         //主线程
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl] placeholderImage:placeholderImage];
+            [self->_pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl] placeholderImage:placeholderImage];
         });
     }];
 }
