@@ -26,7 +26,8 @@ typedef NS_ENUM(NSUInteger, FullStatusBarHiddenType) {
 typedef void(^BackButtonBlock)(UIButton *button);
 typedef void(^EndBolck)(void);
 
-@interface CLPlayerView : UIView
+
+@interface CLPlayerViewConfig : NSObject
 
 /**后台返回是否自动播放，默认Yes,会跟随用户，如果是播放状态进入后台，返回会继续播放*/
 @property (nonatomic, assign) BOOL                    backPlay;
@@ -42,8 +43,6 @@ typedef void(^EndBolck)(void);
 @property (nonatomic, assign) BOOL                    smallGestureControl;
 /**全屏手势控制,默认Yes*/
 @property (nonatomic, assign) BOOL                    fullGestureControl;;
-/**是否是全屏*/
-@property (nonatomic, assign, readonly) BOOL          isFullScreen;
 /**工具条消失时间，默认10s*/
 @property (nonatomic, assign) NSInteger               toolBarDisappearTime;
 /**拉伸方式，默认全屏填充*/
@@ -52,8 +51,7 @@ typedef void(^EndBolck)(void);
 @property (nonatomic, assign) TopToolBarHiddenType    topToolBarHiddenType;
 /**全屏状态栏隐藏方式，默认不隐藏*/
 @property (nonatomic, assign) FullStatusBarHiddenType fullStatusBarHiddenType;
-/**视频url*/
-@property (nonatomic, strong) NSURL                   *url;
+
 /**进度条背景颜色*/
 @property (nonatomic, strong) UIColor                 *progressBackgroundColor;
 /**缓冲条缓冲进度颜色*/
@@ -62,6 +60,24 @@ typedef void(^EndBolck)(void);
 @property (nonatomic, strong) UIColor                 *progressPlayFinishColor;
 /**转子线条颜色*/
 @property (nonatomic, strong) UIColor                 *strokeColor;
+
+/**
+ 默认配置
+ @return 配置
+ */
++ (instancetype)defaultConfig;
+
+@end
+
+@interface CLPlayerView : UIView
+
+/**是否是全屏*/
+@property (nonatomic, assign, readonly) BOOL          isFullScreen;
+/**视频url*/
+@property (nonatomic, strong) NSURL                   *url;
+
+/**更新播放器基本配置*/
+- (void)updateWithConfig:(void(^)(CLPlayerViewConfig *config))configBlock;
 
 /**播放*/
 - (void)playVideo;

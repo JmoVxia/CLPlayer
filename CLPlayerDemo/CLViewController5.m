@@ -24,16 +24,18 @@
     CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 90, self.view.CLwidth, 300)];
     _playerView = playerView;
     [self.view addSubview:_playerView];
-    //当前控制器是否支持旋转，当前页面支持旋转的时候需要设置，告知播放器
-    _playerView.isLandscape = YES;
-    //全屏是否隐藏状态栏，默认一直不隐藏
-    _playerView.fullStatusBarHiddenType = FullStatusBarHiddenNever;
-    //顶部工具条隐藏样式，默认不隐藏
-    _playerView.topToolBarHiddenType = TopToolBarHiddenNever;
-    //全屏手势控制，默认Yes
-    _playerView.fullGestureControl = NO;
-    //小屏手势控制，默认NO
-    _playerView.smallGestureControl = YES;
+    [_playerView updateWithConfig:^(CLPlayerViewConfig *config) {
+        //当前控制器是否支持旋转，当前页面支持旋转的时候需要设置，告知播放器
+        config.isLandscape = YES;
+        //全屏是否隐藏状态栏，默认一直不隐藏
+        config.fullStatusBarHiddenType = FullStatusBarHiddenNever;
+        //顶部工具条隐藏样式，默认不隐藏
+        config.topToolBarHiddenType = TopToolBarHiddenNever;
+        //全屏手势控制，默认Yes
+        config.fullGestureControl = NO;
+        //小屏手势控制，默认NO
+        config.smallGestureControl = YES;
+    }];
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2017/0830/b0e248268d4b11e79e13842b2b4c75ab_wpd.mp4"];
     //播放

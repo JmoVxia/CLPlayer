@@ -132,9 +132,12 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
     [cell.contentView addSubview:_playerView];
     //视频地址
     _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
-    _playerView.topToolBarHiddenType = TopToolBarHiddenSmall;
-    _playerView.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
-//    _playerView.smallGestureControl = YES;
+
+    [_playerView updateWithConfig:^(CLPlayerViewConfig *config) {
+        config.topToolBarHiddenType = TopToolBarHiddenSmall;
+        config.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
+//        config.smallGestureControl = YES;
+    }];
     //播放
     [_playerView playVideo];
     //返回按钮点击事件回调

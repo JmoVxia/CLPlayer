@@ -27,10 +27,12 @@
     
     _playerView = playerView;
     [self.view addSubview:_playerView];
-    //全屏是否隐藏状态栏，默认一直不隐藏
-    _playerView.fullStatusBarHiddenType = FullStatusBarHiddenAlways;
-    //顶部工具条隐藏样式，默认不隐藏
-    _playerView.topToolBarHiddenType = TopToolBarHiddenAlways;
+    [_playerView updateWithConfig:^(CLPlayerViewConfig *config) {
+        //全屏是否隐藏状态栏，默认一直不隐藏
+        config.fullStatusBarHiddenType = FullStatusBarHiddenAlways;
+        //顶部工具条隐藏样式，默认不隐藏
+        config.topToolBarHiddenType = TopToolBarHiddenAlways;
+    }];
     //视频地址
     _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1117/5cd90c96-acb0-11e6-b83b-d4ae5296039d_wpc.mp4"];
     //播放
