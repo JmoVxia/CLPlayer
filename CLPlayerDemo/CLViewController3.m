@@ -37,7 +37,7 @@
         config.topToolBarHiddenType = TopToolBarHiddenSmall;
     }];
     //视频地址
-    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1203/58425ad2a0c1d_wpd.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://220.249.115.46:18080/wav/day_by_day.mp4"];
     //播放
     [_playerView playVideo];
     //返回按钮点击事件回调,小屏状态才会调用，全屏默认变为小屏
@@ -57,7 +57,7 @@
     [self.view addSubview:but];
 }
 - (void)next{
-    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/0709/5781023a979d7_wpd.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://220.249.115.46:18080/wav/day_by_day.mp4"];
     [_playerView playVideo];
 }
 -(void)viewDidDisappear:(BOOL)animated{

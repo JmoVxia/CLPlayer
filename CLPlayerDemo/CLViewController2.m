@@ -36,7 +36,7 @@
         //工具条消失时间，默认10s
         config.toolBarDisappearTime = 8;
         //顶部工具条隐藏样式，默认不隐藏
-        config.topToolBarHiddenType = TopToolBarHiddenSmall;
+        config.topToolBarHiddenType = TopToolBarHiddenAlways;
     }];
     
     //视频地址
@@ -60,7 +60,7 @@
     [self.view addSubview:but];
 }
 - (void)next{
-    _playerView.url = [NSURL URLWithString:@"http://wvideo.spriteapp.cn/video/2016/1203/58425ad2a0c1d_wpd.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://220.249.115.46:18080/wav/day_by_day.mp4"];
     [_playerView playVideo];
 }
 -(void)viewDidDisappear:(BOOL)animated{

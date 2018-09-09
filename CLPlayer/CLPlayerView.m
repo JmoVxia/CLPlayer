@@ -117,67 +117,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 
 @implementation CLPlayerView
 
-//MARK:JmoVxia---懒加载
-//遮罩
-- (CLPlayerMaskView *) maskView{
-    if (_maskView == nil){
-        _maskView                         = [[CLPlayerMaskView alloc] init];
-        _maskView.progressBackgroundColor = self.config.progressBackgroundColor;
-        _maskView.progressBufferColor     = self.config.progressBufferColor;
-        _maskView.progressPlayFinishColor = self.config.progressPlayFinishColor;
-        _maskView.delegate                = self;
-        //创建并添加点击手势（点击事件、添加手势）
-        UITapGestureRecognizer*tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disappearAction:)];
-        [_maskView addGestureRecognizer:tap];
-        //计时器，循环执行
-        [self.sliderTimer startTimer];
-    }
-    return _maskView;
-}
-//进度条定时器
-- (CLGCDTimer *) sliderTimer{
-    if (_sliderTimer == nil){
-        __weak __typeof(self) weakSelf = self;
-        _sliderTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:1.0f
-                                                    delaySecs:0 queue:dispatch_get_main_queue()
-                                                      repeats:YES
-                                                       action:^{
-                                                           __typeof(&*weakSelf) strongSelf = weakSelf;
-                                                           [strongSelf timeStack];
-                                                       }];
-    }
-    return _sliderTimer;
-}
-//手势定时器
-- (CLGCDTimer *) tapTimer{
-    if (_tapTimer == nil){
-        __weak __typeof(self) weakSelf = self;
-        _tapTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:self.config.toolBarDisappearTime
-                                                                delaySecs:self.config.toolBarDisappearTime
-                                                                    queue:dispatch_get_main_queue()
-                                                                  repeats:YES
-                                                                   action:^{
-                                                                       __typeof(&*weakSelf) strongSelf = weakSelf;
-                                                                       [strongSelf disappear];
-                                                                   }];
-        
-    }
-    return _tapTimer;
-}
-/**状态栏*/
-- (UIView *) statusBar{
-    if (_statusBar == nil){
-        _statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    }
-    return _statusBar;
-}
-/**配置*/
-- (CLPlayerViewConfig *) config{
-    if (_config == nil){
-        _config = [CLPlayerViewConfig defaultConfig];
-    }
-    return _config;
-}
 //MARK:JmoVxia---更新配置
 - (void)updateWithConfig:(void(^)(CLPlayerViewConfig *config))configBlock {
     if (configBlock) {
@@ -942,6 +881,66 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     NSLog(@"播放器被销毁了");
 #endif
 }
-
+//MARK:JmoVxia---懒加载
+//遮罩
+- (CLPlayerMaskView *) maskView{
+    if (_maskView == nil){
+        _maskView                         = [[CLPlayerMaskView alloc] init];
+        _maskView.progressBackgroundColor = self.config.progressBackgroundColor;
+        _maskView.progressBufferColor     = self.config.progressBufferColor;
+        _maskView.progressPlayFinishColor = self.config.progressPlayFinishColor;
+        _maskView.delegate                = self;
+        //创建并添加点击手势（点击事件、添加手势）
+        UITapGestureRecognizer*tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disappearAction:)];
+        [_maskView addGestureRecognizer:tap];
+        //计时器，循环执行
+        [self.sliderTimer startTimer];
+    }
+    return _maskView;
+}
+//进度条定时器
+- (CLGCDTimer *) sliderTimer{
+    if (_sliderTimer == nil){
+        __weak __typeof(self) weakSelf = self;
+        _sliderTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:1.0f
+                                                                   delaySecs:0 queue:dispatch_get_main_queue()
+                                                                     repeats:YES
+                                                                      action:^{
+                                                                          __typeof(&*weakSelf) strongSelf = weakSelf;
+                                                                          [strongSelf timeStack];
+                                                                      }];
+    }
+    return _sliderTimer;
+}
+//手势定时器
+- (CLGCDTimer *) tapTimer{
+    if (_tapTimer == nil){
+        __weak __typeof(self) weakSelf = self;
+        _tapTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:self.config.toolBarDisappearTime
+                                                                delaySecs:self.config.toolBarDisappearTime
+                                                                    queue:dispatch_get_main_queue()
+                                                                  repeats:YES
+                                                                   action:^{
+                                                                       __typeof(&*weakSelf) strongSelf = weakSelf;
+                                                                       [strongSelf disappear];
+                                                                   }];
+        
+    }
+    return _tapTimer;
+}
+/**状态栏*/
+- (UIView *) statusBar{
+    if (_statusBar == nil){
+        _statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+    }
+    return _statusBar;
+}
+/**配置*/
+- (CLPlayerViewConfig *) config{
+    if (_config == nil){
+        _config = [CLPlayerViewConfig defaultConfig];
+    }
+    return _config;
+}
 @end
 

@@ -37,7 +37,7 @@
         config.smallGestureControl = YES;
     }];
     //视频地址
-    _playerView.url = [NSURL URLWithString:@"http://dvideo.spriteapp.cn/video/2017/0830/b0e248268d4b11e79e13842b2b4c75ab_wpd.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://220.249.115.46:18080/wav/day_by_day.mp4"];
     //播放
     [_playerView playVideo];
     //返回按钮点击事件回调,小屏状态才会调用，全屏默认变为小屏
