@@ -905,7 +905,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         _sliderTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:1.0f
                                                                    delaySecs:0 queue:dispatch_get_main_queue()
                                                                      repeats:YES
-                                                                      action:^{
+                                                                      action:^(NSInteger actionTimes) {
                                                                           __typeof(&*weakSelf) strongSelf = weakSelf;
                                                                           [strongSelf timeStack];
                                                                       }];
@@ -920,7 +920,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                                                                 delaySecs:self.config.toolBarDisappearTime
                                                                     queue:dispatch_get_main_queue()
                                                                   repeats:YES
-                                                                   action:^{
+                                                                   action:^(NSInteger actionTimes) {
                                                                        __typeof(&*weakSelf) strongSelf = weakSelf;
                                                                        [strongSelf disappear];
                                                                    }];

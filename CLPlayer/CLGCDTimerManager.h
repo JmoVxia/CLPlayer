@@ -14,7 +14,7 @@
                                 delaySecs:(float)delaySecs
                                     queue:(dispatch_queue_t)queue
                                   repeats:(BOOL)repeats
-                                   action:(dispatch_block_t)action;
+                                   action:(void(^)(NSInteger actionTimes))action;
 /*响应次数*/
 @property (nonatomic, assign, readonly) NSInteger actionTimes;
 
@@ -29,7 +29,7 @@
 /**恢复定时器*/
 - (void)resumeTimer;
 /**替换旧的响应*/
-- (void)replaceOldAction:(dispatch_block_t)action;
+- (void)replaceOldAction:(void(^)(NSInteger actionTimes))action;
 
 
 
@@ -57,7 +57,7 @@
                              delaySecs:(float)delaySecs
                                  queue:(dispatch_queue_t)queue
                                repeats:(BOOL)repeats
-                                action:(dispatch_block_t)action;
+                                action:(void(^)(NSInteger actionTimes))action;
 
 /**开始定时器*/
 - (void)startTimer:(NSString *)timerName;
