@@ -917,7 +917,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 -(CLPlayerLayer *)playerLayerView {
     if (_playerLayerView == nil) {
         _playerLayerView = [[CLPlayerLayer alloc] init];
-        _playerLayerView.backgroundColor = [UIColor redColor];
     }
     return _playerLayerView;
 }

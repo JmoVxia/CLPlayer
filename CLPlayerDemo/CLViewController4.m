@@ -34,7 +34,8 @@
         config.topToolBarHiddenType = TopToolBarHiddenAlways;
     }];
     //视频地址
-    _playerView.url = [NSURL URLWithString:@"http://220.249.115.46:18080/wav/day_by_day.mp4"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];
+    _playerView.url = [NSURL fileURLWithPath:path];
     //播放
     [_playerView playVideo];
     
