@@ -11,7 +11,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "CLPlayerMaskView.h"
 #import "CLGCDTimerManager.h"
-
+#import "Masonry.h"
 // 播放器的几种状态
 typedef NS_ENUM(NSInteger, CLPlayerState) {
     CLPlayerStateFailed,     ///< 播放失败
@@ -24,6 +24,18 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     CLPanDirectionHorizontalMoved, ///< 横向移动
     CLPanDirectionVerticalMoved,   ///< 纵向移动
 };
+
+@interface CLPlayerLayer : UIView
+
+@end
+
+@implementation CLPlayerLayer
+
++ (Class)layerClass {
+    return AVPlayerLayer.class;
+}
+
+@end
 
 @implementation CLPlayerViewConfig
 
@@ -83,7 +95,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 @property (nonatomic, assign) BOOL             isEnd;
 /**播放器*/
 @property (nonatomic, strong) AVPlayer         *player;
-/**playerLayer*/
+/**playerLayerView*/
+@property (nonatomic, strong) CLPlayerLayer    *playerLayerView;
+/**playerLayerView*/
 @property (nonatomic, strong) AVPlayerLayer    *playerLayer;
 /**播放器item*/
 @property (nonatomic, strong) AVPlayerItem     *playerItem;
@@ -170,22 +184,17 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 //MARK:JmoVxia---播放地址
 - (void)setUrl:(NSURL *)url{
     [self resetPlayer];
-    _url                      = url;
-    self.playerItem           = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:_url]];
-    //创建
-    _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
-    _playerLayer              = [AVPlayerLayer playerLayerWithPlayer:_player];
-    //全屏拉伸
-    _playerLayer.videoGravity = AVLayerVideoGravityResize;
     //设置静音模式播放声音
     AVAudioSession * session  = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     [session setActive:YES error:nil];
+    _url                      = url;
+    self.playerItem           = [AVPlayerItem playerItemWithAsset:[AVAsset assetWithURL:_url]];
+    //创建
+    _player                   = [AVPlayer playerWithPlayerItem:_playerItem];
+    _playerLayer              = (AVPlayerLayer *)self.playerLayerView.layer;
     _playerLayer.videoGravity = _fillMode;
-    //放到最下面，防止遮挡
-    [self.layer insertSublayer:_playerLayer atIndex:0];
-    [self setNeedsLayout];
-    [self layoutIfNeeded];
+    [_playerLayer setPlayer:_player];
 }
 -(void)setPlayerItem:(AVPlayerItem *)playerItem{
     if (_playerItem == playerItem){
@@ -285,6 +294,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     [self configureVolume];
     //最上面的View
     [self addSubview:self.maskView];
+    [self insertSubview:self.playerLayerView atIndex:0];
 }
 //MARK:JmoVxia---监听
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context{
@@ -647,6 +657,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 //MARK:JmoVxia---播放
 - (void)playVideo{
     self.maskView.playButton.selected = YES;
+    [self insertSubview:self.playerLayerView atIndex:0];
     if (_isEnd && self.maskView.slider.value == 1) {
         [self resetPlay];
     }else{
@@ -672,7 +683,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     //销毁转子动画
     [self.maskView.loadingView destroyAnimation];
     //移除
-    [self.playerLayer removeFromSuperlayer];
+    [self.playerLayerView removeFromSuperview];
     [self removeFromSuperview];
     self.maskView.loadingView = nil;
     self.playerLayer = nil;
@@ -687,7 +698,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     _isDisappear = NO;
     //移除之前的
     [self pausePlay];
-    [self.playerLayer removeFromSuperlayer];
+    [self.playerLayerView removeFromSuperview];
     self.playerLayer           = nil;
     self.player                = nil;
     //还原进度条和缓冲条
@@ -850,8 +861,12 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 //MARK:JmoVxia---layoutSubviews
 -(void)layoutSubviews{
     [super layoutSubviews];
-    self.playerLayer.frame = self.bounds;
-    self.maskView.frame    = self.bounds;
+    [self.maskView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
+    }];
+    [self.playerLayerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self);
+    }];
 }
 //MARK:JmoVxia---dealloc
 - (void)dealloc{
@@ -883,8 +898,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 //MARK:JmoVxia---懒加载
 //遮罩
-- (CLPlayerMaskView *) maskView{
-    if (_maskView == nil){
+- (CLPlayerMaskView *) maskView {
+    if (_maskView == nil) {
         _maskView                         = [[CLPlayerMaskView alloc] init];
         _maskView.progressBackgroundColor = self.config.progressBackgroundColor;
         _maskView.progressBufferColor     = self.config.progressBufferColor;
@@ -898,11 +913,19 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     }
     return _maskView;
 }
+//playerLayer载体
+-(CLPlayerLayer *)playerLayerView {
+    if (_playerLayerView == nil) {
+        _playerLayerView = [[CLPlayerLayer alloc] init];
+        _playerLayerView.backgroundColor = [UIColor redColor];
+    }
+    return _playerLayerView;
+}
 //进度条定时器
-- (CLGCDTimer *) sliderTimer{
-    if (_sliderTimer == nil){
+- (CLGCDTimer *) sliderTimer {
+    if (_sliderTimer == nil) {
         __weak __typeof(self) weakSelf = self;
-        _sliderTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:1.0f
+        _sliderTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:0.1f
                                                                    delaySecs:0 queue:dispatch_get_main_queue()
                                                                      repeats:YES
                                                                       action:^(NSInteger actionTimes) {
@@ -913,8 +936,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     return _sliderTimer;
 }
 //手势定时器
-- (CLGCDTimer *) tapTimer{
-    if (_tapTimer == nil){
+- (CLGCDTimer *) tapTimer {
+    if (_tapTimer == nil) {
         __weak __typeof(self) weakSelf = self;
         _tapTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:self.config.toolBarDisappearTime
                                                                 delaySecs:self.config.toolBarDisappearTime
@@ -943,4 +966,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     return _config;
 }
 @end
+
+
+
 

@@ -16,6 +16,7 @@
 		5B1FC4FB1DC850EF0036C489 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1FC4FA1DC850EF0036C489 /* MediaPlayer.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B35DDE31DE07F9A00CEB057 /* Date.json */; };
 		5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */; };
+		5B47242221D53F2600840F92 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5B47242121D53F2500840F92 /* video.mp4 */; };
 		5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B73AAB81DCB0881007680C1 /* Assets.xcassets */; };
 		5BA0AF561F4292670097B9B2 /* UINavigationController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0AF511F4292670097B9B2 /* UINavigationController+CLPlayerRotation.m */; };
 		5BA0AF571F4292670097B9B2 /* UITabBarController+CLPlayerRotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BA0AF531F4292670097B9B2 /* UITabBarController+CLPlayerRotation.m */; };
@@ -54,6 +55,7 @@
 		5B35DDE31DE07F9A00CEB057 /* Date.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Date.json; sourceTree = "<group>"; };
 		5B456F8D1E60164000C9599F /* UIView+CLSetRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CLSetRect.h"; sourceTree = "<group>"; };
 		5B456F8E1E60164000C9599F /* UIView+CLSetRect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CLSetRect.m"; sourceTree = "<group>"; };
+		5B47242121D53F2500840F92 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 		5B73AAB81DCB0881007680C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BA0AF501F4292670097B9B2 /* UINavigationController+CLPlayerRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+CLPlayerRotation.h"; sourceTree = "<group>"; };
 		5BA0AF511F4292670097B9B2 /* UINavigationController+CLPlayerRotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+CLPlayerRotation.m"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 		5B1FC4C61DC850820036C489 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				5B47242121D53F2500840F92 /* video.mp4 */,
 				5B35DDE31DE07F9A00CEB057 /* Date.json */,
 				5B73AAB81DCB0881007680C1 /* Assets.xcassets */,
 				5B1FC4D41DC850820036C489 /* LaunchScreen.storyboard */,
@@ -388,6 +391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B35DDE41DE07F9A00CEB057 /* Date.json in Resources */,
+				5B47242221D53F2600840F92 /* video.mp4 in Resources */,
 				5B1FC4D61DC850820036C489 /* LaunchScreen.storyboard in Resources */,
 				5B73AAB91DCB0881007680C1 /* Assets.xcassets in Resources */,
 				5BB4D1081F345A7D007A1742 /* CLPlayer.bundle in Resources */,
