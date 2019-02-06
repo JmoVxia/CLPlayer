@@ -757,7 +757,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                 }
             }
         }
-        else if (orientation == UIDeviceOrientationPortrait){
+        else {
             if (_isFullScreen){
                 [self originalscreen];
             }
@@ -781,6 +781,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         }
         [self hiddenStatusBarWithFullStatusBarHiddenType];
+        self.frame                            = CGRectMake(0, 0, MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
     }else{
         //播放器所在控制器不支持旋转，采用旋转view的方式实现
         [self setStatusBarHidden:YES];
@@ -800,9 +801,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                 [self hiddenStatusBarWithFullStatusBarHiddenType];
             }];
         }
+        self.frame                            = CGRectMake(0, 0, MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
     }
     self.maskView.fullButton.selected     = YES;
-    self.frame                            = keyWindow.bounds;
     self.statusBar.userInteractionEnabled = NO;
     [self setNeedsLayout];
     [self layoutIfNeeded];
@@ -861,12 +862,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 //MARK:JmoVxia---layoutSubviews
 -(void)layoutSubviews{
     [super layoutSubviews];
-    [self.maskView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self);
-    }];
-    [self.playerLayerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.mas_equalTo(self);
-    }];
+    self.maskView.frame = self.bounds;
+    self.playerLayerView.frame = self.bounds;
 }
 //MARK:JmoVxia---dealloc
 - (void)dealloc{
