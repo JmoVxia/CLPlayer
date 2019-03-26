@@ -412,6 +412,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 //MARK:JmoVxia---水平移动调节进度
 - (void)horizontalMoved:(CGFloat)value {
+    if (value == 0) {
+        return;
+    }
     // 每次滑动需要叠加时间
     self.sumTime += value / 200;
     // 需要限定sumTime的范围
@@ -422,9 +425,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     }
     if (self.sumTime < 0) {
         self.sumTime = 0;
-    }
-    if (value == 0) {
-        return;
     }
     self.isDragged             = YES;
     //计算出拖动的当前秒数
