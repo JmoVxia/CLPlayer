@@ -61,6 +61,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 -(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
     [_playerView destroyPlayer];
 }
 #pragma mark -- 需要设置全局支持旋转方向，然后重写下面三个方法可以让当前页面支持多个方向

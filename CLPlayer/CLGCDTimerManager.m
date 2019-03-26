@@ -9,114 +9,119 @@
 #import "CLGCDTimerManager.h"
 
 @interface CLGCDTimer ()
-/**响应*/
-@property (nonatomic, copy) void(^actionBlock)(NSInteger actionTimes);
-/**线程*/
-@property (nonatomic, strong) dispatch_queue_t serialQueue;
-/**定时器名字*/
-@property (nonatomic, strong) NSString         *timerName;
-/**是否重复*/
-@property (nonatomic, assign) BOOL             repeat;
+
+/**队列*/
+@property (nonatomic, strong) dispatch_queue_t queue;
+/**定时器*/
+@property (nonatomic, strong) dispatch_source_t timer;
 /**执行时间*/
-@property (nonatomic, assign) NSTimeInterval   timeInterval;
+@property (nonatomic, assign) NSTimeInterval interval;
 /**延迟时间*/
-@property (nonatomic, assign) float            delaySecs;
+@property (nonatomic, assign) NSTimeInterval delaySecs;
+/**是否重复*/
+@property (nonatomic, assign) BOOL repeat;
 /**是否正在运行*/
-@property (nonatomic, assign) BOOL             isRuning;
-/*定时器*/
-@property (nonatomic,strong) dispatch_source_t timer_t;
-/*响应次数*/
+@property (nonatomic, assign) BOOL isRuning;
+/**响应次数*/
 @property (nonatomic, assign) NSInteger actionTimes;
+///名称
+@property (nonatomic, copy) NSString *name;
+/**响应*/
+@property (nonatomic, copy) void (^action) (NSInteger actionTimes);
 
 @end
 
 @implementation CLGCDTimer
 
-- (instancetype)initDispatchTimerWithName:(NSString *)timerName
-                             timeInterval:(double)interval
-                                delaySecs:(float)delaySecs
-                                    queue:(dispatch_queue_t)queue
+- (instancetype _Nonnull)initWithName:(NSString *)name
+                             interval:(NSTimeInterval)interval
+                            delaySecs:(NSTimeInterval)delaySecs
+                                queue:(dispatch_queue_t _Nullable)queue
+                              repeats:(BOOL)repeats
+                               action:(void(^ _Nullable)(NSInteger actionTimes))action {
+    CLGCDTimer *timer = [self initWithInterval:interval
+                                     delaySecs:delaySecs
+                                         queue:queue
+                                       repeats:repeats
+                                        action:action];
+    timer.name = name;
+    return timer;
+}
+- (instancetype _Nonnull)initWithInterval:(NSTimeInterval)interval
+                                delaySecs:(NSTimeInterval)delaySecs
+                                    queue:(dispatch_queue_t _Nullable)queue
                                   repeats:(BOOL)repeats
-                                   action:(void(^)(NSInteger actionTimes))action{
+                                   action:( void(^ _Nullable)(NSInteger actionTimes))action {
     if (self = [super init]) {
-        self.timeInterval = interval;
-        self.delaySecs    = delaySecs;
-        self.repeat       = repeats;
-        self.actionBlock  = action;
-        self.timerName    = timerName;
-        self.isRuning     = NO;
-        self.serialQueue           = dispatch_queue_create([[NSString stringWithFormat:@"CLGCDTimer.%p", self] cStringUsingEncoding:NSASCIIStringEncoding], DISPATCH_QUEUE_SERIAL);
-        self.timer_t               = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.serialQueue);
-        dispatch_set_target_queue(self.serialQueue, queue);
+        if (queue == nil) {
+            queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+        }
+        self.interval = interval;
+        self.delaySecs = delaySecs;
+        self.repeat = repeats;
+        self.action = action;
+        self.isRuning = NO;
+        self.queue = dispatch_queue_create([[NSString stringWithFormat:@"CLGCDTimer.%p", self] cStringUsingEncoding:NSASCIIStringEncoding], DISPATCH_QUEUE_SERIAL);
+        self.timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.queue);
+        dispatch_set_target_queue(self.queue, queue);
     }
     return self;
 }
-
-- (instancetype)initDispatchTimerWithTimeInterval:(double)interval
-                                        delaySecs:(float)delaySecs
-                                            queue:(dispatch_queue_t)queue
-                                          repeats:(BOOL)repeats
-                                           action:(void(^)(NSInteger actionTimes))action{
-    if (self = [super init]) {
-        self.timeInterval = interval;
-        self.delaySecs    = delaySecs;
-        self.repeat       = repeats;
-        self.actionBlock  = action;
-        self.timerName    = nil;
-        self.isRuning     = NO;
-        self.serialQueue           = dispatch_queue_create([[NSString stringWithFormat:@"CLGCDTimer.%p", self] cStringUsingEncoding:NSASCIIStringEncoding], DISPATCH_QUEUE_SERIAL);
-        self.timer_t               = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, self.serialQueue);
-        dispatch_set_target_queue(self.serialQueue, queue);
+- (void)replaceOldAction:(void(^ _Nonnull)(NSInteger actionTimes))action {
+    if (action) {
+        self.action = action;
     }
-    return self;
-}
-- (void)replaceOldAction:(void(^)(NSInteger actionTimes))action {
-    self.actionBlock = action;
 }
 /**开始定时器*/
-- (void)startTimer {
-    dispatch_source_set_timer(self.timer_t, dispatch_time(DISPATCH_TIME_NOW, (NSInteger)(self.delaySecs * NSEC_PER_SEC)),(NSInteger)(self.timeInterval * NSEC_PER_SEC), 0 * NSEC_PER_SEC);
-    dispatch_source_set_event_handler(self.timer_t, ^{
-        if (self.actionBlock) {
-            self.actionBlock(self.actionTimes);
-            self.actionTimes ++;
+- (void)start {
+    dispatch_source_set_timer(self.timer, dispatch_time(DISPATCH_TIME_NOW, (NSInteger)(self.delaySecs * NSEC_PER_SEC)),(NSInteger)(self.interval * NSEC_PER_SEC), 0 * NSEC_PER_SEC);
+    __weak __typeof(self) weakSelf = self;
+    dispatch_source_set_event_handler(self.timer, ^{
+        __typeof(&*weakSelf) strongSelf = weakSelf;
+        strongSelf.actionTimes ++;
+        if (strongSelf.action) {
+            strongSelf.action(strongSelf.actionTimes);
         }
-        if (!self.repeat) {
-            [self cancelTimer];
+        if (!strongSelf.repeat) {
+            [strongSelf cancel];
         }
     });
-    [self resumeTimer];
+    [self resume];
 }
 /**执行一次定时器响应*/
-- (void)responseOnceTimer {
-    self.isRuning    = YES;
-    if (self.actionBlock) {
-        self.actionBlock(self.actionTimes);
-        self.actionTimes ++;
+- (void)responseOnce {
+    self.actionTimes ++;
+    self.isRuning = YES;
+    if (self.action) {
+        self.action(self.actionTimes);
     }
     self.isRuning = NO;
 }
 /**取消定时器*/
-- (void)cancelTimer {
+- (void)cancel {
     if (!self.isRuning) {
-        [self resumeTimer];
+        [self resume];
     }
-    dispatch_source_cancel(self.timer_t);
+    dispatch_source_cancel(self.timer);
 }
 /**暂停定时器*/
-- (void)suspendTimer {
+- (void)suspend {
     if (self.isRuning) {
-        dispatch_suspend(self.timer_t);
+        dispatch_suspend(self.timer);
         self.isRuning = NO;
     }
 }
 /**恢复定时器*/
-- (void)resumeTimer {
+- (void)resume {
     if (!self.isRuning) {
-        dispatch_resume(self.timer_t);
+        dispatch_resume(self.timer);
         self.isRuning = YES;
     }
 }
+-(void)dealloc {
+    [self cancel];
+}
+
 @end
 
 @interface CLGCDTimerManager ()
@@ -125,7 +130,6 @@
 @property (nonatomic, strong) NSMutableDictionary *timerObjectCache;
 /**信号*/
 @property (nonatomic, strong) dispatch_semaphore_t semaphore;
-
 
 @end
 
@@ -152,7 +156,8 @@ static CLGCDTimerManager *_manager = nil;
     dispatch_once(&onceToken, ^{
         _manager = [super init];
         self.timerObjectCache = [NSMutableDictionary dictionary];
-        self.semaphore = dispatch_semaphore_create(1);
+        self.semaphore = dispatch_semaphore_create(0);
+        dispatch_semaphore_signal(self.semaphore);
     });
     return _manager;
 }
@@ -164,109 +169,87 @@ static CLGCDTimerManager *_manager = nil;
 - (id)mutableCopyWithZone:(NSZone __unused*)zone {
     return _manager;
 }
-
-#pragma mark - 创建定时器
-- (void)scheduledDispatchTimerWithName:(NSString *)timerName
-                          timeInterval:(NSTimeInterval)interval
-                             delaySecs:(float)delaySecs
-                                 queue:(dispatch_queue_t)queue
-                               repeats:(BOOL)repeats
-                                action:(void(^)(NSInteger actionTimes))action {
-    NSParameterAssert(timerName);
-    __strong NSString *string = timerName;
+//MARK:JmoVxia---创建定时器
++ (void)scheduledTimerWithName:( NSString * _Nonnull)name
+                      interval:(NSTimeInterval)interval
+                     delaySecs:(NSTimeInterval)delaySecs
+                         queue:(dispatch_queue_t _Nullable)queue
+                       repeats:(BOOL)repeats
+                        action:(void(^ _Nullable)(NSInteger actionTimes))action {
+    __strong NSString *string = name;
     CLGCDTimer *GCDTimer = [self timer:string];
     if (GCDTimer) {
         return;
     }
-    if (queue == nil) {
-        queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    }
-    GCDTimer = [[CLGCDTimer alloc] initDispatchTimerWithName:string
-                                                timeInterval:interval
-                                                   delaySecs:delaySecs
-                                                       queue:queue
-                                                     repeats:repeats
-                                                      action:action];
+    GCDTimer = [[CLGCDTimer alloc] initWithName:string
+                                       interval:interval
+                                      delaySecs:delaySecs
+                                          queue:queue
+                                        repeats:repeats
+                                         action:action];
     [self setTimer:GCDTimer name:string];
 }
-#pragma mark - 开始定时器
-- (void)startTimer:(NSString *)timerName {
-    __strong NSString *string = timerName;
+//MARK:JmoVxia---开始定时器
++ (void)start:(NSString *_Nonnull)name {
+    __strong NSString *string = name;
     CLGCDTimer *GCDTimer = [self timer:string];
-    if (!GCDTimer.isRuning && GCDTimer) {
-        NSParameterAssert(string);
-        dispatch_source_t timer_t = GCDTimer.timer_t;
-        dispatch_source_set_timer(timer_t, dispatch_time(DISPATCH_TIME_NOW, (NSInteger)(GCDTimer.delaySecs * NSEC_PER_SEC)),(NSInteger)(GCDTimer.timeInterval * NSEC_PER_SEC), 0 * NSEC_PER_SEC);
-        dispatch_source_set_event_handler(timer_t, ^{
-            if (GCDTimer.actionBlock) {
-                GCDTimer.actionBlock(GCDTimer.actionTimes);
-                GCDTimer.actionTimes ++;
-            }
-            if (!GCDTimer.repeat) {
-                [self cancelTimerWithName:string];
-            }
-        });
-        [self resumeTimer:string];
-    }
-}
-#pragma mark - 执行一次定时器响应
-- (void)responseOnceTimer:(NSString *)timerName {
-    __strong NSString *string = timerName;
-    CLGCDTimer *GCDTimer = [self timer:string];
-    GCDTimer.isRuning    = YES;
-    if (GCDTimer.actionBlock) {
-        GCDTimer.actionBlock(GCDTimer.actionTimes);
-        GCDTimer.actionTimes ++;
-    }
-    GCDTimer.isRuning = NO;
-}
-#pragma mark - 取消定时器
-- (void)cancelTimerWithName:(NSString *)timerName {
-    __strong NSString *string = timerName;
-    CLGCDTimer *GCDTimer = [self timer:string];
-    if (!GCDTimer.isRuning && GCDTimer) {
-        [self resumeTimer:string];
-    }
     if (GCDTimer) {
-        dispatch_source_cancel(GCDTimer.timer_t);
-        [self.timerObjectCache removeObjectForKey:string];
+        [GCDTimer start];
     }
 }
-#pragma mark - 暂停定时器
-- (void)suspendTimer:(NSString *)timerName {
-    __strong NSString *string = timerName;
+//MARK:JmoVxia---执行一次定时器响应
++ (void)responseOnce:(NSString *_Nonnull)name {
+    __strong NSString *string = name;
     CLGCDTimer *GCDTimer = [self timer:string];
-    if (GCDTimer.isRuning && GCDTimer) {
-        dispatch_suspend(GCDTimer.timer_t);
-        GCDTimer.isRuning = NO;
+    if (GCDTimer) {
+        [GCDTimer responseOnce];
     }
 }
-#pragma mark - 恢复定时器
-- (void)resumeTimer:(NSString *)timerName {
-    __strong NSString *string = timerName;
+//MARK:JmoVxia---取消定时器
++ (void)cancel:(NSString *_Nonnull)name {
+    __strong NSString *string = name;
     CLGCDTimer *GCDTimer = [self timer:string];
-    if (!GCDTimer.isRuning && GCDTimer) {
-        dispatch_resume(GCDTimer.timer_t);
-        GCDTimer.isRuning = YES;
+    if (GCDTimer) {
+        [GCDTimer cancel];
+        [self removeTimer:name];
+    }
+}
+//MARK:JmoVxia---暂停定时器
++ (void)suspend:(NSString *_Nonnull)name {
+    __strong NSString *string = name;
+    CLGCDTimer *GCDTimer = [self timer:string];
+    if (GCDTimer) {
+        [GCDTimer suspend];
+    }
+}
+//MARK:JmoVxia---恢复定时器
++ (void)resume:(NSString *_Nonnull)name {
+    __strong NSString *string = name;
+    CLGCDTimer *GCDTimer = [self timer:string];
+    if (GCDTimer) {
+        [GCDTimer resume];
     }
 }
 //MARK:JmoVxia---获取定时器
-- (CLGCDTimer *)timer:(NSString *)timerName {
-    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
-    __strong NSString *string = timerName;
-    CLGCDTimer *GCDTimer = [self.timerObjectCache objectForKey:string];
-    dispatch_semaphore_signal(self.semaphore);
++ (CLGCDTimer *_Nullable)timer:(NSString *_Nonnull)name {
+    dispatch_semaphore_wait([CLGCDTimerManager sharedManager].semaphore, DISPATCH_TIME_FOREVER);
+    __strong NSString *string = name;
+    CLGCDTimer *GCDTimer = [[CLGCDTimerManager sharedManager].timerObjectCache objectForKey:string];
+    dispatch_semaphore_signal([CLGCDTimerManager sharedManager].semaphore);
     return GCDTimer;
 }
 //MARK:JmoVxia---储存定时器
-- (void)setTimer:(CLGCDTimer *)timer name:(NSString *)name {
-    dispatch_semaphore_wait(self.semaphore, DISPATCH_TIME_FOREVER);
-    [self.timerObjectCache setObject:timer forKey:name];
-    dispatch_semaphore_signal(self.semaphore);
++ (void)setTimer:(CLGCDTimer *_Nonnull)timer name:(NSString *_Nonnull)name {
+    dispatch_semaphore_wait([CLGCDTimerManager sharedManager].semaphore, DISPATCH_TIME_FOREVER);
+    [[CLGCDTimerManager sharedManager].timerObjectCache setObject:timer forKey:name];
+    dispatch_semaphore_signal([CLGCDTimerManager sharedManager].semaphore);
 }
-
-
-
+//MARK:JmoVxia---移除定时器
++ (void)removeTimer:(NSString *_Nonnull)name {
+    dispatch_semaphore_wait([CLGCDTimerManager sharedManager].semaphore, DISPATCH_TIME_FOREVER);
+    [[CLGCDTimerManager sharedManager].timerObjectCache removeObjectForKey:name];
+    dispatch_semaphore_signal([CLGCDTimerManager sharedManager].semaphore);
+}
 @end
 
 

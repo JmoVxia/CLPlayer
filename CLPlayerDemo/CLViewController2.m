@@ -65,6 +65,7 @@
     [_playerView playVideo];
 }
 -(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
     [_playerView destroyPlayer];
 }
 

@@ -103,9 +103,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 @property (nonatomic, strong) AVPlayerItem     *playerItem;
 /**遮罩*/
 @property (nonatomic, strong) CLPlayerMaskView *maskView;
-/** 用来保存快进的总时长 */
+/**用来保存快进的总时长*/
 @property (nonatomic, assign) CGFloat          sumTime;
-/** 定义一个实例变量，保存枚举值 */
+/**定义一个实例变量，保存枚举值*/
 @property (nonatomic, assign) CLPanDirection   panDirection;
 /** 是否在调节音量*/
 @property (nonatomic, assign) BOOL             isVolume;
@@ -162,7 +162,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 //MARK:JmoVxia---重置工具条时间
 -(void)resetToolBarDisappearTime{
     [self destroyToolBarTimer];
-    [self.tapTimer startTimer];
+    [self.tapTimer start];
 }
 //MARK:JmoVxia---重置顶部工具条隐藏方式
 -(void)resetTopToolBarHiddenType{
@@ -423,13 +423,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     if (self.sumTime < 0) {
         self.sumTime = 0;
     }
-    BOOL style = false;
-    if (value > 0) {
-        style = YES;
-    }
-    if (value < 0) {
-        style = NO;
-    }
     if (value == 0) {
         return;
     }
@@ -652,7 +645,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 - (void)pausePlay{
     self.maskView.playButton.selected = NO;
     [_player pause];
-    [self.sliderTimer suspendTimer];
+    [self.sliderTimer suspend];
 }
 //MARK:JmoVxia---播放
 - (void)playVideo{
@@ -662,7 +655,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         [self resetPlay];
     }else{
         [_player play];
-        [self.sliderTimer resumeTimer];
+        [self.sliderTimer resume];
     }
 }
 //MARK:JmoVxia---重新开始播放
@@ -707,7 +700,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     //重置时间
     self.maskView.currentTimeLabel.text = @"00:00";
     self.maskView.totalTimeLabel.text   = @"00:00";
-    [self.sliderTimer resumeTimer];
+    [self.sliderTimer resume];
     //销毁定时消失工具条
     [self destroyToolBarTimer];
     //重置定时消失
@@ -724,14 +717,14 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 //MARK:JmoVxia---取消定时器
 //销毁所有定时器
 - (void)destroyAllTimer{
-    [self.sliderTimer cancelTimer];
-    [self.tapTimer cancelTimer];
+    [self.sliderTimer cancel];
+    [self.tapTimer cancel];
     self.sliderTimer = nil;
     self.tapTimer    = nil;
 }
 //销毁定时消失定时器
 - (void)destroyToolBarTimer{
-    [self.tapTimer cancelTimer];
+    [self.tapTimer cancel];
     self.tapTimer = nil;
 }
 //MARK:JmoVxia---屏幕旋转通知
@@ -906,7 +899,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         UITapGestureRecognizer*tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disappearAction:)];
         [_maskView addGestureRecognizer:tap];
         //计时器，循环执行
-        [self.sliderTimer startTimer];
+        [self.sliderTimer start];
     }
     return _maskView;
 }
@@ -921,13 +914,13 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 - (CLGCDTimer *) sliderTimer {
     if (_sliderTimer == nil) {
         __weak __typeof(self) weakSelf = self;
-        _sliderTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:0.1f
-                                                                   delaySecs:0 queue:dispatch_get_main_queue()
-                                                                     repeats:YES
-                                                                      action:^(NSInteger actionTimes) {
-                                                                          __typeof(&*weakSelf) strongSelf = weakSelf;
-                                                                          [strongSelf timeStack];
-                                                                      }];
+        _sliderTimer = [[CLGCDTimer alloc] initWithInterval:0.1f
+                                                  delaySecs:0 queue:dispatch_get_main_queue()
+                                                    repeats:YES
+                                                     action:^(NSInteger actionTimes) {
+                                                         __typeof(&*weakSelf) strongSelf = weakSelf;
+                                                         [strongSelf timeStack];
+                                                     }];
     }
     return _sliderTimer;
 }
@@ -935,15 +928,14 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 - (CLGCDTimer *) tapTimer {
     if (_tapTimer == nil) {
         __weak __typeof(self) weakSelf = self;
-        _tapTimer = [[CLGCDTimer alloc] initDispatchTimerWithTimeInterval:self.config.toolBarDisappearTime
-                                                                delaySecs:self.config.toolBarDisappearTime
-                                                                    queue:dispatch_get_main_queue()
-                                                                  repeats:YES
-                                                                   action:^(NSInteger actionTimes) {
-                                                                       __typeof(&*weakSelf) strongSelf = weakSelf;
-                                                                       [strongSelf disappear];
-                                                                   }];
-        
+        _tapTimer = [[CLGCDTimer alloc] initWithInterval:self.config.toolBarDisappearTime
+                                               delaySecs:self.config.toolBarDisappearTime
+                                                   queue:dispatch_get_main_queue()
+                                                 repeats:YES
+                                                  action:^(NSInteger actionTimes) {
+                                                      __typeof(&*weakSelf) strongSelf = weakSelf;
+                                                      [strongSelf disappear];
+                                                  }];
     }
     return _tapTimer;
 }

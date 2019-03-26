@@ -339,8 +339,6 @@
 				5B1FC4BF1DC850820036C489 /* Sources */,
 				5B1FC4C01DC850820036C489 /* Frameworks */,
 				5B1FC4C11DC850820036C489 /* Resources */,
-				1EB1842FE2B3D249FB4A0592 /* [CP] Embed Pods Frameworks */,
-				7EA429C9BF9689EFB54AB4CA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -401,36 +399,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1EB1842FE2B3D249FB4A0592 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CLPlayerDemo/Pods-CLPlayerDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7EA429C9BF9689EFB54AB4CA /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CLPlayerDemo/Pods-CLPlayerDemo-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BF74B56DB434491DF9FB4379 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
