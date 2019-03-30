@@ -26,17 +26,17 @@
     _playerView = playerView;
     [self.view addSubview:_playerView];
    
-    [_playerView updateWithConfig:^(CLPlayerViewConfig *config) {
+    [_playerView updateWithConfigure:^(CLPlayerViewConfigure *configure) {
         //全屏是否隐藏状态栏，默认一直不隐藏
-        config.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
+        configure.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
         //后台返回是否继续播放
-        config.backPlay = NO;
+        configure.backPlay = NO;
         //转子颜色
-        config.strokeColor = [UIColor redColor];
+        configure.strokeColor = [UIColor redColor];
         //工具条消失时间，默认10s
-        config.toolBarDisappearTime = 8;
+        configure.toolBarDisappearTime = 8;
         //顶部工具条隐藏样式，默认不隐藏
-        config.topToolBarHiddenType = TopToolBarHiddenAlways;
+        configure.topToolBarHiddenType = TopToolBarHiddenAlways;
     }];
     
     //视频地址

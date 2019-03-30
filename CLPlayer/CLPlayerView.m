@@ -37,32 +37,33 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 
 @end
 
-@implementation CLPlayerViewConfig
+@implementation CLPlayerViewConfigure
 
 
-+ (instancetype)defaultConfig {
-    CLPlayerViewConfig *config = [[CLPlayerViewConfig alloc] init];
-    config.repeatPlay              = NO;
-    config.mute                    = NO;
-    config.isLandscape             = NO;
-    config.smallGestureControl     = NO;
-    config.autoRotate              = YES;
-    config.fullGestureControl      = YES;
-    config.backPlay                = YES;
-    config.progressBackgroundColor = [UIColor colorWithRed:0.54118
++ (instancetype)defaultConfigure {
+    CLPlayerViewConfigure *configure = [[CLPlayerViewConfigure alloc] init];
+    configure.repeatPlay              = NO;
+    configure.mute                    = NO;
+    configure.isLandscape             = NO;
+    configure.smallGestureControl     = NO;
+    configure.autoRotate              = YES;
+    configure.fullGestureControl      = YES;
+    configure.backPlay                = YES;
+    configure.progressBackgroundColor = [UIColor colorWithRed:0.54118
                                                green:0.51373
                                                 blue:0.50980
                                                alpha:1.00000];
-    config.progressPlayFinishColor = [UIColor whiteColor];
-    config.progressBufferColor     = [UIColor colorWithRed:0.84118
+    configure.progressPlayFinishColor = [UIColor whiteColor];
+    configure.progressBufferColor     = [UIColor colorWithRed:0.84118
                                                green:0.81373
                                                 blue:0.80980
                                                alpha:1.00000];
-    config.videoFillMode           = VideoFillModeResize;
-    config.topToolBarHiddenType    = TopToolBarHiddenNever;
-    config.fullStatusBarHiddenType = FullStatusBarHiddenNever;
-    config.toolBarDisappearTime    = 10;
-    return config;
+    configure.strokeColor             = [UIColor whiteColor];
+    configure.videoFillMode           = VideoFillModeResize;
+    configure.topToolBarHiddenType    = TopToolBarHiddenNever;
+    configure.fullStatusBarHiddenType = FullStatusBarHiddenNever;
+    configure.toolBarDisappearTime    = 10;
+    return configure;
 }
 
 @end
@@ -120,7 +121,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 /*点击定时器*/
 @property (nonatomic, strong) CLGCDTimer       *tapTimer;
 /*配置*/
-@property (nonatomic, strong) CLPlayerViewConfig *config;
+@property (nonatomic, strong) CLPlayerViewConfigure *configure;
 
 /**返回按钮回调*/
 @property (nonatomic, copy) void (^BackBlock) (UIButton *backButton);
@@ -132,11 +133,11 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 @implementation CLPlayerView
 
 //MARK:JmoVxia---更新配置
-- (void)updateWithConfig:(void(^)(CLPlayerViewConfig *config))configBlock {
-    if (configBlock) {
-        configBlock(self.config);
+- (void)updateWithConfigure:(void(^)(CLPlayerViewConfigure *configure))configureBlock {
+    if (configureBlock) {
+        configureBlock(self.configure);
     }
-    switch (self.config.videoFillMode){
+    switch (self.configure.videoFillMode){
         case VideoFillModeResize:
             //拉伸视频内容达到边框占满，但不按原比例拉伸
             _fillMode = AVLayerVideoGravityResize;
@@ -150,11 +151,11 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             _fillMode = AVLayerVideoGravityResizeAspectFill;
             break;
     }
-    self.maskView.progressBackgroundColor = self.config.progressBackgroundColor;
-    self.maskView.progressBufferColor     = self.config.progressBufferColor;
-    self.maskView.progressPlayFinishColor = self.config.progressPlayFinishColor;
-    self.maskView.loadingView.strokeColor = self.config.strokeColor;
-    self.player.muted                     = self.config.mute;
+    self.maskView.progressBackgroundColor = self.configure.progressBackgroundColor;
+    self.maskView.progressBufferColor     = self.configure.progressBufferColor;
+    self.maskView.progressPlayFinishColor = self.configure.progressPlayFinishColor;
+    self.maskView.loadingView.strokeColor = self.configure.strokeColor;
+    self.player.muted                     = self.configure.mute;
     [self resetToolBarDisappearTime];
     [self resetTopToolBarHiddenType];
 }
@@ -166,7 +167,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 //MARK:JmoVxia---重置顶部工具条隐藏方式
 -(void)resetTopToolBarHiddenType{
-    switch (self.config.topToolBarHiddenType) {
+    switch (self.configure.topToolBarHiddenType) {
         case TopToolBarHiddenNever:
             //不隐藏
             self.maskView.topToolBar.hidden = NO;
@@ -309,7 +310,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             [panRecognizer setDelaysTouchesEnded:YES];
             [panRecognizer setCancelsTouchesInView:YES];
             [self.maskView addGestureRecognizer:panRecognizer];
-            self.player.muted = self.config.mute;
+            self.player.muted = self.configure.mute;
         }
         else if (self.player.currentItem.status == AVPlayerItemStatusFailed) {
             self.state = CLPlayerStateFailed;
@@ -347,7 +348,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                     self.maskView.topToolBar.alpha    = 1.0;
                     self.maskView.bottomToolBar.alpha = 1.0;
                 }];
-                if (self.config.fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
+                if (self.configure.fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
                     [self setStatusBarHidden:NO];
                 }
                 // 取消隐藏
@@ -442,7 +443,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 //MARK:JmoVxia---手势代理
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
-    if ((!self.config.smallGestureControl && !_isFullScreen) || (!self.config.fullGestureControl && _isFullScreen)) {
+    if ((!self.configure.smallGestureControl && !_isFullScreen) || (!self.configure.fullGestureControl && _isFullScreen)) {
         return NO;
     }
     if ([touch.view isDescendantOfView:self.maskView.bottomToolBar]) {
@@ -595,7 +596,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             self.maskView.bottomToolBar.alpha = 1.0;
         }];
     }
-    if (self.config.fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
+    if (self.configure.fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
         [self setStatusBarHidden:!_isDisappear];
     }
     _isDisappear = !_isDisappear;
@@ -606,7 +607,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         self.maskView.topToolBar.alpha    = 0;
         self.maskView.bottomToolBar.alpha = 0;
     }];
-    if (self.config.fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
+    if (self.configure.fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
         [self setStatusBarHidden:YES];
     }
     _isDisappear = YES;
@@ -614,7 +615,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 //MARK:JmoVxia---播放完成
 - (void)moviePlayDidEnd:(id)sender{
     _isEnd = YES;
-    if (!self.config.repeatPlay){
+    if (!self.configure.repeatPlay){
         [self pausePlay];
     }else{
         [self resetPlay];
@@ -729,11 +730,11 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 //MARK:JmoVxia---屏幕旋转通知
 - (void)orientChange:(NSNotification *)notification{
-    if (self.config.autoRotate) {
+    if (self.configure.autoRotate) {
         UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
         if (orientation == UIDeviceOrientationLandscapeLeft){
             if (!_isFullScreen){
-                if (self.config.isLandscape) {
+                if (self.configure.isLandscape) {
                     //播放器所在控制器页面支持旋转情况下，和正常情况是相反的
                     [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
                 }else{
@@ -743,7 +744,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         }
         else if (orientation == UIDeviceOrientationLandscapeRight){
             if (!_isFullScreen){
-                if (self.config.isLandscape) {
+                if (self.configure.isLandscape) {
                     [self fullScreenWithDirection:UIInterfaceOrientationLandscapeLeft];
                 }else{
                     [self fullScreenWithDirection:UIInterfaceOrientationLandscapeRight];
@@ -768,7 +769,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     //添加到Window上
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
-    if (self.config.isLandscape){
+    if (self.configure.isLandscape){
         //手动点击需要旋转方向
         if (_isUserTapMaxButton) {
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
@@ -803,7 +804,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 //MARK:JmoVxia---根据状态隐藏状态栏
 - (void)hiddenStatusBarWithFullStatusBarHiddenType{
-    switch (self.config.fullStatusBarHiddenType) {
+    switch (self.configure.fullStatusBarHiddenType) {
         case FullStatusBarHiddenNever:
             [self setStatusBarHidden:NO];
             break;
@@ -821,7 +822,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     _isUserTapMaxButton       = NO;
     [self resetTopToolBarHiddenType];
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:YES];
-    if (self.config.isLandscape) {
+    if (self.configure.isLandscape) {
         //还原为竖屏
         [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
         [self setStatusBarHidden:_statusBarHiddenState];
@@ -848,7 +849,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 }
 - (void)appDidEnterPlayground:(NSNotification *)note{
     //继续播放
-    if (_isUserPlay && self.config.backPlay) {
+    if (_isUserPlay && self.configure.backPlay) {
         [self playVideo];
     }
 }
@@ -891,9 +892,9 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 - (CLPlayerMaskView *) maskView {
     if (_maskView == nil) {
         _maskView                         = [[CLPlayerMaskView alloc] init];
-        _maskView.progressBackgroundColor = self.config.progressBackgroundColor;
-        _maskView.progressBufferColor     = self.config.progressBufferColor;
-        _maskView.progressPlayFinishColor = self.config.progressPlayFinishColor;
+        _maskView.progressBackgroundColor = self.configure.progressBackgroundColor;
+        _maskView.progressBufferColor     = self.configure.progressBufferColor;
+        _maskView.progressPlayFinishColor = self.configure.progressPlayFinishColor;
         _maskView.delegate                = self;
         //创建并添加点击手势（点击事件、添加手势）
         UITapGestureRecognizer*tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disappearAction:)];
@@ -928,8 +929,8 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 - (CLGCDTimer *) tapTimer {
     if (_tapTimer == nil) {
         __weak __typeof(self) weakSelf = self;
-        _tapTimer = [[CLGCDTimer alloc] initWithInterval:self.config.toolBarDisappearTime
-                                               delaySecs:self.config.toolBarDisappearTime
+        _tapTimer = [[CLGCDTimer alloc] initWithInterval:self.configure.toolBarDisappearTime
+                                               delaySecs:self.configure.toolBarDisappearTime
                                                    queue:dispatch_get_main_queue()
                                                  repeats:YES
                                                   action:^(NSInteger actionTimes) {
@@ -947,11 +948,11 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     return _statusBar;
 }
 /**配置*/
-- (CLPlayerViewConfig *) config{
-    if (_config == nil){
-        _config = [CLPlayerViewConfig defaultConfig];
+- (CLPlayerViewConfigure *) configure{
+    if (_configure == nil){
+        _configure = [CLPlayerViewConfigure defaultConfigure];
     }
-    return _config;
+    return _configure;
 }
 @end
 

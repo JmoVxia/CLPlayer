@@ -27,11 +27,11 @@
     
     _playerView = playerView;
     [self.view addSubview:_playerView];
-    [_playerView updateWithConfig:^(CLPlayerViewConfig *config) {
+    [_playerView updateWithConfigure:^(CLPlayerViewConfigure *configure) {
         //全屏是否隐藏状态栏，默认一直不隐藏
-        config.fullStatusBarHiddenType = FullStatusBarHiddenAlways;
+        configure.fullStatusBarHiddenType = FullStatusBarHiddenAlways;
         //顶部工具条隐藏样式，默认不隐藏
-        config.topToolBarHiddenType = TopToolBarHiddenAlways;
+        configure.topToolBarHiddenType = TopToolBarHiddenAlways;
     }];
     //视频地址
     NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];

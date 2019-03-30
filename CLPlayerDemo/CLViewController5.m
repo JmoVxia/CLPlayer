@@ -24,17 +24,17 @@
     CLPlayerView *playerView = [[CLPlayerView alloc] initWithFrame:CGRectMake(0, 90, self.view.CLwidth, 300)];
     _playerView = playerView;
     [self.view addSubview:_playerView];
-    [_playerView updateWithConfig:^(CLPlayerViewConfig *config) {
+    [_playerView updateWithConfigure:^(CLPlayerViewConfigure *configure) {
         //当前控制器是否支持旋转，当前页面支持旋转的时候需要设置，告知播放器
-        config.isLandscape = YES;
+        configure.isLandscape = YES;
         //全屏是否隐藏状态栏，默认一直不隐藏
-        config.fullStatusBarHiddenType = FullStatusBarHiddenNever;
+        configure.fullStatusBarHiddenType = FullStatusBarHiddenNever;
         //顶部工具条隐藏样式，默认不隐藏
-        config.topToolBarHiddenType = TopToolBarHiddenNever;
+        configure.topToolBarHiddenType = TopToolBarHiddenNever;
         //全屏手势控制，默认Yes
-        config.fullGestureControl = NO;
+        configure.fullGestureControl = NO;
         //小屏手势控制，默认NO
-        config.smallGestureControl = YES;
+        configure.smallGestureControl = YES;
     }];
     //视频地址
     NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];

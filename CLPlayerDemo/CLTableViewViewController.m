@@ -133,9 +133,9 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
     //视频地址
     _playerView.url = [NSURL URLWithString:cell.model.videoUrl];
 
-    [_playerView updateWithConfig:^(CLPlayerViewConfig *config) {
-        config.topToolBarHiddenType = TopToolBarHiddenSmall;
-        config.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
+    [_playerView updateWithConfigure:^(CLPlayerViewConfigure *configure) {
+        configure.topToolBarHiddenType = TopToolBarHiddenSmall;
+        configure.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
 //        config.smallGestureControl = YES;
     }];
     //播放

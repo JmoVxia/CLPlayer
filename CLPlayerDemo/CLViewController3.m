@@ -26,15 +26,15 @@
     _playerView = playerView;
     [self.view addSubview:_playerView];
     
-    [_playerView updateWithConfig:^(CLPlayerViewConfig *config) {
+    [_playerView updateWithConfigure:^(CLPlayerViewConfigure *configure) {
         //重复播放，默认不播放
-        config.repeatPlay = YES;
+        configure.repeatPlay = YES;
         //当前控制器是否支持旋转，当前页面支持旋转的时候需要设置，告知播放器
-        config.isLandscape = YES;
+        configure.isLandscape = YES;
         //全屏是否隐藏状态栏，默认一直不隐藏
-        config.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
+        configure.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
         //顶部工具条隐藏样式，默认不隐藏
-        config.topToolBarHiddenType = TopToolBarHiddenSmall;
+        configure.topToolBarHiddenType = TopToolBarHiddenSmall;
     }];
     //视频地址
     NSString *path = [[NSBundle mainBundle] pathForResource:@"video" ofType:@"mp4"];

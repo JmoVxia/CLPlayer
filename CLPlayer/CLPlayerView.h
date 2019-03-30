@@ -27,7 +27,7 @@ typedef void(^BackButtonBlock)(UIButton *button);
 typedef void(^EndBolck)(void);
 
 
-@interface CLPlayerViewConfig : NSObject
+@interface CLPlayerViewConfigure : NSObject
 
 /**后台返回是否自动播放，默认Yes,会跟随用户，如果是播放状态进入后台，返回会继续播放*/
 @property (nonatomic, assign) BOOL                    backPlay;
@@ -65,7 +65,7 @@ typedef void(^EndBolck)(void);
  默认配置
  @return 配置
  */
-+ (instancetype)defaultConfig;
++ (instancetype)defaultConfigure;
 
 @end
 
@@ -77,7 +77,7 @@ typedef void(^EndBolck)(void);
 @property (nonatomic, strong) NSURL                   *url;
 
 /**更新播放器基本配置*/
-- (void)updateWithConfig:(void(^)(CLPlayerViewConfig *config))configBlock;
+- (void)updateWithConfigure:(void(^)(CLPlayerViewConfigure *configure))configureBlock;
 
 /**播放*/
 - (void)playVideo;
