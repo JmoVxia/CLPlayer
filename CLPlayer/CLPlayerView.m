@@ -11,7 +11,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "CLPlayerMaskView.h"
 #import "CLGCDTimerManager.h"
-#import "Masonry.h"
+#import <Masonry/Masonry.h>
 // 播放器的几种状态
 typedef NS_ENUM(NSInteger, CLPlayerState) {
     CLPlayerStateFailed,     ///< 播放失败
@@ -767,7 +767,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     _isFullScreen             = YES;
     [self resetTopToolBarHiddenType];
     //添加到Window上
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    UIWindow *keyWindow = [UIApplication sharedApplication].delegate.window;
     [keyWindow addSubview:self];
     if (self.configure.isLandscape){
         //手动点击需要旋转方向
@@ -775,7 +775,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         }
         [self hiddenStatusBarWithFullStatusBarHiddenType];
-        self.frame                            = CGRectMake(0, 0, MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
+        self.frame = CGRectMake(0, 0, MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
     }else{
         //播放器所在控制器不支持旋转，采用旋转view的方式实现
         [self setStatusBarHidden:YES];
@@ -795,7 +795,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                 [self hiddenStatusBarWithFullStatusBarHiddenType];
             }];
         }
-        self.frame                            = CGRectMake(0, 0, MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
+        self.frame = CGRectMake(0, 0, MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
     }
     self.maskView.fullButton.selected     = YES;
     self.statusBar.userInteractionEnabled = NO;

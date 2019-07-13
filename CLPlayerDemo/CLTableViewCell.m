@@ -7,8 +7,8 @@
 //
 
 #import "CLTableViewCell.h"
-#import "UIImageView+WebCache.h"
 #import "UIView+CLSetRect.h"
+#import <SDWebImage/SDWebImage.h>
 
 #define CellHeight   300
 #define ImageViewHeight 600
@@ -56,15 +56,14 @@
 -(void)setModel:(CLModel *)model{
     _model = model;
     __block UIImage *placeholderImage = [UIImage imageNamed:@"placeholder"];
-    [[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:_model.pictureUrl] completion:^(BOOL isInCache) {
+    __weak __typeof(self) weakSelf = self;
+    [[SDImageCache sharedImageCache] diskImageExistsWithKey:_model.pictureUrl completion:^(BOOL isInCache) {
+        __typeof(&*weakSelf) strongSelf = weakSelf;
         if (isInCache) {
             //本地存在图片,替换占位图片
             placeholderImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:model.pictureUrl];
         }
-        //主线程
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self->_pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl] placeholderImage:placeholderImage];
-        });
+        [strongSelf.pictureView sd_setImageWithURL:[NSURL URLWithString:model.pictureUrl] placeholderImage:placeholderImage];
     }];
 }
 - (void)playAction:(UIButton *)button{

@@ -11,8 +11,9 @@
 #import "CLTableViewCell.h"
 #import "CLModel.h"
 #import "UIView+CLSetRect.h"
-#import "UIImageView+WebCache.h"
-#import "Masonry.h"
+#import <SDWebImage/SDWebImage.h>
+
+#import <Masonry/Masonry.h>
 
 static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
 
@@ -88,27 +89,25 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
     //Cell开始出现的时候修正偏移量，让图片可以全部显示
     [myCell cellOffset];
     //第一次加载动画
-    [[SDWebImageManager sharedManager] cachedImageExistsForURL:[NSURL URLWithString:myCell.model.pictureUrl] completion:^(BOOL isInCache) {
+    [[SDImageCache sharedImageCache] diskImageExistsWithKey:myCell.model.pictureUrl completion:^(BOOL isInCache) {
         if (!isInCache) {
             //主线程
-            dispatch_async(dispatch_get_main_queue(), ^{
-                CATransform3D rotation;//3D旋转
-                rotation = CATransform3DMakeTranslation(0 ,50 ,20);
-                //逆时针旋转
-                rotation = CATransform3DScale(rotation, 0.8, 0.9, 1);
-                rotation.m34 = 1.0/ -600;
-                myCell.layer.shadowColor = [[UIColor blackColor]CGColor];
-                myCell.layer.shadowOffset = CGSizeMake(10, 10);
-                myCell.alpha = 0;
-                myCell.layer.transform = rotation;
-                [UIView beginAnimations:@"rotation" context:NULL];
-                //旋转时间
-                [UIView setAnimationDuration:0.6];
-                myCell.layer.transform = CATransform3DIdentity;
-                myCell.alpha = 1;
-                myCell.layer.shadowOffset = CGSizeMake(0, 0);
-                [UIView commitAnimations];
-            });
+            CATransform3D rotation;//3D旋转
+            rotation = CATransform3DMakeTranslation(0 ,50 ,20);
+            //逆时针旋转
+            rotation = CATransform3DScale(rotation, 0.8, 0.9, 1);
+            rotation.m34 = 1.0/ -600;
+            myCell.layer.shadowColor = [[UIColor blackColor]CGColor];
+            myCell.layer.shadowOffset = CGSizeMake(10, 10);
+            myCell.alpha = 0;
+            myCell.layer.transform = rotation;
+            [UIView beginAnimations:@"rotation" context:NULL];
+            //旋转时间
+            [UIView setAnimationDuration:0.6];
+            myCell.layer.transform = CATransform3DIdentity;
+            myCell.alpha = 1;
+            myCell.layer.shadowOffset = CGSizeMake(0, 0);
+            [UIView commitAnimations];
         }
     }];
 }
