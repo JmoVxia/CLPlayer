@@ -134,7 +134,6 @@ static NSString *CLTableViewCellIdentifier = @"CLTableViewCellIdentifier";
 
     [_playerView updateWithConfigure:^(CLPlayerViewConfigure *configure) {
         configure.topToolBarHiddenType = TopToolBarHiddenSmall;
-        configure.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
 //        config.smallGestureControl = YES;
     }];
     //播放

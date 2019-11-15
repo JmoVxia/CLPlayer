@@ -18,14 +18,8 @@ typedef NS_ENUM(NSUInteger, TopToolBarHiddenType) {
     TopToolBarHiddenAlways,    ///<小屏和全屏都隐藏
     TopToolBarHiddenSmall,     ///<小屏隐藏，全屏不隐藏
 };
-typedef NS_ENUM(NSUInteger, FullStatusBarHiddenType) {
-    FullStatusBarHiddenNever = 0,     ///<一直不隐藏
-    FullStatusBarHiddenAlways,        ///<一直隐藏
-    FullStatusBarHiddenFollowToolBar, ///<跟随工具条，工具条隐藏就隐藏，工具条不隐藏就不隐藏
-};
 typedef void(^BackButtonBlock)(UIButton *button);
 typedef void(^EndBolck)(void);
-
 
 @interface CLPlayerViewConfigure : NSObject
 
@@ -49,8 +43,6 @@ typedef void(^EndBolck)(void);
 @property (nonatomic, assign) VideoFillMode           videoFillMode;
 /**顶部工具条隐藏方式，默认不隐藏*/
 @property (nonatomic, assign) TopToolBarHiddenType    topToolBarHiddenType;
-/**全屏状态栏隐藏方式，默认不隐藏*/
-@property (nonatomic, assign) FullStatusBarHiddenType fullStatusBarHiddenType;
 
 /**进度条背景颜色*/
 @property (nonatomic, strong) UIColor                 *progressBackgroundColor;

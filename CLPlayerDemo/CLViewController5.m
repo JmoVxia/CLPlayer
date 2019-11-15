@@ -17,6 +17,15 @@
 
 @implementation CLViewController5
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -27,8 +36,6 @@
     [_playerView updateWithConfigure:^(CLPlayerViewConfigure *configure) {
         //当前控制器是否支持旋转，当前页面支持旋转的时候需要设置，告知播放器
         configure.isLandscape = YES;
-        //全屏是否隐藏状态栏，默认一直不隐藏
-        configure.fullStatusBarHiddenType = FullStatusBarHiddenNever;
         //顶部工具条隐藏样式，默认不隐藏
         configure.topToolBarHiddenType = TopToolBarHiddenNever;
         //全屏手势控制，默认Yes

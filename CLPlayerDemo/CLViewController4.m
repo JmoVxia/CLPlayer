@@ -18,6 +18,15 @@
 
 @implementation CLViewController4
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.modalPresentationStyle = UIModalPresentationFullScreen;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -28,8 +37,6 @@
     _playerView = playerView;
     [self.view addSubview:_playerView];
     [_playerView updateWithConfigure:^(CLPlayerViewConfigure *configure) {
-        //全屏是否隐藏状态栏，默认一直不隐藏
-        configure.fullStatusBarHiddenType = FullStatusBarHiddenAlways;
         //顶部工具条隐藏样式，默认不隐藏
         configure.topToolBarHiddenType = TopToolBarHiddenAlways;
     }];

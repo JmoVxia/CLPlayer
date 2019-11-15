@@ -61,7 +61,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     configure.strokeColor             = [UIColor whiteColor];
     configure.videoFillMode           = VideoFillModeResize;
     configure.topToolBarHiddenType    = TopToolBarHiddenNever;
-    configure.fullStatusBarHiddenType = FullStatusBarHiddenNever;
     configure.toolBarDisappearTime    = 10;
     return configure;
 }
@@ -80,8 +79,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 @property (nonatomic, strong) UIView           *fatherView;
 /**视频拉伸模式*/
 @property (nonatomic, copy) NSString           *fillMode;
-/**状态栏*/
-@property (nonatomic, strong) UIView           *statusBar;
 /**是否是全屏*/
 @property (nonatomic, assign) BOOL             isFullScreen;
 /**工具条隐藏标记*/
@@ -252,11 +249,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         }
     }
 }
-//MARK:JmoVxia---隐藏或者显示状态栏方法
-- (void)setStatusBarHidden:(BOOL)hidden{
-    //设置是否隐藏
-    self.statusBar.hidden = hidden;
-}
 //MARK:JmoVxia---初始化
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]){
@@ -266,7 +258,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         _isUserTapMaxButton      = NO;
         _isEnd                   = NO;
         _isUserPlay              = YES;
-        _statusBarHiddenState    = self.statusBar.isHidden;
         //开启
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         //注册屏幕旋转通知
@@ -348,9 +339,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                     self.maskView.topToolBar.alpha    = 1.0;
                     self.maskView.bottomToolBar.alpha = 1.0;
                 }];
-                if (self.configure.fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
-                    [self setStatusBarHidden:NO];
-                }
                 // 取消隐藏
                 self.panDirection = CLPanDirectionHorizontalMoved;
                 // 给sumTime初值
@@ -596,9 +584,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
             self.maskView.bottomToolBar.alpha = 1.0;
         }];
     }
-    if (self.configure.fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
-        [self setStatusBarHidden:!_isDisappear];
-    }
     _isDisappear = !_isDisappear;
 }
 //MARK:JmoVxia---定时消失
@@ -607,9 +592,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         self.maskView.topToolBar.alpha    = 0;
         self.maskView.bottomToolBar.alpha = 0;
     }];
-    if (self.configure.fullStatusBarHiddenType == FullStatusBarHiddenFollowToolBar && _isFullScreen) {
-        [self setStatusBarHidden:YES];
-    }
     _isDisappear = YES;
 }
 //MARK:JmoVxia---播放完成
@@ -774,47 +756,26 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         if (_isUserTapMaxButton) {
             [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationLandscapeRight] forKey:@"orientation"];
         }
-        [self hiddenStatusBarWithFullStatusBarHiddenType];
         self.frame = CGRectMake(0, 0, MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
     }else{
         //播放器所在控制器不支持旋转，采用旋转view的方式实现
-        [self setStatusBarHidden:YES];
         CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
         if (direction == UIInterfaceOrientationLandscapeLeft){
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:YES];
             [UIView animateWithDuration:duration animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
-            }completion:^(BOOL finished) {
-                [self hiddenStatusBarWithFullStatusBarHiddenType];
             }];
         }else if (direction == UIInterfaceOrientationLandscapeRight) {
             [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
             [UIView animateWithDuration:duration animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
-            }completion:^(BOOL finished) {
-                [self hiddenStatusBarWithFullStatusBarHiddenType];
             }];
         }
         self.frame = CGRectMake(0, 0, MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
     }
     self.maskView.fullButton.selected     = YES;
-    self.statusBar.userInteractionEnabled = NO;
     [self setNeedsLayout];
     [self layoutIfNeeded];
-}
-//MARK:JmoVxia---根据状态隐藏状态栏
-- (void)hiddenStatusBarWithFullStatusBarHiddenType{
-    switch (self.configure.fullStatusBarHiddenType) {
-        case FullStatusBarHiddenNever:
-            [self setStatusBarHidden:NO];
-            break;
-        case FullStatusBarHiddenAlways:
-            [self setStatusBarHidden:YES];
-            break;
-        case FullStatusBarHiddenFollowToolBar:
-            [self setStatusBarHidden:_isDisappear];
-            break;
-    }
 }
 //MARK:JmoVxia---原始大小
 - (void)originalscreen{
@@ -825,22 +786,17 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     if (self.configure.isLandscape) {
         //还原为竖屏
         [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
-        [self setStatusBarHidden:_statusBarHiddenState];
     }else{
         //还原
-        [self setStatusBarHidden:YES];
         CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
         [UIView animateWithDuration:duration animations:^{
             self.transform = CGAffineTransformMakeRotation(0);
-        }completion:^(BOOL finished) {
-            [self setStatusBarHidden:self->_statusBarHiddenState];
         }];
     }
     self.frame = _customFarme;
     //还原到原有父类上
     [_fatherView addSubview:self];
     self.maskView.fullButton.selected     = NO;
-    self.statusBar.userInteractionEnabled = YES;
 }
 //MARK:JmoVxia---APP活动通知
 - (void)appDidEnterBackground:(NSNotification *)note{
@@ -881,8 +837,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
     //重置状态条
     [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:YES];
-    //恢复默认状态栏显示与否
-    [self setStatusBarHidden:_statusBarHiddenState];
 #ifdef DEBUG
     NSLog(@"播放器被销毁了");
 #endif
@@ -939,13 +893,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                                                   }];
     }
     return _tapTimer;
-}
-/**状态栏*/
-- (UIView *) statusBar{
-    if (_statusBar == nil){
-        _statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    }
-    return _statusBar;
 }
 /**配置*/
 - (CLPlayerViewConfigure *) configure{

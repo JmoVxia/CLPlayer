@@ -27,8 +27,6 @@
     [self.view addSubview:_playerView];
    
     [_playerView updateWithConfigure:^(CLPlayerViewConfigure *configure) {
-        //全屏是否隐藏状态栏，默认一直不隐藏
-        configure.fullStatusBarHiddenType = FullStatusBarHiddenFollowToolBar;
         //后台返回是否继续播放
         configure.backPlay = NO;
         //转子颜色
