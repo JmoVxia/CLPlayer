@@ -50,7 +50,7 @@
         make.height.mas_equalTo(ToolBarHeight);
     }];
     //底部工具条
-    [self .bottomToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.bottomToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.bottom.mas_equalTo(self);
         make.height.mas_equalTo(ToolBarHeight);
     }];
@@ -61,21 +61,36 @@
     }];
     //返回按钮
     [self.backButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(Padding);
+        make.top.mas_equalTo(Padding);
+        if (@available(iOS 11.0, *)) {
+            make.left.mas_equalTo(self.mas_safeAreaLayoutGuideLeft).mas_offset(Padding);
+        } else {
+            make.left.mas_equalTo(Padding);
+        }
         make.bottom.mas_equalTo(-Padding);
         make.width.mas_equalTo(self.backButton.mas_height);
     }];
     //播放按钮
     [self.playButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_equalTo(Padding);
+        make.top.mas_equalTo(Padding);
+        if (@available(iOS 11.0, *)) {
+            make.left.mas_equalTo(self.mas_safeAreaLayoutGuideLeft).mas_offset(Padding);
+        } else {
+            make.left.mas_equalTo(Padding);
+        }
         make.bottom.mas_equalTo(-Padding);
-        make.width.mas_equalTo(self.backButton.mas_height);
+        make.width.mas_equalTo(self.playButton.mas_height);
     }];
     //全屏按钮
     [self.fullButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.bottom.mas_equalTo(-Padding);
+        make.bottom.mas_equalTo(-Padding);
+        if (@available(iOS 11.0, *)) {
+            make.right.mas_equalTo(self.mas_safeAreaLayoutGuideRight).mas_offset(-Padding);
+        } else {
+            make.right.mas_equalTo(-Padding);
+        }
         make.top.mas_equalTo(Padding);
-        make.width.mas_equalTo(self.backButton.mas_height);
+        make.width.mas_equalTo(self.fullButton.mas_height);
     }];
     //当前播放时间
     [self.currentTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {

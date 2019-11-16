@@ -773,7 +773,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         }
         self.frame = CGRectMake(0, 0, MIN([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height), MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height));
     }
-    self.maskView.fullButton.selected     = YES;
+    self.maskView.fullButton.selected = YES;
     [self setNeedsLayout];
     [self layoutIfNeeded];
 }
@@ -796,7 +796,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     self.frame = _customFarme;
     //还原到原有父类上
     [_fatherView addSubview:self];
-    self.maskView.fullButton.selected     = NO;
+    self.maskView.fullButton.selected = NO;
 }
 //MARK:JmoVxia---APP活动通知
 - (void)appDidEnterBackground:(NSNotification *)note{
