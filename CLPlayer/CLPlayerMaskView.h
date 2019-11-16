@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "CLSlider.h"
-#import "AILoadingView.h"
+#import "CLRotateAnimationView.h"
+
 @protocol CLPlayerMaskViewDelegate <NSObject>
 /**返回按钮代理*/
 - (void)cl_backButtonAction:(UIButton *)button;
@@ -32,7 +33,7 @@
 /**底部工具条*/
 @property (nonatomic,strong) UIView *bottomToolBar;
 /**转子*/
-@property (nonatomic,strong) AILoadingView *loadingView;
+@property (nonatomic,strong) CLRotateAnimationView *loadingView;
 /**顶部工具条返回按钮*/
 @property (nonatomic,strong) UIButton *backButton;
 /**底部工具条播放按钮*/

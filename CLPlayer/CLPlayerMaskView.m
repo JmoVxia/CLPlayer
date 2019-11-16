@@ -122,7 +122,7 @@
 //顶部工具条
 - (UIView *) topToolBar{
     if (_topToolBar == nil){
-        _topToolBar                        = [[UIView alloc] init];
+        _topToolBar = [[UIView alloc] init];
         _topToolBar.userInteractionEnabled = YES;
     }
     return _topToolBar;
@@ -130,17 +130,16 @@
 //底部工具条
 - (UIView *) bottomToolBar{
     if (_bottomToolBar == nil){
-        _bottomToolBar                        = [[UIView alloc] init];
+        _bottomToolBar = [[UIView alloc] init];
         _bottomToolBar.userInteractionEnabled = YES;
     }
     return _bottomToolBar;
 }
 //转子
-- (AILoadingView *) loadingView{
+- (CLRotateAnimationView *) loadingView{
     if (_loadingView == nil){
-        _loadingView             = [[AILoadingView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-        _loadingView.strokeColor = [UIColor whiteColor];
-        [_loadingView starAnimation];
+        _loadingView = [[CLRotateAnimationView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        [_loadingView startAnimation];
     }
     return _loadingView;
 }

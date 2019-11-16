@@ -151,8 +151,10 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     self.maskView.progressBackgroundColor = self.configure.progressBackgroundColor;
     self.maskView.progressBufferColor     = self.configure.progressBufferColor;
     self.maskView.progressPlayFinishColor = self.configure.progressPlayFinishColor;
-    self.maskView.loadingView.strokeColor = self.configure.strokeColor;
     self.player.muted                     = self.configure.mute;
+    [self.maskView.loadingView updateWithConfigure:^(CLRotateAnimationViewConfigure * _Nonnull configure) {
+        configure.backgroundColor = self.configure.strokeColor;
+    }];
     [self resetToolBarDisappearTime];
     [self resetTopToolBarHiddenType];
 }
@@ -234,7 +236,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     }
     _state = state;
     if (state == CLPlayerStateBuffering) {
-        [self.maskView.loadingView starAnimation];
+        [self.maskView.loadingView startAnimation];
     }else if (state == CLPlayerStateFailed){
         [self.maskView.loadingView stopAnimation];
         self.maskView.failButton.hidden   = NO;
@@ -656,8 +658,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     [NSObject cancelPreviousPerformRequestsWithTarget:self
                                              selector:@selector(bufferingSomeSecondEnd)
                                                object:@"Buffering"];
-    //销毁转子动画
-    [self.maskView.loadingView destroyAnimation];
     //移除
     [self.playerLayerView removeFromSuperview];
     [self removeFromSuperview];
@@ -695,7 +695,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     [self resetToolBarDisappearTime];
     self.maskView.failButton.hidden = YES;
     //开始转子
-    [self.maskView.loadingView starAnimation];
+    [self.maskView.loadingView startAnimation];
 }
 //MARK:JmoVxia---取消定时器
 //销毁所有定时器

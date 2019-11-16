@@ -50,7 +50,7 @@ typedef void(^EndBolck)(void);
 @property (nonatomic, strong) UIColor                 *progressBufferColor;
 /**进度条播放完成颜色*/
 @property (nonatomic, strong) UIColor                 *progressPlayFinishColor;
-/**转子线条颜色*/
+/**转子背景颜色*/
 @property (nonatomic, strong) UIColor                 *strokeColor;
 
 /**

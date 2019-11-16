@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C78B789237ED9880072BB9E /* CLRotateAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C78B788237ED9880072BB9E /* CLRotateAnimationView.m */; };
 		0CD6AE3D214FACB000BCE29D /* CLGCDTimerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD6AE3B214FACAF00BCE29D /* CLGCDTimerManager.m */; };
-		453E2AAA1F3C97900003AB0C /* AILoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 453E2AA91F3C97900003AB0C /* AILoadingView.m */; };
 		52CFF55482649C3F8FF48753 /* libPods-CLPlayerDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */; };
 		5B1FC4C81DC850820036C489 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4C71DC850820036C489 /* main.m */; };
 		5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B1FC4CA1DC850820036C489 /* AppDelegate.m */; };
@@ -39,12 +39,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C78B787237ED9870072BB9E /* CLRotateAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLRotateAnimationView.h; sourceTree = "<group>"; };
+		0C78B788237ED9880072BB9E /* CLRotateAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLRotateAnimationView.m; sourceTree = "<group>"; };
 		0CD6AE3B214FACAF00BCE29D /* CLGCDTimerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLGCDTimerManager.m; sourceTree = "<group>"; };
 		0CD6AE3C214FACAF00BCE29D /* CLGCDTimerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLGCDTimerManager.h; sourceTree = "<group>"; };
 		133621D737F2050001C8A017 /* Pods-CLPlayerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLPlayerDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CLPlayerDemo/Pods-CLPlayerDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		188363D6831D09896A05B358 /* libPods-CLPlayerDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLPlayerDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		453E2AA81F3C97900003AB0C /* AILoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AILoadingView.h; sourceTree = "<group>"; };
-		453E2AA91F3C97900003AB0C /* AILoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AILoadingView.m; sourceTree = "<group>"; };
 		5B1FC4C31DC850820036C489 /* CLPlayerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLPlayerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B1FC4C71DC850820036C489 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5B1FC4C91DC850820036C489 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -313,10 +313,10 @@
 				5BB55D081FC549A700CC8327 /* CLPlayerView.m */,
 				5BDEA70F1E63F4BB00953D5D /* CLPlayerMaskView.h */,
 				5BDEA7101E63F4BB00953D5D /* CLPlayerMaskView.m */,
+				0C78B787237ED9870072BB9E /* CLRotateAnimationView.h */,
+				0C78B788237ED9880072BB9E /* CLRotateAnimationView.m */,
 				5BDEA7131E63F4BB00953D5D /* CLSlider.h */,
 				5BDEA7141E63F4BB00953D5D /* CLSlider.m */,
-				453E2AA81F3C97900003AB0C /* AILoadingView.h */,
-				453E2AA91F3C97900003AB0C /* AILoadingView.m */,
 				5BA0AF501F4292670097B9B2 /* UINavigationController+CLPlayerRotation.h */,
 				5BA0AF511F4292670097B9B2 /* UINavigationController+CLPlayerRotation.m */,
 				5BA0AF521F4292670097B9B2 /* UITabBarController+CLPlayerRotation.h */,
@@ -427,7 +427,6 @@
 				5BB4D0FE1F34565F007A1742 /* CLTableViewCell.m in Sources */,
 				5BB4D0DF1F31A4B1007A1742 /* CLViewController.m in Sources */,
 				5BA0AF561F4292670097B9B2 /* UINavigationController+CLPlayerRotation.m in Sources */,
-				453E2AAA1F3C97900003AB0C /* AILoadingView.m in Sources */,
 				5BA0AF571F4292670097B9B2 /* UITabBarController+CLPlayerRotation.m in Sources */,
 				5BB4D0F91F3455D0007A1742 /* CLModel.m in Sources */,
 				5B1FC4CB1DC850820036C489 /* AppDelegate.m in Sources */,
@@ -438,6 +437,7 @@
 				5B456F8F1E60164000C9599F /* UIView+CLSetRect.m in Sources */,
 				5BB4D0EE1F31B7A2007A1742 /* CLViewController5.m in Sources */,
 				5BDEA7161E63F4BB00953D5D /* CLPlayerMaskView.m in Sources */,
+				0C78B789237ED9880072BB9E /* CLRotateAnimationView.m in Sources */,
 				5BDEA7181E63F4BB00953D5D /* CLSlider.m in Sources */,
 				0CD6AE3D214FACB000BCE29D /* CLGCDTimerManager.m in Sources */,
 				5BB4D0EB1F31B775007A1742 /* CLViewController3.m in Sources */,
