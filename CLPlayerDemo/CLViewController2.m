@@ -59,14 +59,25 @@
     [self.view addSubview:but];
 }
 - (void)next{
-    _playerView.url = [NSURL URLWithString:@"http://220.249.115.46:18080/wav/day_by_day.mp4"];
+    _playerView.url = [NSURL URLWithString:@"http://120.24.184.1/cdm/media/k2/videos/1.mp4"];
     [_playerView playVideo];
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     [_playerView destroyPlayer];
 }
-
+// 是否支持自动转屏
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+// 支持哪些屏幕方向
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+// 默认的屏幕方向（当前ViewController必须是通过模态出来的UIViewController（模态带导航的无效）方式展现出来的，才会调用这个方法）
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
 
 
 

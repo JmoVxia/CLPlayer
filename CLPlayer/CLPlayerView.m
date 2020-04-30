@@ -53,7 +53,7 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                                                green:0.51373
                                                 blue:0.50980
                                                alpha:1.00000];
-    configure.progressPlayFinishColor = [UIColor whiteColor];
+    configure.progressPlayFinishColor = [UIColor greenColor];
     configure.progressBufferColor     = [UIColor colorWithRed:0.84118
                                                green:0.81373
                                                 blue:0.80980
@@ -85,8 +85,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
 @property (nonatomic, assign) BOOL             isDisappear;
 /**用户点击播放标记*/
 @property (nonatomic, assign) BOOL             isUserPlay;
-/**记录控制器状态栏状态*/
-@property (nonatomic, assign) BOOL             statusBarHiddenState;
 /**点击最大化标记*/
 @property (nonatomic, assign) BOOL             isUserTapMaxButton;
 /**播放完成标记*/
@@ -761,12 +759,10 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
         //播放器所在控制器不支持旋转，采用旋转view的方式实现
         CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
         if (direction == UIInterfaceOrientationLandscapeLeft){
-            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:YES];
             [UIView animateWithDuration:duration animations:^{
                 self.transform = CGAffineTransformMakeRotation(M_PI / 2);
             }];
         }else if (direction == UIInterfaceOrientationLandscapeRight) {
-            [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeLeft animated:YES];
             [UIView animateWithDuration:duration animations:^{
                 self.transform = CGAffineTransformMakeRotation( - M_PI / 2);
             }];
@@ -782,7 +778,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
     _isFullScreen             = NO;
     _isUserTapMaxButton       = NO;
     [self resetTopToolBarHiddenType];
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:YES];
     if (self.configure.isLandscape) {
         //还原为竖屏
         [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
@@ -835,8 +830,6 @@ typedef NS_ENUM(NSInteger, CLPanDirection){
                                                   object:nil];
     //回到竖屏
     [[UIDevice currentDevice] setValue:[NSNumber numberWithInteger:UIInterfaceOrientationPortrait] forKey:@"orientation"];
-    //重置状态条
-    [[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationPortrait animated:YES];
 #ifdef DEBUG
     NSLog(@"播放器被销毁了");
 #endif

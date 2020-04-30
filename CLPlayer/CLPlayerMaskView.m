@@ -9,10 +9,12 @@
 #import "CLPlayerMaskView.h"
 #import "CLSlider.h"
 #import "Masonry.h"
+#import "CLImageHelper.h"
+
 //间隙
 #define Padding        10
 //顶部底部工具条高度
-#define ToolBarHeight     50
+#define ToolBarHeight     40
 
 @interface CLPlayerMaskView ()
 
@@ -24,6 +26,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self initViews];
+        [self makeConstraints];
     }
     return self;
 }
@@ -106,7 +109,7 @@
     }];
     //缓冲条
     [self.progress mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.currentTimeLabel.mas_right).mas_offset(Padding);
+        make.left.mas_equalTo(self.currentTimeLabel.mas_right).mas_offset(Padding).priority(50);
         make.right.mas_equalTo(self.totalTimeLabel.mas_left).mas_offset(-Padding);
         make.height.mas_equalTo(2);
         make.centerY.mas_equalTo(self.bottomToolBar);
@@ -162,8 +165,8 @@
 - (UIButton *) backButton{
     if (_backButton == nil){
         _backButton = [[UIButton alloc] init];
-        [_backButton setImage:[self getPictureWithName:@"CLBackBtn"] forState:UIControlStateNormal];
-        [_backButton setImage:[self getPictureWithName:@"CLBackBtn"] forState:UIControlStateHighlighted];
+        [_backButton setImage:[CLImageHelper imageWithName:@"CLBackBtn"] forState:UIControlStateNormal];
+        [_backButton setImage:[CLImageHelper imageWithName:@"CLBackBtn"] forState:UIControlStateHighlighted];
         [_backButton addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _backButton;
@@ -172,8 +175,8 @@
 - (UIButton *) playButton{
     if (_playButton == nil){
         _playButton = [[UIButton alloc] init];
-        [_playButton setImage:[self getPictureWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
-        [_playButton setImage:[self getPictureWithName:@"CLPauseBtn"] forState:UIControlStateSelected];
+        [_playButton setImage:[CLImageHelper imageWithName:@"CLPlayBtn"] forState:UIControlStateNormal];
+        [_playButton setImage:[CLImageHelper imageWithName:@"CLPauseBtn"] forState:UIControlStateSelected];
         [_playButton addTarget:self action:@selector(playButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _playButton;
@@ -182,8 +185,8 @@
 - (UIButton *) fullButton{
     if (_fullButton == nil){
         _fullButton = [[UIButton alloc] init];
-        [_fullButton setImage:[self getPictureWithName:@"CLMaxBtn"] forState:UIControlStateNormal];
-        [_fullButton setImage:[self getPictureWithName:@"CLMinBtn"] forState:UIControlStateSelected];
+        [_fullButton setImage:[CLImageHelper imageWithName:@"CLMaxBtn"] forState:UIControlStateNormal];
+        [_fullButton setImage:[CLImageHelper imageWithName:@"CLMinBtn"] forState:UIControlStateSelected];
         [_fullButton addTarget:self action:@selector(fullButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _fullButton;
@@ -192,6 +195,7 @@
 - (UILabel *) currentTimeLabel{
     if (_currentTimeLabel == nil){
         _currentTimeLabel                           = [[UILabel alloc] init];
+        _currentTimeLabel.font                      = [UIFont systemFontOfSize:14];
         _currentTimeLabel.textColor                 = [UIColor whiteColor];
         _currentTimeLabel.adjustsFontSizeToFitWidth = YES;
         _currentTimeLabel.text                      = @"00:00";
@@ -203,6 +207,7 @@
 - (UILabel *) totalTimeLabel{
     if (_totalTimeLabel == nil){
         _totalTimeLabel                           = [[UILabel alloc] init];
+        _totalTimeLabel.font                      = [UIFont systemFontOfSize:14];
         _totalTimeLabel.textColor                 = [UIColor whiteColor];
         _totalTimeLabel.adjustsFontSizeToFitWidth = YES;
         _totalTimeLabel.text                      = @"00:00";
@@ -308,17 +313,4 @@
         NSLog(@"没有实现代理或者没有设置代理人");
     }
 }
-#pragma mark - 布局
--(void)layoutSubviews{
-    [super layoutSubviews];
-    [self makeConstraints];
-}
-#pragma mark - 获取资源图片
-- (UIImage *)getPictureWithName:(NSString *)name{
-    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"CLPlayer" ofType:@"bundle"]];
-    NSString *path   = [bundle pathForResource:name ofType:@"png"];
-    return [[UIImage imageWithContentsOfFile:path] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-}
-
-
 @end

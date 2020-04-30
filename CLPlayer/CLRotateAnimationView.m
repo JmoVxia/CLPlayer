@@ -18,7 +18,7 @@
     configure.intervalDuration = 0.12;
     configure.duration = 2;
     configure.diameter = 8;
-    configure.backgroundColor = [UIColor colorWithRed:0.96 green:0.67 blue:0.06 alpha:1.00];
+    configure.backgroundColor = [UIColor redColor];
     return configure;
 }
 
@@ -28,6 +28,8 @@
 
 ///默认配置
 @property (nonatomic, strong) CLRotateAnimationViewConfigure *defaultConfigure;
+///是否开始动画
+@property (nonatomic, assign) BOOL isStart;
 ///是否暂停
 @property (nonatomic, assign) BOOL isPause;
 ///layer数组
@@ -81,6 +83,10 @@
     }
     CGFloat intervalDuration = (CGFloat)(self.defaultConfigure.duration / 2.0 / (CGFloat)self.defaultConfigure.number);
     self.defaultConfigure.intervalDuration = MIN(self.defaultConfigure.intervalDuration, intervalDuration);
+    if (self.isStart) {
+        [self stopAnimation];
+        [self startAnimation];
+    }
 }
 //MARK:JmoVxia---开始动画
 - (void)startAnimation {
@@ -88,6 +94,7 @@
     for (CALayer *layer in self.layerArray) {
         [self.layer addSublayer:layer];
     }
+    self.isStart = YES;
 }
 //MARK:JmoVxia---结束动画
 - (void)stopAnimation {
@@ -95,6 +102,7 @@
         [layer removeFromSuperlayer];
     }
     [self.layerArray removeAllObjects];
+    self.isStart = NO;
 }
 //MARK:JmoVxia---暂停动画
 - (void)pauseAnimation {

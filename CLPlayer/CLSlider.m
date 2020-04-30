@@ -7,6 +7,7 @@
 //
 
 #import "CLSlider.h"
+#import "CLImageHelper.h"
 
 #define SLIDER_X_BOUND 30
 #define SLIDER_Y_BOUND 40
@@ -25,7 +26,7 @@
     return self;
 }
 - (void)setup {
-    UIImage *thumbImage = [self getPictureWithName:@"CLRound"];
+    UIImage *thumbImage = [CLImageHelper imageWithName:@"CLRound"];
     [self setThumbImage:thumbImage forState:UIControlStateHighlighted];
     [self setThumbImage:thumbImage forState:UIControlStateNormal];
 }
@@ -77,11 +78,7 @@
     return result;
 }
 #pragma mark - 获取资源图片
-- (UIImage *)getPictureWithName:(NSString *)name{
-    NSBundle *bundle = [NSBundle bundleWithPath:[[NSBundle bundleForClass:[self class]] pathForResource:@"CLPlayer" ofType:@"bundle"]];
-    NSString *path   = [bundle pathForResource:name ofType:@"png"];
-    return [[UIImage imageWithContentsOfFile:path] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-}
+
 
 
 @end
