@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = 'CLPlayer'
-  s.version      = '2.0.0'
+  s.version      = '2.0.1'
   s.summary      = 'Swift版自定义AVPlayer'
   s.description  = <<-DESC
                    CLPlayer是基于系统AVPlayer封装的视频播放器.
@@ -19,6 +19,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '10.0'
   s.source       = {:git => 'https://github.com/JmoVxia/CLPlayer.git', :tag => s.version}
   s.source_files = ['CLPlayer/**/*.swift']
+  s.resource     = 'CLPlayer/CLPlayer.bundle'
   s.requires_arc = true
   s.frameworks = 'UIKit','MediaPlayer'
   s.dependency 'SnapKit'

@@ -9,8 +9,8 @@ import AVFoundation
 import SnapKit
 import UIKit
 
-class CLPlayer: UIView {
-    override init(frame: CGRect) {
+public class CLPlayer: UIView {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
         initUI()
         makeConstraints()
@@ -114,7 +114,7 @@ class CLPlayer: UIView {
         }
     }
 
-    var url: URL? {
+    public var url: URL? {
         didSet {
             guard let url = url else { return }
             resetPlayer()
@@ -138,7 +138,7 @@ class CLPlayer: UIView {
 
 // MARK: - JmoVxia---override
 
-extension CLPlayer {
+public extension CLPlayer {
     override class var layerClass: AnyClass {
         return AVPlayerLayer.classForCoder()
     }
@@ -297,7 +297,7 @@ private extension CLPlayer {
 
 // MARK: - JmoVxia---公共方法
 
-extension CLPlayer {
+public extension CLPlayer {
     func pause() {
         contentView.playState = .pause
         player?.pause()
@@ -324,13 +324,13 @@ extension CLPlayer {
 // MARK: - JmoVxia---UIViewControllerTransitioningDelegate
 
 extension CLPlayer: UIViewControllerTransitioningDelegate {
-    func animationController(forPresented _: UIViewController, presenting _: UIViewController, source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forPresented _: UIViewController, presenting _: UIViewController, source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         animationTransitioning = CLAnimationTransitioning(playView: self)
         animationTransitioning?.animationType = .present
         return animationTransitioning
     }
 
-    func animationController(forDismissed _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func animationController(forDismissed _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         animationTransitioning?.animationType = .dismiss
         return animationTransitioning
     }
