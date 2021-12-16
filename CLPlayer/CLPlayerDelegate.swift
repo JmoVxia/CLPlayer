@@ -12,4 +12,12 @@ public protocol CLPlayerDelegate: AnyObject {
     func didClickBackButton(in player: CLPlayer)
     /// 视频播放结束
     func didPlayToEndTime(in player: CLPlayer)
+    /// 播放器播放进度变化
+    func player(_ player: CLPlayer, playbackProgressChanged: CGFloat)
+}
+
+public extension CLPlayerDelegate {
+    func didClickBackButton(in _: CLPlayer) {}
+    func didPlayToEndTime(in _: CLPlayer) {}
+    func player(_: CLPlayer, playbackProgressChanged _: CGFloat) {}
 }

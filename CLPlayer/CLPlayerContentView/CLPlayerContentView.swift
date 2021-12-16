@@ -25,7 +25,7 @@ extension CLPlayerContentView {
         case buffering
         case failed
         case pause
-        case end
+        case ended
     }
 
     enum CLPanDirection {
@@ -272,7 +272,7 @@ class CLPlayerContentView: UIImageView {
             case .pause:
                 sliderView.isUserInteractionEnabled = true
                 playButton.isSelected = false
-            case .end:
+            case .ended:
                 sliderView.isUserInteractionEnabled = true
                 failButton.isHidden = true
                 playButton.isSelected = false

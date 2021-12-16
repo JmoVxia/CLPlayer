@@ -98,19 +98,10 @@ private extension CLHomeController {
     func initData() {
         do {
             let item = CLListItem()
-            item.title = "Autolayout创建"
+            item.title = "普通View"
             item.didSelectCellCallback = { [weak self] _ in
                 guard let self = self else { return }
-                self.pushToAutolayout()
-            }
-            tableViewHepler.dataSource.append(item)
-        }
-        do {
-            let item = CLListItem()
-            item.title = "Frame创建"
-            item.didSelectCellCallback = { [weak self] _ in
-                guard let self = self else { return }
-                self.pushToFrame()
+                self.pushToView()
             }
             tableViewHepler.dataSource.append(item)
         }
@@ -147,12 +138,8 @@ extension CLHomeController {}
 // MARK: - JmoVxia---私有方法
 
 private extension CLHomeController {
-    func pushToAutolayout() {
-        navigationController?.pushViewController(CLAutolayoutController(), animated: true)
-    }
-
-    func pushToFrame() {
-        navigationController?.pushViewController(CLFrameController(), animated: true)
+    func pushToView() {
+        navigationController?.pushViewController(CLViewController(), animated: true)
     }
 
     func pushToTableView() {

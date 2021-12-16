@@ -27,10 +27,11 @@ class CLCollectionViewController: CLController {
     deinit {}
 
     private lazy var collectionView: UICollectionView = {
+        let width = (view.bounds.width - 30) * 0.5
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize(width: view.bounds.width - 20, height: (view.bounds.width - 20) * 9.0 / 16.0)
+        layout.itemSize = CGSize(width: width, height: width * 9.0 / 16.0)
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         view.backgroundColor = .clear
@@ -126,7 +127,16 @@ private extension CLCollectionViewController {
 
 // MARK: - JmoVxia---override
 
-extension CLCollectionViewController {}
+extension CLCollectionViewController {
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
+    // 支持哪些屏幕方向
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+}
 
 // MARK: - JmoVxia---objc
 
@@ -148,10 +158,7 @@ private extension CLCollectionViewController {
         })
         player?.url = URL(string: array[indexPath.row])
         cell.contentView.addSubview(player!)
-        player?.snp.remakeConstraints { make in
-            make.top.left.equalToSuperview()
-            make.size.equalTo(CGSize(width: cell.bounds.width, height: cell.bounds.height - 10))
-        }
+        player?.frame = cell.contentView.bounds
         player?.play()
     }
 }
@@ -181,10 +188,7 @@ extension CLCollectionViewController: UICollectionViewDelegate {
         guard array[indexPath.row] == player.url?.absoluteString else { return }
 
         cell.contentView.addSubview(player)
-        player.snp.remakeConstraints { make in
-            make.top.left.equalToSuperview()
-            make.size.equalTo(CGSize(width: cell.bounds.width, height: cell.bounds.height - 10))
-        }
+        player.frame = cell.contentView.bounds
         player.play()
     }
 

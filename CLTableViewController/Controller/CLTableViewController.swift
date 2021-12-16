@@ -146,7 +146,16 @@ private extension CLTableViewController {
 
 // MARK: - JmoVxia---override
 
-extension CLTableViewController {}
+extension CLTableViewController {
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
+    // 支持哪些屏幕方向
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+}
 
 // MARK: - JmoVxia---objc
 
@@ -162,13 +171,10 @@ private extension CLTableViewController {
         if player == nil {
             player = CLPlayer()
         }
+        cell.contentView.addSubview(player!)
+        player?.frame = CGRect(x: 0, y: 0, width: cell.contentView.bounds.width, height: cell.contentView.bounds.height - 10)
         player?.title = item.title
         player?.url = item.url
-        cell.contentView.addSubview(player!)
-        player?.snp.remakeConstraints { make in
-            make.top.left.equalToSuperview()
-            make.size.equalTo(CGSize(width: cell.bounds.width, height: cell.bounds.height - 10))
-        }
         player?.play()
     }
 }
@@ -180,10 +186,7 @@ extension CLTableViewController: UITableViewDelegate {
         guard url == player.url?.absoluteString else { return }
 
         cell.contentView.addSubview(player)
-        player.snp.remakeConstraints { make in
-            make.top.left.equalToSuperview()
-            make.size.equalTo(CGSize(width: cell.bounds.width, height: cell.bounds.height - 10))
-        }
+        player.frame = CGRect(x: 0, y: 0, width: cell.contentView.bounds.width, height: cell.contentView.bounds.height - 10)
         player.play()
     }
 

@@ -94,32 +94,68 @@ public class CLPlayer: UIView {
         }
     }
 
-    private var totalDuration: TimeInterval = .zero {
+    public private(set) var totalDuration: TimeInterval = .zero {
         didSet {
             guard totalDuration != oldValue else { return }
             contentView.setTotalDuration(totalDuration)
         }
     }
 
-    private var currentDuration: TimeInterval = .zero {
+    public private(set) var currentDuration: TimeInterval = .zero {
         didSet {
             guard currentDuration != oldValue else { return }
-            contentView.setCurrentDuration(currentDuration)
+            contentView.setCurrentDuration(min(currentDuration, totalDuration))
         }
     }
 
-    private var rate: Float = 1.0 {
+    public private(set) var playbackProgress: CGFloat = .zero {
+        didSet {
+            guard playbackProgress != oldValue else { return }
+            contentView.setSliderProgress(Float(playbackProgress), animated: false)
+            let oldIntValue = Int(oldValue * 100)
+            let intValue = Int(playbackProgress * 100)
+            if intValue != oldIntValue {
+                delegate?.player(self, playbackProgressChanged: CGFloat(intValue) / 100)
+            }
+        }
+    }
+
+    public private(set) var rate: Float = 1.0 {
         didSet {
             guard rate != oldValue else { return }
             play()
         }
     }
 
-    private var videoGravity: AVLayerVideoGravity = .resizeAspectFill {
+    public private(set) var videoGravity: AVLayerVideoGravity = .resizeAspectFill {
         didSet {
             guard videoGravity != oldValue else { return }
             playerLayer?.videoGravity = videoGravity
         }
+    }
+    
+    public var isFullScreen: Bool {
+        return contentView.screenState == .fullScreen
+    }
+
+    public var isPlaying: Bool {
+        return contentView.playState == .playing
+    }
+
+    public var isBuffering: Bool {
+        return contentView.playState == .buffering
+    }
+
+    public var isFailed: Bool {
+        return contentView.playState == .failed
+    }
+
+    public var isPaused: Bool {
+        return contentView.playState == .pause
+    }
+
+    public var isEnded: Bool {
+        return contentView.playState == .ended
     }
 
     public var title: NSMutableAttributedString? {
@@ -148,11 +184,7 @@ public class CLPlayer: UIView {
         }
     }
 
-    public var isFullScreen: Bool {
-        return contentView.screenState == .fullScreen
-    }
-
-    weak var delegate: CLPlayerDelegate?
+    public weak var delegate: CLPlayerDelegate?
 }
 
 // MARK: - JmoVxia---override
@@ -194,7 +226,9 @@ private extension CLPlayer {
 
 @objc private extension CLPlayer {
     func didPlaybackEnds() {
-        contentView.playState = .end
+        currentDuration = totalDuration
+        playbackProgress = 1.0
+        contentView.playState = .ended
         sliderTimer.suspend()
         delegate?.didPlayToEndTime(in: self)
     }
@@ -204,11 +238,9 @@ private extension CLPlayer {
         case .portrait:
             dismiss()
         case .landscapeLeft:
-            guard superview != nil else { return }
-            presentController(CLFullScreenRightController())
+            presentWithOrientation(.left)
         case .landscapeRight:
-            guard superview != nil else { return }
-            presentController(CLFullScreenLeftController())
+            presentWithOrientation(.right)
         default:
             break
         }
@@ -261,6 +293,7 @@ private extension CLPlayer {
     }
 
     func bufferingSomeSecond() {
+        guard contentView.playState != .failed else { return }
         contentView.playState = .buffering
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
             self?.play()
@@ -272,9 +305,7 @@ private extension CLPlayer {
         guard playerItem.duration.timescale != .zero else { return }
 
         currentDuration = CMTimeGetSeconds(playerItem.currentTime())
-
-        let value = currentDuration / totalDuration
-        contentView.setSliderProgress(Float(value), animated: false)
+        playbackProgress = currentDuration / totalDuration
     }
 }
 
@@ -291,11 +322,16 @@ private extension CLPlayer {
         fullScreenController = nil
     }
 
-    func presentController(_ controller: CLFullScreenController) {
+    func presentWithOrientation(_ orientation: CLAnimationTransitioning.CLAnimationOrientation) {
+        guard superview != nil else { return }
+        guard fullScreenController == nil else { return }
         guard contentView.screenState == .small else { return }
         guard let rootViewController = keyWindow?.rootViewController else { return }
         contentView.screenState = .animating
-        fullScreenController = controller
+
+        animationTransitioning = CLAnimationTransitioning(playView: self, orientation: orientation)
+
+        fullScreenController = orientation == .right ? CLFullScreenLeftController() : CLFullScreenRightController()
         fullScreenController?.transitioningDelegate = self
         fullScreenController?.modalPresentationStyle = .fullScreen
         rootViewController.present(fullScreenController!, animated: true, completion: {
@@ -311,7 +347,7 @@ public extension CLPlayer {
         guard !isEnterBackground else { return }
         guard let playerItem = playerItem else { return }
         guard !isUserPause else { return }
-        if contentView.playState == .end {
+        if contentView.playState == .ended {
             player?.seek(to: CMTimeMake(value: 0, timescale: 1), toleranceBefore: .zero, toleranceAfter: .zero)
         }
         guard playerItem.isPlaybackLikelyToKeepUp else {
@@ -356,7 +392,6 @@ public extension CLPlayer {
 
 extension CLPlayer: UIViewControllerTransitioningDelegate {
     public func animationController(forPresented _: UIViewController, presenting _: UIViewController, source _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        animationTransitioning = CLAnimationTransitioning(playView: self)
         animationTransitioning?.animationType = .present
         return animationTransitioning
     }
@@ -408,7 +443,7 @@ extension CLPlayer: CLPlayerContentViewDelegate {
     }
 
     func didClickFullButton(isFull: Bool, in _: CLPlayerContentView) {
-        isFull ? dismiss() : presentController(CLFullScreenRightController())
+        isFull ? dismiss() : presentWithOrientation(.fullRight)
     }
 
     func didChangeRate(_ rate: Float, in _: CLPlayerContentView) {

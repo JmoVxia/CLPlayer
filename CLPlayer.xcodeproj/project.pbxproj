@@ -36,7 +36,6 @@
 		5BE1F31B2727DCDB0090F6C8 /* CLMoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F31A2727DCDB0090F6C8 /* CLMoreController.swift */; };
 		5BE1F3202727DDC00090F6C8 /* CLListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F31F2727DDC00090F6C8 /* CLListCell.swift */; };
 		5BE1F3252727DE4C0090F6C8 /* CLListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F3242727DE4C0090F6C8 /* CLListItem.swift */; };
-		5BE1F32A2727E0F80090F6C8 /* CLAutolayoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F3292727E0F80090F6C8 /* CLAutolayoutController.swift */; };
 		5BE1F32D2727E1430090F6C8 /* CLTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F32C2727E1430090F6C8 /* CLTableViewController.swift */; };
 		5BE1F3322727E21E0090F6C8 /* CLBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F3312727E21E0090F6C8 /* CLBackView.swift */; };
 		5BE1F3342727E3800090F6C8 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F3332727E3800090F6C8 /* UIImage+Extension.swift */; };
@@ -45,7 +44,7 @@
 		5BF306642728DFB40046075A /* CLFullScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF306632728DFB40046075A /* CLFullScreenController.swift */; };
 		5BFADCAC2767415200A596A6 /* CLPlayerContentPanelHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCAB2767415200A596A6 /* CLPlayerContentPanelHeadView.swift */; };
 		5BFADCAE276742F500A596A6 /* CLPlayerContentPanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCAD276742F500A596A6 /* CLPlayerContentPanelCell.swift */; };
-		5BFADCB6276888B400A596A6 /* CLFrameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCB5276888B400A596A6 /* CLFrameController.swift */; };
+		5BFADCB6276888B400A596A6 /* CLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCB5276888B400A596A6 /* CLViewController.swift */; };
 		5BFADCBA276893B600A596A6 /* CLGCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCB9276893B600A596A6 /* CLGCDTimer.swift */; };
 		5BFADCC027689C5500A596A6 /* CLTableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCBF27689C5500A596A6 /* CLTableViewItem.swift */; };
 		5BFADCC227689C6300A596A6 /* CLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCC127689C6300A596A6 /* CLTableViewCell.swift */; };
@@ -84,7 +83,6 @@
 		5BE1F31A2727DCDB0090F6C8 /* CLMoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMoreController.swift; sourceTree = "<group>"; };
 		5BE1F31F2727DDC00090F6C8 /* CLListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLListCell.swift; sourceTree = "<group>"; };
 		5BE1F3242727DE4C0090F6C8 /* CLListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLListItem.swift; sourceTree = "<group>"; };
-		5BE1F3292727E0F80090F6C8 /* CLAutolayoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAutolayoutController.swift; sourceTree = "<group>"; };
 		5BE1F32C2727E1430090F6C8 /* CLTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTableViewController.swift; sourceTree = "<group>"; };
 		5BE1F3312727E21E0090F6C8 /* CLBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLBackView.swift; sourceTree = "<group>"; };
 		5BE1F3332727E3800090F6C8 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
@@ -93,7 +91,7 @@
 		5BF306632728DFB40046075A /* CLFullScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLFullScreenController.swift; sourceTree = "<group>"; };
 		5BFADCAB2767415200A596A6 /* CLPlayerContentPanelHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerContentPanelHeadView.swift; sourceTree = "<group>"; };
 		5BFADCAD276742F500A596A6 /* CLPlayerContentPanelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerContentPanelCell.swift; sourceTree = "<group>"; };
-		5BFADCB5276888B400A596A6 /* CLFrameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLFrameController.swift; sourceTree = "<group>"; };
+		5BFADCB5276888B400A596A6 /* CLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLViewController.swift; sourceTree = "<group>"; };
 		5BFADCB9276893B600A596A6 /* CLGCDTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLGCDTimer.swift; sourceTree = "<group>"; };
 		5BFADCBF27689C5500A596A6 /* CLTableViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTableViewItem.swift; sourceTree = "<group>"; };
 		5BFADCC127689C6300A596A6 /* CLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTableViewCell.swift; sourceTree = "<group>"; };
@@ -166,8 +164,7 @@
 				5B37DEE82727DBD9002A377A /* CLTableView */,
 				5BE1F31C2727DD960090F6C8 /* CLHomeController */,
 				5BE1F31D2727DDA10090F6C8 /* CLMoreController */,
-				5BE1F3282727E0C60090F6C8 /* CLAutolayoutController */,
-				5BFADCB42768888500A596A6 /* CLFrameController */,
+				5BFADCB42768888500A596A6 /* CLViewController */,
 				5BE1F32B2727E11F0090F6C8 /* CLTableViewController */,
 				5BC41036276B188900DFE028 /* CLCollectionViewController */,
 				5BE1F3372727E55E0090F6C8 /* Resources */,
@@ -285,14 +282,6 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		5BE1F3282727E0C60090F6C8 /* CLAutolayoutController */ = {
-			isa = PBXGroup;
-			children = (
-				5BE1F3292727E0F80090F6C8 /* CLAutolayoutController.swift */,
-			);
-			path = CLAutolayoutController;
-			sourceTree = "<group>";
-		};
 		5BE1F32B2727E11F0090F6C8 /* CLTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,12 +343,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		5BFADCB42768888500A596A6 /* CLFrameController */ = {
+		5BFADCB42768888500A596A6 /* CLViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5BFADCB5276888B400A596A6 /* CLFrameController.swift */,
+				5BFADCB5276888B400A596A6 /* CLViewController.swift */,
 			);
-			path = CLFrameController;
+			path = CLViewController;
 			sourceTree = "<group>";
 		};
 		5BFADCB72768936C00A596A6 /* CLPlayerContentView */ = {
@@ -567,7 +556,6 @@
 				5BA39B182727D147005059F5 /* AppDelegate.swift in Sources */,
 				5B37DEF02727DBD9002A377A /* CLCellProtocol.swift in Sources */,
 				5B37DEEF2727DBD9002A377A /* CLCellItemProtocol.swift in Sources */,
-				5BE1F32A2727E0F80090F6C8 /* CLAutolayoutController.swift in Sources */,
 				5B33B4DE2769EAA20086B402 /* CLPlayerConfigure.swift in Sources */,
 				5BE1F3322727E21E0090F6C8 /* CLBackView.swift in Sources */,
 				5B72C197272A868E004B9AEA /* CLPlayerContentViewDelegate.swift in Sources */,
@@ -589,7 +577,7 @@
 				5B37DEE52727DB04002A377A /* CLController.swift in Sources */,
 				5BA11A70276AD7290093B418 /* NSMutableAttributedString+Extension.swift in Sources */,
 				5BE1F3202727DDC00090F6C8 /* CLListCell.swift in Sources */,
-				5BFADCB6276888B400A596A6 /* CLFrameController.swift in Sources */,
+				5BFADCB6276888B400A596A6 /* CLViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

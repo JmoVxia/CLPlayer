@@ -13,6 +13,12 @@ extension CLAnimationTransitioning {
         case present
         case dismiss
     }
+
+    enum CLAnimationOrientation {
+        case left
+        case right
+        case fullRight
+    }
 }
 
 class CLAnimationTransitioning: NSObject {
@@ -28,19 +34,19 @@ class CLAnimationTransitioning: NSObject {
 
     private weak var parentView: UIView?
 
-    private var centerInWindow: CGPoint = .zero
-
     private var centerInParent: CGPoint = .zero
 
     private var originSize: CGSize = .zero
 
+    private var orientation: CLAnimationOrientation = .left
+
     var animationType: CLAnimationType = .present
 
-    init(playView: CLPlayer) {
+    init(playView: CLPlayer, orientation: CLAnimationOrientation) {
         player = playView
+        self.orientation = orientation
         parentView = playView.superview
-        centerInParent = parentView?.convert(playView.center, from: parentView) ?? .zero
-        centerInWindow = keyWindow?.convert(playView.center, from: parentView) ?? .zero
+        centerInParent = playView.center
         originSize = playView.frame.size
     }
 }
@@ -54,7 +60,7 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
         guard let playView = player else { return }
         if animationType == .present {
             guard let toView = transitionContext.view(forKey: .to) else { return }
-            guard let toController = transitionContext.viewController(forKey: .to) else { return }
+            guard let fromController = transitionContext.viewController(forKey: .from) else { return }
 
             let fromCenter = transitionContext.containerView.convert(playView.center, from: playView.superview)
             let fromSize = transitionContext.containerView.convert(playView.frame, from: nil).size
@@ -62,7 +68,17 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
             transitionContext.containerView.addSubview(toView)
             toView.addSubview(playView)
 
-            toView.transform = toController.isKind(of: CLFullScreenLeftController.self) ? .init(rotationAngle: Double.pi * 0.5) : .init(rotationAngle: -Double.pi * 0.5)
+            if orientation == .left,
+               !(fromController.shouldAutorotate && fromController.supportedInterfaceOrientations.contains(.landscapeLeft))
+            {
+                toView.transform = .init(rotationAngle: -Double.pi * 0.5)
+            } else if orientation == .right,
+                      !(fromController.shouldAutorotate && fromController.supportedInterfaceOrientations.contains(.landscapeRight))
+            {
+                toView.transform = .init(rotationAngle: Double.pi * 0.5)
+            } else if orientation == .fullRight {
+                toView.transform = .init(rotationAngle: -Double.pi * 0.5)
+            }
 
             toView.snp.remakeConstraints { make in
                 make.center.equalTo(fromCenter)
@@ -106,6 +122,7 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
 
             transitionContext.containerView.addSubview(toView)
             transitionContext.containerView.addSubview(fromView)
+            fromView.addSubview(playView)
 
             fromView.snp.remakeConstraints { make in
                 make.center.equalTo(fromCenter)
@@ -117,8 +134,9 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
             transitionContext.containerView.setNeedsLayout()
             transitionContext.containerView.layoutIfNeeded()
 
+            let center = transitionContext.containerView.convert(centerInParent, from: parentView)
             fromView.snp.updateConstraints { make in
-                make.center.equalTo(centerInWindow)
+                make.center.equalTo(center)
                 make.size.equalTo(originSize)
             }
 

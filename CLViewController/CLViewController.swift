@@ -1,5 +1,5 @@
 //
-//  CLFrameController.swift
+//  CLViewController.swift
 //  CLPlayer
 //
 //  Created by Chen JmoVxia on 2021/12/14.
@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class CLFrameController: CLController {
+class CLViewController: CLController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -43,7 +43,7 @@ class CLFrameController: CLController {
 
 // MARK: - JmoVxia---生命周期
 
-extension CLFrameController {
+extension CLViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -74,9 +74,9 @@ extension CLFrameController {
 
 // MARK: - JmoVxia---布局
 
-private extension CLFrameController {
+private extension CLViewController {
     func initUI() {
-        updateTitleLabel { $0.text = "Nomal" }
+        updateTitleLabel { $0.text = "UIView" }
         view.addSubview(player)
         view.addSubview(changeButton)
     }
@@ -91,7 +91,7 @@ private extension CLFrameController {
 
 // MARK: - JmoVxia---数据
 
-private extension CLFrameController {
+private extension CLViewController {
     func initData() {
         player.title = NSMutableAttributedString("Apple", attributes: { $0
                 .font(.systemFont(ofSize: 16))
@@ -103,9 +103,9 @@ private extension CLFrameController {
     }
 }
 
-extension CLFrameController {
+extension CLViewController {
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
 
     // 支持哪些屏幕方向
@@ -116,7 +116,7 @@ extension CLFrameController {
 
 // MARK: - JmoVxia---objc
 
-@objc private extension CLFrameController {
+@objc private extension CLViewController {
     func changeAction() {
         player.title = NSMutableAttributedString("这是一个标题", attributes: { $0
                 .font(.systemFont(ofSize: 16))
