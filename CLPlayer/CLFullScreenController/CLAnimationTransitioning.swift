@@ -79,8 +79,9 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
                 make.size.equalTo(transitionContext.containerView.bounds.size)
             }
             if #available(iOS 11.0, *) {
-                let safeAreaInsets = keyWindow?.safeAreaInsets ?? .zero
-                playView.contentView.animationLayout(safeAreaInsets: safeAreaInsets)
+                playView.contentView.animationLayout(safeAreaInsets: keyWindow?.safeAreaInsets ?? .zero, to: .fullScreen)
+            } else {
+                playView.contentView.animationLayout(safeAreaInsets: .zero, to: .fullScreen)
             }
             UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: .layoutSubviews, animations: {
                 toView.transform = .identity
@@ -120,9 +121,9 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
                 make.center.equalTo(centerInWindow)
                 make.size.equalTo(originSize)
             }
-            if #available(iOS 11.0, *) {
-                playView.contentView.animationLayout(safeAreaInsets: .zero)
-            }
+
+            playView.contentView.animationLayout(safeAreaInsets: .zero, to: .small)
+
             UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .layoutSubviews, animations: {
                 fromView.transform = .identity
                 transitionContext.containerView.setNeedsLayout()

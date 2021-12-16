@@ -10,8 +10,10 @@ import SnapKit
 import UIKit
 
 public class CLPlayer: UIView {
-    public override init(frame: CGRect) {
+    public init(frame: CGRect = .zero, configure: ((inout CLPlayerConfigure) -> Void)? = nil) {
         super.init(frame: frame)
+        configure?(&config)
+        updateConfig()
         initUI()
         makeConstraints()
     }
@@ -22,14 +24,16 @@ public class CLPlayer: UIView {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+        if config.isAutoRotate {
+            NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
+        }
         NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         print("CLPlayer deinit")
     }
 
     private(set) lazy var contentView: CLPlayerContentView = {
-        let view = CLPlayerContentView()
+        let view = CLPlayerContentView(config: config)
         view.delegate = self
         return view
     }()
@@ -49,6 +53,8 @@ public class CLPlayer: UIView {
         return timer
     }()
 
+    private var config = CLPlayerConfigure()
+
     private var animationTransitioning: CLAnimationTransitioning?
 
     private var fullScreenController: CLFullScreenController?
@@ -61,6 +67,8 @@ public class CLPlayer: UIView {
 
     private var isUserPause: Bool = false
 
+    private var isEnterBackground: Bool = false
+
     private var player: AVPlayer?
 
     private var playerLayer: AVPlayerLayer?
@@ -72,7 +80,7 @@ public class CLPlayer: UIView {
                 NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: oldPlayerItem)
             }
             guard let playerItem = playerItem else { return }
-            NotificationCenter.default.addObserver(self, selector: #selector(playerDidToEnd), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
+            NotificationCenter.default.addObserver(self, selector: #selector(didPlaybackEnds), name: .AVPlayerItemDidPlayToEndTime, object: playerItem)
 
             statusObserve = playerItem.observe(\.status, options: [.new]) { [weak self] _, _ in
                 self?.observeStatusAction()
@@ -114,10 +122,17 @@ public class CLPlayer: UIView {
         }
     }
 
+    public var title: NSMutableAttributedString? {
+        didSet {
+            guard let title = title else { return }
+            contentView.title = title
+        }
+    }
+
     public var url: URL? {
         didSet {
             guard let url = url else { return }
-            resetPlayer()
+            stop()
             let session = AVAudioSession.sharedInstance()
             do {
                 try session.setCategory(.playback)
@@ -130,10 +145,14 @@ public class CLPlayer: UIView {
             playerLayer = layer as? AVPlayerLayer
             playerLayer?.videoGravity = videoGravity
             playerLayer?.player = player
-
-            play()
         }
     }
+
+    public var isFullScreen: Bool {
+        return contentView.screenState == .fullScreen
+    }
+
+    weak var delegate: CLPlayerDelegate?
 }
 
 // MARK: - JmoVxia---override
@@ -150,10 +169,12 @@ private extension CLPlayer {
     func initUI() {
         backgroundColor = .black
         addSubview(contentView)
-        if !UIDevice.current.isGeneratingDeviceOrientationNotifications {
-            UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        if config.isAutoRotate {
+            if !UIDevice.current.isGeneratingDeviceOrientationNotifications {
+                UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+            }
+            NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterPlayground), name: UIApplication.didBecomeActiveNotification, object: nil)
     }
@@ -163,14 +184,19 @@ private extension CLPlayer {
             make.edges.equalToSuperview()
         }
     }
+
+    func updateConfig() {
+        videoGravity = config.videoGravity
+    }
 }
 
 // MARK: - JmoVxia---objc
 
 @objc private extension CLPlayer {
-    func playerDidToEnd() {
+    func didPlaybackEnds() {
         contentView.playState = .end
         sliderTimer.suspend()
+        delegate?.didPlayToEndTime(in: self)
     }
 
     func deviceOrientationDidChange() {
@@ -178,8 +204,10 @@ private extension CLPlayer {
         case .portrait:
             dismiss()
         case .landscapeLeft:
+            guard superview != nil else { return }
             presentController(CLFullScreenRightController())
         case .landscapeRight:
+            guard superview != nil else { return }
             presentController(CLFullScreenLeftController())
         default:
             break
@@ -187,10 +215,12 @@ private extension CLPlayer {
     }
 
     func appDidEnterBackground() {
+        isEnterBackground = true
         pause()
     }
 
     func appDidEnterPlayground() {
+        isEnterBackground = false
         play()
     }
 }
@@ -246,27 +276,6 @@ private extension CLPlayer {
         let value = currentDuration / totalDuration
         contentView.setSliderProgress(Float(value), animated: false)
     }
-
-    func resetPlayer() {
-        statusObserve?.invalidate()
-        loadedTimeRangesObserve?.invalidate()
-        playbackBufferEmptyObserve?.invalidate()
-
-        statusObserve = nil
-        loadedTimeRangesObserve = nil
-        playbackBufferEmptyObserve = nil
-
-        playerItem = nil
-        player = nil
-        playerLayer = nil
-
-        contentView.playState = .unknow
-        contentView.setProgress(0, animated: false)
-        contentView.setSliderProgress(0, animated: false)
-        contentView.setTotalDuration(0)
-        contentView.setCurrentDuration(0)
-        sliderTimer.resume()
-    }
 }
 
 // MARK: - JmoVxia---Screen
@@ -298,13 +307,8 @@ private extension CLPlayer {
 // MARK: - JmoVxia---公共方法
 
 public extension CLPlayer {
-    func pause() {
-        contentView.playState = .pause
-        player?.pause()
-        sliderTimer.suspend()
-    }
-
     func play() {
+        guard !isEnterBackground else { return }
         guard let playerItem = playerItem else { return }
         guard !isUserPause else { return }
         if contentView.playState == .end {
@@ -317,6 +321,33 @@ public extension CLPlayer {
         contentView.playState = .playing
         player?.play()
         player?.rate = rate
+        sliderTimer.resume()
+    }
+
+    func pause() {
+        contentView.playState = .pause
+        player?.pause()
+        sliderTimer.suspend()
+    }
+
+    func stop() {
+        statusObserve?.invalidate()
+        loadedTimeRangesObserve?.invalidate()
+        playbackBufferEmptyObserve?.invalidate()
+
+        statusObserve = nil
+        loadedTimeRangesObserve = nil
+        playbackBufferEmptyObserve = nil
+
+        playerItem = nil
+        player = nil
+        playerLayer = nil
+
+        contentView.playState = .unknow
+        contentView.setProgress(0, animated: false)
+        contentView.setSliderProgress(0, animated: false)
+        contentView.setTotalDuration(0)
+        contentView.setCurrentDuration(0)
         sliderTimer.resume()
     }
 }
@@ -352,7 +383,7 @@ extension CLPlayer: CLPlayerContentViewDelegate {
     func sliderTouchEnded(_ slider: CLSlider, in _: CLPlayerContentView) {
         guard let playerItem = playerItem else { return }
         if slider.value == 1 {
-            playerDidToEnd()
+            didPlaybackEnds()
         } else if playerItem.isPlaybackLikelyToKeepUp {
             play()
         } else {
@@ -368,6 +399,7 @@ extension CLPlayer: CLPlayerContentViewDelegate {
     func didClickBackButton(in contentView: CLPlayerContentView) {
         guard contentView.screenState == .fullScreen else { return }
         dismiss()
+        delegate?.didClickBackButton(in: self)
     }
 
     func didClickPlayButton(isPlay: Bool, in _: CLPlayerContentView) {

@@ -8,6 +8,8 @@
 import UIKit
 
 class CLTableViewItem: NSObject {
+    var title = NSMutableAttributedString()
+    var url: URL?
     var didSelectCellCallback: ((IndexPath) -> Void)?
 }
 

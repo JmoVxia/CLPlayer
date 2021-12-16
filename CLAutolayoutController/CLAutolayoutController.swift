@@ -19,7 +19,14 @@ class CLAutolayoutController: CLController {
     }
 
     private lazy var player: CLPlayer = {
-        let view = CLPlayer()
+        let view = CLPlayer { config in
+            config.isAutoRotate = true
+            config.isGestureInteractionEnabled = false
+            config.autoFadeOut = 8
+            config.topBarHiddenStyle = .onlySmall
+            config.maskImage = UIImage(named: "placeholder")
+        }
+        view.delegate = self
         return view
     }()
 
@@ -104,7 +111,13 @@ private extension CLAutolayoutController {
 
 private extension CLAutolayoutController {
     func initData() {
+        player.title = NSMutableAttributedString("Apple", attributes: { $0
+                .font(.systemFont(ofSize: 16))
+                .foregroundColor(.white)
+                .alignment(.center)
+        })
         player.url = URL(string: "https://www.apple.com/105/media/us/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-tpl-cc-us-20170912_1280x720h.mp4")
+        player.play()
     }
 }
 
@@ -125,6 +138,22 @@ extension CLAutolayoutController {
 
 @objc private extension CLAutolayoutController {
     func changeAction() {
+        player.title = NSMutableAttributedString("这是一个标题", attributes: { $0
+                .font(.systemFont(ofSize: 16))
+                .foregroundColor(.orange)
+                .alignment(.left)
+        })
         player.url = URL(string: "https://www.apple.com/105/media/us/mac/family/2018/46c4b917_abfd_45a3_9b51_4e3054191797/films/peter/mac-peter-tpl-cc-us-2018_1280x720h.mp4")
+        player.play()
+    }
+}
+
+extension CLAutolayoutController: CLPlayerDelegate {
+    func didClickBackButton(in _: CLPlayer) {
+        print("didClickBackButton")
+    }
+
+    func didPlayToEndTime(in _: CLPlayer) {
+        print("didPlayToEndTime")
     }
 }

@@ -27,7 +27,7 @@ class CLTableViewController: CLController {
     deinit {}
 
     private lazy var tableViewHepler: CLTableViewHepler = {
-        let hepler = CLTableViewHepler()
+        let hepler = CLTableViewHepler(delegate: self)
         return hepler
     }()
 
@@ -45,10 +45,7 @@ class CLTableViewController: CLController {
         return view
     }()
 
-    private lazy var player: CLPlayer = {
-        let view = CLPlayer()
-        return view
-    }()
+    private var player: CLPlayer?
 }
 
 // MARK: - JmoVxia---生命周期
@@ -106,12 +103,40 @@ private extension CLTableViewController {
 
 private extension CLTableViewController {
     func initData() {
-        for _ in 0 ..< 30 {
+        let array = [
+            "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4",
+            "http://vfx.mtime.cn/Video/2019/02/04/mp4/190204084208765161.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/21/mp4/190321153853126488.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319222227698228.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318214226685784.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319104618910544.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319125415785691.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/17/mp4/190317150237409904.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/14/mp4/190314102306987969.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/13/mp4/190313094901111138.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/12/mp4/190312143927981075.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/12/mp4/190312083533415853.mp4",
+            "http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4",
+            "https://www.apple.com/105/media/us/mac/family/2018/46c4b917_abfd_45a3_9b51_4e3054191797/films/grimes/mac-grimes-tpl-cc-us-2018_1280x720h.mp4",
+            "https://www.apple.com/105/media/us/iphone-x/2017/01df5b43-28e4-4848-bf20-490c34a926a7/films/feature/iphone-x-feature-tpl-cc-us-20170912_1280x720h.mp4",
+            "https://www.apple.com/105/media/us/mac/family/2018/46c4b917_abfd_45a3_9b51_4e3054191797/films/peter/mac-peter-tpl-cc-us-2018_1280x720h.mp4",
+            "http://mirror.aarnet.edu.au/pub/TED-talks/911Mothers_2010W-480p.mp4",
+        ]
+        for string in array {
             let item = CLTableViewItem()
-            item.didSelectCellCallback = { [weak self] value in
+            item.title = NSMutableAttributedString("这是一个标题", attributes: { $0
+                    .font(.systemFont(ofSize: 16))
+                    .foregroundColor(.orange)
+                    .alignment(.center)
+            })
+            item.url = URL(string: string)
+            item.didSelectCellCallback = { [weak self] indexPath in
                 guard let self = self else { return }
-                guard let cell = self.tableView.cellForRow(at: value) else { return }
-                self.playWithCell(cell)
+                self.playWithIndexPath(indexPath)
             }
             tableViewHepler.dataSource.append(item)
         }
@@ -130,16 +155,44 @@ extension CLTableViewController {}
 // MARK: - JmoVxia---私有方法
 
 private extension CLTableViewController {
-    func playWithCell(_ cell: UITableViewCell) {
-        player.url = URL(string: "https://www.apple.com/105/media/us/mac/family/2018/46c4b917_abfd_45a3_9b51_4e3054191797/films/grimes/mac-grimes-tpl-cc-us-2018_1280x720h.mp4")
+    func playWithIndexPath(_ indexPath: IndexPath) {
+        guard let item = tableViewHepler.dataSource[indexPath.row] as? CLTableViewItem else { return }
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+
+        if player == nil {
+            player = CLPlayer()
+        }
+        player?.title = item.title
+        player?.url = item.url
+        cell.contentView.addSubview(player!)
+        player?.snp.remakeConstraints { make in
+            make.top.left.equalToSuperview()
+            make.size.equalTo(CGSize(width: cell.bounds.width, height: cell.bounds.height - 10))
+        }
+        player?.play()
+    }
+}
+
+extension CLTableViewController: UITableViewDelegate {
+    func tableView(_: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let player = player else { return }
+        let url = (tableViewHepler.dataSource[indexPath.row] as? CLTableViewItem)?.url?.absoluteString
+        guard url == player.url?.absoluteString else { return }
+
         cell.contentView.addSubview(player)
         player.snp.remakeConstraints { make in
             make.top.left.equalToSuperview()
             make.size.equalTo(CGSize(width: cell.bounds.width, height: cell.bounds.height - 10))
         }
+        player.play()
+    }
+
+    func tableView(_: UITableView, didEndDisplaying _: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let player = player else { return }
+        let url = (tableViewHepler.dataSource[indexPath.row] as? CLTableViewItem)?.url?.absoluteString
+        guard url == player.url?.absoluteString else { return }
+
+        player.removeFromSuperview()
+        player.pause()
     }
 }
-
-// MARK: - JmoVxia---公共方法
-
-extension CLTableViewController {}

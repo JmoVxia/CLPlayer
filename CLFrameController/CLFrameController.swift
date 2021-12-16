@@ -93,7 +93,13 @@ private extension CLFrameController {
 
 private extension CLFrameController {
     func initData() {
+        player.title = NSMutableAttributedString("Apple", attributes: { $0
+                .font(.systemFont(ofSize: 16))
+                .foregroundColor(.white)
+                .alignment(.center)
+        })
         player.url = URL(string: "https://www.apple.com/105/media/cn/mac/family/2018/46c4b917_abfd_45a3_9b51_4e3054191797/films/bruce/mac-bruce-tpl-cn-2018_1280x720h.mp4")
+        player.play()
     }
 }
 
@@ -112,6 +118,12 @@ extension CLFrameController {
 
 @objc private extension CLFrameController {
     func changeAction() {
+        player.title = NSMutableAttributedString("这是一个标题", attributes: { $0
+                .font(.systemFont(ofSize: 16))
+                .foregroundColor(.white)
+                .alignment(.left)
+        })
         player.url = URL(string: "http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4")
+        player.play()
     }
 }

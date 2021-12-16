@@ -36,9 +36,10 @@ extension CLPlayerContentView {
     }
 }
 
-class CLPlayerContentView: UIView {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+class CLPlayerContentView: UIImageView {
+    init(config: CLPlayerConfigure) {
+        self.config = config
+        super.init(frame: .zero)
         initUI()
         makeConstraints()
     }
@@ -49,8 +50,8 @@ class CLPlayerContentView: UIView {
     }
 
     private var volumeSlider: UISlider? = {
-        let volumeView = MPVolumeView()
-        return volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+        let view = MPVolumeView()
+        return view.subviews.first(where: { $0 is UISlider }) as? UISlider
     }()
 
     private lazy var topToolView: UIView = {
@@ -84,18 +85,18 @@ class CLPlayerContentView: UIView {
     private lazy var backButton: UIButton = {
         let view = UIButton()
         view.setImage(CLImageHelper.imageWithName("CLBack"), for: .normal)
-        view.setImage(CLImageHelper.imageWithName("CLBack"), for: .highlighted)
-        view.setImage(CLImageHelper.imageWithName("CLBack"), for: .selected)
         view.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+        return view
+    }()
+
+    private lazy var titleLabel: UILabel = {
+        let view = UILabel()
         return view
     }()
 
     private lazy var moreButton: UIButton = {
         let view = UIButton()
-        view.isHidden = true
         view.setImage(CLImageHelper.imageWithName("CLMore"), for: .normal)
-        view.setImage(CLImageHelper.imageWithName("CLMore"), for: .highlighted)
-        view.setImage(CLImageHelper.imageWithName("CLMore"), for: .selected)
         view.addTarget(self, action: #selector(moreButtonAction), for: .touchUpInside)
         return view
     }()
@@ -204,6 +205,13 @@ class CLPlayerContentView: UIView {
         return gesture
     }()
 
+    var title: NSMutableAttributedString? {
+        didSet {
+            guard let title = title else { return }
+            titleLabel.attributedText = title
+        }
+    }
+
     var currentRate: Float = 1.0 {
         didSet {
             guard currentRate != oldValue else { return }
@@ -225,14 +233,12 @@ class CLPlayerContentView: UIView {
             guard screenState != oldValue else { return }
             switch screenState {
             case .small:
-                moreButton.isHidden = true
-                fullButton.isSelected = false
+                topToolView.isHidden = config.topBarHiddenStyle != .never
                 hiddenMorePanel()
             case .animating:
                 break
             case .fullScreen:
-                moreButton.isHidden = false
-                fullButton.isSelected = true
+                topToolView.isHidden = config.topBarHiddenStyle == .always
             }
         }
     }
@@ -254,6 +260,7 @@ class CLPlayerContentView: UIView {
                 failButton.isHidden = true
                 playButton.isSelected = true
                 loadingView.stopAnimation()
+                image = nil
             case .buffering:
                 sliderView.isUserInteractionEnabled = true
                 failButton.isHidden = true
@@ -270,9 +277,12 @@ class CLPlayerContentView: UIView {
                 failButton.isHidden = true
                 playButton.isSelected = false
                 loadingView.stopAnimation()
+                image = config.maskImage
             }
         }
     }
+
+    private var config: CLPlayerConfigure!
 
     private var isShowMorePanel: Bool = false {
         didSet {
@@ -340,13 +350,17 @@ class CLPlayerContentView: UIView {
 
 private extension CLPlayerContentView {
     func initUI() {
+        updateConfig()
+
         clipsToBounds = true
         autoresizesSubviews = true
+        isUserInteractionEnabled = true
 
         addSubview(topToolView)
         addSubview(bottomToolView)
         addSubview(loadingView)
         topToolView.addSubview(backButton)
+        topToolView.addSubview(titleLabel)
         topToolView.addSubview(moreButton)
         bottomToolView.addSubview(bottomContentView)
         bottomToolView.addSubview(bottomSafeView)
@@ -388,12 +402,17 @@ private extension CLPlayerContentView {
             make.size.equalTo(40)
         }
         backButton.snp.makeConstraints { make in
-            make.left.equalTo(10)
+            make.left.equalTo(-40)
             make.size.equalTo(40)
             make.centerY.equalToSuperview()
         }
+        titleLabel.snp.makeConstraints { make in
+            make.left.equalTo(backButton.snp.right).offset(15)
+            make.right.equalTo(moreButton.snp.left).offset(-15)
+            make.centerY.height.equalToSuperview()
+        }
         moreButton.snp.makeConstraints { make in
-            make.right.equalTo(-10)
+            make.right.equalTo(40)
             make.size.equalTo(40)
             make.centerY.equalToSuperview()
         }
@@ -432,6 +451,62 @@ private extension CLPlayerContentView {
             make.right.equalTo(morePanelWidth)
             make.width.equalTo(morePanelWidth)
         }
+    }
+
+    func updateConfig() {
+        currentVideoGravity = config.videoGravity
+        topToolView.isHidden = screenState == .small ? config.topBarHiddenStyle != .never : config.topBarHiddenStyle == .always
+        moreButton.isHidden = !config.isShowMorePanel
+        topToolView.backgroundColor = config.topToobarBackgroundColor
+        bottomToolView.backgroundColor = config.bottomToolbarBackgroundColor
+        progressView.trackTintColor = config.progressBackgroundColor
+        progressView.progressTintColor = config.progressBufferColor
+        sliderView.minimumTrackTintColor = config.progressFinishedColor
+        loadingView.updateWithConfigure { $0.backgroundColor = self.config.loadingBackgroundColor }
+
+        let backImage: UIImage? = {
+            guard let image = config.backImage else { return CLImageHelper.imageWithName("CLBack") }
+            return image
+        }()
+        backButton.setImage(backImage, for: .normal)
+
+        let moreImage: UIImage? = {
+            guard let image = config.moreImage else { return CLImageHelper.imageWithName("CLMore") }
+            return image
+        }()
+        moreButton.setImage(moreImage, for: .normal)
+
+        let playImage: UIImage? = {
+            guard let image = config.playImage else { return CLImageHelper.imageWithName("CLPlay") }
+            return image
+        }()
+        playButton.setImage(playImage, for: .normal)
+
+        let pauseImage: UIImage? = {
+            guard let image = config.pauseImage else { return CLImageHelper.imageWithName("CLPause") }
+            return image
+        }()
+        playButton.setImage(pauseImage, for: .selected)
+
+        let maxImage: UIImage? = {
+            guard let image = config.maxImage else { return CLImageHelper.imageWithName("CLFullscreen") }
+            return image
+        }()
+        fullButton.setImage(maxImage, for: .normal)
+
+        let minImage: UIImage? = {
+            guard let image = config.minImage else { return CLImageHelper.imageWithName("CLSmallscreen") }
+            return image
+        }()
+        fullButton.setImage(minImage, for: .selected)
+
+        let sliderImage: UIImage? = {
+            guard let image = config.sliderImage else { return CLImageHelper.imageWithName("CLSlider") }
+            return image
+        }()
+        sliderView.setThumbImage(sliderImage, for: .normal)
+
+        image = config.maskImage
     }
 }
 
@@ -529,7 +604,7 @@ private extension CLPlayerContentView {
     }
 
     func autoFadeOutTooView() {
-        autoFadeOutTimer = CLGCDTimer(interval: 0, delaySecs: 5.25, repeats: false, action: { [weak self] _ in
+        autoFadeOutTimer = CLGCDTimer(interval: 0, delaySecs: 0.25 + config.autoFadeOut, repeats: false, action: { [weak self] _ in
             self?.isShowToolView = false
         })
         autoFadeOutTimer?.start()
@@ -543,16 +618,19 @@ private extension CLPlayerContentView {
 // MARK: - JmoVxia---公共方法
 
 extension CLPlayerContentView {
-    @available(iOS 11.0, *)
-    func animationLayout(safeAreaInsets: UIEdgeInsets) {
+    func animationLayout(safeAreaInsets: UIEdgeInsets, to screenState: CLPlayerScreenState) {
         bottomSafeView.snp.updateConstraints { make in
             make.height.equalTo(safeAreaInsets.bottom)
         }
         backButton.snp.updateConstraints { make in
-            make.left.equalTo(safeAreaInsets.left + 10)
+            make.left.equalTo(screenState == .small ? -40 : safeAreaInsets.left + 10)
+        }
+        titleLabel.snp.updateConstraints { make in
+            make.left.equalTo(backButton.snp.right).offset(screenState == .small ? 15 : 10)
+            make.right.equalTo(moreButton.snp.left).offset(screenState == .small ? -15 : -10)
         }
         moreButton.snp.updateConstraints { make in
-            make.right.equalTo(-safeAreaInsets.left - 10)
+            make.right.equalTo(screenState == .small ? 40 : -safeAreaInsets.left - 10)
         }
         playButton.snp.updateConstraints { make in
             make.left.equalTo(safeAreaInsets.left + 10)
@@ -560,6 +638,10 @@ extension CLPlayerContentView {
         fullButton.snp.updateConstraints { make in
             make.right.equalTo(-safeAreaInsets.right - 10)
         }
+
+        fullButton.isSelected = screenState == .fullScreen
+
+        topToolView.isHidden = screenState == .small ? config.topBarHiddenStyle != .never : config.topBarHiddenStyle == .always
     }
 
     func setProgress(_ progress: Float, animated: Bool) {
@@ -636,7 +718,7 @@ extension CLPlayerContentView: UIGestureRecognizerDelegate {
         if morePanelCollectionView.bounds.contains(touch.location(in: morePanelCollectionView)) {
             return false
         } else if gestureRecognizer == panGesture {
-            return screenState == .fullScreen
+            return screenState == .fullScreen && config.isGestureInteractionEnabled
         }
         return true
     }

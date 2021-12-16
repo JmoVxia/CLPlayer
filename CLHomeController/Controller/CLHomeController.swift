@@ -123,6 +123,15 @@ private extension CLHomeController {
             }
             tableViewHepler.dataSource.append(item)
         }
+        do {
+            let item = CLListItem()
+            item.title = "UICollectionView"
+            item.didSelectCellCallback = { [weak self] _ in
+                guard let self = self else { return }
+                self.pushToCollectionView()
+            }
+            tableViewHepler.dataSource.append(item)
+        }
         tableView.reloadData()
     }
 }
@@ -148,6 +157,10 @@ private extension CLHomeController {
 
     func pushToTableView() {
         navigationController?.pushViewController(CLTableViewController(), animated: true)
+    }
+
+    func pushToCollectionView() {
+        navigationController?.pushViewController(CLCollectionViewController(), animated: true)
     }
 }
 

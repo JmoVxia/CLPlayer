@@ -11,6 +11,8 @@
 		5B2D28E32729446800E85A53 /* CLRotateAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2D28E22729446800E85A53 /* CLRotateAnimationView.swift */; };
 		5B2D28E52729463800E85A53 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B2D28E42729463800E85A53 /* CLPlayer.bundle */; };
 		5B2D28E72729468000E85A53 /* CLImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2D28E62729468000E85A53 /* CLImageHelper.swift */; };
+		5B33B4DE2769EAA20086B402 /* CLPlayerConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33B4DD2769EAA20086B402 /* CLPlayerConfigure.swift */; };
+		5B33B4E02769F2990086B402 /* CLPlayerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33B4DF2769F2990086B402 /* CLPlayerDelegate.swift */; };
 		5B37DEE02727D9ED002A377A /* UIColor+CLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37DEDF2727D9ED002A377A /* UIColor+CLExtension.swift */; };
 		5B37DEE32727DA5E002A377A /* CLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37DEE22727DA5E002A377A /* CLNavigationController.swift */; };
 		5B37DEE52727DB04002A377A /* CLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37DEE42727DB04002A377A /* CLController.swift */; };
@@ -23,11 +25,14 @@
 		5B83040E2728FE0800A92423 /* CLFullScreenLeftController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83040D2728FE0800A92423 /* CLFullScreenLeftController.swift */; };
 		5B8304102728FE1100A92423 /* CLFullScreenRightController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B83040F2728FE1100A92423 /* CLFullScreenRightController.swift */; };
 		5B830414272917FD00A92423 /* CLAnimationTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B830413272917FD00A92423 /* CLAnimationTransitioning.swift */; };
+		5BA11A70276AD7290093B418 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA11A6F276AD7290093B418 /* NSMutableAttributedString+Extension.swift */; };
 		5BA39B182727D147005059F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA39B172727D147005059F5 /* AppDelegate.swift */; };
 		5BA39B1F2727D147005059F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA39B1D2727D147005059F5 /* Main.storyboard */; };
 		5BA39B212727D148005059F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BA39B202727D148005059F5 /* Assets.xcassets */; };
 		5BA39B242727D148005059F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BA39B222727D148005059F5 /* LaunchScreen.storyboard */; };
 		5BA39B2F2727D1EE005059F5 /* CLTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA39B2C2727D1EE005059F5 /* CLTabBarController.swift */; };
+		5BC41038276B18AB00DFE028 /* CLCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC41037276B18AB00DFE028 /* CLCollectionViewController.swift */; };
+		5BC4103B276B19C300DFE028 /* CLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4103A276B19C300DFE028 /* CLCollectionViewCell.swift */; };
 		5BE1F31B2727DCDB0090F6C8 /* CLMoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F31A2727DCDB0090F6C8 /* CLMoreController.swift */; };
 		5BE1F3202727DDC00090F6C8 /* CLListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F31F2727DDC00090F6C8 /* CLListCell.swift */; };
 		5BE1F3252727DE4C0090F6C8 /* CLListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F3242727DE4C0090F6C8 /* CLListItem.swift */; };
@@ -52,6 +57,8 @@
 		5B2D28E22729446800E85A53 /* CLRotateAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRotateAnimationView.swift; sourceTree = "<group>"; };
 		5B2D28E42729463800E85A53 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
 		5B2D28E62729468000E85A53 /* CLImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLImageHelper.swift; sourceTree = "<group>"; };
+		5B33B4DD2769EAA20086B402 /* CLPlayerConfigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerConfigure.swift; sourceTree = "<group>"; };
+		5B33B4DF2769F2990086B402 /* CLPlayerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerDelegate.swift; sourceTree = "<group>"; };
 		5B37DEDF2727D9ED002A377A /* UIColor+CLExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CLExtension.swift"; sourceTree = "<group>"; };
 		5B37DEE22727DA5E002A377A /* CLNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLNavigationController.swift; sourceTree = "<group>"; };
 		5B37DEE42727DB04002A377A /* CLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLController.swift; sourceTree = "<group>"; };
@@ -64,6 +71,7 @@
 		5B83040D2728FE0800A92423 /* CLFullScreenLeftController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLFullScreenLeftController.swift; sourceTree = "<group>"; };
 		5B83040F2728FE1100A92423 /* CLFullScreenRightController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLFullScreenRightController.swift; sourceTree = "<group>"; };
 		5B830413272917FD00A92423 /* CLAnimationTransitioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAnimationTransitioning.swift; sourceTree = "<group>"; };
+		5BA11A6F276AD7290093B418 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		5BA39B142727D147005059F5 /* CLPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CLPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BA39B172727D147005059F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BA39B1E2727D147005059F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +79,8 @@
 		5BA39B232727D148005059F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BA39B252727D148005059F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BA39B2C2727D1EE005059F5 /* CLTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLTabBarController.swift; sourceTree = "<group>"; };
+		5BC41037276B18AB00DFE028 /* CLCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCollectionViewController.swift; sourceTree = "<group>"; };
+		5BC4103A276B19C300DFE028 /* CLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCollectionViewCell.swift; sourceTree = "<group>"; };
 		5BE1F31A2727DCDB0090F6C8 /* CLMoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMoreController.swift; sourceTree = "<group>"; };
 		5BE1F31F2727DDC00090F6C8 /* CLListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLListCell.swift; sourceTree = "<group>"; };
 		5BE1F3242727DE4C0090F6C8 /* CLListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLListItem.swift; sourceTree = "<group>"; };
@@ -105,6 +115,7 @@
 		5B37DEE12727D9F0002A377A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				5BA11A6F276AD7290093B418 /* NSMutableAttributedString+Extension.swift */,
 				5BE1F3332727E3800090F6C8 /* UIImage+Extension.swift */,
 				5B37DEDF2727D9ED002A377A /* UIColor+CLExtension.swift */,
 			);
@@ -158,6 +169,7 @@
 				5BE1F3282727E0C60090F6C8 /* CLAutolayoutController */,
 				5BFADCB42768888500A596A6 /* CLFrameController */,
 				5BE1F32B2727E11F0090F6C8 /* CLTableViewController */,
+				5BC41036276B188900DFE028 /* CLCollectionViewController */,
 				5BE1F3372727E55E0090F6C8 /* Resources */,
 				5BA39B152727D147005059F5 /* Products */,
 				D532A78DB1B29559F40D05B2 /* Pods */,
@@ -177,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				5BE1F3382727E5780090F6C8 /* CLPlayer.swift */,
+				5B33B4DD2769EAA20086B402 /* CLPlayerConfigure.swift */,
+				5B33B4DF2769F2990086B402 /* CLPlayerDelegate.swift */,
 				5B2D28E62729468000E85A53 /* CLImageHelper.swift */,
 				5BFADCB9276893B600A596A6 /* CLGCDTimer.swift */,
 				5BFADCB72768936C00A596A6 /* CLPlayerContentView */,
@@ -194,6 +208,23 @@
 				5BE1F3352727E4000090F6C8 /* CLController */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		5BC41036276B188900DFE028 /* CLCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5BC41037276B18AB00DFE028 /* CLCollectionViewController.swift */,
+				5BC41039276B19B500DFE028 /* View */,
+			);
+			path = CLCollectionViewController;
+			sourceTree = "<group>";
+		};
+		5BC41039276B19B500DFE028 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5BC4103A276B19C300DFE028 /* CLCollectionViewCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5BE1F31C2727DD960090F6C8 /* CLHomeController */ = {
@@ -537,21 +568,26 @@
 				5B37DEF02727DBD9002A377A /* CLCellProtocol.swift in Sources */,
 				5B37DEEF2727DBD9002A377A /* CLCellItemProtocol.swift in Sources */,
 				5BE1F32A2727E0F80090F6C8 /* CLAutolayoutController.swift in Sources */,
+				5B33B4DE2769EAA20086B402 /* CLPlayerConfigure.swift in Sources */,
 				5BE1F3322727E21E0090F6C8 /* CLBackView.swift in Sources */,
 				5B72C197272A868E004B9AEA /* CLPlayerContentViewDelegate.swift in Sources */,
 				5BFADCBA276893B600A596A6 /* CLGCDTimer.swift in Sources */,
 				5B37DEF12727DBD9002A377A /* CLTableViewHepler.swift in Sources */,
 				5B8304102728FE1100A92423 /* CLFullScreenRightController.swift in Sources */,
 				5B2D28E32729446800E85A53 /* CLRotateAnimationView.swift in Sources */,
+				5BC41038276B18AB00DFE028 /* CLCollectionViewController.swift in Sources */,
 				5B830414272917FD00A92423 /* CLAnimationTransitioning.swift in Sources */,
 				5B72C195272A39B1004B9AEA /* CLSlider.swift in Sources */,
+				5BC4103B276B19C300DFE028 /* CLCollectionViewCell.swift in Sources */,
 				5BFADCAC2767415200A596A6 /* CLPlayerContentPanelHeadView.swift in Sources */,
 				5BE1F3342727E3800090F6C8 /* UIImage+Extension.swift in Sources */,
 				5B2D28E72729468000E85A53 /* CLImageHelper.swift in Sources */,
 				5B37DEE72727DBA5002A377A /* CLHomeController.swift in Sources */,
+				5B33B4E02769F2990086B402 /* CLPlayerDelegate.swift in Sources */,
 				5BF306642728DFB40046075A /* CLFullScreenController.swift in Sources */,
 				5BE1F3252727DE4C0090F6C8 /* CLListItem.swift in Sources */,
 				5B37DEE52727DB04002A377A /* CLController.swift in Sources */,
+				5BA11A70276AD7290093B418 /* NSMutableAttributedString+Extension.swift in Sources */,
 				5BE1F3202727DDC00090F6C8 /* CLListCell.swift in Sources */,
 				5BFADCB6276888B400A596A6 /* CLFrameController.swift in Sources */,
 			);
