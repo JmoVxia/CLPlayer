@@ -28,7 +28,7 @@ public struct CLPlayerConfigure {
     /// 顶部工具条隐藏风格
     public var topBarHiddenStyle: CLPlayerTopBarHiddenStyle = .onlySmall
     /// 工具条自动消失时间
-    public var autoFadeOut: TimeInterval = 5
+    public var autoFadeOut: TimeInterval = 8
     /// 默认拉伸方式
     public var videoGravity: AVLayerVideoGravity = .resizeAspectFill
     /// 顶部工具条背景颜色

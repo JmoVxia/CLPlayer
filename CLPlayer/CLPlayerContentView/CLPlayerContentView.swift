@@ -254,7 +254,7 @@ class CLPlayerContentView: UIImageView {
                 playButton.isSelected = false
                 loadingView.startAnimation()
             case .readyToPlay:
-                sliderView.isUserInteractionEnabled = false
+                sliderView.isUserInteractionEnabled = true
             case .playing:
                 sliderView.isUserInteractionEnabled = true
                 failButton.isHidden = true

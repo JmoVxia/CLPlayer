@@ -9,6 +9,14 @@ import AVFoundation
 import SnapKit
 import UIKit
 
+extension CLPlayer {
+    enum CLWaitReadyToPlayState {
+        case nomal
+        case pause
+        case play
+    }
+}
+
 public class CLPlayer: UIView {
     public init(frame: CGRect = .zero, configure: ((inout CLPlayerConfigure) -> Void)? = nil) {
         super.init(frame: frame)
@@ -46,12 +54,11 @@ public class CLPlayer: UIView {
         }
     }()
 
-    private lazy var sliderTimer: CLGCDTimer = {
-        let timer = CLGCDTimer(interval: 0.1) { [weak self] _ in
-            self?.sliderTimerAction()
-        }
-        return timer
-    }()
+    private var waitReadyToPlayState: CLWaitReadyToPlayState = .nomal
+
+    private var sliderTimer: CLGCDTimer?
+
+    private var bufferTimer: CLGCDTimer?
 
     private var config = CLPlayerConfigure()
 
@@ -85,12 +92,6 @@ public class CLPlayer: UIView {
             statusObserve = playerItem.observe(\.status, options: [.new]) { [weak self] _, _ in
                 self?.observeStatusAction()
             }
-            loadedTimeRangesObserve = playerItem.observe(\.loadedTimeRanges, options: [.new]) { [weak self] _, _ in
-                self?.observeLoadedTimeRangesAction()
-            }
-            playbackBufferEmptyObserve = playerItem.observe(\.isPlaybackBufferEmpty, options: [.new]) { [weak self] _, _ in
-                self?.observePlaybackBufferEmptyAction()
-            }
         }
     }
 
@@ -115,7 +116,9 @@ public class CLPlayer: UIView {
             let oldIntValue = Int(oldValue * 100)
             let intValue = Int(playbackProgress * 100)
             if intValue != oldIntValue {
-                delegate?.player(self, playbackProgressChanged: CGFloat(intValue) / 100)
+                DispatchQueue.main.async {
+                    self.delegate?.player(self, playProgressChanged: CGFloat(intValue) / 100)
+                }
             }
         }
     }
@@ -133,7 +136,7 @@ public class CLPlayer: UIView {
             playerLayer?.videoGravity = videoGravity
         }
     }
-    
+
     public var isFullScreen: Bool {
         return contentView.screenState == .fullScreen
     }
@@ -229,8 +232,10 @@ private extension CLPlayer {
         currentDuration = totalDuration
         playbackProgress = 1.0
         contentView.playState = .ended
-        sliderTimer.suspend()
-        delegate?.didPlayToEndTime(in: self)
+        sliderTimer?.suspend()
+        DispatchQueue.main.async {
+            self.delegate?.didPlayToEnd(in: self)
+        }
     }
 
     func deviceOrientationDidChange() {
@@ -253,6 +258,7 @@ private extension CLPlayer {
 
     func appDidEnterPlayground() {
         isEnterBackground = false
+        guard contentView.playState != .ended else { return }
         play()
     }
 }
@@ -261,13 +267,37 @@ private extension CLPlayer {
 
 private extension CLPlayer {
     func observeStatusAction() {
-        if player?.currentItem?.status == .readyToPlay {
-            guard let playerItem = playerItem else { return }
+        guard let playerItem = playerItem else { return }
+        if playerItem.status == .readyToPlay {
             contentView.playState = .readyToPlay
             totalDuration = TimeInterval(playerItem.duration.value) / TimeInterval(playerItem.duration.timescale)
-            sliderTimer.start()
-        } else if player?.currentItem?.status == .failed {
+
+            sliderTimer = CLGCDTimer(interval: 0.1) { [weak self] _ in
+                self?.sliderTimerAction()
+            }
+            sliderTimer?.start()
+
+            loadedTimeRangesObserve = playerItem.observe(\.loadedTimeRanges, options: [.new]) { [weak self] _, _ in
+                self?.observeLoadedTimeRangesAction()
+            }
+
+            playbackBufferEmptyObserve = playerItem.observe(\.isPlaybackBufferEmpty, options: [.new]) { [weak self] _, _ in
+                self?.observePlaybackBufferEmptyAction()
+            }
+
+            switch waitReadyToPlayState {
+            case .nomal:
+                break
+            case .pause:
+                pause()
+            case .play:
+                play()
+            }
+        } else if playerItem.status == .failed {
             contentView.playState = .failed
+            DispatchQueue.main.async {
+                self.delegate?.player(self, playFailed: playerItem.error)
+            }
         }
     }
 
@@ -286,18 +316,30 @@ private extension CLPlayer {
 
 private extension CLPlayer {
     func availableDuration() -> TimeInterval? {
-        guard let timeRange = player?.currentItem?.loadedTimeRanges.first?.timeRangeValue else { return nil }
+        guard let timeRange = playerItem?.loadedTimeRanges.first?.timeRangeValue else { return nil }
         let startSeconds = CMTimeGetSeconds(timeRange.start)
         let durationSeconds = CMTimeGetSeconds(timeRange.duration)
         return .init(startSeconds + durationSeconds)
     }
 
     func bufferingSomeSecond() {
+        guard playerItem?.status == .readyToPlay else { return }
         guard contentView.playState != .failed else { return }
+
+        player?.pause()
+        sliderTimer?.suspend()
+        bufferTimer?.cancel()
+
         contentView.playState = .buffering
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
-            self?.play()
-        }
+        bufferTimer = CLGCDTimer(interval: 0, delaySecs: 3.0, repeats: false, action: { [weak self] _ in
+            guard let playerItem = self?.playerItem else { return }
+            if playerItem.isPlaybackLikelyToKeepUp {
+                self?.play()
+            } else {
+                self?.bufferingSomeSecond()
+            }
+        })
+        bufferTimer?.start()
     }
 
     func sliderTimerAction() {
@@ -345,25 +387,36 @@ private extension CLPlayer {
 public extension CLPlayer {
     func play() {
         guard !isEnterBackground else { return }
-        guard let playerItem = playerItem else { return }
         guard !isUserPause else { return }
-        if contentView.playState == .ended {
-            player?.seek(to: CMTimeMake(value: 0, timescale: 1), toleranceBefore: .zero, toleranceAfter: .zero)
+        guard let playerItem = playerItem else { return }
+        guard playerItem.status == .readyToPlay else {
+            waitReadyToPlayState = .play
+            return
         }
         guard playerItem.isPlaybackLikelyToKeepUp else {
             bufferingSomeSecond()
             return
         }
+        if contentView.playState == .ended {
+            player?.seek(to: CMTimeMake(value: 0, timescale: 1), toleranceBefore: .zero, toleranceAfter: .zero)
+        }
         contentView.playState = .playing
         player?.play()
         player?.rate = rate
-        sliderTimer.resume()
+        sliderTimer?.resume()
+        waitReadyToPlayState = .nomal
     }
 
     func pause() {
+        guard playerItem?.status == .readyToPlay else {
+            waitReadyToPlayState = .pause
+            return
+        }
         contentView.playState = .pause
         player?.pause()
-        sliderTimer.suspend()
+        sliderTimer?.suspend()
+        bufferTimer?.cancel()
+        waitReadyToPlayState = .nomal
     }
 
     func stop() {
@@ -379,12 +432,16 @@ public extension CLPlayer {
         player = nil
         playerLayer = nil
 
+        isUserPause = false
+
+        waitReadyToPlayState = .nomal
+
         contentView.playState = .unknow
         contentView.setProgress(0, animated: false)
         contentView.setSliderProgress(0, animated: false)
         contentView.setTotalDuration(0)
         contentView.setCurrentDuration(0)
-        sliderTimer.resume()
+        sliderTimer?.cancel()
     }
 }
 
@@ -434,7 +491,9 @@ extension CLPlayer: CLPlayerContentViewDelegate {
     func didClickBackButton(in contentView: CLPlayerContentView) {
         guard contentView.screenState == .fullScreen else { return }
         dismiss()
-        delegate?.didClickBackButton(in: self)
+        DispatchQueue.main.async {
+            self.delegate?.didClickBackButton(in: self)
+        }
     }
 
     func didClickPlayButton(isPlay: Bool, in _: CLPlayerContentView) {

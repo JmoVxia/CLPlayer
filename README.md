@@ -1,3 +1,5 @@
+![head](https://gitee.com/JmoVxia/Photos/raw/master/2mIPI2.png)
+
 # 前言
 
     很早之前开源了一个简单的视频播放器，由于年久失修，效果惨目忍睹，最近特意花时间对其进行了深度重构。旧版本后期不再维护，新版本使用`Swift`实现，后续会增加更多功能。不想看文字的请自行下载代码------>>>[CLPlayer](https://github.com/JmoVxia/CLPlayer)
