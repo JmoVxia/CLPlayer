@@ -717,6 +717,10 @@ extension CLPlayerContentView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         if morePanelCollectionView.bounds.contains(touch.location(in: morePanelCollectionView)) {
             return false
+        } else if topToolView.bounds.contains(touch.location(in: topToolView)) {
+            return false
+        } else if bottomToolView.bounds.contains(touch.location(in: bottomToolView)) {
+            return false
         } else if gestureRecognizer == panGesture {
             return screenState == .fullScreen && config.isGestureInteractionEnabled
         }
