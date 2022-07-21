@@ -18,12 +18,12 @@ extension CLPlayer {
 }
 
 public class CLPlayer: UIView {
-    public init(frame: CGRect = .zero, configure: ((inout CLPlayerConfigure) -> Void)? = nil) {
+    public init(frame: CGRect = .zero, config: ((inout CLPlayerConfigure) -> Void)? = nil) {
         super.init(frame: frame)
-        configure?(&config)
-        updateConfig()
+        config?(&self.config)
         initUI()
         makeConstraints()
+        (layer as? AVPlayerLayer)?.videoGravity = self.config.videoGravity
     }
 
     @available(*, unavailable)
@@ -32,9 +32,7 @@ public class CLPlayer: UIView {
     }
 
     deinit {
-        if config.isAutoRotate {
-            NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
+        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         print("CLPlayer deinit")
@@ -77,8 +75,6 @@ public class CLPlayer: UIView {
     private var isEnterBackground: Bool = false
 
     private var player: AVPlayer?
-
-    private var playerLayer: AVPlayerLayer?
 
     private var playerItem: AVPlayerItem? {
         didSet {
@@ -130,13 +126,6 @@ public class CLPlayer: UIView {
         }
     }
 
-    public private(set) var videoGravity: AVLayerVideoGravity = .resizeAspectFill {
-        didSet {
-            guard videoGravity != oldValue else { return }
-            playerLayer?.videoGravity = videoGravity
-        }
-    }
-
     public var isFullScreen: Bool {
         return contentView.screenState == .fullScreen
     }
@@ -181,9 +170,13 @@ public class CLPlayer: UIView {
             }
             playerItem = AVPlayerItem(asset: .init(url: url))
             player = AVPlayer(playerItem: playerItem)
-            playerLayer = layer as? AVPlayerLayer
-            playerLayer?.videoGravity = videoGravity
-            playerLayer?.player = player
+            (layer as? AVPlayerLayer)?.player = player
+        }
+    }
+
+    public weak var placeholder: UIView? {
+        didSet {
+            contentView.placeholderView = placeholder
         }
     }
 
@@ -204,24 +197,18 @@ private extension CLPlayer {
     func initUI() {
         backgroundColor = .black
         addSubview(contentView)
-        if config.isAutoRotate {
-            if !UIDevice.current.isGeneratingDeviceOrientationNotifications {
-                UIDevice.current.beginGeneratingDeviceOrientationNotifications()
-            }
-            NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
-        }
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterBackground), name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appDidEnterPlayground), name: UIApplication.didBecomeActiveNotification, object: nil)
+        if !UIDevice.current.isGeneratingDeviceOrientationNotifications {
+            UIDevice.current.beginGeneratingDeviceOrientationNotifications()
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
 
     func makeConstraints() {
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-
-    func updateConfig() {
-        videoGravity = config.videoGravity
     }
 }
 
@@ -239,6 +226,10 @@ private extension CLPlayer {
     }
 
     func deviceOrientationDidChange() {
+        guard config.rotateStyle != .none else { return }
+        if config.rotateStyle == .small, isFullScreen { return }
+        if config.rotateStyle == .fullScreen, !isFullScreen { return }
+
         switch UIDevice.current.orientation {
         case .portrait:
             dismiss()
@@ -362,6 +353,7 @@ private extension CLPlayer {
             self.contentView.screenState = .small
         })
         fullScreenController = nil
+        UIViewController.attemptRotationToDeviceOrientation()
     }
 
     func presentWithOrientation(_ orientation: CLAnimationTransitioning.CLAnimationOrientation) {
@@ -378,6 +370,7 @@ private extension CLPlayer {
         fullScreenController?.modalPresentationStyle = .fullScreen
         rootViewController.present(fullScreenController!, animated: true, completion: {
             self.contentView.screenState = .fullScreen
+            UIViewController.attemptRotationToDeviceOrientation()
         })
     }
 }
@@ -390,6 +383,7 @@ public extension CLPlayer {
         guard !isUserPause else { return }
         guard let playerItem = playerItem else { return }
         guard playerItem.status == .readyToPlay else {
+            contentView.playState = .waiting
             waitReadyToPlayState = .play
             return
         }
@@ -430,7 +424,6 @@ public extension CLPlayer {
 
         playerItem = nil
         player = nil
-        playerLayer = nil
 
         isUserPause = false
 
@@ -462,17 +455,34 @@ extension CLPlayer: UIViewControllerTransitioningDelegate {
 // MARK: - JmoVxia---CLPlayerContentViewDelegate
 
 extension CLPlayer: CLPlayerContentViewDelegate {
-    func sliderTouchBegan(_: CLSlider, in _: CLPlayerContentView) {
+    func contentView(_ contentView: CLPlayerContentView, didClickPlayButton isPlay: Bool) {
+        isUserPause = isPlay
+        isPlay ? pause() : play()
+    }
+
+    func contentView(_ contentView: CLPlayerContentView, didClickFullButton isFull: Bool) {
+        isFull ? dismiss() : presentWithOrientation(.fullRight)
+    }
+
+    func contentView(_ contentView: CLPlayerContentView, didChangeRate rate: Float) {
+        self.rate = rate
+    }
+
+    func contentView(_ contentView: CLPlayerContentView, didChangeVideoGravity videoGravity: AVLayerVideoGravity) {
+        (layer as? AVPlayerLayer)?.videoGravity = videoGravity
+    }
+
+    func contentView(_ contentView: CLPlayerContentView, sliderTouchBegan slider: CLSlider) {
         pause()
     }
 
-    func sliderValueChanged(_ slider: CLSlider, in _: CLPlayerContentView) {
+    func contentView(_ contentView: CLPlayerContentView, sliderValueChanged slider: CLSlider) {
         currentDuration = totalDuration * TimeInterval(slider.value)
         let dragedCMTime = CMTimeMake(value: Int64(ceil(currentDuration)), timescale: 1)
         player?.seek(to: dragedCMTime, toleranceBefore: .zero, toleranceAfter: .zero)
     }
 
-    func sliderTouchEnded(_ slider: CLSlider, in _: CLPlayerContentView) {
+    func contentView(_ contentView: CLPlayerContentView, sliderTouchEnded slider: CLSlider) {
         guard let playerItem = playerItem else { return }
         if slider.value == 1 {
             didPlaybackEnds()
@@ -494,22 +504,5 @@ extension CLPlayer: CLPlayerContentViewDelegate {
         DispatchQueue.main.async {
             self.delegate?.didClickBackButton(in: self)
         }
-    }
-
-    func didClickPlayButton(isPlay: Bool, in _: CLPlayerContentView) {
-        isUserPause = isPlay
-        isPlay ? pause() : play()
-    }
-
-    func didClickFullButton(isFull: Bool, in _: CLPlayerContentView) {
-        isFull ? dismiss() : presentWithOrientation(.fullRight)
-    }
-
-    func didChangeRate(_ rate: Float, in _: CLPlayerContentView) {
-        self.rate = rate
-    }
-
-    func didChangeVideoGravity(_ videoGravity: AVLayerVideoGravity, in _: CLPlayerContentView) {
-        self.videoGravity = videoGravity
     }
 }

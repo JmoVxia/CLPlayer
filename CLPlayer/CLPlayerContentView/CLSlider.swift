@@ -29,10 +29,7 @@ class CLSlider: UISlider {
 // MARK: - JmoVxia---布局
 
 private extension CLSlider {
-    func initUI() {
-        let thumbImage = CLImageHelper.imageWithName("CLSlider")
-        setThumbImage(thumbImage, for: .normal)
-    }
+    func initUI() {}
 }
 
 // MARK: - JmoVxia---override

@@ -7,8 +7,8 @@
 
 import UIKit
 
-class CLImageHelper: NSObject {
-    static func imageWithName(_ name: String) -> UIImage? {
+public class CLImageHelper: NSObject {
+    public static func imageWithName(_ name: String) -> UIImage? {
         let filePath = Bundle(for: classForCoder()).resourcePath! + "/CLPlayer.bundle"
         let bundle = Bundle(path: filePath)
         let scale = max(min(Int(UIScreen.main.scale), 2), 3)

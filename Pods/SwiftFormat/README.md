@@ -21,6 +21,8 @@ Table of Contents
     - [Sublime Text plugin](#sublime-text-plugin)
     - [Git pre-commit hook](#git-pre-commit-hook)
     - [On CI using Danger](#on-ci-using-danger)
+    - [Bazel build](#bazel-build)
+    - [Docker](#docker)
 - [Configuration](#configuration)
     - [Options](#options)
     - [Rules](#rules)
@@ -43,6 +45,7 @@ What is this?
 SwiftFormat is a code library and command-line tool for reformatting Swift code on macOS or Linux.
 
 SwiftFormat goes above and beyond what you might expect from a code formatter. In addition to adjusting white space it can insert or remove implicit `self`, remove redundant parentheses, and correct many other deviations from the standard Swift idioms.
+
 
 Why would I want to do that?
 -----------------------------
@@ -72,7 +75,7 @@ Command-line tool
 
 **Installation:**
 
-You can install the `swiftformat` command-line tool on macOS using [Homebrew](http://brew.sh/). Assuming you already have Homebrew installed, just type:
+You can install the `swiftformat` command-line tool on macOS or Linux using [Homebrew](http://brew.sh/). Assuming you already have Homebrew installed, just type:
 
 ```bash
 $ brew install swiftformat
@@ -90,13 +93,7 @@ Alternatively, you can install the tool on macOS or Linux by using [Mint](https:
 $ mint install nicklockwood/SwiftFormat
 ```
 
-And then run it using:
-
-```bash
-$ mint run swiftformat
-```
-
-Or if you prefer, you can check out and build SwiftFormat manually on macOS or Linux as follows:
+Or if you prefer, you can check out and build SwiftFormat manually on macOS, Linux or Windows as follows:
 
 ```bash
 $ git clone https://github.com/nicklockwood/SwiftFormat
@@ -105,6 +102,16 @@ $ swift build -c release
 ```
 
 If you are installing SwiftFormat into your project directory, you can use [CocoaPods](https://cocoapods.org/) on macOS to automatically install the swiftformat binary along with your other pods - see the Xcode build phase instructions below for details.
+
+Another option is to include the binary artifactbundle in your `Package.swift`:
+
+```swift
+.binaryTarget(
+    name: "SwiftFormat",
+    url: "https://github.com/nicklockwood/SwiftFormat/releases/download/0.49.12/swiftformat-macos.artifactbundle.zip",
+    checksum: "CHECKSUM"
+),
+``` 
 
 If you would prefer not to use a package manager, you can build the command-line app manually:
 
@@ -210,7 +217,7 @@ Alternatively, if you prefer not to use Homebrew, you'll find the latest version
 
 **Usage:**
 
-Once you have launched the app and restarted Xcode, you'll find a SwiftFormat option under Xcode's Editor menu.
+Once you have launched the app and restarted Xcode, you'll find a SwiftFormat option under Xcode's Editor menu. If the SwiftFormat menu does not appear [this thread](https://github.com/nicklockwood/SwiftFormat/issues/494) may help. 
 
 You can configure the formatting [rules](#rules) and [options](#options) using the SwiftFormat for Xcode host application. There is currently no way to override these per-project, however, you can import and export different configurations using the File menu. You will need to do this again each time you switch projects.
 
@@ -230,7 +237,7 @@ Alternatively, you might want to consider running SwiftFormat in [lint](#linting
 
 To set up SwiftFormat as an Xcode build phase, do the following:
 
-#### 1) Create a BuildTools folder & Package.swift
+#### 1) Create a BuildTools folder and Package.swift
 
 1. Create a folder called `BuildTools` in the same folder as your xcodeproj file
 2. In this folder, create a file called `Package.swift`, with the following contents:
@@ -242,14 +249,14 @@ let package = Package(
     name: "BuildTools",
     platforms: [.macOS(.v10_11)],
     dependencies: [
-        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.48.10"),
+        .package(url: "https://github.com/nicklockwood/SwiftFormat", from: "0.49.0"),
     ],
     targets: [.target(name: "BuildTools", path: "")]
 )
 ```
 3. If you are running Xcode 11.4 or later, in the `BuildTools` folder create a file called `Empty.swift` with nothing in it. This is to satisfy a change in Swift Package Manager.
 
-#### 2) Add a Build phases to your app target
+#### 2) Add a Build phase to your app target
 
 1. Click on your project in the file list, choose your target under `TARGETS`, click the `Build Phases` tab
 2. Add a `New Run Script Phase` by clicking the little plus icon in the top left
@@ -266,14 +273,14 @@ You can also use `swift run -c release --package-path BuildTools swiftformat "$S
 
 **NOTE:** You may wish to check BuildTools/Package.swift into your source control so that the version used by your run-script phase is kept in version control. It is recommended to add the following to your .gitignore file: `BuildTools/.build` and `BuildTools/.swiftpm`.
 
-### Using Cocoapods
+### Using CocoaPods
 
 #### 1) Add the SwiftFormat CLI to your Podfile
 
 1. Add the `swiftformat` binary to your project directory via [CocoaPods](https://cocoapods.org/), by adding the following line to your Podfile then running `pod install`:
 
     ```ruby
-    pod 'SwiftFormat/CLI'
+    pod 'SwiftFormat/CLI', '~> 0.49'
     ```
 
 **NOTE:** This will only install the pre-built command-line app, not the source code for the SwiftFormat framework.
@@ -376,6 +383,46 @@ To setup SwiftFormat to be used by your continuous integration system using [Dan
 
     **NOTE:** It is recommended to add the `swiftformat` binary to your project directory to ensure the same version is used each time (see the [Xcode build phase](#xcode-build-phase) instructions above).
 
+
+Bazel Build
+-----------
+
+If you use [Bazel](https://bazel.build/) to build your Swift projects and want to ensure that only properly formatted code is merged to your main branch, try [rules_swiftformat](https://github.com/cgrindel/rules_swiftformat). The repository contains Bazel rules and macros that format Swift source files using SwiftFormat, test that the formatted files exist in the workspace directory, and copy the formatted files to the workspace directory.
+
+
+Docker
+-----------
+
+SwiftFormat publishes releases into [GitHub Packages](https://github.com/features/packages) Docker registry. To pull the image call:
+
+```bash
+$ docker pull ghcr.io/nicklockwood/swiftformat:latest
+```
+
+By default, the container runs `swiftformat .` Therefore, you need to provide a path either via an argument:
+
+```bash
+docker run --rm -v /local/source/path:/work ghcr.io/nicklockwood/swiftformat:latest /work
+```
+
+or by changing the working dir:
+
+```bash
+docker run --rm -v /local/source/path:/work -w /work ghcr.io/nicklockwood/swiftformat:latest
+```
+
+To check the installed SwiftFormat version:
+
+```bash
+docker run --rm ghcr.io/nicklockwood/swiftformat:latest --version
+```
+
+Linting example:
+
+```bash
+docker run --rm -v /local/source/path:/work ghcr.io/nicklockwood/swiftformat:latest /work --lint
+```
+
 Configuration
 -------------
 
@@ -438,7 +485,13 @@ Alternatively, you can use the line continuation character `\` to wrap a single 
     redundantSelf
 ```
 
-To avoid automatically opting-in to new rules when SwiftFormat is updated, use the`--rules` argument to *only* enable the rules you specify:
+To avoid automatically opting-in to new rules when SwiftFormat is updated, you can disable all rules using:
+
+```bash
+--disable all
+```
+
+And then individually enable just the rules you want. Alternatively, use the`--rules` argument to *only* enable the rules you specify:
 
 ```bash
 --rules indent,linebreaks
@@ -615,6 +668,13 @@ By default, `--lint` will only report lines that require formatting, but you can
 
 If you would prefer not to see a warning for each and every formatting change, you can use the `--quiet` flag to suppress all output except errors.
 
+Sometimes you may wish to autoformat some rules, but only lint others. To do that, use the `--lintonly` option in your config file to specify rules that should only be applied in `--lint` mode:
+
+```
+--rules braces,indent
+--lintonly trailingClosures,unusedArguments
+```
+
 
 Error codes
 -----------
@@ -701,7 +761,7 @@ FAQ
 
 *Q. What platforms does SwiftFormat support?*
 
-> A. SwiftFormat works on macOS 10.13 (High Sierra) and above, and also runs on Ubuntu Linux.
+> A. SwiftFormat works on macOS 10.13 (High Sierra) and above, and also runs on Ubuntu Linux and Windows.
 
 
 *Q. What versions of Swift are supported?*
@@ -758,6 +818,12 @@ Q. I don't want to be surprised by new rules added when I upgrade SwiftFormat. H
 Known issues
 ---------------
 
+* When using the Xcode Source Editor Extension, the SwiftFormat menu sometimes disappears from Xcode. If this happens, try moving or renaming Xcode temporarily and then changing it back. Failing that, the suggestions in [this thread](https://github.com/nicklockwood/SwiftFormat/issues/494) may help.
+
+* The `enumNamespaces` rule replaces classes that have only static members with an `enum`. If the class is subclassed, or if there is code that depends on the class exposing certain runtime behaviors, this may break the program. To solve this you can either fix it on a per-case basis by adding a `// swiftformat:disable:next enumNamespaces` comment directive above the class declaration, or you can add `--enumnamespaces structs-only` to prevent the rule being applied to classes, or you can just disable the `enumNamespaces` rule completely.
+
+* The `redundantVoidReturnType` rule can inadvertently alter the type signature for closures, for example in cases where the closure calls a `@discardableResult` function. To solve this you can either fix it on a per-case basis by adding a `// swiftformat:disable:next redundantVoidReturnType` comment directive to disable the rule for a specific call site, or you can add `--closurevoid preserve` to your [configuration](#configuration) to disable the rule completely for closures (regular functions or methods aren't affected).
+
 * The `redundantType` rule can introduce ambiguous code in certain cases when using the default mode of `--redundanttype inferred`. This can be worked around by by using `--redundanttype explicit`, or by manually removing the redundant type reference on the affected line, or by using the `// swiftformat:disable:next redundantType` comment directive to disable the rule at the call site (or just disable the `redundantType` rule completely).
 
 * If a type initializer or factory method returns an implicitly unwrapped optional value then the `redundantType` rule may remove the explicit type in a situation where it's actually required. To work around this you can either use `--redundanttype explicit`, or use the `// swiftformat:disable:next redundantType` comment directive to disable the rule at the call site (or just disable the `redundantType` rule completely).
@@ -770,7 +836,7 @@ Known issues
 
 * When using the `--self remove` option, the `redundantSelf` rule will remove references to `self` in autoclosure arguments, which may change the meaning of the code, or cause it not to compile. To work around this issue, use the `--selfrequired` option to provide a comma-delimited list of methods to be excluded from the rule. The `expect()` function from the popular [Nimble](https://github.com/Quick/Nimble) unit testing framework is already excluded by default. If you are using the `--self insert` option then this is not an issue.
 
-* If you assign `SomeClass.self` to a variable and then instantiate an instance of the class using that variable, Swift requires that you use an explicit `.init()`, however, the `redundantInit` rule is not currently capable of detecting this situation and will remove the `.init`. To work around this issue, use the `// swiftformat:disable:next redundantInit` comment directive to disable the rule for any affected lines of code (or just disable the `redundantInit` rule completely).
+* If you assign `SomeClass.self` to a variable and then instantiate an instance of the class using that variable, Swift requires that you use an explicit `.init()`, however, the `redundantInit` rule is not currently capable of detecting this situation in all cases, and may remove the `.init`. To work around this issue, use the `// swiftformat:disable:next redundantInit` comment directive to disable the rule for any affected lines of code (or just disable the `redundantInit` rule completely).
 
 * The `--self insert` option can only recognize locally declared member variables, not ones inherited from superclasses or extensions in other files, so it cannot insert missing `self` references for those. Note that the reverse is not true: `--self remove` should remove *all* redundant `self` references.
 
@@ -814,6 +880,7 @@ Credits
 * [Jim Puls](https://github.com/puls) - Big Sur icon update
 * [Daniele Formichelli](https://github.com/danyf90) - JSON reporter
 * [Mahdi Bchatnia](https://github.com/inket) - Linux build workflow
+* [Arthur Semenyutin](https://github.com/vox-humana) - Docker image
 * [Nick Lockwood](https://github.com/nicklockwood) - Everything else
 
 ([Full list of contributors](https://github.com/nicklockwood/SwiftFormat/graphs/contributors))

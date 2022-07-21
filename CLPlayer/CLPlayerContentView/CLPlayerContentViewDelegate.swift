@@ -14,17 +14,17 @@ protocol CLPlayerContentViewDelegate: AnyObject {
 
     func didClickBackButton(in contentView: CLPlayerContentView)
 
-    func didClickPlayButton(isPlay: Bool, in contentView: CLPlayerContentView)
+    func contentView(_ contentView: CLPlayerContentView, didClickPlayButton isPlay: Bool)
 
-    func didClickFullButton(isFull: Bool, in contentView: CLPlayerContentView)
+    func contentView(_ contentView: CLPlayerContentView, didClickFullButton isFull: Bool)
 
-    func didChangeRate(_ rate: Float, in contentView: CLPlayerContentView)
+    func contentView(_ contentView: CLPlayerContentView, didChangeRate rate: Float)
 
-    func didChangeVideoGravity(_ videoGravity: AVLayerVideoGravity, in contentView: CLPlayerContentView)
+    func contentView(_ contentView: CLPlayerContentView, didChangeVideoGravity videoGravity: AVLayerVideoGravity)
 
-    func sliderTouchBegan(_ slider: CLSlider, in contentView: CLPlayerContentView)
+    func contentView(_ contentView: CLPlayerContentView, sliderTouchBegan slider: CLSlider)
 
-    func sliderValueChanged(_ slider: CLSlider, in contentView: CLPlayerContentView)
+    func contentView(_ contentView: CLPlayerContentView, sliderValueChanged slider: CLSlider)
 
-    func sliderTouchEnded(_ slider: CLSlider, in contentView: CLPlayerContentView)
+    func contentView(_ contentView: CLPlayerContentView, sliderTouchEnded slider: CLSlider)
 }

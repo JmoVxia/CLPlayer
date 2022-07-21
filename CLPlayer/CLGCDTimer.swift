@@ -8,7 +8,7 @@
 import UIKit
 
 class CLGCDTimer: NSObject {
-    typealias actionBlock = ((NSInteger) -> Void)
+    typealias actionBlock = (NSInteger) -> Void
     /// 执行时间
     private var interval: TimeInterval!
     /// 延迟时间

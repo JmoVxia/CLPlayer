@@ -1,11 +1,10 @@
 Pod::Spec.new do |s|
 
   s.name         = 'CLPlayer'
-  s.version      = '2.0.3'
+  s.version      = '2.0.4'
   s.summary      = 'Swift版自定义AVPlayer'
   s.description  = <<-DESC
                    CLPlayer是基于系统AVPlayer封装的视频播放器.
-                   * 支持Autolayout、Frame.
                    * 支持UITableView、UICollectionView.
                    * 支持亮度、音量调节.
                    * 支持进度调节.

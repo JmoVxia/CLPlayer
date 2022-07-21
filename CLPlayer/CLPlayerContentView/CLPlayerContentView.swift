@@ -20,6 +20,7 @@ extension CLPlayerContentView {
 
     enum CLPlayerPlayState {
         case unknow
+        case waiting
         case readyToPlay
         case playing
         case buffering
@@ -36,12 +37,13 @@ extension CLPlayerContentView {
     }
 }
 
-class CLPlayerContentView: UIImageView {
+class CLPlayerContentView: UIView {
     init(config: CLPlayerConfigure) {
         self.config = config
         super.init(frame: .zero)
         initUI()
         makeConstraints()
+        updateConfig()
     }
 
     @available(*, unavailable)
@@ -49,9 +51,17 @@ class CLPlayerContentView: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private var volumeSlider: UISlider? = {
-        let view = MPVolumeView()
-        return view.subviews.first(where: { $0 is UISlider }) as? UISlider
+    private lazy var placeholderStackView: UIStackView = {
+        let view = UIStackView()
+        view.isHidden = true
+        view.axis = .horizontal
+        view.distribution = .fill
+        view.alignment = .fill
+        view.insetsLayoutMarginsFromSafeArea = false
+        view.isLayoutMarginsRelativeArrangement = true
+        view.layoutMargins = .zero
+        view.spacing = 0
+        return view
     }()
 
     private lazy var topToolView: UIView = {
@@ -84,7 +94,6 @@ class CLPlayerContentView: UIImageView {
 
     private lazy var backButton: UIButton = {
         let view = UIButton()
-        view.setImage(CLImageHelper.imageWithName("CLBack"), for: .normal)
         view.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
         return view
     }()
@@ -96,23 +105,18 @@ class CLPlayerContentView: UIImageView {
 
     private lazy var moreButton: UIButton = {
         let view = UIButton()
-        view.setImage(CLImageHelper.imageWithName("CLMore"), for: .normal)
         view.addTarget(self, action: #selector(moreButtonAction), for: .touchUpInside)
         return view
     }()
 
     private lazy var playButton: UIButton = {
         let view = UIButton()
-        view.setImage(CLImageHelper.imageWithName("CLPlay"), for: .normal)
-        view.setImage(CLImageHelper.imageWithName("CLPause"), for: .selected)
         view.addTarget(self, action: #selector(playButtonAction(_:)), for: .touchUpInside)
         return view
     }()
 
     private lazy var fullButton: UIButton = {
         let view = UIButton()
-        view.setImage(CLImageHelper.imageWithName("CLFullscreen"), for: .normal)
-        view.setImage(CLImageHelper.imageWithName("CLSmallscreen"), for: .selected)
         view.addTarget(self, action: #selector(fullButtonAction(_:)), for: .touchUpInside)
         return view
     }()
@@ -205,6 +209,62 @@ class CLPlayerContentView: UIImageView {
         return gesture
     }()
 
+    private lazy var volumeSlider: UISlider? = {
+        let view = MPVolumeView()
+        return view.subviews.first(where: { $0 is UISlider }) as? UISlider
+    }()
+
+    private var config: CLPlayerConfigure!
+
+    private var isShowMorePanel: Bool = false {
+        didSet {
+            guard isShowMorePanel != oldValue else { return }
+            if isShowMorePanel {
+                hiddenToolView()
+                morePanelCollectionView.snp.updateConstraints { make in
+                    make.right.equalTo(0)
+                }
+            } else {
+                if screenState == .fullScreen {
+                    showToolView()
+                }
+                morePanelCollectionView.snp.updateConstraints { make in
+                    make.right.equalTo(morePanelWidth)
+                }
+            }
+            UIView.animate(withDuration: 0.25) {
+                self.setNeedsLayout()
+                self.layoutIfNeeded()
+            }
+        }
+    }
+
+    private var isHiddenToolView: Bool = true
+
+    private var panDirection: CLPanDirection = .unknow
+
+    private var autoFadeOutTimer: CLGCDTimer?
+
+    private var rates: [Float] = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
+
+    private var videoGravity: [(name: String, mode: AVLayerVideoGravity)] = [("适应", .resizeAspect), ("拉伸", .resizeAspectFill), ("填充", .resize)]
+
+    private let morePanelWidth: CGFloat = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 0.382
+
+    weak var delegate: CLPlayerContentViewDelegate?
+
+    weak var placeholderView: UIView? {
+        didSet {
+            guard placeholderView != oldValue else { return }
+            placeholderStackView.isHidden = placeholderView == nil
+            if let newView = placeholderView {
+                placeholderStackView.addArrangedSubview(newView)
+            }
+            guard let oldView = oldValue else { return }
+            placeholderStackView.removeArrangedSubview(oldView)
+        }
+    }
+
     var title: NSMutableAttributedString? {
         didSet {
             guard let title = title else { return }
@@ -216,7 +276,7 @@ class CLPlayerContentView: UIImageView {
         didSet {
             guard currentRate != oldValue else { return }
             morePanelCollectionView.reloadData()
-            delegate?.didChangeRate(currentRate, in: self)
+            delegate?.contentView(self, didChangeRate: currentRate)
         }
     }
 
@@ -224,7 +284,7 @@ class CLPlayerContentView: UIImageView {
         didSet {
             guard currentVideoGravity != oldValue else { return }
             morePanelCollectionView.reloadData()
-            delegate?.didChangeVideoGravity(currentVideoGravity, in: self)
+            delegate?.contentView(self, didChangeVideoGravity: currentVideoGravity)
         }
     }
 
@@ -252,6 +312,12 @@ class CLPlayerContentView: UIImageView {
                 sliderView.isUserInteractionEnabled = false
                 failButton.isHidden = true
                 playButton.isSelected = false
+                placeholderStackView.isHidden = placeholderView == nil
+                loadingView.startAnimation()
+            case .waiting:
+                sliderView.isUserInteractionEnabled = false
+                failButton.isHidden = true
+                placeholderStackView.isHidden = true
                 loadingView.startAnimation()
             case .readyToPlay:
                 sliderView.isUserInteractionEnabled = true
@@ -259,11 +325,12 @@ class CLPlayerContentView: UIImageView {
                 sliderView.isUserInteractionEnabled = true
                 failButton.isHidden = true
                 playButton.isSelected = true
+                placeholderStackView.isHidden = true
                 loadingView.stopAnimation()
-                image = nil
             case .buffering:
                 sliderView.isUserInteractionEnabled = true
                 failButton.isHidden = true
+                placeholderStackView.isHidden = true
                 loadingView.startAnimation()
             case .failed:
                 sliderView.isUserInteractionEnabled = false
@@ -276,82 +343,17 @@ class CLPlayerContentView: UIImageView {
                 sliderView.isUserInteractionEnabled = true
                 failButton.isHidden = true
                 playButton.isSelected = false
+                placeholderStackView.isHidden = placeholderView == nil
                 loadingView.stopAnimation()
-                image = config.maskImage
             }
         }
     }
-
-    private var config: CLPlayerConfigure!
-
-    private var isShowMorePanel: Bool = false {
-        didSet {
-            guard isShowMorePanel != oldValue else { return }
-            if isShowMorePanel {
-                isShowToolView = false
-                morePanelCollectionView.snp.updateConstraints { make in
-                    make.right.equalTo(0)
-                }
-            } else {
-                isShowToolView = true
-                morePanelCollectionView.snp.updateConstraints { make in
-                    make.right.equalTo(morePanelWidth)
-                }
-            }
-            UIView.animate(withDuration: 0.25) {
-                self.setNeedsLayout()
-                self.layoutIfNeeded()
-            }
-        }
-    }
-
-    private var isShowToolView: Bool = true {
-        didSet {
-            guard isShowToolView != oldValue else { return }
-            if isShowToolView {
-                topToolView.snp.updateConstraints { make in
-                    make.top.equalTo(0)
-                }
-                bottomToolView.snp.remakeConstraints { make in
-                    make.left.right.bottom.equalToSuperview()
-                }
-                autoFadeOutTooView()
-            } else {
-                topToolView.snp.updateConstraints { make in
-                    make.top.equalTo(-50)
-                }
-                bottomToolView.snp.remakeConstraints { make in
-                    make.left.right.equalToSuperview()
-                    make.top.equalTo(self.snp.bottom)
-                }
-                cancelAutoFadeOutTooView()
-            }
-            UIView.animate(withDuration: 0.25) {
-                self.setNeedsLayout()
-                self.layoutIfNeeded()
-            }
-        }
-    }
-
-    private let morePanelWidth: CGFloat = max(UIScreen.main.bounds.width, UIScreen.main.bounds.height) * 0.382
-
-    private var panDirection: CLPanDirection = .unknow
-
-    private var autoFadeOutTimer: CLGCDTimer?
-
-    private var rates: [Float] = [0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
-
-    private var videoGravity: [(name: String, mode: AVLayerVideoGravity)] = [("适应", .resizeAspect), ("拉伸", .resizeAspectFill), ("填充", .resize)]
-
-    weak var delegate: CLPlayerContentViewDelegate?
 }
 
 // MARK: - JmoVxia---布局
 
 private extension CLPlayerContentView {
     func initUI() {
-        updateConfig()
-
         clipsToBounds = true
         autoresizesSubviews = true
         isUserInteractionEnabled = true
@@ -372,21 +374,28 @@ private extension CLPlayerContentView {
         bottomContentView.addSubview(sliderView)
         addSubview(failButton)
         addSubview(morePanelCollectionView)
+        addSubview(placeholderStackView)
 
         addGestureRecognizer(tapGesture)
         addGestureRecognizer(panGesture)
 
+        guard !config.isHiddenToolbarWhenStart else { return }
         autoFadeOutTooView()
     }
 
     func makeConstraints() {
         topToolView.snp.makeConstraints { make in
-            make.top.equalTo(0)
+            make.top.equalTo(config.isHiddenToolbarWhenStart ? -50 : 00)
             make.left.right.equalToSuperview()
             make.height.equalTo(50)
         }
         bottomToolView.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+            if config.isHiddenToolbarWhenStart {
+                make.top.equalTo(self.snp.bottom)
+            } else {
+                make.bottom.equalToSuperview()
+            }
         }
         bottomSafeView.snp.makeConstraints { make in
             make.left.right.bottom.equalToSuperview()
@@ -451,62 +460,30 @@ private extension CLPlayerContentView {
             make.right.equalTo(morePanelWidth)
             make.width.equalTo(morePanelWidth)
         }
+        placeholderStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 
     func updateConfig() {
         currentVideoGravity = config.videoGravity
         topToolView.isHidden = screenState == .small ? config.topBarHiddenStyle != .never : config.topBarHiddenStyle == .always
-        moreButton.isHidden = !config.isShowMorePanel
-        topToolView.backgroundColor = config.topToobarBackgroundColor
-        bottomToolView.backgroundColor = config.bottomToolbarBackgroundColor
-        progressView.trackTintColor = config.progressBackgroundColor
-        progressView.progressTintColor = config.progressBufferColor
-        sliderView.minimumTrackTintColor = config.progressFinishedColor
-        loadingView.updateWithConfigure { $0.backgroundColor = self.config.loadingBackgroundColor }
+        moreButton.isHidden = config.isHiddenMorePanel
+        topToolView.backgroundColor = config.color.topToobar
+        bottomToolView.backgroundColor = config.color.bottomToolbar
+        progressView.trackTintColor = config.color.progress
+        progressView.progressTintColor = config.color.progressBuffer
+        sliderView.minimumTrackTintColor = config.color.progressFinished
+        loadingView.updateWithConfigure { $0.backgroundColor = self.config.color.loading }
+        isHiddenToolView = config.isHiddenToolbarWhenStart
 
-        let backImage: UIImage? = {
-            guard let image = config.backImage else { return CLImageHelper.imageWithName("CLBack") }
-            return image
-        }()
-        backButton.setImage(backImage, for: .normal)
-
-        let moreImage: UIImage? = {
-            guard let image = config.moreImage else { return CLImageHelper.imageWithName("CLMore") }
-            return image
-        }()
-        moreButton.setImage(moreImage, for: .normal)
-
-        let playImage: UIImage? = {
-            guard let image = config.playImage else { return CLImageHelper.imageWithName("CLPlay") }
-            return image
-        }()
-        playButton.setImage(playImage, for: .normal)
-
-        let pauseImage: UIImage? = {
-            guard let image = config.pauseImage else { return CLImageHelper.imageWithName("CLPause") }
-            return image
-        }()
-        playButton.setImage(pauseImage, for: .selected)
-
-        let maxImage: UIImage? = {
-            guard let image = config.maxImage else { return CLImageHelper.imageWithName("CLFullscreen") }
-            return image
-        }()
-        fullButton.setImage(maxImage, for: .normal)
-
-        let minImage: UIImage? = {
-            guard let image = config.minImage else { return CLImageHelper.imageWithName("CLSmallscreen") }
-            return image
-        }()
-        fullButton.setImage(minImage, for: .selected)
-
-        let sliderImage: UIImage? = {
-            guard let image = config.sliderImage else { return CLImageHelper.imageWithName("CLSlider") }
-            return image
-        }()
-        sliderView.setThumbImage(sliderImage, for: .normal)
-
-        image = config.maskImage
+        backButton.setImage(config.image.back, for: .normal)
+        moreButton.setImage(config.image.more, for: .normal)
+        playButton.setImage(config.image.play, for: .normal)
+        playButton.setImage(config.image.pause, for: .selected)
+        fullButton.setImage(config.image.max, for: .normal)
+        fullButton.setImage(config.image.min, for: .selected)
+        sliderView.setThumbImage(config.image.slider, for: .normal)
     }
 }
 
@@ -517,7 +494,7 @@ private extension CLPlayerContentView {
         if isShowMorePanel {
             isShowMorePanel = false
         } else {
-            isShowToolView.toggle()
+            isHiddenToolView ? showToolView() : hiddenToolView()
         }
     }
 
@@ -558,11 +535,11 @@ private extension CLPlayerContentView {
     }
 
     func playButtonAction(_ button: UIButton) {
-        delegate?.didClickPlayButton(isPlay: button.isSelected, in: self)
+        delegate?.contentView(self, didClickPlayButton: button.isSelected)
     }
 
     func fullButtonAction(_ button: UIButton) {
-        delegate?.didClickFullButton(isFull: button.isSelected, in: self)
+        delegate?.contentView(self, didClickFullButton: button.isSelected)
     }
 
     func failButtonAction() {
@@ -571,16 +548,16 @@ private extension CLPlayerContentView {
 
     func progressSliderTouchBegan(_ slider: CLSlider) {
         cancelAutoFadeOutTooView()
-        delegate?.sliderTouchBegan(slider, in: self)
+        delegate?.contentView(self, sliderTouchBegan: slider)
     }
 
     func progressSliderValueChanged(_ slider: CLSlider) {
-        delegate?.sliderValueChanged(slider, in: self)
+        delegate?.contentView(self, sliderValueChanged: slider)
     }
 
     func progressSliderTouchEnded(_ slider: CLSlider) {
         autoFadeOutTooView()
-        delegate?.sliderTouchEnded(slider, in: self)
+        delegate?.contentView(self, sliderTouchEnded: slider)
     }
 }
 
@@ -596,16 +573,41 @@ private extension CLPlayerContentView {
     }
 
     func showToolView() {
-        isShowToolView = true
+        isHiddenToolView = false
+        topToolView.snp.updateConstraints { make in
+            make.top.equalTo(0)
+        }
+        bottomToolView.snp.remakeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+        }
+        UIView.animate(withDuration: 0.25, delay: 0) {
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+        } completion: { _ in
+            self.autoFadeOutTooView()
+        }
     }
 
     func hiddenToolView() {
-        isShowToolView = false
+        isHiddenToolView = true
+        topToolView.snp.updateConstraints { make in
+            make.top.equalTo(-50)
+        }
+        bottomToolView.snp.remakeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalTo(self.snp.bottom)
+        }
+        UIView.animate(withDuration: 0.25, delay: 0) {
+            self.setNeedsLayout()
+            self.layoutIfNeeded()
+        } completion: { _ in
+            self.cancelAutoFadeOutTooView()
+        }
     }
 
     func autoFadeOutTooView() {
         autoFadeOutTimer = CLGCDTimer(interval: 0, delaySecs: 0.25 + config.autoFadeOut, repeats: false, action: { [weak self] _ in
-            self?.isShowToolView = false
+            self?.hiddenToolView()
         })
         autoFadeOutTimer?.start()
     }
@@ -715,14 +717,19 @@ extension CLPlayerContentView: UICollectionViewDataSource {
 
 extension CLPlayerContentView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        if morePanelCollectionView.bounds.contains(touch.location(in: morePanelCollectionView)) {
+        if !placeholderStackView.isHidden {
+            return false
+        } else if morePanelCollectionView.bounds.contains(touch.location(in: morePanelCollectionView)) {
             return false
         } else if topToolView.bounds.contains(touch.location(in: topToolView)) {
             return false
         } else if bottomToolView.bounds.contains(touch.location(in: bottomToolView)) {
             return false
         } else if gestureRecognizer == panGesture {
-            return screenState == .fullScreen && config.isGestureInteractionEnabled
+            guard screenState != .animating else { return false }
+            if config.gestureInteraction == .none { return false }
+            if config.gestureInteraction == .small, screenState == .fullScreen { return false }
+            if config.gestureInteraction == .fullScreen, screenState == .small { return false }
         }
         return true
     }

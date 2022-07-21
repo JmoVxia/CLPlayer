@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		11A3DE9060FD8CD4516A2F1D /* libPods-CLPlayer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4745977FFF79AB78FC9B13E /* libPods-CLPlayer.a */; };
+		5B1F5BBA2943200B00D554D7 /* CLPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B1F5BB92943200B00D554D7 /* CLPlaceholderView.swift */; };
 		5B2D28E32729446800E85A53 /* CLRotateAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2D28E22729446800E85A53 /* CLRotateAnimationView.swift */; };
 		5B2D28E52729463800E85A53 /* CLPlayer.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5B2D28E42729463800E85A53 /* CLPlayer.bundle */; };
 		5B2D28E72729468000E85A53 /* CLImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2D28E62729468000E85A53 /* CLImageHelper.swift */; };
@@ -53,6 +54,7 @@
 /* Begin PBXFileReference section */
 		2A4B8371167B1ECA19BBA36A /* Pods-CLPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLPlayer.debug.xcconfig"; path = "Target Support Files/Pods-CLPlayer/Pods-CLPlayer.debug.xcconfig"; sourceTree = "<group>"; };
 		2FB9093F4F6D6B5B3B0E722C /* Pods-CLPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLPlayer.release.xcconfig"; path = "Target Support Files/Pods-CLPlayer/Pods-CLPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		5B1F5BB92943200B00D554D7 /* CLPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlaceholderView.swift; sourceTree = "<group>"; };
 		5B2D28E22729446800E85A53 /* CLRotateAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLRotateAnimationView.swift; sourceTree = "<group>"; };
 		5B2D28E42729463800E85A53 /* CLPlayer.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CLPlayer.bundle; sourceTree = "<group>"; };
 		5B2D28E62729468000E85A53 /* CLImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLImageHelper.swift; sourceTree = "<group>"; };
@@ -185,10 +187,10 @@
 		5BA39B162727D147005059F5 /* CLPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				5B2D28E62729468000E85A53 /* CLImageHelper.swift */,
 				5BE1F3382727E5780090F6C8 /* CLPlayer.swift */,
 				5B33B4DD2769EAA20086B402 /* CLPlayerConfigure.swift */,
 				5B33B4DF2769F2990086B402 /* CLPlayerDelegate.swift */,
-				5B2D28E62729468000E85A53 /* CLImageHelper.swift */,
 				5BFADCB9276893B600A596A6 /* CLGCDTimer.swift */,
 				5BFADCB72768936C00A596A6 /* CLPlayerContentView */,
 				5BFADCB82768937D00A596A6 /* CLFullScreenController */,
@@ -347,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				5BFADCB5276888B400A596A6 /* CLViewController.swift */,
+				5B1F5BB92943200B00D554D7 /* CLPlaceholderView.swift */,
 			);
 			path = CLViewController;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 		};
 		5B918B752727D7E2008355E5 /* SwiftFormat */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -568,6 +572,7 @@
 				5B72C195272A39B1004B9AEA /* CLSlider.swift in Sources */,
 				5BC4103B276B19C300DFE028 /* CLCollectionViewCell.swift in Sources */,
 				5BFADCAC2767415200A596A6 /* CLPlayerContentPanelHeadView.swift in Sources */,
+				5B1F5BBA2943200B00D554D7 /* CLPlaceholderView.swift in Sources */,
 				5BE1F3342727E3800090F6C8 /* UIImage+Extension.swift in Sources */,
 				5B2D28E72729468000E85A53 /* CLImageHelper.swift in Sources */,
 				5B37DEE72727DBA5002A377A /* CLHomeController.swift in Sources */,
@@ -741,7 +746,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JmoVxia.CLPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JmoVxia.CLPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -771,7 +776,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = JmoVxia.CLPlayer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JmoVxia.CLPlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

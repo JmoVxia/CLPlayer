@@ -1,4 +1,4 @@
-source 'https://gitee.com/mirrors/CocoaPods-Specs.git'
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 platform :ios, '10.0'
 #use_frameworks!
 use_modular_headers!

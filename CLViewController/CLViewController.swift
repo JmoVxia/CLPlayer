@@ -18,8 +18,19 @@ class CLViewController: CLController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    private lazy var placeholderView: CLPlaceholderView = {
+        let view = CLPlaceholderView()
+        view.addTarget(self, action: #selector(playAction), for: .touchUpInside)
+        return view
+    }()
+
     private lazy var player: CLPlayer = {
-        let view = CLPlayer(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height + navigationBarHeight + 50, width: view.bounds.width, height: view.bounds.width / (16.0 / 9.0)))
+        let view = CLPlayer(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height + navigationBarHeight + 50, width: view.bounds.width, height: view.bounds.width / (16.0 / 9.0))) { config in
+            config.videoGravity = .resizeAspectFill
+            config.topBarHiddenStyle = .never
+            config.isHiddenToolbarWhenStart = false
+        }
+        view.placeholder = placeholderView
         return view
     }()
 
@@ -98,8 +109,6 @@ private extension CLViewController {
                 .foregroundColor(.white)
                 .alignment(.center)
         })
-        player.url = URL(string: "https://www.apple.com/105/media/cn/mac/family/2018/46c4b917_abfd_45a3_9b51_4e3054191797/films/bruce/mac-bruce-tpl-cn-2018_1280x720h.mp4")
-        player.play()
     }
 }
 
@@ -117,7 +126,14 @@ extension CLViewController {
 // MARK: - JmoVxia---objc
 
 @objc private extension CLViewController {
+    func playAction() {
+        placeholderView.imageView.image = UIImage(named: "placeholder")
+        player.url = URL(string: "https://www.apple.com/105/media/cn/mac/family/2018/46c4b917_abfd_45a3_9b51_4e3054191797/films/bruce/mac-bruce-tpl-cn-2018_1280x720h.mp4")
+        player.play()
+    }
+
     func changeAction() {
+        placeholderView.imageView.image = UIImage(named: "placeholder1")
         player.title = NSMutableAttributedString("这是一个标题", attributes: { $0
                 .font(.systemFont(ofSize: 16))
                 .foregroundColor(.white)
