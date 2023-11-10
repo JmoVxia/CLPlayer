@@ -30,9 +30,9 @@ class CLAnimationTransitioning: NSObject {
         }
     }()
 
-    private weak var player: CLPlayer?
+    private weak var player: CLPlayerView?
 
-    private weak var parentView: UIView?
+    private weak var parentView: UIStackView?
 
     private var centerInParent: CGPoint = .zero
 
@@ -42,10 +42,10 @@ class CLAnimationTransitioning: NSObject {
 
     var animationType: CLAnimationType = .present
 
-    init(playView: CLPlayer, orientation: CLAnimationOrientation) {
+    init(playView: CLPlayerView, orientation: CLAnimationOrientation) {
         player = playView
         self.orientation = orientation
-        parentView = playView.superview
+        parentView = playView.superview as? UIStackView
         centerInParent = playView.center
         originSize = playView.frame.size
     }
@@ -150,11 +150,7 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
                 playView.contentView.layoutIfNeeded()
             }) { _ in
                 fromView.transform = .identity
-                parentView.addSubview(playView)
-                playView.snp.remakeConstraints { make in
-                    make.center.equalTo(self.centerInParent)
-                    make.size.equalTo(self.originSize)
-                }
+                parentView.addArrangedSubview(playView)
                 fromView.removeFromSuperview()
                 transitionContext.completeTransition(true)
                 UIViewController.attemptRotationToDeviceOrientation()

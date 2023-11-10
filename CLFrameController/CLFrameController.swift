@@ -1,5 +1,5 @@
 //
-//  CLViewController.swift
+//  CLFrameController.swift
 //  CLPlayer
 //
 //  Created by Chen JmoVxia on 2021/12/14.
@@ -8,7 +8,7 @@
 import SnapKit
 import UIKit
 
-class CLViewController: CLController {
+class CLFrameController: CLController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
@@ -54,7 +54,7 @@ class CLViewController: CLController {
 
 // MARK: - JmoVxia---生命周期
 
-extension CLViewController {
+extension CLFrameController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -85,7 +85,7 @@ extension CLViewController {
 
 // MARK: - JmoVxia---布局
 
-private extension CLViewController {
+private extension CLFrameController {
     func initUI() {
         updateTitleLabel { $0.text = "UIView" }
         view.addSubview(player)
@@ -102,7 +102,7 @@ private extension CLViewController {
 
 // MARK: - JmoVxia---数据
 
-private extension CLViewController {
+private extension CLFrameController {
     func initData() {
         player.title = NSMutableAttributedString("Apple", attributes: { $0
                 .font(.systemFont(ofSize: 16))
@@ -112,7 +112,7 @@ private extension CLViewController {
     }
 }
 
-extension CLViewController {
+extension CLFrameController {
     override var shouldAutorotate: Bool {
         return false
     }
@@ -125,7 +125,7 @@ extension CLViewController {
 
 // MARK: - JmoVxia---objc
 
-@objc private extension CLViewController {
+@objc private extension CLFrameController {
     func playAction() {
         placeholderView.imageView.image = UIImage(named: "placeholder")
         player.url = URL(string: "https://www.apple.com/105/media/cn/mac/family/2018/46c4b917_abfd_45a3_9b51_4e3054191797/films/bruce/mac-bruce-tpl-cn-2018_1280x720h.mp4")
@@ -139,7 +139,7 @@ extension CLViewController {
                 .foregroundColor(.white)
                 .alignment(.left)
         })
-        player.url = URL(string: "http://vfx.mtime.cn/Video/2019/03/09/mp4/190309153658147087.mp4")
+        player.url = URL(string: "http://vjs.zencdn.net/v/oceans.mp4")
         player.play()
     }
 }

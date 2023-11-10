@@ -14,6 +14,7 @@
 		5B2D28E72729468000E85A53 /* CLImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2D28E62729468000E85A53 /* CLImageHelper.swift */; };
 		5B33B4DE2769EAA20086B402 /* CLPlayerConfigure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33B4DD2769EAA20086B402 /* CLPlayerConfigure.swift */; };
 		5B33B4E02769F2990086B402 /* CLPlayerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B33B4DF2769F2990086B402 /* CLPlayerDelegate.swift */; };
+		5B37C4C02AFE2F8D00DED530 /* CLStackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37C4BF2AFE2F8D00DED530 /* CLStackViewController.swift */; };
 		5B37DEE02727D9ED002A377A /* UIColor+CLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37DEDF2727D9ED002A377A /* UIColor+CLExtension.swift */; };
 		5B37DEE32727DA5E002A377A /* CLNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37DEE22727DA5E002A377A /* CLNavigationController.swift */; };
 		5B37DEE52727DB04002A377A /* CLController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B37DEE42727DB04002A377A /* CLController.swift */; };
@@ -34,18 +35,20 @@
 		5BA39B2F2727D1EE005059F5 /* CLTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BA39B2C2727D1EE005059F5 /* CLTabBarController.swift */; };
 		5BC41038276B18AB00DFE028 /* CLCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC41037276B18AB00DFE028 /* CLCollectionViewController.swift */; };
 		5BC4103B276B19C300DFE028 /* CLCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4103A276B19C300DFE028 /* CLCollectionViewCell.swift */; };
+		5BC4C3512AFE19E80043D6DB /* CLPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4C3502AFE19E80043D6DB /* CLPlayer.swift */; };
+		5BC4C3562AFE2C7F0043D6DB /* CLAutolayoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BC4C3552AFE2C7F0043D6DB /* CLAutolayoutController.swift */; };
 		5BE1F31B2727DCDB0090F6C8 /* CLMoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F31A2727DCDB0090F6C8 /* CLMoreController.swift */; };
 		5BE1F3202727DDC00090F6C8 /* CLListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F31F2727DDC00090F6C8 /* CLListCell.swift */; };
 		5BE1F3252727DE4C0090F6C8 /* CLListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F3242727DE4C0090F6C8 /* CLListItem.swift */; };
 		5BE1F32D2727E1430090F6C8 /* CLTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F32C2727E1430090F6C8 /* CLTableViewController.swift */; };
 		5BE1F3322727E21E0090F6C8 /* CLBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F3312727E21E0090F6C8 /* CLBackView.swift */; };
 		5BE1F3342727E3800090F6C8 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F3332727E3800090F6C8 /* UIImage+Extension.swift */; };
-		5BE1F3392727E5780090F6C8 /* CLPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F3382727E5780090F6C8 /* CLPlayer.swift */; };
+		5BE1F3392727E5780090F6C8 /* CLPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F3382727E5780090F6C8 /* CLPlayerView.swift */; };
 		5BE1F33B2727E7A70090F6C8 /* CLPlayerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE1F33A2727E7A70090F6C8 /* CLPlayerContentView.swift */; };
 		5BF306642728DFB40046075A /* CLFullScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BF306632728DFB40046075A /* CLFullScreenController.swift */; };
 		5BFADCAC2767415200A596A6 /* CLPlayerContentPanelHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCAB2767415200A596A6 /* CLPlayerContentPanelHeadView.swift */; };
 		5BFADCAE276742F500A596A6 /* CLPlayerContentPanelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCAD276742F500A596A6 /* CLPlayerContentPanelCell.swift */; };
-		5BFADCB6276888B400A596A6 /* CLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCB5276888B400A596A6 /* CLViewController.swift */; };
+		5BFADCB6276888B400A596A6 /* CLFrameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCB5276888B400A596A6 /* CLFrameController.swift */; };
 		5BFADCBA276893B600A596A6 /* CLGCDTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCB9276893B600A596A6 /* CLGCDTimer.swift */; };
 		5BFADCC027689C5500A596A6 /* CLTableViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCBF27689C5500A596A6 /* CLTableViewItem.swift */; };
 		5BFADCC227689C6300A596A6 /* CLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFADCC127689C6300A596A6 /* CLTableViewCell.swift */; };
@@ -60,6 +63,7 @@
 		5B2D28E62729468000E85A53 /* CLImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLImageHelper.swift; sourceTree = "<group>"; };
 		5B33B4DD2769EAA20086B402 /* CLPlayerConfigure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerConfigure.swift; sourceTree = "<group>"; };
 		5B33B4DF2769F2990086B402 /* CLPlayerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerDelegate.swift; sourceTree = "<group>"; };
+		5B37C4BF2AFE2F8D00DED530 /* CLStackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLStackViewController.swift; sourceTree = "<group>"; };
 		5B37DEDF2727D9ED002A377A /* UIColor+CLExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CLExtension.swift"; sourceTree = "<group>"; };
 		5B37DEE22727DA5E002A377A /* CLNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLNavigationController.swift; sourceTree = "<group>"; };
 		5B37DEE42727DB04002A377A /* CLController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLController.swift; sourceTree = "<group>"; };
@@ -82,18 +86,20 @@
 		5BA39B2C2727D1EE005059F5 /* CLTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLTabBarController.swift; sourceTree = "<group>"; };
 		5BC41037276B18AB00DFE028 /* CLCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCollectionViewController.swift; sourceTree = "<group>"; };
 		5BC4103A276B19C300DFE028 /* CLCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLCollectionViewCell.swift; sourceTree = "<group>"; };
+		5BC4C3502AFE19E80043D6DB /* CLPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayer.swift; sourceTree = "<group>"; };
+		5BC4C3552AFE2C7F0043D6DB /* CLAutolayoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLAutolayoutController.swift; sourceTree = "<group>"; };
 		5BE1F31A2727DCDB0090F6C8 /* CLMoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLMoreController.swift; sourceTree = "<group>"; };
 		5BE1F31F2727DDC00090F6C8 /* CLListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLListCell.swift; sourceTree = "<group>"; };
 		5BE1F3242727DE4C0090F6C8 /* CLListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLListItem.swift; sourceTree = "<group>"; };
 		5BE1F32C2727E1430090F6C8 /* CLTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTableViewController.swift; sourceTree = "<group>"; };
 		5BE1F3312727E21E0090F6C8 /* CLBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLBackView.swift; sourceTree = "<group>"; };
 		5BE1F3332727E3800090F6C8 /* UIImage+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
-		5BE1F3382727E5780090F6C8 /* CLPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayer.swift; sourceTree = "<group>"; };
+		5BE1F3382727E5780090F6C8 /* CLPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerView.swift; sourceTree = "<group>"; };
 		5BE1F33A2727E7A70090F6C8 /* CLPlayerContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerContentView.swift; sourceTree = "<group>"; };
 		5BF306632728DFB40046075A /* CLFullScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLFullScreenController.swift; sourceTree = "<group>"; };
 		5BFADCAB2767415200A596A6 /* CLPlayerContentPanelHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerContentPanelHeadView.swift; sourceTree = "<group>"; };
 		5BFADCAD276742F500A596A6 /* CLPlayerContentPanelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLPlayerContentPanelCell.swift; sourceTree = "<group>"; };
-		5BFADCB5276888B400A596A6 /* CLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLViewController.swift; sourceTree = "<group>"; };
+		5BFADCB5276888B400A596A6 /* CLFrameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLFrameController.swift; sourceTree = "<group>"; };
 		5BFADCB9276893B600A596A6 /* CLGCDTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLGCDTimer.swift; sourceTree = "<group>"; };
 		5BFADCBF27689C5500A596A6 /* CLTableViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTableViewItem.swift; sourceTree = "<group>"; };
 		5BFADCC127689C6300A596A6 /* CLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLTableViewCell.swift; sourceTree = "<group>"; };
@@ -112,6 +118,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B37C4BE2AFE2F7800DED530 /* CLStackViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5B37C4BF2AFE2F8D00DED530 /* CLStackViewController.swift */,
+			);
+			path = CLStackViewController;
+			sourceTree = "<group>";
+		};
 		5B37DEE12727D9F0002A377A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +180,9 @@
 				5B37DEE82727DBD9002A377A /* CLTableView */,
 				5BE1F31C2727DD960090F6C8 /* CLHomeController */,
 				5BE1F31D2727DDA10090F6C8 /* CLMoreController */,
-				5BFADCB42768888500A596A6 /* CLViewController */,
+				5BFADCB42768888500A596A6 /* CLFrameController */,
+				5BC4C3522AFE2AC60043D6DB /* CLAutolayoutController */,
+				5B37C4BE2AFE2F7800DED530 /* CLStackViewController */,
 				5BE1F32B2727E11F0090F6C8 /* CLTableViewController */,
 				5BC41036276B188900DFE028 /* CLCollectionViewController */,
 				5BE1F3372727E55E0090F6C8 /* Resources */,
@@ -188,7 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				5B2D28E62729468000E85A53 /* CLImageHelper.swift */,
-				5BE1F3382727E5780090F6C8 /* CLPlayer.swift */,
+				5BC4C3502AFE19E80043D6DB /* CLPlayer.swift */,
+				5BE1F3382727E5780090F6C8 /* CLPlayerView.swift */,
 				5B33B4DD2769EAA20086B402 /* CLPlayerConfigure.swift */,
 				5B33B4DF2769F2990086B402 /* CLPlayerDelegate.swift */,
 				5BFADCB9276893B600A596A6 /* CLGCDTimer.swift */,
@@ -224,6 +241,14 @@
 				5BC4103A276B19C300DFE028 /* CLCollectionViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5BC4C3522AFE2AC60043D6DB /* CLAutolayoutController */ = {
+			isa = PBXGroup;
+			children = (
+				5BC4C3552AFE2C7F0043D6DB /* CLAutolayoutController.swift */,
+			);
+			path = CLAutolayoutController;
 			sourceTree = "<group>";
 		};
 		5BE1F31C2727DD960090F6C8 /* CLHomeController */ = {
@@ -345,13 +370,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		5BFADCB42768888500A596A6 /* CLViewController */ = {
+		5BFADCB42768888500A596A6 /* CLFrameController */ = {
 			isa = PBXGroup;
 			children = (
-				5BFADCB5276888B400A596A6 /* CLViewController.swift */,
+				5BFADCB5276888B400A596A6 /* CLFrameController.swift */,
 				5B1F5BB92943200B00D554D7 /* CLPlaceholderView.swift */,
 			);
-			path = CLViewController;
+			path = CLFrameController;
 			sourceTree = "<group>";
 		};
 		5BFADCB72768936C00A596A6 /* CLPlayerContentView */ = {
@@ -458,7 +483,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1300;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					5BA39B132727D147005059F5 = {
 						CreatedOnToolsVersion = 13.0;
@@ -548,8 +573,9 @@
 			files = (
 				5BE1F32D2727E1430090F6C8 /* CLTableViewController.swift in Sources */,
 				5B83040E2728FE0800A92423 /* CLFullScreenLeftController.swift in Sources */,
+				5B37C4C02AFE2F8D00DED530 /* CLStackViewController.swift in Sources */,
 				5BFADCC227689C6300A596A6 /* CLTableViewCell.swift in Sources */,
-				5BE1F3392727E5780090F6C8 /* CLPlayer.swift in Sources */,
+				5BE1F3392727E5780090F6C8 /* CLPlayerView.swift in Sources */,
 				5B37DEE02727D9ED002A377A /* UIColor+CLExtension.swift in Sources */,
 				5BA39B2F2727D1EE005059F5 /* CLTabBarController.swift in Sources */,
 				5BFADCAE276742F500A596A6 /* CLPlayerContentPanelCell.swift in Sources */,
@@ -566,11 +592,13 @@
 				5BFADCBA276893B600A596A6 /* CLGCDTimer.swift in Sources */,
 				5B37DEF12727DBD9002A377A /* CLTableViewHepler.swift in Sources */,
 				5B8304102728FE1100A92423 /* CLFullScreenRightController.swift in Sources */,
+				5BC4C3562AFE2C7F0043D6DB /* CLAutolayoutController.swift in Sources */,
 				5B2D28E32729446800E85A53 /* CLRotateAnimationView.swift in Sources */,
 				5BC41038276B18AB00DFE028 /* CLCollectionViewController.swift in Sources */,
 				5B830414272917FD00A92423 /* CLAnimationTransitioning.swift in Sources */,
 				5B72C195272A39B1004B9AEA /* CLSlider.swift in Sources */,
 				5BC4103B276B19C300DFE028 /* CLCollectionViewCell.swift in Sources */,
+				5BC4C3512AFE19E80043D6DB /* CLPlayer.swift in Sources */,
 				5BFADCAC2767415200A596A6 /* CLPlayerContentPanelHeadView.swift in Sources */,
 				5B1F5BBA2943200B00D554D7 /* CLPlaceholderView.swift in Sources */,
 				5BE1F3342727E3800090F6C8 /* UIImage+Extension.swift in Sources */,
@@ -582,7 +610,7 @@
 				5B37DEE52727DB04002A377A /* CLController.swift in Sources */,
 				5BA11A70276AD7290093B418 /* NSMutableAttributedString+Extension.swift in Sources */,
 				5BE1F3202727DDC00090F6C8 /* CLListCell.swift in Sources */,
-				5BFADCB6276888B400A596A6 /* CLViewController.swift in Sources */,
+				5BFADCB6276888B400A596A6 /* CLFrameController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +673,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -666,6 +695,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -706,6 +736,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -720,6 +751,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

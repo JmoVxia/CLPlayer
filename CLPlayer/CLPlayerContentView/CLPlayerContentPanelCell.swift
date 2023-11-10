@@ -11,7 +11,7 @@ import UIKit
 class CLPlayerContentPanelCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initUI()
+        initSubViews()
         makeConstraints()
     }
 
@@ -45,7 +45,7 @@ class CLPlayerContentPanelCell: UICollectionViewCell {
 }
 
 private extension CLPlayerContentPanelCell {
-    func initUI() {
+    func initSubViews() {
         contentView.addSubview(titleLabel)
     }
 

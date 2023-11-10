@@ -11,7 +11,7 @@ import UIKit
 class CLSlider: UISlider {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initUI()
+        initSubViews()
     }
 
     @available(*, unavailable)
@@ -29,7 +29,7 @@ class CLSlider: UISlider {
 // MARK: - JmoVxia---布局
 
 private extension CLSlider {
-    func initUI() {}
+    func initSubViews() {}
 }
 
 // MARK: - JmoVxia---override

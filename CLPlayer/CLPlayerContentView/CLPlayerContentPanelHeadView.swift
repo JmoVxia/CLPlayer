@@ -11,7 +11,7 @@ import UIKit
 class CLPlayerContentPanelHeadView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        initUI()
+        initSubViews()
         makeConstraints()
     }
 
@@ -38,7 +38,7 @@ class CLPlayerContentPanelHeadView: UICollectionReusableView {
 }
 
 private extension CLPlayerContentPanelHeadView {
-    func initUI() {
+    func initSubViews() {
         addSubview(titleLabel)
     }
 

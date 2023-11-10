@@ -41,7 +41,7 @@ class CLPlayerContentView: UIView {
     init(config: CLPlayerConfigure) {
         self.config = config
         super.init(frame: .zero)
-        initUI()
+        initSubViews()
         makeConstraints()
         updateConfig()
     }
@@ -353,7 +353,7 @@ class CLPlayerContentView: UIView {
 // MARK: - JmoVxia---布局
 
 private extension CLPlayerContentView {
-    func initUI() {
+    func initSubViews() {
         clipsToBounds = true
         autoresizesSubviews = true
         isUserInteractionEnabled = true
