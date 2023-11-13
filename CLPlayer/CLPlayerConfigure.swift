@@ -49,7 +49,7 @@ public struct CLPlayerConfigure {
         /// 暂停按钮图片
         public var pause: UIImage?
         /// 进度滑块图片
-        public var slider: UIImage?
+        public var thumb: UIImage?
         /// 最大化按钮图片
         public var max: UIImage?
         /// 最小化按钮图片
@@ -59,7 +59,7 @@ public struct CLPlayerConfigure {
                     more: UIImage? = CLImageHelper.imageWithName("CLMore"),
                     play: UIImage? = CLImageHelper.imageWithName("CLPlay"),
                     pause: UIImage? = CLImageHelper.imageWithName("CLPause"),
-                    slider: UIImage? = CLImageHelper.imageWithName("CLSlider"),
+                    thumb: UIImage? = CLImageHelper.imageWithName("CLSlider"),
                     max: UIImage? = CLImageHelper.imageWithName("CLFullscreen"),
                     min: UIImage? = CLImageHelper.imageWithName("CLSmallscreen"))
         {
@@ -67,7 +67,7 @@ public struct CLPlayerConfigure {
             self.more = more
             self.play = play
             self.pause = pause
-            self.slider = slider
+            self.thumb = thumb
             self.max = max
             self.min = min
         }
@@ -125,4 +125,8 @@ public struct CLPlayerConfigure {
     public var color = CLPlayerColor()
     /// 图片
     public var image = CLPlayerImage()
+    /// 滑块水平偏移量
+    public var thumbImageOffset = 0.0
+    /// 滑块点击范围偏移
+    public var thumbClickableOffset = CGPoint(x: 30, y: 40)
 }

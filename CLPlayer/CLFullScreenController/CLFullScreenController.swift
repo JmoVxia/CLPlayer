@@ -77,4 +77,8 @@ extension CLFullScreenController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
 }

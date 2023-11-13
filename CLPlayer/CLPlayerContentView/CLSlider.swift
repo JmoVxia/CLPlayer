@@ -1,66 +1,38 @@
-//
-//  CLSlider.swift
-//  CLPlayer
-//
-//  Created by Chen JmoVxia on 2021/10/28.
-//
-
-import SnapKit
 import UIKit
 
 class CLSlider: UISlider {
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initSubViews()
-    }
+    private var lastThumbBounds = CGRect.zero
 
-    @available(*, unavailable)
-    required init?(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var thumbClickableOffset = CGPoint(x: 30.0, y: 40.0)
 
-    private var lastBounds: CGRect = .zero
+    var verticalSliderOffset: CGFloat = 0.0
 
-    private let sliderBoundX: CGFloat = 30
-
-    private let sliderBoundY: CGFloat = 40
-}
-
-// MARK: - JmoVxia---布局
-
-private extension CLSlider {
-    func initSubViews() {}
-}
-
-// MARK: - JmoVxia---override
-
-extension CLSlider {
     override func trackRect(forBounds bounds: CGRect) -> CGRect {
-        super.trackRect(forBounds: bounds)
-        return .init(origin: bounds.origin, size: CGSize(width: bounds.width, height: 2))
+        let newTrackRect = super.trackRect(forBounds: bounds)
+        return CGRect(origin: newTrackRect.origin, size: CGSize(width: newTrackRect.width, height: 2))
     }
 
     override func thumbRect(forBounds bounds: CGRect, trackRect rect: CGRect, value: Float) -> CGRect {
-        var rect = rect
-        rect.origin.x = rect.minX - 6
-        rect.size.width = rect.width + 12
-        lastBounds = super.thumbRect(forBounds: bounds, trackRect: rect, value: value)
-        return lastBounds
+        var thumbRect = rect
+        thumbRect.origin.x = thumbRect.minX - verticalSliderOffset
+        thumbRect.size.width = thumbRect.width + verticalSliderOffset * 2.0
+        lastThumbBounds = super.thumbRect(forBounds: bounds, trackRect: thumbRect, value: value)
+        return lastThumbBounds
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let view = super.hitTest(point, with: event)
         guard view != self else { return view }
         guard point.x >= 0, point.x < bounds.width else { return view }
-        guard point.y >= -15, point.y < lastBounds.height + sliderBoundY else { return view }
+        guard point.y >= -thumbClickableOffset.x * 0.5, point.y < lastThumbBounds.height + thumbClickableOffset.y else { return view }
         return self
     }
 
     override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-        let result = super.point(inside: point, with: event)
-        guard !result else { return result }
-        guard point.x >= lastBounds.minX - sliderBoundX, point.x <= lastBounds.maxX + sliderBoundX else { return result }
-        guard point.y >= -sliderBoundY, point.y < lastBounds.height + sliderBoundY else { return result }
+        let isInside = super.point(inside: point, with: event)
+        guard !isInside else { return isInside }
+        guard point.x >= lastThumbBounds.minX - thumbClickableOffset.x, point.x <= lastThumbBounds.maxX + thumbClickableOffset.x else { return isInside }
+        guard point.y >= -thumbClickableOffset.y, point.y < lastThumbBounds.height + thumbClickableOffset.y else { return isInside }
         return true
     }
 }

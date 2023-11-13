@@ -29,6 +29,11 @@ class CLFrameController: CLController {
             config.videoGravity = .resizeAspectFill
             config.topBarHiddenStyle = .never
             config.isHiddenToolbarWhenStart = false
+            config.image.thumb = UIImage(named: "slider_dog")
+            config.thumbImageOffset = 10
+            config.color.progress = .orange
+            config.color.progressFinished = .red
+            config.color.progressBuffer = .yellow
         }
         view.placeholder = placeholderView
         return view

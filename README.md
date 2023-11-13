@@ -36,6 +36,7 @@
 
 # 功能
 
+- [x] 支持Autolayout、UIStackView、Frame
 - [x] 支持全屏模式、小屏模式
 - [x] 支持跟随手机自动旋转
 - [x] 支持本地视频、网络`URL`

@@ -35,7 +35,6 @@ class CLPlayerView: UIView {
         NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
-        print("CLPlayer deinit")
     }
 
     private(set) lazy var contentView: CLPlayerContentView = {
@@ -269,10 +268,10 @@ private extension CLPlayerView {
             contentView.playState = .readyToPlay
             totalDuration = TimeInterval(playerItem.duration.value) / TimeInterval(playerItem.duration.timescale)
 
-            sliderTimer = CLGCDTimer(interval: 0.1) { [weak self] _ in
+            sliderTimer = CLGCDTimer(interval: 0.1)
+            sliderTimer?.start { [weak self] _ in
                 self?.sliderTimerAction()
             }
-            sliderTimer?.start()
 
             loadedTimeRangesObserve = playerItem.observe(\.loadedTimeRanges, options: [.new]) { [weak self] _, _ in
                 self?.observeLoadedTimeRangesAction()
@@ -325,18 +324,18 @@ private extension CLPlayerView {
 
         player?.pause()
         sliderTimer?.suspend()
-        bufferTimer?.cancel()
+        bufferTimer = nil
 
         contentView.playState = .buffering
-        bufferTimer = CLGCDTimer(interval: 0, delaySecs: 3.0, repeats: false, action: { [weak self] _ in
+        bufferTimer = CLGCDTimer(interval: 0, delaySecs: 3.0)
+        bufferTimer?.start { [weak self] _ in
             guard let playerItem = self?.playerItem else { return }
             if playerItem.isPlaybackLikelyToKeepUp {
                 self?.play()
             } else {
                 self?.bufferingSomeSecond()
             }
-        })
-        bufferTimer?.start()
+        }
     }
 
     func sliderTimerAction() {
@@ -415,7 +414,7 @@ extension CLPlayerView {
         contentView.playState = .pause
         player?.pause()
         sliderTimer?.suspend()
-        bufferTimer?.cancel()
+        bufferTimer = nil
         waitReadyToPlayState = .nomal
     }
 
@@ -437,10 +436,10 @@ extension CLPlayerView {
 
         contentView.playState = .unknow
         contentView.setProgress(0, animated: false)
-        contentView.setSliderProgress(0, animated: false)
-        contentView.setTotalDuration(0)
-        contentView.setCurrentDuration(0)
-        sliderTimer?.cancel()
+        playbackProgress = 0
+        totalDuration = 0
+        currentDuration = 0
+        sliderTimer = nil
     }
 }
 
@@ -506,8 +505,8 @@ extension CLPlayerView: CLPlayerContentViewDelegate {
 
     func didClickBackButton(in contentView: CLPlayerContentView) {
         guard contentView.screenState == .fullScreen else { return }
-        dismiss()
         DispatchQueue.main.async {
+            self.dismiss()
             self.backButtonTappedHandler?()
         }
     }

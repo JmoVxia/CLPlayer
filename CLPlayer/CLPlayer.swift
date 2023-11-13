@@ -139,7 +139,7 @@ private extension CLPlayer {}
 
 // MARK: - JmoVxia---公共方法
 
-extension CLPlayer {
+public extension CLPlayer {
     func play() {
         playerView.play()
     }

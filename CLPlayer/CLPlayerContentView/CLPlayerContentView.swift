@@ -145,6 +145,8 @@ class CLPlayerContentView: UIView {
 
     private lazy var progressView: UIProgressView = {
         let view = UIProgressView()
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 1
         view.trackTintColor = .white.withAlphaComponent(0.35)
         view.progressTintColor = .white.withAlphaComponent(0.5)
         return view
@@ -306,7 +308,6 @@ class CLPlayerContentView: UIView {
     var playState: CLPlayerPlayState = .unknow {
         didSet {
             guard playState != oldValue else { return }
-            print("playState:\(playState)")
             switch playState {
             case .unknow:
                 sliderView.isUserInteractionEnabled = false
@@ -444,13 +445,16 @@ private extension CLPlayerContentView {
             make.centerY.equalToSuperview()
         }
         progressView.snp.makeConstraints { make in
-            make.left.equalTo(currentDurationLabel.snp.right).offset(15)
+            make.left.equalTo(currentDurationLabel.snp.right).offset(15 + config.thumbImageOffset)
             make.centerY.equalToSuperview()
             make.height.equalTo(2)
-            make.right.equalTo(totalDurationLabel.snp.left).offset(-15)
+            make.right.equalTo(totalDurationLabel.snp.left).offset(-15 - config.thumbImageOffset)
         }
         sliderView.snp.makeConstraints { make in
-            make.edges.equalTo(progressView)
+            make.left.equalTo(progressView).offset(-1)
+            make.right.equalTo(progressView).offset(1)
+            make.height.equalTo(30)
+            make.centerY.equalTo(progressView)
         }
         failButton.snp.makeConstraints { make in
             make.center.equalToSuperview()
@@ -483,7 +487,9 @@ private extension CLPlayerContentView {
         playButton.setImage(config.image.pause, for: .selected)
         fullButton.setImage(config.image.max, for: .normal)
         fullButton.setImage(config.image.min, for: .selected)
-        sliderView.setThumbImage(config.image.slider, for: .normal)
+        sliderView.setThumbImage(config.image.thumb, for: .normal)
+        sliderView.verticalSliderOffset = config.thumbImageOffset
+        sliderView.thumbClickableOffset = config.thumbClickableOffset
     }
 }
 
@@ -606,14 +612,14 @@ private extension CLPlayerContentView {
     }
 
     func autoFadeOutTooView() {
-        autoFadeOutTimer = CLGCDTimer(interval: 0, delaySecs: 0.25 + config.autoFadeOut, repeats: false, action: { [weak self] _ in
+        autoFadeOutTimer = CLGCDTimer(interval: 0, delaySecs: 0.25 + config.autoFadeOut)
+        autoFadeOutTimer?.start { [weak self] _ in
             self?.hiddenToolView()
-        })
-        autoFadeOutTimer?.start()
+        }
     }
 
     func cancelAutoFadeOutTooView() {
-        autoFadeOutTimer?.cancel()
+        autoFadeOutTimer = nil
     }
 }
 
