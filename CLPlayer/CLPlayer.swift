@@ -116,6 +116,7 @@ public class CLPlayer: UIStackView {
 
 private extension CLPlayer {
     func initSubViews() {
+        insetsLayoutMarginsFromSafeArea = false
         distribution = .fill
         alignment = .fill
         addArrangedSubview(playerView)
