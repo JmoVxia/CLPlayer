@@ -9,6 +9,7 @@ target 'CLPlayer' do
     inhibit_all_warnings!
     pod 'SnapKit'
     pod 'SwiftFormat/CLI'
+    pod 'LookinServer', :subspecs => ['Swift'], :configurations => ['Debug']
 end
 
 post_install do |installer|

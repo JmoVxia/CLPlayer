@@ -8,24 +8,24 @@
 import UIKit
 
 class CLGCDTimer: NSObject {
-    public enum State {
+    public enum TimerState {
         case suspended
         case resumed
     }
 
     /// 执行时间
     public private(set) var interval: TimeInterval!
-    /// 延迟时间
-    public private(set) var delaySecs: TimeInterval!
+    /// 第一次执行延迟时间延迟时间
+    public private(set) var initialDelay: TimeInterval!
     /// 队列
-    public private(set) var serialQueue: DispatchQueue!
+    public private(set) var queue: DispatchQueue!
     /// 定时器
     public private(set) var timer: DispatchSourceTimer!
-    /// 是否正在运行
-    public private(set) var state: State = .suspended
-    /// 响应次数
-    public private(set) var actionTimes = Int.zero
-    /// 响应
+    /// 运行状态
+    public private(set) var state: TimerState = .suspended
+    /// 执行次数
+    public private(set) var numberOfActions = Int.zero
+    /// 响应回调
     public private(set) var eventHandler: ((Int) -> Void)?
 
     /// 创建定时器
@@ -37,19 +37,19 @@ class CLGCDTimer: NSObject {
     ///   - repeats: 是否重复执行，默认true
     ///   - action: 响应
     public init(interval: TimeInterval,
-                delaySecs: TimeInterval = 0,
+                initialDelay: TimeInterval = 0,
                 queue: DispatchQueue = .main)
     {
         super.init()
         self.interval = interval
-        self.delaySecs = delaySecs
-        serialQueue = queue
-        timer = DispatchSource.makeTimerSource(queue: serialQueue)
-        timer.schedule(deadline: .now() + delaySecs, repeating: interval)
+        self.initialDelay = initialDelay
+        self.queue = queue
+        timer = DispatchSource.makeTimerSource(queue: queue)
+        timer.schedule(deadline: .now() + initialDelay, repeating: interval)
         timer.setEventHandler { [weak self] in
             guard let self = self else { return }
-            self.actionTimes += 1
-            self.eventHandler?(self.actionTimes)
+            self.numberOfActions += 1
+            self.eventHandler?(self.numberOfActions)
         }
     }
 
@@ -63,13 +63,13 @@ class CLGCDTimer: NSObject {
 
 extension CLGCDTimer {
     /// 开始
-    public func start(_ handler: @escaping ((_ count: Int) -> Void)) {
+    public func run(_ handler: @escaping ((_ numberOfActions: Int) -> Void)) {
         eventHandler = handler
         resume()
     }
 
     /// 暂停
-    public func suspend() {
+    public func pause() {
         guard let timer = timer else { return }
         guard state != .suspended else { return }
         state = .suspended

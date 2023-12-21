@@ -53,7 +53,7 @@ class CLAnimationTransitioning: NSObject {
 
 extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using _: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.25
+        return 0.35
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -106,7 +106,6 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
                 playView.contentView.setNeedsLayout()
                 playView.contentView.layoutIfNeeded()
             }) { _ in
-                toView.transform = .identity
                 transitionContext.completeTransition(true)
                 UIViewController.attemptRotationToDeviceOrientation()
             }
@@ -122,15 +121,12 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
 
             transitionContext.containerView.addSubview(toView)
             transitionContext.containerView.addSubview(fromView)
-            fromView.addSubview(playView)
 
             fromView.snp.remakeConstraints { make in
                 make.center.equalTo(fromCenter)
                 make.size.equalTo(fromSize)
             }
-            playView.snp.remakeConstraints { make in
-                make.edges.equalToSuperview()
-            }
+
             transitionContext.containerView.setNeedsLayout()
             transitionContext.containerView.layoutIfNeeded()
 
@@ -150,8 +146,8 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
                 playView.contentView.layoutIfNeeded()
             }) { _ in
                 fromView.transform = .identity
-                parentView.addArrangedSubview(playView)
                 fromView.removeFromSuperview()
+                parentView.addArrangedSubview(playView)
                 transitionContext.completeTransition(true)
                 UIViewController.attemptRotationToDeviceOrientation()
             }

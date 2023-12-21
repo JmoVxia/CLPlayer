@@ -224,7 +224,7 @@ private extension CLPlayerView {
         currentDuration = totalDuration
         playbackProgress = 1.0
         contentView.playState = .ended
-        sliderTimer?.suspend()
+        sliderTimer?.pause()
         DispatchQueue.main.async {
             self.playToEndHandler?()
         }
@@ -269,7 +269,7 @@ private extension CLPlayerView {
             totalDuration = TimeInterval(playerItem.duration.value) / TimeInterval(playerItem.duration.timescale)
 
             sliderTimer = CLGCDTimer(interval: 0.1)
-            sliderTimer?.start { [weak self] _ in
+            sliderTimer?.run { [weak self] _ in
                 self?.sliderTimerAction()
             }
 
@@ -323,13 +323,13 @@ private extension CLPlayerView {
         guard contentView.playState != .failed else { return }
 
         player?.pause()
-        sliderTimer?.suspend()
-        bufferTimer = nil
+        sliderTimer?.pause()
 
         contentView.playState = .buffering
-        bufferTimer = CLGCDTimer(interval: 0, delaySecs: 3.0)
-        bufferTimer?.start { [weak self] _ in
+        bufferTimer = CLGCDTimer(interval: 3.0, initialDelay: 3.0)
+        bufferTimer?.run { [weak self] _ in
             guard let playerItem = self?.playerItem else { return }
+            self?.bufferTimer = nil
             if playerItem.isPlaybackLikelyToKeepUp {
                 self?.play()
             } else {
@@ -351,17 +351,19 @@ private extension CLPlayerView {
 
 private extension CLPlayerView {
     func dismiss() {
+        guard Thread.isMainThread else { return DispatchQueue.main.async { self.dismiss() } }
         guard contentView.screenState == .fullScreen else { return }
         guard let controller = fullScreenController else { return }
         contentView.screenState = .animating
         controller.dismiss(animated: true, completion: {
             self.contentView.screenState = .small
+            self.fullScreenController = nil
+            UIViewController.attemptRotationToDeviceOrientation()
         })
-        fullScreenController = nil
-        UIViewController.attemptRotationToDeviceOrientation()
     }
 
     func presentWithOrientation(_ orientation: CLAnimationTransitioning.CLAnimationOrientation) {
+        guard Thread.isMainThread else { return DispatchQueue.main.async { self.presentWithOrientation(orientation) } }
         guard superview != nil else { return }
         guard fullScreenController == nil else { return }
         guard contentView.screenState == .small else { return }
@@ -404,6 +406,7 @@ extension CLPlayerView {
         player?.rate = rate
         sliderTimer?.resume()
         waitReadyToPlayState = .nomal
+        bufferTimer = nil
     }
 
     func pause() {
@@ -413,7 +416,7 @@ extension CLPlayerView {
         }
         contentView.playState = .pause
         player?.pause()
-        sliderTimer?.suspend()
+        sliderTimer?.pause()
         bufferTimer = nil
         waitReadyToPlayState = .nomal
     }

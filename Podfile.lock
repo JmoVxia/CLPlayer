@@ -1,20 +1,26 @@
 PODS:
+  - LookinServer/Core (1.2.4)
+  - LookinServer/Swift (1.2.4):
+    - LookinServer/Core
   - SnapKit (5.6.0)
   - SwiftFormat/CLI (0.52.8)
 
 DEPENDENCIES:
+  - LookinServer/Swift
   - SnapKit
   - SwiftFormat/CLI
 
 SPEC REPOS:
   https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
+    - LookinServer
     - SnapKit
     - SwiftFormat
 
 SPEC CHECKSUMS:
+  LookinServer: 00c7588043ed8e7ab64ce55b9fb747e51371ad06
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
   SwiftFormat: e60dbe6a704faf75f3089744e5f508aae0be4ad5
 
-PODFILE CHECKSUM: c0c00e0561d0fe1bf93e289b8b78eeeded153d95
+PODFILE CHECKSUM: ef8371675a67d45b1e997f6d8c113acea73d85d7
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.15.2

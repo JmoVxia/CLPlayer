@@ -5,6 +5,8 @@
 //  Created by Chen JmoVxia on 2021/10/26.
 //
 
+import AVFoundation
+import MobileCoreServices
 import SnapKit
 import UIKit
 
@@ -58,6 +60,7 @@ extension CLHomeController {
         initUI()
         makeConstraints()
         initData()
+        print("本框架基于AVPlayer封装，支持格式：\n\(getAllowedAVPlayerFileExtensions())")
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -156,6 +159,13 @@ extension CLHomeController {}
 // MARK: - JmoVxia---私有方法
 
 private extension CLHomeController {
+    func getAllowedAVPlayerFileExtensions() -> [String] {
+        let avTypes = AVURLAsset.audiovisualTypes()
+        var avExtensions = avTypes.map { UTTypeCopyPreferredTagWithClass($0 as CFString, kUTTagClassFilenameExtension)?.takeRetainedValue() as String? ?? "" }
+        avExtensions = avExtensions.filter { !$0.isEmpty }
+        return avExtensions
+    }
+
     func pushToFrame() {
         navigationController?.pushViewController(CLFrameController(), animated: true)
     }

@@ -27,7 +27,7 @@ class CLCollectionViewController: CLController {
     deinit {}
 
     private lazy var collectionView: UICollectionView = {
-        let width = (view.bounds.width - 30) * 0.5
+        let width = (view.bounds.width - 20)
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10

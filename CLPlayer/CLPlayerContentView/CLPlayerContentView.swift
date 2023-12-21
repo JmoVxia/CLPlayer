@@ -612,8 +612,8 @@ private extension CLPlayerContentView {
     }
 
     func autoFadeOutTooView() {
-        autoFadeOutTimer = CLGCDTimer(interval: 0, delaySecs: 0.25 + config.autoFadeOut)
-        autoFadeOutTimer?.start { [weak self] _ in
+        autoFadeOutTimer = CLGCDTimer(interval: 0, initialDelay: 0.25 + config.autoFadeOut)
+        autoFadeOutTimer?.run { [weak self] _ in
             self?.hiddenToolView()
         }
     }

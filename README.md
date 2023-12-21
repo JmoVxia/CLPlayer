@@ -1,5 +1,3 @@
-![head](https://s1.xptou.com/2022/12/09/6392e258944b2.png)
-
 # 前言
 
     很早之前开源了一个简单的视频播放器，由于年久失修，效果惨目忍睹，最近特意花时间对其进行了深度重构。旧版本后期不再维护，新版本使用`Swift`实现，后续会增加更多功能。不想看文字的请自行下载代码------>>>[CLPlayer](https://github.com/JmoVxia/CLPlayer)
@@ -24,6 +22,7 @@
 **9.新版本移除了状态栏相关配置**
 
 # 效果
+
 ![效果图](https://upload-images.jianshu.io/upload_images/1979970-3f35995fbe988a91.gif?imageMogr2/auto-orient/strip)
 
 ![全屏](https://upload-images.jianshu.io/upload_images/1979970-46f701b4f1d654ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
