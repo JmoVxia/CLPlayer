@@ -324,12 +324,12 @@ private extension CLPlayerView {
 
         player?.pause()
         sliderTimer?.suspend()
-        bufferTimer = nil
 
         contentView.playState = .buffering
-        bufferTimer = CLGCDTimer(interval: 0, delaySecs: 3.0)
+        bufferTimer = CLGCDTimer(interval: 3.0, delaySecs: 3.0)
         bufferTimer?.start { [weak self] _ in
             guard let playerItem = self?.playerItem else { return }
+            self?.bufferTimer = nil
             if playerItem.isPlaybackLikelyToKeepUp {
                 self?.play()
             } else {
@@ -404,6 +404,7 @@ extension CLPlayerView {
         player?.rate = rate
         sliderTimer?.resume()
         waitReadyToPlayState = .nomal
+        bufferTimer = nil
     }
 
     func pause() {
