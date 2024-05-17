@@ -9,12 +9,12 @@ import SnapKit
 import UIKit
 
 extension CLAnimationTransitioning {
-    enum CLAnimationType {
+    enum AnimationType {
         case present
         case dismiss
     }
 
-    enum CLAnimationOrientation {
+    enum AnimationOrientation {
         case left
         case right
         case fullRight
@@ -30,24 +30,27 @@ class CLAnimationTransitioning: NSObject {
         }
     }()
 
-    private weak var player: CLPlayerView?
+    private weak var playerView: CLPlayerView?
 
-    private weak var parentView: UIStackView?
+    private weak var parentStackView: UIStackView?
 
-    private var centerInParent: CGPoint = .zero
+    private var initialCenter: CGPoint = .zero
 
-    private var originSize: CGSize = .zero
+    private var finalCenter: CGPoint = .zero
 
-    private var orientation: CLAnimationOrientation = .left
+    private var initialBounds: CGRect = .zero
 
-    var animationType: CLAnimationType = .present
+    private var animationOrientation: AnimationOrientation = .left
 
-    init(playView: CLPlayerView, orientation: CLAnimationOrientation) {
-        player = playView
-        self.orientation = orientation
-        parentView = playView.superview as? UIStackView
-        centerInParent = playView.center
-        originSize = playView.frame.size
+    var animationType: AnimationType = .present
+
+    init(playerView: CLPlayerView, animationOrientation: AnimationOrientation) {
+        self.playerView = playerView
+        self.animationOrientation = animationOrientation
+        parentStackView = playerView.superview as? UIStackView
+        initialBounds = playerView.bounds
+        initialCenter = playerView.center
+        finalCenter = playerView.convert(initialCenter, to: nil)
     }
 }
 
@@ -57,97 +60,59 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        guard let playView = player else { return }
+        guard let playerView = playerView else { return }
+
         if animationType == .present {
             guard let toView = transitionContext.view(forKey: .to) else { return }
-            guard let fromController = transitionContext.viewController(forKey: .from) else { return }
+            guard let toController = transitionContext.viewController(forKey: .to) as? CLFullScreenController else { return }
 
-            let fromCenter = transitionContext.containerView.convert(playView.center, from: playView.superview)
-            let fromSize = transitionContext.containerView.convert(playView.frame, from: nil).size
-
+            let startCenter = transitionContext.containerView.convert(initialCenter, from: playerView)
             transitionContext.containerView.addSubview(toView)
-            toView.addSubview(playView)
+            toController.mainStackView.addArrangedSubview(playerView)
+            toView.bounds = initialBounds
+            toView.center = startCenter
+            toView.transform = .init(rotationAngle: toController.isKind(of: CLFullScreenLeftController.self) ? Double.pi * 0.5 : Double.pi * -0.5)
 
-            if orientation == .left,
-               !(fromController.shouldAutorotate && fromController.supportedInterfaceOrientations.contains(.landscapeLeft))
-            {
-                toView.transform = .init(rotationAngle: -Double.pi * 0.5)
-            } else if orientation == .right,
-                      !(fromController.shouldAutorotate && fromController.supportedInterfaceOrientations.contains(.landscapeRight))
-            {
-                toView.transform = .init(rotationAngle: Double.pi * 0.5)
-            } else if orientation == .fullRight {
-                toView.transform = .init(rotationAngle: -Double.pi * 0.5)
-            }
-
-            toView.snp.remakeConstraints { make in
-                make.center.equalTo(fromCenter)
-                make.size.equalTo(fromSize)
-            }
-            playView.snp.remakeConstraints { make in
-                make.edges.equalToSuperview()
-            }
-            transitionContext.containerView.setNeedsLayout()
-            transitionContext.containerView.layoutIfNeeded()
-
-            toView.snp.updateConstraints { make in
-                make.center.equalTo(transitionContext.containerView.center)
-                make.size.equalTo(transitionContext.containerView.bounds.size)
-            }
             if #available(iOS 11.0, *) {
-                playView.contentView.animationLayout(safeAreaInsets: keyWindow?.safeAreaInsets ?? .zero, to: .fullScreen)
+                playerView.contentView.animationLayout(safeAreaInsets: keyWindow?.safeAreaInsets ?? .zero, to: .fullScreen)
             } else {
-                playView.contentView.animationLayout(safeAreaInsets: .zero, to: .fullScreen)
+                playerView.contentView.animationLayout(safeAreaInsets: .zero, to: .fullScreen)
             }
             UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0, options: .layoutSubviews, animations: {
                 toView.transform = .identity
-                transitionContext.containerView.setNeedsLayout()
-                transitionContext.containerView.layoutIfNeeded()
-                playView.contentView.setNeedsLayout()
-                playView.contentView.layoutIfNeeded()
+                toView.bounds = transitionContext.containerView.bounds
+                toView.center = transitionContext.containerView.center
+                playerView.contentView.setNeedsLayout()
+                playerView.contentView.layoutIfNeeded()
             }) { _ in
+                toView.transform = .identity
+                toView.bounds = transitionContext.containerView.bounds
+                toView.center = transitionContext.containerView.center
                 transitionContext.completeTransition(true)
                 UIViewController.attemptRotationToDeviceOrientation()
             }
         } else {
-            guard let parentView = parentView else { return }
+            guard let parentStackView = parentStackView else { return }
             guard let fromView = transitionContext.view(forKey: .from) else { return }
             guard let toView = transitionContext.view(forKey: .to) else { return }
 
-            toView.frame = transitionContext.containerView.bounds
-
-            let fromCenter = CGPoint(x: toView.frame.width * 0.5, y: toView.frame.height * 0.5)
-            let fromSize = transitionContext.containerView.convert(playView.frame, from: nil).size
-
             transitionContext.containerView.addSubview(toView)
             transitionContext.containerView.addSubview(fromView)
+            toView.frame = transitionContext.containerView.bounds
 
-            fromView.snp.remakeConstraints { make in
-                make.center.equalTo(fromCenter)
-                make.size.equalTo(fromSize)
-            }
-
-            transitionContext.containerView.setNeedsLayout()
-            transitionContext.containerView.layoutIfNeeded()
-
-            let center = transitionContext.containerView.convert(centerInParent, from: parentView)
-            fromView.snp.updateConstraints { make in
-                make.center.equalTo(center)
-                make.size.equalTo(originSize)
-            }
-
-            playView.contentView.animationLayout(safeAreaInsets: .zero, to: .small)
-
+            playerView.contentView.animationLayout(safeAreaInsets: .zero, to: .small)
             UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: .layoutSubviews, animations: {
                 fromView.transform = .identity
-                transitionContext.containerView.setNeedsLayout()
-                transitionContext.containerView.layoutIfNeeded()
-                playView.contentView.setNeedsLayout()
-                playView.contentView.layoutIfNeeded()
+                fromView.center = self.finalCenter
+                fromView.bounds = self.initialBounds
+                playerView.contentView.setNeedsLayout()
+                playerView.contentView.layoutIfNeeded()
             }) { _ in
                 fromView.transform = .identity
+                fromView.center = self.finalCenter
+                fromView.bounds = self.initialBounds
+                parentStackView.addArrangedSubview(playerView)
                 fromView.removeFromSuperview()
-                parentView.addArrangedSubview(playView)
                 transitionContext.completeTransition(true)
                 UIViewController.attemptRotationToDeviceOrientation()
             }

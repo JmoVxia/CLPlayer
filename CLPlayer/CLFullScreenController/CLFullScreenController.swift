@@ -20,6 +20,19 @@ class CLFullScreenController: UIViewController {
     }
 
     deinit {}
+
+    private(set) lazy var mainStackView: UIStackView = {
+        let view = UIStackView()
+        view.isUserInteractionEnabled = true
+        view.axis = .horizontal
+        view.distribution = .fill
+        view.alignment = .fill
+        view.insetsLayoutMarginsFromSafeArea = false
+        view.isLayoutMarginsRelativeArrangement = true
+        view.layoutMargins = .zero
+        view.spacing = 0
+        return view
+    }()
 }
 
 // MARK: - JmoVxia---生命周期
@@ -56,6 +69,10 @@ extension CLFullScreenController {
 private extension CLFullScreenController {
     func initUI() {
         view.backgroundColor = .black
+        view.addSubview(mainStackView)
+        mainStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
 }
 

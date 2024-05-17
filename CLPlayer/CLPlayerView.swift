@@ -362,7 +362,7 @@ private extension CLPlayerView {
         })
     }
 
-    func presentWithOrientation(_ orientation: CLAnimationTransitioning.CLAnimationOrientation) {
+    func presentWithOrientation(_ orientation: CLAnimationTransitioning.AnimationOrientation) {
         guard Thread.isMainThread else { return DispatchQueue.main.async { self.presentWithOrientation(orientation) } }
         guard superview != nil else { return }
         guard fullScreenController == nil else { return }
@@ -370,7 +370,7 @@ private extension CLPlayerView {
         guard let rootViewController = keyWindow?.rootViewController else { return }
         contentView.screenState = .animating
 
-        animationTransitioning = CLAnimationTransitioning(playView: self, orientation: orientation)
+        animationTransitioning = CLAnimationTransitioning(playerView: self, animationOrientation: orientation)
 
         fullScreenController = orientation == .right ? CLFullScreenLeftController() : CLFullScreenRightController()
         fullScreenController?.transitioningDelegate = self
