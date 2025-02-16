@@ -9,223 +9,232 @@
 /* Begin PBXAggregateTarget section */
 		1CD0618C486973D5588EF20D2E8C0AEA /* SwiftFormat */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 46EB2E000018C0 /* Build configuration list for PBXAggregateTarget "SwiftFormat" */;
+			buildConfigurationList = 46EB2E000019C0 /* Build configuration list for PBXAggregateTarget "SwiftFormat" */;
 			buildPhases = (
 			);
 			dependencies = (
 			);
 			name = SwiftFormat;
-			productName = SwiftFormat;
 		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		46EB2E00000C40 /* CALayer+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000110 /* CALayer+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000C50 /* NSObject+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000130 /* NSObject+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000C60 /* UIBlurEffect+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000150 /* UIBlurEffect+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000C70 /* UIColor+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000170 /* UIColor+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000C80 /* UIImage+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000190 /* UIImage+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000C90 /* UIImageView+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000001B0 /* UIImageView+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000CA0 /* UILabel+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000001D0 /* UILabel+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000CB0 /* UITableView+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000001F0 /* UITableView+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000CC0 /* UITextField+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000210 /* UITextField+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000CD0 /* UITextView+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000230 /* UITextView+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000CE0 /* UIView+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000250 /* UIView+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000CF0 /* UIViewController+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000270 /* UIViewController+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000D00 /* UIVisualEffectView+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000290 /* UIVisualEffectView+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000D10 /* LKS_ConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000002B0 /* LKS_ConnectionManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000D20 /* LKS_RequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000002D0 /* LKS_RequestHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000D30 /* LKS_AttrModificationPatchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000002F0 /* LKS_AttrModificationPatchHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000D40 /* LKS_CustomAttrModificationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000310 /* LKS_CustomAttrModificationHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000D50 /* LKS_HierarchyDetailsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000330 /* LKS_HierarchyDetailsHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000D60 /* LKS_InbuiltAttrModificationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000350 /* LKS_InbuiltAttrModificationHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000D70 /* LKSConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000380 /* LKSConfigManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000D80 /* LKS_AttrGroupsMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000003A0 /* LKS_AttrGroupsMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000D90 /* LKS_CustomAttrGroupsMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000003C0 /* LKS_CustomAttrGroupsMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000DA0 /* LKS_CustomAttrSetterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000003E0 /* LKS_CustomAttrSetterManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000DB0 /* LKS_CustomDisplayItemsMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000400 /* LKS_CustomDisplayItemsMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000DC0 /* LKS_EventHandlerMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000420 /* LKS_EventHandlerMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000DD0 /* LKS_ExportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000440 /* LKS_ExportManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000DE0 /* LKS_GestureTargetActionsSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000460 /* LKS_GestureTargetActionsSearcher.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000DF0 /* LKS_Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000480 /* LKS_Helper.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000E00 /* LKS_HierarchyDisplayItemsMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000004A0 /* LKS_HierarchyDisplayItemsMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000E10 /* LKS_ObjectRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000004C0 /* LKS_ObjectRegistry.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000E20 /* LKS_TraceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000004E0 /* LKS_TraceManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000E30 /* CALayer+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000510 /* CALayer+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000E40 /* Color+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000530 /* Color+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000E50 /* Image+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000550 /* Image+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000E60 /* NSArray+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000570 /* NSArray+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000E70 /* NSObject+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000590 /* NSObject+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000E80 /* NSSet+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000005B0 /* NSSet+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000E90 /* NSString+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000005D0 /* NSString+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000EA0 /* LookinAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000005F0 /* LookinAppInfo.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000EB0 /* LookinAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000610 /* LookinAttribute.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000EC0 /* LookinAttributeModification.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000630 /* LookinAttributeModification.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000ED0 /* LookinAttributesGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000650 /* LookinAttributesGroup.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000EE0 /* LookinAttributesSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000670 /* LookinAttributesSection.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000EF0 /* LookinAttrIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000690 /* LookinAttrIdentifiers.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000F00 /* LookinAutoLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000006C0 /* LookinAutoLayoutConstraint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000F10 /* LookinConnectionAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000006F0 /* LookinConnectionAttachment.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000F20 /* LookinConnectionResponseAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000710 /* LookinConnectionResponseAttachment.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000F30 /* LookinCustomAttrModification.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000730 /* LookinCustomAttrModification.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000F40 /* LookinCustomDisplayItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000750 /* LookinCustomDisplayItemInfo.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000F50 /* LookinDashboardBlueprint.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000770 /* LookinDashboardBlueprint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000F60 /* LookinDisplayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000007A0 /* LookinDisplayItem.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000F70 /* LookinDisplayItemDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000007C0 /* LookinDisplayItemDetail.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000F80 /* LookinEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000007E0 /* LookinEventHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000F90 /* LookinHierarchyFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000800 /* LookinHierarchyFile.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000FA0 /* LookinHierarchyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000820 /* LookinHierarchyInfo.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000FB0 /* LookinObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000840 /* LookinObject.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000FC0 /* LookinStaticAsyncUpdateTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000860 /* LookinStaticAsyncUpdateTask.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000FD0 /* LookinTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000880 /* LookinTuple.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000FE0 /* LookinWeakContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000008A0 /* LookinWeakContainer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00000FF0 /* Lookin_PTChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000008C0 /* Lookin_PTChannel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00001000 /* Lookin_PTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000008F0 /* Lookin_PTProtocol.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00001010 /* Lookin_PTUSBHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000910 /* Lookin_PTUSBHub.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00001020 /* LookinIvarTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000940 /* LookinIvarTrace.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		46EB2E00001030 /* CALayer+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000100 /* CALayer+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001040 /* NSObject+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000120 /* NSObject+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001050 /* UIBlurEffect+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000140 /* UIBlurEffect+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001060 /* UIColor+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000160 /* UIColor+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001070 /* UIImage+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000180 /* UIImage+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001080 /* UIImageView+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000001A0 /* UIImageView+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001090 /* UILabel+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000001C0 /* UILabel+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000010A0 /* UITableView+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000001E0 /* UITableView+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000010B0 /* UITextField+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000200 /* UITextField+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000010C0 /* UITextView+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000220 /* UITextView+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000010D0 /* UIView+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000240 /* UIView+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000010E0 /* UIViewController+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000260 /* UIViewController+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000010F0 /* UIVisualEffectView+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000280 /* UIVisualEffectView+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001100 /* LKS_ConnectionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000002A0 /* LKS_ConnectionManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001110 /* LKS_RequestHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000002C0 /* LKS_RequestHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001120 /* LKS_AttrModificationPatchHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000002E0 /* LKS_AttrModificationPatchHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001130 /* LKS_CustomAttrModificationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000300 /* LKS_CustomAttrModificationHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001140 /* LKS_HierarchyDetailsHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000320 /* LKS_HierarchyDetailsHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001150 /* LKS_InbuiltAttrModificationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000340 /* LKS_InbuiltAttrModificationHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001160 /* LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000360 /* LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001170 /* LKSConfigManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000370 /* LKSConfigManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001180 /* LKS_AttrGroupsMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000390 /* LKS_AttrGroupsMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001190 /* LKS_CustomAttrGroupsMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000003B0 /* LKS_CustomAttrGroupsMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000011A0 /* LKS_CustomAttrSetterManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000003D0 /* LKS_CustomAttrSetterManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000011B0 /* LKS_CustomDisplayItemsMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000003F0 /* LKS_CustomDisplayItemsMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000011C0 /* LKS_EventHandlerMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000410 /* LKS_EventHandlerMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000011D0 /* LKS_ExportManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000430 /* LKS_ExportManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000011E0 /* LKS_GestureTargetActionsSearcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000450 /* LKS_GestureTargetActionsSearcher.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000011F0 /* LKS_Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000470 /* LKS_Helper.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001200 /* LKS_HierarchyDisplayItemsMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000490 /* LKS_HierarchyDisplayItemsMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001210 /* LKS_ObjectRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000004B0 /* LKS_ObjectRegistry.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001220 /* LKS_TraceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000004D0 /* LKS_TraceManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001230 /* LookinServerDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000004F0 /* LookinServerDefines.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001240 /* CALayer+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000500 /* CALayer+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001250 /* Color+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000520 /* Color+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001260 /* Image+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000540 /* Image+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001270 /* NSArray+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000560 /* NSArray+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001280 /* NSObject+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000580 /* NSObject+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001290 /* NSSet+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000005A0 /* NSSet+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000012A0 /* NSString+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000005C0 /* NSString+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000012B0 /* LookinAppInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000005E0 /* LookinAppInfo.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000012C0 /* LookinAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000600 /* LookinAttribute.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000012D0 /* LookinAttributeModification.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000620 /* LookinAttributeModification.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000012E0 /* LookinAttributesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000640 /* LookinAttributesGroup.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000012F0 /* LookinAttributesSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000660 /* LookinAttributesSection.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001300 /* LookinAttrIdentifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000680 /* LookinAttrIdentifiers.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001310 /* LookinAttrType.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000006A0 /* LookinAttrType.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001320 /* LookinAutoLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000006B0 /* LookinAutoLayoutConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001330 /* LookinCodingValueType.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000006D0 /* LookinCodingValueType.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001340 /* LookinConnectionAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000006E0 /* LookinConnectionAttachment.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001350 /* LookinConnectionResponseAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000700 /* LookinConnectionResponseAttachment.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001360 /* LookinCustomAttrModification.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000720 /* LookinCustomAttrModification.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001370 /* LookinCustomDisplayItemInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000740 /* LookinCustomDisplayItemInfo.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001380 /* LookinDashboardBlueprint.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000760 /* LookinDashboardBlueprint.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001390 /* LookinDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000780 /* LookinDefines.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000013A0 /* LookinDisplayItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000790 /* LookinDisplayItem.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000013B0 /* LookinDisplayItemDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000007B0 /* LookinDisplayItemDetail.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000013C0 /* LookinEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000007D0 /* LookinEventHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000013D0 /* LookinHierarchyFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000007F0 /* LookinHierarchyFile.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000013E0 /* LookinHierarchyInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000810 /* LookinHierarchyInfo.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000013F0 /* LookinObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000830 /* LookinObject.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001400 /* LookinStaticAsyncUpdateTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000850 /* LookinStaticAsyncUpdateTask.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001410 /* LookinTuple.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000870 /* LookinTuple.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001420 /* LookinWeakContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000890 /* LookinWeakContainer.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001430 /* Lookin_PTChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000008B0 /* Lookin_PTChannel.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001440 /* Lookin_PTPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000008D0 /* Lookin_PTPrivate.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001450 /* Lookin_PTProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000008E0 /* Lookin_PTProtocol.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001460 /* Lookin_PTUSBHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000900 /* Lookin_PTUSBHub.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001470 /* Peertalk.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000920 /* Peertalk.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001480 /* LookinIvarTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000930 /* LookinIvarTrace.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001490 /* LKS_SwiftTraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000960 /* LKS_SwiftTraceManager.swift */; };
-		46EB2E000014F0 /* LookinServer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000014E0 /* LookinServer-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001530 /* LookinServer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00001520 /* LookinServer-dummy.m */; };
-		46EB2E000015C0 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000970 /* Constraint.swift */; };
-		46EB2E000015D0 /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000980 /* ConstraintAttributes.swift */; };
-		46EB2E000015E0 /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000990 /* ConstraintConfig.swift */; };
-		46EB2E000015F0 /* ConstraintConstantTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009A0 /* ConstraintConstantTarget.swift */; };
-		46EB2E00001600 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009B0 /* ConstraintDescription.swift */; };
-		46EB2E00001610 /* ConstraintDirectionalInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009C0 /* ConstraintDirectionalInsets.swift */; };
-		46EB2E00001620 /* ConstraintDirectionalInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009D0 /* ConstraintDirectionalInsetTarget.swift */; };
-		46EB2E00001630 /* ConstraintDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009E0 /* ConstraintDSL.swift */; };
-		46EB2E00001640 /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009F0 /* ConstraintInsets.swift */; };
-		46EB2E00001650 /* ConstraintInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A00 /* ConstraintInsetTarget.swift */; };
-		46EB2E00001660 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A10 /* ConstraintItem.swift */; };
-		46EB2E00001670 /* ConstraintLayoutGuide+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A20 /* ConstraintLayoutGuide+Extensions.swift */; };
-		46EB2E00001680 /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A30 /* ConstraintLayoutGuide.swift */; };
-		46EB2E00001690 /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A40 /* ConstraintLayoutGuideDSL.swift */; };
-		46EB2E000016A0 /* ConstraintLayoutSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A50 /* ConstraintLayoutSupport.swift */; };
-		46EB2E000016B0 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A60 /* ConstraintLayoutSupportDSL.swift */; };
-		46EB2E000016C0 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A70 /* ConstraintMaker.swift */; };
-		46EB2E000016D0 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A80 /* ConstraintMakerEditable.swift */; };
-		46EB2E000016E0 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A90 /* ConstraintMakerExtendable.swift */; };
-		46EB2E000016F0 /* ConstraintMakerFinalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AA0 /* ConstraintMakerFinalizable.swift */; };
-		46EB2E00001700 /* ConstraintMakerPrioritizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AB0 /* ConstraintMakerPrioritizable.swift */; };
-		46EB2E00001710 /* ConstraintMakerRelatable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AC0 /* ConstraintMakerRelatable+Extensions.swift */; };
-		46EB2E00001720 /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AD0 /* ConstraintMakerRelatable.swift */; };
-		46EB2E00001730 /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AE0 /* ConstraintMultiplierTarget.swift */; };
-		46EB2E00001740 /* ConstraintOffsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AF0 /* ConstraintOffsetTarget.swift */; };
-		46EB2E00001750 /* ConstraintPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B00 /* ConstraintPriority.swift */; };
-		46EB2E00001760 /* ConstraintPriorityTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B10 /* ConstraintPriorityTarget.swift */; };
-		46EB2E00001770 /* ConstraintRelatableTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B20 /* ConstraintRelatableTarget.swift */; };
-		46EB2E00001780 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B30 /* ConstraintRelation.swift */; };
-		46EB2E00001790 /* ConstraintView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B40 /* ConstraintView+Extensions.swift */; };
-		46EB2E000017A0 /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B50 /* ConstraintView.swift */; };
-		46EB2E000017B0 /* ConstraintViewDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B60 /* ConstraintViewDSL.swift */; };
-		46EB2E000017C0 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B70 /* Debugging.swift */; };
-		46EB2E000017D0 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B80 /* LayoutConstraint.swift */; };
-		46EB2E000017E0 /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B90 /* LayoutConstraintItem.swift */; };
-		46EB2E000017F0 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000BA0 /* Typealiases.swift */; };
-		46EB2E00001800 /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000BB0 /* UILayoutSupport+Extensions.swift */; };
-		46EB2E00001860 /* SnapKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00001850 /* SnapKit-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E000018A0 /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00001890 /* SnapKit-dummy.m */; };
-		46EB2E000019F0 /* Pods-CLPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000019E0 /* Pods-CLPlayer-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		46EB2E00001A30 /* Pods-CLPlayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00001A20 /* Pods-CLPlayer-dummy.m */; };
+		46EB2E00000C80 /* CALayer+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000110 /* CALayer+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000C90 /* NSObject+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000130 /* NSObject+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000CA0 /* UIBlurEffect+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000150 /* UIBlurEffect+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000CB0 /* UIColor+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000170 /* UIColor+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000CC0 /* UIImage+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000190 /* UIImage+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000CD0 /* UIImageView+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000001B0 /* UIImageView+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000CE0 /* UILabel+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000001D0 /* UILabel+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000CF0 /* UITableView+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000001F0 /* UITableView+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000D00 /* UITextField+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000210 /* UITextField+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000D10 /* UITextView+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000230 /* UITextView+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000D20 /* UIView+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000250 /* UIView+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000D30 /* UIViewController+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000270 /* UIViewController+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000D40 /* UIVisualEffectView+LookinServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000290 /* UIVisualEffectView+LookinServer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000D50 /* LKS_ConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000002B0 /* LKS_ConnectionManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000D60 /* LKS_RequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000002D0 /* LKS_RequestHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000D70 /* LKS_AttrModificationPatchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000002F0 /* LKS_AttrModificationPatchHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000D80 /* LKS_CustomAttrModificationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000310 /* LKS_CustomAttrModificationHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000D90 /* LKS_HierarchyDetailsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000330 /* LKS_HierarchyDetailsHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000DA0 /* LKS_InbuiltAttrModificationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000350 /* LKS_InbuiltAttrModificationHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000DB0 /* LKSConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000380 /* LKSConfigManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000DC0 /* LKS_AttrGroupsMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000003A0 /* LKS_AttrGroupsMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000DD0 /* LKS_CustomAttrGroupsMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000003C0 /* LKS_CustomAttrGroupsMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000DE0 /* LKS_CustomAttrSetterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000003E0 /* LKS_CustomAttrSetterManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000DF0 /* LKS_CustomDisplayItemsMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000400 /* LKS_CustomDisplayItemsMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000E00 /* LKS_EventHandlerMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000420 /* LKS_EventHandlerMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000E10 /* LKS_ExportManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000440 /* LKS_ExportManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000E20 /* LKS_GestureTargetActionsSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000460 /* LKS_GestureTargetActionsSearcher.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000E30 /* LKS_Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000480 /* LKS_Helper.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000E40 /* LKS_HierarchyDisplayItemsMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000004A0 /* LKS_HierarchyDisplayItemsMaker.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000E50 /* LKS_MultiplatformAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000004C0 /* LKS_MultiplatformAdapter.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000E60 /* LKS_ObjectRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000004E0 /* LKS_ObjectRegistry.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000E70 /* LKS_TraceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000500 /* LKS_TraceManager.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000E80 /* CALayer+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000530 /* CALayer+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000E90 /* Color+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000550 /* Color+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000EA0 /* Image+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000570 /* Image+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000EB0 /* NSArray+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000590 /* NSArray+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000EC0 /* NSObject+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000005B0 /* NSObject+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000ED0 /* NSSet+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000005D0 /* NSSet+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000EE0 /* NSString+Lookin.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000005F0 /* NSString+Lookin.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000EF0 /* LookinAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000610 /* LookinAppInfo.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000F00 /* LookinAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000630 /* LookinAttribute.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000F10 /* LookinAttributeModification.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000650 /* LookinAttributeModification.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000F20 /* LookinAttributesGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000670 /* LookinAttributesGroup.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000F30 /* LookinAttributesSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000690 /* LookinAttributesSection.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000F40 /* LookinAttrIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000006B0 /* LookinAttrIdentifiers.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000F50 /* LookinAutoLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000006E0 /* LookinAutoLayoutConstraint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000F60 /* LookinConnectionAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000710 /* LookinConnectionAttachment.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000F70 /* LookinConnectionResponseAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000730 /* LookinConnectionResponseAttachment.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000F80 /* LookinCustomAttrModification.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000750 /* LookinCustomAttrModification.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000F90 /* LookinCustomDisplayItemInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000770 /* LookinCustomDisplayItemInfo.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000FA0 /* LookinDashboardBlueprint.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000790 /* LookinDashboardBlueprint.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000FB0 /* LookinDisplayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000007C0 /* LookinDisplayItem.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000FC0 /* LookinDisplayItemDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000007E0 /* LookinDisplayItemDetail.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000FD0 /* LookinEventHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000800 /* LookinEventHandler.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000FE0 /* LookinHierarchyFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000820 /* LookinHierarchyFile.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00000FF0 /* LookinHierarchyInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000840 /* LookinHierarchyInfo.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00001000 /* LookinObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000860 /* LookinObject.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00001010 /* LookinStaticAsyncUpdateTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000880 /* LookinStaticAsyncUpdateTask.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00001020 /* LookinTuple.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000008A0 /* LookinTuple.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00001030 /* LookinWeakContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000008C0 /* LookinWeakContainer.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00001040 /* Lookin_PTChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000008E0 /* Lookin_PTChannel.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00001050 /* Lookin_PTProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000910 /* Lookin_PTProtocol.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00001060 /* Lookin_PTUSBHub.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000930 /* Lookin_PTUSBHub.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00001070 /* LookinIvarTrace.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000960 /* LookinIvarTrace.m */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		46EB2E00001080 /* CALayer+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000100 /* CALayer+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001090 /* NSObject+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000120 /* NSObject+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000010A0 /* UIBlurEffect+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000140 /* UIBlurEffect+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000010B0 /* UIColor+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000160 /* UIColor+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000010C0 /* UIImage+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000180 /* UIImage+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000010D0 /* UIImageView+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000001A0 /* UIImageView+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000010E0 /* UILabel+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000001C0 /* UILabel+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000010F0 /* UITableView+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000001E0 /* UITableView+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001100 /* UITextField+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000200 /* UITextField+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001110 /* UITextView+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000220 /* UITextView+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001120 /* UIView+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000240 /* UIView+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001130 /* UIViewController+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000260 /* UIViewController+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001140 /* UIVisualEffectView+LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000280 /* UIVisualEffectView+LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001150 /* LKS_ConnectionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000002A0 /* LKS_ConnectionManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001160 /* LKS_RequestHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000002C0 /* LKS_RequestHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001170 /* LKS_AttrModificationPatchHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000002E0 /* LKS_AttrModificationPatchHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001180 /* LKS_CustomAttrModificationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000300 /* LKS_CustomAttrModificationHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001190 /* LKS_HierarchyDetailsHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000320 /* LKS_HierarchyDetailsHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000011A0 /* LKS_InbuiltAttrModificationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000340 /* LKS_InbuiltAttrModificationHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000011B0 /* LookinServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000360 /* LookinServer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000011C0 /* LKSConfigManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000370 /* LKSConfigManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000011D0 /* LKS_AttrGroupsMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000390 /* LKS_AttrGroupsMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000011E0 /* LKS_CustomAttrGroupsMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000003B0 /* LKS_CustomAttrGroupsMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000011F0 /* LKS_CustomAttrSetterManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000003D0 /* LKS_CustomAttrSetterManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001200 /* LKS_CustomDisplayItemsMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000003F0 /* LKS_CustomDisplayItemsMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001210 /* LKS_EventHandlerMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000410 /* LKS_EventHandlerMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001220 /* LKS_ExportManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000430 /* LKS_ExportManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001230 /* LKS_GestureTargetActionsSearcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000450 /* LKS_GestureTargetActionsSearcher.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001240 /* LKS_Helper.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000470 /* LKS_Helper.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001250 /* LKS_HierarchyDisplayItemsMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000490 /* LKS_HierarchyDisplayItemsMaker.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001260 /* LKS_MultiplatformAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000004B0 /* LKS_MultiplatformAdapter.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001270 /* LKS_ObjectRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000004D0 /* LKS_ObjectRegistry.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001280 /* LKS_TraceManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000004F0 /* LKS_TraceManager.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001290 /* LookinServerDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000510 /* LookinServerDefines.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000012A0 /* CALayer+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000520 /* CALayer+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000012B0 /* Color+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000540 /* Color+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000012C0 /* Image+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000560 /* Image+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000012D0 /* NSArray+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000580 /* NSArray+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000012E0 /* NSObject+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000005A0 /* NSObject+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000012F0 /* NSSet+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000005C0 /* NSSet+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001300 /* NSString+Lookin.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000005E0 /* NSString+Lookin.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001310 /* LookinAppInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000600 /* LookinAppInfo.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001320 /* LookinAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000620 /* LookinAttribute.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001330 /* LookinAttributeModification.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000640 /* LookinAttributeModification.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001340 /* LookinAttributesGroup.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000660 /* LookinAttributesGroup.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001350 /* LookinAttributesSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000680 /* LookinAttributesSection.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001360 /* LookinAttrIdentifiers.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000006A0 /* LookinAttrIdentifiers.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001370 /* LookinAttrType.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000006C0 /* LookinAttrType.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001380 /* LookinAutoLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000006D0 /* LookinAutoLayoutConstraint.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001390 /* LookinCodingValueType.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000006F0 /* LookinCodingValueType.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000013A0 /* LookinConnectionAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000700 /* LookinConnectionAttachment.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000013B0 /* LookinConnectionResponseAttachment.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000720 /* LookinConnectionResponseAttachment.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000013C0 /* LookinCustomAttrModification.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000740 /* LookinCustomAttrModification.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000013D0 /* LookinCustomDisplayItemInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000760 /* LookinCustomDisplayItemInfo.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000013E0 /* LookinDashboardBlueprint.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000780 /* LookinDashboardBlueprint.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000013F0 /* LookinDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000007A0 /* LookinDefines.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001400 /* LookinDisplayItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000007B0 /* LookinDisplayItem.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001410 /* LookinDisplayItemDetail.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000007D0 /* LookinDisplayItemDetail.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001420 /* LookinEventHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000007F0 /* LookinEventHandler.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001430 /* LookinHierarchyFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000810 /* LookinHierarchyFile.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001440 /* LookinHierarchyInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000830 /* LookinHierarchyInfo.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001450 /* LookinObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000850 /* LookinObject.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001460 /* LookinStaticAsyncUpdateTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000870 /* LookinStaticAsyncUpdateTask.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001470 /* LookinTuple.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000890 /* LookinTuple.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001480 /* LookinWeakContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000008B0 /* LookinWeakContainer.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001490 /* Lookin_PTChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000008D0 /* Lookin_PTChannel.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000014A0 /* Lookin_PTPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E000008F0 /* Lookin_PTPrivate.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000014B0 /* Lookin_PTProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000900 /* Lookin_PTProtocol.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000014C0 /* Lookin_PTUSBHub.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000920 /* Lookin_PTUSBHub.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000014D0 /* Peertalk.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000940 /* Peertalk.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000014E0 /* LookinIvarTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00000950 /* LookinIvarTrace.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000014F0 /* LKS_SwiftTraceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000980 /* LKS_SwiftTraceManager.swift */; };
+		46EB2E00001550 /* LookinServer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00001540 /* LookinServer-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001590 /* LookinServer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00001580 /* LookinServer-dummy.m */; };
+		46EB2E000016A0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000BF0 /* PrivacyInfo.xcprivacy */; };
+		46EB2E000016D0 /* Constraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000990 /* Constraint.swift */; };
+		46EB2E000016E0 /* ConstraintAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009A0 /* ConstraintAttributes.swift */; };
+		46EB2E000016F0 /* ConstraintConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009B0 /* ConstraintConfig.swift */; };
+		46EB2E00001700 /* ConstraintConstantTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009C0 /* ConstraintConstantTarget.swift */; };
+		46EB2E00001710 /* ConstraintDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009D0 /* ConstraintDescription.swift */; };
+		46EB2E00001720 /* ConstraintDirectionalInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009E0 /* ConstraintDirectionalInsets.swift */; };
+		46EB2E00001730 /* ConstraintDirectionalInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E000009F0 /* ConstraintDirectionalInsetTarget.swift */; };
+		46EB2E00001740 /* ConstraintDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A00 /* ConstraintDSL.swift */; };
+		46EB2E00001750 /* ConstraintInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A10 /* ConstraintInsets.swift */; };
+		46EB2E00001760 /* ConstraintInsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A20 /* ConstraintInsetTarget.swift */; };
+		46EB2E00001770 /* ConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A30 /* ConstraintItem.swift */; };
+		46EB2E00001780 /* ConstraintLayoutGuide+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A40 /* ConstraintLayoutGuide+Extensions.swift */; };
+		46EB2E00001790 /* ConstraintLayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A50 /* ConstraintLayoutGuide.swift */; };
+		46EB2E000017A0 /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A60 /* ConstraintLayoutGuideDSL.swift */; };
+		46EB2E000017B0 /* ConstraintLayoutSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A70 /* ConstraintLayoutSupport.swift */; };
+		46EB2E000017C0 /* ConstraintLayoutSupportDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A80 /* ConstraintLayoutSupportDSL.swift */; };
+		46EB2E000017D0 /* ConstraintMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000A90 /* ConstraintMaker.swift */; };
+		46EB2E000017E0 /* ConstraintMakerEditable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AA0 /* ConstraintMakerEditable.swift */; };
+		46EB2E000017F0 /* ConstraintMakerExtendable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AB0 /* ConstraintMakerExtendable.swift */; };
+		46EB2E00001800 /* ConstraintMakerFinalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AC0 /* ConstraintMakerFinalizable.swift */; };
+		46EB2E00001810 /* ConstraintMakerPrioritizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AD0 /* ConstraintMakerPrioritizable.swift */; };
+		46EB2E00001820 /* ConstraintMakerRelatable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AE0 /* ConstraintMakerRelatable+Extensions.swift */; };
+		46EB2E00001830 /* ConstraintMakerRelatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000AF0 /* ConstraintMakerRelatable.swift */; };
+		46EB2E00001840 /* ConstraintMultiplierTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B00 /* ConstraintMultiplierTarget.swift */; };
+		46EB2E00001850 /* ConstraintOffsetTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B10 /* ConstraintOffsetTarget.swift */; };
+		46EB2E00001860 /* ConstraintPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B20 /* ConstraintPriority.swift */; };
+		46EB2E00001870 /* ConstraintPriorityTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B30 /* ConstraintPriorityTarget.swift */; };
+		46EB2E00001880 /* ConstraintRelatableTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B40 /* ConstraintRelatableTarget.swift */; };
+		46EB2E00001890 /* ConstraintRelation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B50 /* ConstraintRelation.swift */; };
+		46EB2E000018A0 /* ConstraintView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B60 /* ConstraintView+Extensions.swift */; };
+		46EB2E000018B0 /* ConstraintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B70 /* ConstraintView.swift */; };
+		46EB2E000018C0 /* ConstraintViewDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B80 /* ConstraintViewDSL.swift */; };
+		46EB2E000018D0 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000B90 /* Debugging.swift */; };
+		46EB2E000018E0 /* LayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000BA0 /* LayoutConstraint.swift */; };
+		46EB2E000018F0 /* LayoutConstraintItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000BB0 /* LayoutConstraintItem.swift */; };
+		46EB2E00001900 /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000BC0 /* Typealiases.swift */; };
+		46EB2E00001910 /* UILayoutSupport+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00000BD0 /* UILayoutSupport+Extensions.swift */; };
+		46EB2E00001960 /* SnapKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00001950 /* SnapKit-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E000019A0 /* SnapKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00001990 /* SnapKit-dummy.m */; };
+		46EB2E00001AF0 /* Pods-CLPlayer-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 46EB2E00001AE0 /* Pods-CLPlayer-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		46EB2E00001B40 /* Pods-CLPlayer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 46EB2E00001B30 /* Pods-CLPlayer-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		46EB2E00001A40 /* PBXContainerItemProxy */ = {
+		46EB2E00001B50 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 638FEAAFC575BB76BC6AC055CDDA3506;
 			remoteInfo = LookinServer;
 		};
-		46EB2E00001A60 /* PBXContainerItemProxy */ = {
+		46EB2E00001B70 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 19622742EBA51E823D6DAE3F8CDBFAD4;
 			remoteInfo = SnapKit;
 		};
-		46EB2E00001A80 /* PBXContainerItemProxy */ = {
+		46EB2E00001B90 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 46EB2E00000000 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 1CD0618C486973D5588EF20D2E8C0AEA;
 			remoteInfo = SwiftFormat;
 		};
+		46EB2E00001BB0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 46EB2E00000000 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8A8DB685241263AFDF5E6B20FE67B93A;
+			remoteInfo = "SnapKit-SnapKit_Privacy";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		25664483ABF4DC8EC03E7472AA04333B /* libLookinServer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libLookinServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		46EB2E000000E0 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		25664483ABF4DC8EC03E7472AA04333B /* LookinServer */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = LookinServer; path = libLookinServer.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		46EB2E000000E0 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		46EB2E00000100 /* CALayer+LookinServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CALayer+LookinServer.h"; path = "Src/Main/Server/Category/CALayer+LookinServer.h"; sourceTree = "<group>"; };
 		46EB2E00000110 /* CALayer+LookinServer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CALayer+LookinServer.m"; path = "Src/Main/Server/Category/CALayer+LookinServer.m"; sourceTree = "<group>"; };
 		46EB2E00000120 /* NSObject+LookinServer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+LookinServer.h"; path = "Src/Main/Server/Category/NSObject+LookinServer.h"; sourceTree = "<group>"; };
@@ -285,159 +294,172 @@
 		46EB2E00000480 /* LKS_Helper.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LKS_Helper.m; path = Src/Main/Server/Others/LKS_Helper.m; sourceTree = "<group>"; };
 		46EB2E00000490 /* LKS_HierarchyDisplayItemsMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LKS_HierarchyDisplayItemsMaker.h; path = Src/Main/Server/Others/LKS_HierarchyDisplayItemsMaker.h; sourceTree = "<group>"; };
 		46EB2E000004A0 /* LKS_HierarchyDisplayItemsMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LKS_HierarchyDisplayItemsMaker.m; path = Src/Main/Server/Others/LKS_HierarchyDisplayItemsMaker.m; sourceTree = "<group>"; };
-		46EB2E000004B0 /* LKS_ObjectRegistry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LKS_ObjectRegistry.h; path = Src/Main/Server/Others/LKS_ObjectRegistry.h; sourceTree = "<group>"; };
-		46EB2E000004C0 /* LKS_ObjectRegistry.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LKS_ObjectRegistry.m; path = Src/Main/Server/Others/LKS_ObjectRegistry.m; sourceTree = "<group>"; };
-		46EB2E000004D0 /* LKS_TraceManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LKS_TraceManager.h; path = Src/Main/Server/Others/LKS_TraceManager.h; sourceTree = "<group>"; };
-		46EB2E000004E0 /* LKS_TraceManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LKS_TraceManager.m; path = Src/Main/Server/Others/LKS_TraceManager.m; sourceTree = "<group>"; };
-		46EB2E000004F0 /* LookinServerDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinServerDefines.h; path = Src/Main/Server/Others/LookinServerDefines.h; sourceTree = "<group>"; };
-		46EB2E00000500 /* CALayer+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CALayer+Lookin.h"; path = "Src/Main/Shared/Category/CALayer+Lookin.h"; sourceTree = "<group>"; };
-		46EB2E00000510 /* CALayer+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CALayer+Lookin.m"; path = "Src/Main/Shared/Category/CALayer+Lookin.m"; sourceTree = "<group>"; };
-		46EB2E00000520 /* Color+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Color+Lookin.h"; path = "Src/Main/Shared/Category/Color+Lookin.h"; sourceTree = "<group>"; };
-		46EB2E00000530 /* Color+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Color+Lookin.m"; path = "Src/Main/Shared/Category/Color+Lookin.m"; sourceTree = "<group>"; };
-		46EB2E00000540 /* Image+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Image+Lookin.h"; path = "Src/Main/Shared/Category/Image+Lookin.h"; sourceTree = "<group>"; };
-		46EB2E00000550 /* Image+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Image+Lookin.m"; path = "Src/Main/Shared/Category/Image+Lookin.m"; sourceTree = "<group>"; };
-		46EB2E00000560 /* NSArray+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+Lookin.h"; path = "Src/Main/Shared/Category/NSArray+Lookin.h"; sourceTree = "<group>"; };
-		46EB2E00000570 /* NSArray+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Lookin.m"; path = "Src/Main/Shared/Category/NSArray+Lookin.m"; sourceTree = "<group>"; };
-		46EB2E00000580 /* NSObject+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+Lookin.h"; path = "Src/Main/Shared/Category/NSObject+Lookin.h"; sourceTree = "<group>"; };
-		46EB2E00000590 /* NSObject+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+Lookin.m"; path = "Src/Main/Shared/Category/NSObject+Lookin.m"; sourceTree = "<group>"; };
-		46EB2E000005A0 /* NSSet+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSSet+Lookin.h"; path = "Src/Main/Shared/Category/NSSet+Lookin.h"; sourceTree = "<group>"; };
-		46EB2E000005B0 /* NSSet+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSSet+Lookin.m"; path = "Src/Main/Shared/Category/NSSet+Lookin.m"; sourceTree = "<group>"; };
-		46EB2E000005C0 /* NSString+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+Lookin.h"; path = "Src/Main/Shared/Category/NSString+Lookin.h"; sourceTree = "<group>"; };
-		46EB2E000005D0 /* NSString+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+Lookin.m"; path = "Src/Main/Shared/Category/NSString+Lookin.m"; sourceTree = "<group>"; };
-		46EB2E000005E0 /* LookinAppInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAppInfo.h; path = Src/Main/Shared/LookinAppInfo.h; sourceTree = "<group>"; };
-		46EB2E000005F0 /* LookinAppInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAppInfo.m; path = Src/Main/Shared/LookinAppInfo.m; sourceTree = "<group>"; };
-		46EB2E00000600 /* LookinAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttribute.h; path = Src/Main/Shared/LookinAttribute.h; sourceTree = "<group>"; };
-		46EB2E00000610 /* LookinAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAttribute.m; path = Src/Main/Shared/LookinAttribute.m; sourceTree = "<group>"; };
-		46EB2E00000620 /* LookinAttributeModification.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttributeModification.h; path = Src/Main/Shared/LookinAttributeModification.h; sourceTree = "<group>"; };
-		46EB2E00000630 /* LookinAttributeModification.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAttributeModification.m; path = Src/Main/Shared/LookinAttributeModification.m; sourceTree = "<group>"; };
-		46EB2E00000640 /* LookinAttributesGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttributesGroup.h; path = Src/Main/Shared/LookinAttributesGroup.h; sourceTree = "<group>"; };
-		46EB2E00000650 /* LookinAttributesGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAttributesGroup.m; path = Src/Main/Shared/LookinAttributesGroup.m; sourceTree = "<group>"; };
-		46EB2E00000660 /* LookinAttributesSection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttributesSection.h; path = Src/Main/Shared/LookinAttributesSection.h; sourceTree = "<group>"; };
-		46EB2E00000670 /* LookinAttributesSection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAttributesSection.m; path = Src/Main/Shared/LookinAttributesSection.m; sourceTree = "<group>"; };
-		46EB2E00000680 /* LookinAttrIdentifiers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttrIdentifiers.h; path = Src/Main/Shared/LookinAttrIdentifiers.h; sourceTree = "<group>"; };
-		46EB2E00000690 /* LookinAttrIdentifiers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAttrIdentifiers.m; path = Src/Main/Shared/LookinAttrIdentifiers.m; sourceTree = "<group>"; };
-		46EB2E000006A0 /* LookinAttrType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttrType.h; path = Src/Main/Shared/LookinAttrType.h; sourceTree = "<group>"; };
-		46EB2E000006B0 /* LookinAutoLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAutoLayoutConstraint.h; path = Src/Main/Shared/LookinAutoLayoutConstraint.h; sourceTree = "<group>"; };
-		46EB2E000006C0 /* LookinAutoLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAutoLayoutConstraint.m; path = Src/Main/Shared/LookinAutoLayoutConstraint.m; sourceTree = "<group>"; };
-		46EB2E000006D0 /* LookinCodingValueType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinCodingValueType.h; path = Src/Main/Shared/LookinCodingValueType.h; sourceTree = "<group>"; };
-		46EB2E000006E0 /* LookinConnectionAttachment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinConnectionAttachment.h; path = Src/Main/Shared/LookinConnectionAttachment.h; sourceTree = "<group>"; };
-		46EB2E000006F0 /* LookinConnectionAttachment.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinConnectionAttachment.m; path = Src/Main/Shared/LookinConnectionAttachment.m; sourceTree = "<group>"; };
-		46EB2E00000700 /* LookinConnectionResponseAttachment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinConnectionResponseAttachment.h; path = Src/Main/Shared/LookinConnectionResponseAttachment.h; sourceTree = "<group>"; };
-		46EB2E00000710 /* LookinConnectionResponseAttachment.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinConnectionResponseAttachment.m; path = Src/Main/Shared/LookinConnectionResponseAttachment.m; sourceTree = "<group>"; };
-		46EB2E00000720 /* LookinCustomAttrModification.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinCustomAttrModification.h; path = Src/Main/Shared/LookinCustomAttrModification.h; sourceTree = "<group>"; };
-		46EB2E00000730 /* LookinCustomAttrModification.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinCustomAttrModification.m; path = Src/Main/Shared/LookinCustomAttrModification.m; sourceTree = "<group>"; };
-		46EB2E00000740 /* LookinCustomDisplayItemInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinCustomDisplayItemInfo.h; path = Src/Main/Shared/LookinCustomDisplayItemInfo.h; sourceTree = "<group>"; };
-		46EB2E00000750 /* LookinCustomDisplayItemInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinCustomDisplayItemInfo.m; path = Src/Main/Shared/LookinCustomDisplayItemInfo.m; sourceTree = "<group>"; };
-		46EB2E00000760 /* LookinDashboardBlueprint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinDashboardBlueprint.h; path = Src/Main/Shared/LookinDashboardBlueprint.h; sourceTree = "<group>"; };
-		46EB2E00000770 /* LookinDashboardBlueprint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinDashboardBlueprint.m; path = Src/Main/Shared/LookinDashboardBlueprint.m; sourceTree = "<group>"; };
-		46EB2E00000780 /* LookinDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinDefines.h; path = Src/Main/Shared/LookinDefines.h; sourceTree = "<group>"; };
-		46EB2E00000790 /* LookinDisplayItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinDisplayItem.h; path = Src/Main/Shared/LookinDisplayItem.h; sourceTree = "<group>"; };
-		46EB2E000007A0 /* LookinDisplayItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinDisplayItem.m; path = Src/Main/Shared/LookinDisplayItem.m; sourceTree = "<group>"; };
-		46EB2E000007B0 /* LookinDisplayItemDetail.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinDisplayItemDetail.h; path = Src/Main/Shared/LookinDisplayItemDetail.h; sourceTree = "<group>"; };
-		46EB2E000007C0 /* LookinDisplayItemDetail.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinDisplayItemDetail.m; path = Src/Main/Shared/LookinDisplayItemDetail.m; sourceTree = "<group>"; };
-		46EB2E000007D0 /* LookinEventHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinEventHandler.h; path = Src/Main/Shared/LookinEventHandler.h; sourceTree = "<group>"; };
-		46EB2E000007E0 /* LookinEventHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinEventHandler.m; path = Src/Main/Shared/LookinEventHandler.m; sourceTree = "<group>"; };
-		46EB2E000007F0 /* LookinHierarchyFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinHierarchyFile.h; path = Src/Main/Shared/LookinHierarchyFile.h; sourceTree = "<group>"; };
-		46EB2E00000800 /* LookinHierarchyFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinHierarchyFile.m; path = Src/Main/Shared/LookinHierarchyFile.m; sourceTree = "<group>"; };
-		46EB2E00000810 /* LookinHierarchyInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinHierarchyInfo.h; path = Src/Main/Shared/LookinHierarchyInfo.h; sourceTree = "<group>"; };
-		46EB2E00000820 /* LookinHierarchyInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinHierarchyInfo.m; path = Src/Main/Shared/LookinHierarchyInfo.m; sourceTree = "<group>"; };
-		46EB2E00000830 /* LookinObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinObject.h; path = Src/Main/Shared/LookinObject.h; sourceTree = "<group>"; };
-		46EB2E00000840 /* LookinObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinObject.m; path = Src/Main/Shared/LookinObject.m; sourceTree = "<group>"; };
-		46EB2E00000850 /* LookinStaticAsyncUpdateTask.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinStaticAsyncUpdateTask.h; path = Src/Main/Shared/LookinStaticAsyncUpdateTask.h; sourceTree = "<group>"; };
-		46EB2E00000860 /* LookinStaticAsyncUpdateTask.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinStaticAsyncUpdateTask.m; path = Src/Main/Shared/LookinStaticAsyncUpdateTask.m; sourceTree = "<group>"; };
-		46EB2E00000870 /* LookinTuple.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinTuple.h; path = Src/Main/Shared/LookinTuple.h; sourceTree = "<group>"; };
-		46EB2E00000880 /* LookinTuple.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinTuple.m; path = Src/Main/Shared/LookinTuple.m; sourceTree = "<group>"; };
-		46EB2E00000890 /* LookinWeakContainer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinWeakContainer.h; path = Src/Main/Shared/LookinWeakContainer.h; sourceTree = "<group>"; };
-		46EB2E000008A0 /* LookinWeakContainer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinWeakContainer.m; path = Src/Main/Shared/LookinWeakContainer.m; sourceTree = "<group>"; };
-		46EB2E000008B0 /* Lookin_PTChannel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Lookin_PTChannel.h; path = Src/Main/Shared/Peertalk/Lookin_PTChannel.h; sourceTree = "<group>"; };
-		46EB2E000008C0 /* Lookin_PTChannel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Lookin_PTChannel.m; path = Src/Main/Shared/Peertalk/Lookin_PTChannel.m; sourceTree = "<group>"; };
-		46EB2E000008D0 /* Lookin_PTPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Lookin_PTPrivate.h; path = Src/Main/Shared/Peertalk/Lookin_PTPrivate.h; sourceTree = "<group>"; };
-		46EB2E000008E0 /* Lookin_PTProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Lookin_PTProtocol.h; path = Src/Main/Shared/Peertalk/Lookin_PTProtocol.h; sourceTree = "<group>"; };
-		46EB2E000008F0 /* Lookin_PTProtocol.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Lookin_PTProtocol.m; path = Src/Main/Shared/Peertalk/Lookin_PTProtocol.m; sourceTree = "<group>"; };
-		46EB2E00000900 /* Lookin_PTUSBHub.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Lookin_PTUSBHub.h; path = Src/Main/Shared/Peertalk/Lookin_PTUSBHub.h; sourceTree = "<group>"; };
-		46EB2E00000910 /* Lookin_PTUSBHub.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Lookin_PTUSBHub.m; path = Src/Main/Shared/Peertalk/Lookin_PTUSBHub.m; sourceTree = "<group>"; };
-		46EB2E00000920 /* Peertalk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Peertalk.h; path = Src/Main/Shared/Peertalk/Peertalk.h; sourceTree = "<group>"; };
-		46EB2E00000930 /* LookinIvarTrace.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinIvarTrace.h; path = Src/Base/LookinIvarTrace.h; sourceTree = "<group>"; };
-		46EB2E00000940 /* LookinIvarTrace.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinIvarTrace.m; path = Src/Base/LookinIvarTrace.m; sourceTree = "<group>"; };
-		46EB2E00000960 /* LKS_SwiftTraceManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LKS_SwiftTraceManager.swift; path = Src/Swift/LKS_SwiftTraceManager.swift; sourceTree = "<group>"; };
-		46EB2E00000970 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Sources/Constraint.swift; sourceTree = "<group>"; };
-		46EB2E00000980 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintAttributes.swift; path = Sources/ConstraintAttributes.swift; sourceTree = "<group>"; };
-		46EB2E00000990 /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Sources/ConstraintConfig.swift; sourceTree = "<group>"; };
-		46EB2E000009A0 /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConstantTarget.swift; path = Sources/ConstraintConstantTarget.swift; sourceTree = "<group>"; };
-		46EB2E000009B0 /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Sources/ConstraintDescription.swift; sourceTree = "<group>"; };
-		46EB2E000009C0 /* ConstraintDirectionalInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsets.swift; path = Sources/ConstraintDirectionalInsets.swift; sourceTree = "<group>"; };
-		46EB2E000009D0 /* ConstraintDirectionalInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsetTarget.swift; path = Sources/ConstraintDirectionalInsetTarget.swift; sourceTree = "<group>"; };
-		46EB2E000009E0 /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Sources/ConstraintDSL.swift; sourceTree = "<group>"; };
-		46EB2E000009F0 /* ConstraintInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsets.swift; path = Sources/ConstraintInsets.swift; sourceTree = "<group>"; };
-		46EB2E00000A00 /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsetTarget.swift; path = Sources/ConstraintInsetTarget.swift; sourceTree = "<group>"; };
-		46EB2E00000A10 /* ConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintItem.swift; path = Sources/ConstraintItem.swift; sourceTree = "<group>"; };
-		46EB2E00000A20 /* ConstraintLayoutGuide+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintLayoutGuide+Extensions.swift"; path = "Sources/ConstraintLayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
-		46EB2E00000A30 /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Sources/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
-		46EB2E00000A40 /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuideDSL.swift; path = Sources/ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
-		46EB2E00000A50 /* ConstraintLayoutSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupport.swift; path = Sources/ConstraintLayoutSupport.swift; sourceTree = "<group>"; };
-		46EB2E00000A60 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupportDSL.swift; path = Sources/ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
-		46EB2E00000A70 /* ConstraintMaker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMaker.swift; path = Sources/ConstraintMaker.swift; sourceTree = "<group>"; };
-		46EB2E00000A80 /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerEditable.swift; path = Sources/ConstraintMakerEditable.swift; sourceTree = "<group>"; };
-		46EB2E00000A90 /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Sources/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
-		46EB2E00000AA0 /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerFinalizable.swift; path = Sources/ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
-		46EB2E00000AB0 /* ConstraintMakerPrioritizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerPrioritizable.swift; path = Sources/ConstraintMakerPrioritizable.swift; sourceTree = "<group>"; };
-		46EB2E00000AC0 /* ConstraintMakerRelatable+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintMakerRelatable+Extensions.swift"; path = "Sources/ConstraintMakerRelatable+Extensions.swift"; sourceTree = "<group>"; };
-		46EB2E00000AD0 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerRelatable.swift; path = Sources/ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
-		46EB2E00000AE0 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMultiplierTarget.swift; path = Sources/ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
-		46EB2E00000AF0 /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintOffsetTarget.swift; path = Sources/ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
-		46EB2E00000B00 /* ConstraintPriority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriority.swift; path = Sources/ConstraintPriority.swift; sourceTree = "<group>"; };
-		46EB2E00000B10 /* ConstraintPriorityTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriorityTarget.swift; path = Sources/ConstraintPriorityTarget.swift; sourceTree = "<group>"; };
-		46EB2E00000B20 /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelatableTarget.swift; path = Sources/ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
-		46EB2E00000B30 /* ConstraintRelation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelation.swift; path = Sources/ConstraintRelation.swift; sourceTree = "<group>"; };
-		46EB2E00000B40 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintView+Extensions.swift"; path = "Sources/ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
-		46EB2E00000B50 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Sources/ConstraintView.swift; sourceTree = "<group>"; };
-		46EB2E00000B60 /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintViewDSL.swift; path = Sources/ConstraintViewDSL.swift; sourceTree = "<group>"; };
-		46EB2E00000B70 /* Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debugging.swift; path = Sources/Debugging.swift; sourceTree = "<group>"; };
-		46EB2E00000B80 /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = Sources/LayoutConstraint.swift; sourceTree = "<group>"; };
-		46EB2E00000B90 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraintItem.swift; path = Sources/LayoutConstraintItem.swift; sourceTree = "<group>"; };
-		46EB2E00000BA0 /* Typealiases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Typealiases.swift; path = Sources/Typealiases.swift; sourceTree = "<group>"; };
-		46EB2E00000BB0 /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UILayoutSupport+Extensions.swift"; path = "Sources/UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
-		46EB2E000014B0 /* LookinServer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LookinServer.debug.xcconfig; sourceTree = "<group>"; };
-		46EB2E000014C0 /* LookinServer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LookinServer.release.xcconfig; sourceTree = "<group>"; };
-		46EB2E000014D0 /* LookinServer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LookinServer.modulemap; sourceTree = "<group>"; };
-		46EB2E000014E0 /* LookinServer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LookinServer-umbrella.h"; sourceTree = "<group>"; };
-		46EB2E00001510 /* LookinServer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LookinServer-prefix.pch"; sourceTree = "<group>"; };
-		46EB2E00001520 /* LookinServer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LookinServer-dummy.m"; sourceTree = "<group>"; };
-		46EB2E00001820 /* SnapKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.debug.xcconfig; sourceTree = "<group>"; };
-		46EB2E00001830 /* SnapKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.release.xcconfig; sourceTree = "<group>"; };
-		46EB2E00001840 /* SnapKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SnapKit.modulemap; sourceTree = "<group>"; };
-		46EB2E00001850 /* SnapKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-umbrella.h"; sourceTree = "<group>"; };
-		46EB2E00001880 /* SnapKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-prefix.pch"; sourceTree = "<group>"; };
-		46EB2E00001890 /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
-		46EB2E00001900 /* SwiftFormat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftFormat.debug.xcconfig; sourceTree = "<group>"; };
-		46EB2E00001910 /* SwiftFormat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftFormat.release.xcconfig; sourceTree = "<group>"; };
-		46EB2E000019B0 /* Pods-CLPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CLPlayer.release.xcconfig"; sourceTree = "<group>"; };
-		46EB2E000019C0 /* Pods-CLPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CLPlayer.debug.xcconfig"; sourceTree = "<group>"; };
-		46EB2E000019D0 /* Pods-CLPlayer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CLPlayer.modulemap"; sourceTree = "<group>"; };
-		46EB2E000019E0 /* Pods-CLPlayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CLPlayer-umbrella.h"; sourceTree = "<group>"; };
-		46EB2E00001A00 /* Pods-CLPlayer-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CLPlayer-acknowledgements.plist"; sourceTree = "<group>"; };
-		46EB2E00001A10 /* Pods-CLPlayer-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CLPlayer-acknowledgements.markdown"; sourceTree = "<group>"; };
-		46EB2E00001A20 /* Pods-CLPlayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CLPlayer-dummy.m"; sourceTree = "<group>"; };
-		979486118B3E90C08386079D57962701 /* libSnapKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSnapKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F10AF1E93497D0B2C06AC8CB9D8356FC /* libPods-CLPlayer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CLPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46EB2E000004B0 /* LKS_MultiplatformAdapter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LKS_MultiplatformAdapter.h; path = Src/Main/Server/Others/LKS_MultiplatformAdapter.h; sourceTree = "<group>"; };
+		46EB2E000004C0 /* LKS_MultiplatformAdapter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LKS_MultiplatformAdapter.m; path = Src/Main/Server/Others/LKS_MultiplatformAdapter.m; sourceTree = "<group>"; };
+		46EB2E000004D0 /* LKS_ObjectRegistry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LKS_ObjectRegistry.h; path = Src/Main/Server/Others/LKS_ObjectRegistry.h; sourceTree = "<group>"; };
+		46EB2E000004E0 /* LKS_ObjectRegistry.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LKS_ObjectRegistry.m; path = Src/Main/Server/Others/LKS_ObjectRegistry.m; sourceTree = "<group>"; };
+		46EB2E000004F0 /* LKS_TraceManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LKS_TraceManager.h; path = Src/Main/Server/Others/LKS_TraceManager.h; sourceTree = "<group>"; };
+		46EB2E00000500 /* LKS_TraceManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LKS_TraceManager.m; path = Src/Main/Server/Others/LKS_TraceManager.m; sourceTree = "<group>"; };
+		46EB2E00000510 /* LookinServerDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinServerDefines.h; path = Src/Main/Server/Others/LookinServerDefines.h; sourceTree = "<group>"; };
+		46EB2E00000520 /* CALayer+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "CALayer+Lookin.h"; path = "Src/Main/Shared/Category/CALayer+Lookin.h"; sourceTree = "<group>"; };
+		46EB2E00000530 /* CALayer+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "CALayer+Lookin.m"; path = "Src/Main/Shared/Category/CALayer+Lookin.m"; sourceTree = "<group>"; };
+		46EB2E00000540 /* Color+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Color+Lookin.h"; path = "Src/Main/Shared/Category/Color+Lookin.h"; sourceTree = "<group>"; };
+		46EB2E00000550 /* Color+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Color+Lookin.m"; path = "Src/Main/Shared/Category/Color+Lookin.m"; sourceTree = "<group>"; };
+		46EB2E00000560 /* Image+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "Image+Lookin.h"; path = "Src/Main/Shared/Category/Image+Lookin.h"; sourceTree = "<group>"; };
+		46EB2E00000570 /* Image+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "Image+Lookin.m"; path = "Src/Main/Shared/Category/Image+Lookin.m"; sourceTree = "<group>"; };
+		46EB2E00000580 /* NSArray+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+Lookin.h"; path = "Src/Main/Shared/Category/NSArray+Lookin.h"; sourceTree = "<group>"; };
+		46EB2E00000590 /* NSArray+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Lookin.m"; path = "Src/Main/Shared/Category/NSArray+Lookin.m"; sourceTree = "<group>"; };
+		46EB2E000005A0 /* NSObject+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSObject+Lookin.h"; path = "Src/Main/Shared/Category/NSObject+Lookin.h"; sourceTree = "<group>"; };
+		46EB2E000005B0 /* NSObject+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSObject+Lookin.m"; path = "Src/Main/Shared/Category/NSObject+Lookin.m"; sourceTree = "<group>"; };
+		46EB2E000005C0 /* NSSet+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSSet+Lookin.h"; path = "Src/Main/Shared/Category/NSSet+Lookin.h"; sourceTree = "<group>"; };
+		46EB2E000005D0 /* NSSet+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSSet+Lookin.m"; path = "Src/Main/Shared/Category/NSSet+Lookin.m"; sourceTree = "<group>"; };
+		46EB2E000005E0 /* NSString+Lookin.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSString+Lookin.h"; path = "Src/Main/Shared/Category/NSString+Lookin.h"; sourceTree = "<group>"; };
+		46EB2E000005F0 /* NSString+Lookin.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSString+Lookin.m"; path = "Src/Main/Shared/Category/NSString+Lookin.m"; sourceTree = "<group>"; };
+		46EB2E00000600 /* LookinAppInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAppInfo.h; path = Src/Main/Shared/LookinAppInfo.h; sourceTree = "<group>"; };
+		46EB2E00000610 /* LookinAppInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAppInfo.m; path = Src/Main/Shared/LookinAppInfo.m; sourceTree = "<group>"; };
+		46EB2E00000620 /* LookinAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttribute.h; path = Src/Main/Shared/LookinAttribute.h; sourceTree = "<group>"; };
+		46EB2E00000630 /* LookinAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAttribute.m; path = Src/Main/Shared/LookinAttribute.m; sourceTree = "<group>"; };
+		46EB2E00000640 /* LookinAttributeModification.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttributeModification.h; path = Src/Main/Shared/LookinAttributeModification.h; sourceTree = "<group>"; };
+		46EB2E00000650 /* LookinAttributeModification.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAttributeModification.m; path = Src/Main/Shared/LookinAttributeModification.m; sourceTree = "<group>"; };
+		46EB2E00000660 /* LookinAttributesGroup.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttributesGroup.h; path = Src/Main/Shared/LookinAttributesGroup.h; sourceTree = "<group>"; };
+		46EB2E00000670 /* LookinAttributesGroup.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAttributesGroup.m; path = Src/Main/Shared/LookinAttributesGroup.m; sourceTree = "<group>"; };
+		46EB2E00000680 /* LookinAttributesSection.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttributesSection.h; path = Src/Main/Shared/LookinAttributesSection.h; sourceTree = "<group>"; };
+		46EB2E00000690 /* LookinAttributesSection.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAttributesSection.m; path = Src/Main/Shared/LookinAttributesSection.m; sourceTree = "<group>"; };
+		46EB2E000006A0 /* LookinAttrIdentifiers.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttrIdentifiers.h; path = Src/Main/Shared/LookinAttrIdentifiers.h; sourceTree = "<group>"; };
+		46EB2E000006B0 /* LookinAttrIdentifiers.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAttrIdentifiers.m; path = Src/Main/Shared/LookinAttrIdentifiers.m; sourceTree = "<group>"; };
+		46EB2E000006C0 /* LookinAttrType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAttrType.h; path = Src/Main/Shared/LookinAttrType.h; sourceTree = "<group>"; };
+		46EB2E000006D0 /* LookinAutoLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinAutoLayoutConstraint.h; path = Src/Main/Shared/LookinAutoLayoutConstraint.h; sourceTree = "<group>"; };
+		46EB2E000006E0 /* LookinAutoLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinAutoLayoutConstraint.m; path = Src/Main/Shared/LookinAutoLayoutConstraint.m; sourceTree = "<group>"; };
+		46EB2E000006F0 /* LookinCodingValueType.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinCodingValueType.h; path = Src/Main/Shared/LookinCodingValueType.h; sourceTree = "<group>"; };
+		46EB2E00000700 /* LookinConnectionAttachment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinConnectionAttachment.h; path = Src/Main/Shared/LookinConnectionAttachment.h; sourceTree = "<group>"; };
+		46EB2E00000710 /* LookinConnectionAttachment.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinConnectionAttachment.m; path = Src/Main/Shared/LookinConnectionAttachment.m; sourceTree = "<group>"; };
+		46EB2E00000720 /* LookinConnectionResponseAttachment.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinConnectionResponseAttachment.h; path = Src/Main/Shared/LookinConnectionResponseAttachment.h; sourceTree = "<group>"; };
+		46EB2E00000730 /* LookinConnectionResponseAttachment.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinConnectionResponseAttachment.m; path = Src/Main/Shared/LookinConnectionResponseAttachment.m; sourceTree = "<group>"; };
+		46EB2E00000740 /* LookinCustomAttrModification.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinCustomAttrModification.h; path = Src/Main/Shared/LookinCustomAttrModification.h; sourceTree = "<group>"; };
+		46EB2E00000750 /* LookinCustomAttrModification.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinCustomAttrModification.m; path = Src/Main/Shared/LookinCustomAttrModification.m; sourceTree = "<group>"; };
+		46EB2E00000760 /* LookinCustomDisplayItemInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinCustomDisplayItemInfo.h; path = Src/Main/Shared/LookinCustomDisplayItemInfo.h; sourceTree = "<group>"; };
+		46EB2E00000770 /* LookinCustomDisplayItemInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinCustomDisplayItemInfo.m; path = Src/Main/Shared/LookinCustomDisplayItemInfo.m; sourceTree = "<group>"; };
+		46EB2E00000780 /* LookinDashboardBlueprint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinDashboardBlueprint.h; path = Src/Main/Shared/LookinDashboardBlueprint.h; sourceTree = "<group>"; };
+		46EB2E00000790 /* LookinDashboardBlueprint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinDashboardBlueprint.m; path = Src/Main/Shared/LookinDashboardBlueprint.m; sourceTree = "<group>"; };
+		46EB2E000007A0 /* LookinDefines.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinDefines.h; path = Src/Main/Shared/LookinDefines.h; sourceTree = "<group>"; };
+		46EB2E000007B0 /* LookinDisplayItem.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinDisplayItem.h; path = Src/Main/Shared/LookinDisplayItem.h; sourceTree = "<group>"; };
+		46EB2E000007C0 /* LookinDisplayItem.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinDisplayItem.m; path = Src/Main/Shared/LookinDisplayItem.m; sourceTree = "<group>"; };
+		46EB2E000007D0 /* LookinDisplayItemDetail.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinDisplayItemDetail.h; path = Src/Main/Shared/LookinDisplayItemDetail.h; sourceTree = "<group>"; };
+		46EB2E000007E0 /* LookinDisplayItemDetail.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinDisplayItemDetail.m; path = Src/Main/Shared/LookinDisplayItemDetail.m; sourceTree = "<group>"; };
+		46EB2E000007F0 /* LookinEventHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinEventHandler.h; path = Src/Main/Shared/LookinEventHandler.h; sourceTree = "<group>"; };
+		46EB2E00000800 /* LookinEventHandler.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinEventHandler.m; path = Src/Main/Shared/LookinEventHandler.m; sourceTree = "<group>"; };
+		46EB2E00000810 /* LookinHierarchyFile.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinHierarchyFile.h; path = Src/Main/Shared/LookinHierarchyFile.h; sourceTree = "<group>"; };
+		46EB2E00000820 /* LookinHierarchyFile.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinHierarchyFile.m; path = Src/Main/Shared/LookinHierarchyFile.m; sourceTree = "<group>"; };
+		46EB2E00000830 /* LookinHierarchyInfo.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinHierarchyInfo.h; path = Src/Main/Shared/LookinHierarchyInfo.h; sourceTree = "<group>"; };
+		46EB2E00000840 /* LookinHierarchyInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinHierarchyInfo.m; path = Src/Main/Shared/LookinHierarchyInfo.m; sourceTree = "<group>"; };
+		46EB2E00000850 /* LookinObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinObject.h; path = Src/Main/Shared/LookinObject.h; sourceTree = "<group>"; };
+		46EB2E00000860 /* LookinObject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinObject.m; path = Src/Main/Shared/LookinObject.m; sourceTree = "<group>"; };
+		46EB2E00000870 /* LookinStaticAsyncUpdateTask.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinStaticAsyncUpdateTask.h; path = Src/Main/Shared/LookinStaticAsyncUpdateTask.h; sourceTree = "<group>"; };
+		46EB2E00000880 /* LookinStaticAsyncUpdateTask.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinStaticAsyncUpdateTask.m; path = Src/Main/Shared/LookinStaticAsyncUpdateTask.m; sourceTree = "<group>"; };
+		46EB2E00000890 /* LookinTuple.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinTuple.h; path = Src/Main/Shared/LookinTuple.h; sourceTree = "<group>"; };
+		46EB2E000008A0 /* LookinTuple.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinTuple.m; path = Src/Main/Shared/LookinTuple.m; sourceTree = "<group>"; };
+		46EB2E000008B0 /* LookinWeakContainer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinWeakContainer.h; path = Src/Main/Shared/LookinWeakContainer.h; sourceTree = "<group>"; };
+		46EB2E000008C0 /* LookinWeakContainer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinWeakContainer.m; path = Src/Main/Shared/LookinWeakContainer.m; sourceTree = "<group>"; };
+		46EB2E000008D0 /* Lookin_PTChannel.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Lookin_PTChannel.h; path = Src/Main/Shared/Peertalk/Lookin_PTChannel.h; sourceTree = "<group>"; };
+		46EB2E000008E0 /* Lookin_PTChannel.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Lookin_PTChannel.m; path = Src/Main/Shared/Peertalk/Lookin_PTChannel.m; sourceTree = "<group>"; };
+		46EB2E000008F0 /* Lookin_PTPrivate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Lookin_PTPrivate.h; path = Src/Main/Shared/Peertalk/Lookin_PTPrivate.h; sourceTree = "<group>"; };
+		46EB2E00000900 /* Lookin_PTProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Lookin_PTProtocol.h; path = Src/Main/Shared/Peertalk/Lookin_PTProtocol.h; sourceTree = "<group>"; };
+		46EB2E00000910 /* Lookin_PTProtocol.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Lookin_PTProtocol.m; path = Src/Main/Shared/Peertalk/Lookin_PTProtocol.m; sourceTree = "<group>"; };
+		46EB2E00000920 /* Lookin_PTUSBHub.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Lookin_PTUSBHub.h; path = Src/Main/Shared/Peertalk/Lookin_PTUSBHub.h; sourceTree = "<group>"; };
+		46EB2E00000930 /* Lookin_PTUSBHub.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = Lookin_PTUSBHub.m; path = Src/Main/Shared/Peertalk/Lookin_PTUSBHub.m; sourceTree = "<group>"; };
+		46EB2E00000940 /* Peertalk.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Peertalk.h; path = Src/Main/Shared/Peertalk/Peertalk.h; sourceTree = "<group>"; };
+		46EB2E00000950 /* LookinIvarTrace.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = LookinIvarTrace.h; path = Src/Base/LookinIvarTrace.h; sourceTree = "<group>"; };
+		46EB2E00000960 /* LookinIvarTrace.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = LookinIvarTrace.m; path = Src/Base/LookinIvarTrace.m; sourceTree = "<group>"; };
+		46EB2E00000980 /* LKS_SwiftTraceManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LKS_SwiftTraceManager.swift; path = Src/Swift/LKS_SwiftTraceManager.swift; sourceTree = "<group>"; };
+		46EB2E00000990 /* Constraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Constraint.swift; path = Sources/Constraint.swift; sourceTree = "<group>"; };
+		46EB2E000009A0 /* ConstraintAttributes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintAttributes.swift; path = Sources/ConstraintAttributes.swift; sourceTree = "<group>"; };
+		46EB2E000009B0 /* ConstraintConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConfig.swift; path = Sources/ConstraintConfig.swift; sourceTree = "<group>"; };
+		46EB2E000009C0 /* ConstraintConstantTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintConstantTarget.swift; path = Sources/ConstraintConstantTarget.swift; sourceTree = "<group>"; };
+		46EB2E000009D0 /* ConstraintDescription.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDescription.swift; path = Sources/ConstraintDescription.swift; sourceTree = "<group>"; };
+		46EB2E000009E0 /* ConstraintDirectionalInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsets.swift; path = Sources/ConstraintDirectionalInsets.swift; sourceTree = "<group>"; };
+		46EB2E000009F0 /* ConstraintDirectionalInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDirectionalInsetTarget.swift; path = Sources/ConstraintDirectionalInsetTarget.swift; sourceTree = "<group>"; };
+		46EB2E00000A00 /* ConstraintDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintDSL.swift; path = Sources/ConstraintDSL.swift; sourceTree = "<group>"; };
+		46EB2E00000A10 /* ConstraintInsets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsets.swift; path = Sources/ConstraintInsets.swift; sourceTree = "<group>"; };
+		46EB2E00000A20 /* ConstraintInsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintInsetTarget.swift; path = Sources/ConstraintInsetTarget.swift; sourceTree = "<group>"; };
+		46EB2E00000A30 /* ConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintItem.swift; path = Sources/ConstraintItem.swift; sourceTree = "<group>"; };
+		46EB2E00000A40 /* ConstraintLayoutGuide+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintLayoutGuide+Extensions.swift"; path = "Sources/ConstraintLayoutGuide+Extensions.swift"; sourceTree = "<group>"; };
+		46EB2E00000A50 /* ConstraintLayoutGuide.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuide.swift; path = Sources/ConstraintLayoutGuide.swift; sourceTree = "<group>"; };
+		46EB2E00000A60 /* ConstraintLayoutGuideDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutGuideDSL.swift; path = Sources/ConstraintLayoutGuideDSL.swift; sourceTree = "<group>"; };
+		46EB2E00000A70 /* ConstraintLayoutSupport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupport.swift; path = Sources/ConstraintLayoutSupport.swift; sourceTree = "<group>"; };
+		46EB2E00000A80 /* ConstraintLayoutSupportDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintLayoutSupportDSL.swift; path = Sources/ConstraintLayoutSupportDSL.swift; sourceTree = "<group>"; };
+		46EB2E00000A90 /* ConstraintMaker.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMaker.swift; path = Sources/ConstraintMaker.swift; sourceTree = "<group>"; };
+		46EB2E00000AA0 /* ConstraintMakerEditable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerEditable.swift; path = Sources/ConstraintMakerEditable.swift; sourceTree = "<group>"; };
+		46EB2E00000AB0 /* ConstraintMakerExtendable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerExtendable.swift; path = Sources/ConstraintMakerExtendable.swift; sourceTree = "<group>"; };
+		46EB2E00000AC0 /* ConstraintMakerFinalizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerFinalizable.swift; path = Sources/ConstraintMakerFinalizable.swift; sourceTree = "<group>"; };
+		46EB2E00000AD0 /* ConstraintMakerPrioritizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerPrioritizable.swift; path = Sources/ConstraintMakerPrioritizable.swift; sourceTree = "<group>"; };
+		46EB2E00000AE0 /* ConstraintMakerRelatable+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintMakerRelatable+Extensions.swift"; path = "Sources/ConstraintMakerRelatable+Extensions.swift"; sourceTree = "<group>"; };
+		46EB2E00000AF0 /* ConstraintMakerRelatable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMakerRelatable.swift; path = Sources/ConstraintMakerRelatable.swift; sourceTree = "<group>"; };
+		46EB2E00000B00 /* ConstraintMultiplierTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintMultiplierTarget.swift; path = Sources/ConstraintMultiplierTarget.swift; sourceTree = "<group>"; };
+		46EB2E00000B10 /* ConstraintOffsetTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintOffsetTarget.swift; path = Sources/ConstraintOffsetTarget.swift; sourceTree = "<group>"; };
+		46EB2E00000B20 /* ConstraintPriority.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriority.swift; path = Sources/ConstraintPriority.swift; sourceTree = "<group>"; };
+		46EB2E00000B30 /* ConstraintPriorityTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintPriorityTarget.swift; path = Sources/ConstraintPriorityTarget.swift; sourceTree = "<group>"; };
+		46EB2E00000B40 /* ConstraintRelatableTarget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelatableTarget.swift; path = Sources/ConstraintRelatableTarget.swift; sourceTree = "<group>"; };
+		46EB2E00000B50 /* ConstraintRelation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintRelation.swift; path = Sources/ConstraintRelation.swift; sourceTree = "<group>"; };
+		46EB2E00000B60 /* ConstraintView+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "ConstraintView+Extensions.swift"; path = "Sources/ConstraintView+Extensions.swift"; sourceTree = "<group>"; };
+		46EB2E00000B70 /* ConstraintView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintView.swift; path = Sources/ConstraintView.swift; sourceTree = "<group>"; };
+		46EB2E00000B80 /* ConstraintViewDSL.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintViewDSL.swift; path = Sources/ConstraintViewDSL.swift; sourceTree = "<group>"; };
+		46EB2E00000B90 /* Debugging.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Debugging.swift; path = Sources/Debugging.swift; sourceTree = "<group>"; };
+		46EB2E00000BA0 /* LayoutConstraint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraint.swift; path = Sources/LayoutConstraint.swift; sourceTree = "<group>"; };
+		46EB2E00000BB0 /* LayoutConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LayoutConstraintItem.swift; path = Sources/LayoutConstraintItem.swift; sourceTree = "<group>"; };
+		46EB2E00000BC0 /* Typealiases.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Typealiases.swift; path = Sources/Typealiases.swift; sourceTree = "<group>"; };
+		46EB2E00000BD0 /* UILayoutSupport+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UILayoutSupport+Extensions.swift"; path = "Sources/UILayoutSupport+Extensions.swift"; sourceTree = "<group>"; };
+		46EB2E00000BF0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Sources/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		46EB2E00001510 /* LookinServer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LookinServer.debug.xcconfig; sourceTree = "<group>"; };
+		46EB2E00001520 /* LookinServer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LookinServer.release.xcconfig; sourceTree = "<group>"; };
+		46EB2E00001530 /* LookinServer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LookinServer.modulemap; sourceTree = "<group>"; };
+		46EB2E00001540 /* LookinServer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LookinServer-umbrella.h"; sourceTree = "<group>"; };
+		46EB2E00001570 /* LookinServer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LookinServer-prefix.pch"; sourceTree = "<group>"; };
+		46EB2E00001580 /* LookinServer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LookinServer-dummy.m"; sourceTree = "<group>"; };
+		46EB2E000016C0 /* ResourceBundle-SnapKit_Privacy-SnapKit-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-SnapKit_Privacy-SnapKit-Info.plist"; sourceTree = "<group>"; };
+		46EB2E00001920 /* SnapKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.debug.xcconfig; sourceTree = "<group>"; };
+		46EB2E00001930 /* SnapKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnapKit.release.xcconfig; sourceTree = "<group>"; };
+		46EB2E00001940 /* SnapKit.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SnapKit.modulemap; sourceTree = "<group>"; };
+		46EB2E00001950 /* SnapKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-umbrella.h"; sourceTree = "<group>"; };
+		46EB2E00001980 /* SnapKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnapKit-prefix.pch"; sourceTree = "<group>"; };
+		46EB2E00001990 /* SnapKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnapKit-dummy.m"; sourceTree = "<group>"; };
+		46EB2E00001A00 /* SwiftFormat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftFormat.debug.xcconfig; sourceTree = "<group>"; };
+		46EB2E00001A10 /* SwiftFormat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftFormat.release.xcconfig; sourceTree = "<group>"; };
+		46EB2E00001AB0 /* Pods-CLPlayer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CLPlayer.release.xcconfig"; sourceTree = "<group>"; };
+		46EB2E00001AC0 /* Pods-CLPlayer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-CLPlayer.debug.xcconfig"; sourceTree = "<group>"; };
+		46EB2E00001AD0 /* Pods-CLPlayer.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-CLPlayer.modulemap"; sourceTree = "<group>"; };
+		46EB2E00001AE0 /* Pods-CLPlayer-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-CLPlayer-umbrella.h"; sourceTree = "<group>"; };
+		46EB2E00001B00 /* Pods-CLPlayer-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CLPlayer-resources.sh"; sourceTree = "<group>"; };
+		46EB2E00001B10 /* Pods-CLPlayer-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-CLPlayer-acknowledgements.plist"; sourceTree = "<group>"; };
+		46EB2E00001B20 /* Pods-CLPlayer-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-CLPlayer-acknowledgements.markdown"; sourceTree = "<group>"; };
+		46EB2E00001B30 /* Pods-CLPlayer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-CLPlayer-dummy.m"; sourceTree = "<group>"; };
+		979486118B3E90C08386079D57962701 /* SnapKit */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = SnapKit; path = libSnapKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit-SnapKit_Privacy */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "SnapKit-SnapKit_Privacy"; path = SnapKit_Privacy.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		F10AF1E93497D0B2C06AC8CB9D8356FC /* Pods-CLPlayer */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-CLPlayer"; path = "libPods-CLPlayer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		46EB2E00000C30 /* Frameworks */ = {
+		46EB2E00000C70 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		46EB2E000015B0 /* Frameworks */ = {
+		46EB2E00001610 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		46EB2E00001990 /* Frameworks */ = {
+		46EB2E00001680 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46EB2E00001A90 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -461,9 +483,10 @@
 		46EB2E00000020 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				25664483ABF4DC8EC03E7472AA04333B /* libLookinServer.a */,
-				F10AF1E93497D0B2C06AC8CB9D8356FC /* libPods-CLPlayer.a */,
-				979486118B3E90C08386079D57962701 /* libSnapKit.a */,
+				25664483ABF4DC8EC03E7472AA04333B /* LookinServer */,
+				F10AF1E93497D0B2C06AC8CB9D8356FC /* Pods-CLPlayer */,
+				979486118B3E90C08386079D57962701 /* SnapKit */,
+				B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit-SnapKit_Privacy */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -478,7 +501,7 @@
 		46EB2E00000070 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E000019A0 /* Pods-CLPlayer */,
+				46EB2E00001AA0 /* Pods-CLPlayer */,
 			);
 			name = "Targets Support Files";
 			sourceTree = "<group>";
@@ -497,76 +520,80 @@
 			isa = PBXGroup;
 			children = (
 				46EB2E000000F0 /* Core */,
-				46EB2E000014A0 /* Support Files */,
-				46EB2E00000950 /* Swift */,
+				46EB2E00001500 /* Support Files */,
+				46EB2E00000970 /* Swift */,
 			);
+			name = LookinServer;
 			path = LookinServer;
 			sourceTree = "<group>";
 		};
 		46EB2E000000C0 /* SnapKit */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E00000970 /* Constraint.swift */,
-				46EB2E00000980 /* ConstraintAttributes.swift */,
-				46EB2E00000990 /* ConstraintConfig.swift */,
-				46EB2E000009A0 /* ConstraintConstantTarget.swift */,
-				46EB2E000009B0 /* ConstraintDescription.swift */,
-				46EB2E000009C0 /* ConstraintDirectionalInsets.swift */,
-				46EB2E000009D0 /* ConstraintDirectionalInsetTarget.swift */,
-				46EB2E000009E0 /* ConstraintDSL.swift */,
-				46EB2E000009F0 /* ConstraintInsets.swift */,
-				46EB2E00000A00 /* ConstraintInsetTarget.swift */,
-				46EB2E00000A10 /* ConstraintItem.swift */,
-				46EB2E00000A30 /* ConstraintLayoutGuide.swift */,
-				46EB2E00000A20 /* ConstraintLayoutGuide+Extensions.swift */,
-				46EB2E00000A40 /* ConstraintLayoutGuideDSL.swift */,
-				46EB2E00000A50 /* ConstraintLayoutSupport.swift */,
-				46EB2E00000A60 /* ConstraintLayoutSupportDSL.swift */,
-				46EB2E00000A70 /* ConstraintMaker.swift */,
-				46EB2E00000A80 /* ConstraintMakerEditable.swift */,
-				46EB2E00000A90 /* ConstraintMakerExtendable.swift */,
-				46EB2E00000AA0 /* ConstraintMakerFinalizable.swift */,
-				46EB2E00000AB0 /* ConstraintMakerPrioritizable.swift */,
-				46EB2E00000AD0 /* ConstraintMakerRelatable.swift */,
-				46EB2E00000AC0 /* ConstraintMakerRelatable+Extensions.swift */,
-				46EB2E00000AE0 /* ConstraintMultiplierTarget.swift */,
-				46EB2E00000AF0 /* ConstraintOffsetTarget.swift */,
-				46EB2E00000B00 /* ConstraintPriority.swift */,
-				46EB2E00000B10 /* ConstraintPriorityTarget.swift */,
-				46EB2E00000B20 /* ConstraintRelatableTarget.swift */,
-				46EB2E00000B30 /* ConstraintRelation.swift */,
-				46EB2E00000B50 /* ConstraintView.swift */,
-				46EB2E00000B40 /* ConstraintView+Extensions.swift */,
-				46EB2E00000B60 /* ConstraintViewDSL.swift */,
-				46EB2E00000B70 /* Debugging.swift */,
-				46EB2E00000B80 /* LayoutConstraint.swift */,
-				46EB2E00000B90 /* LayoutConstraintItem.swift */,
-				46EB2E00000BA0 /* Typealiases.swift */,
-				46EB2E00000BB0 /* UILayoutSupport+Extensions.swift */,
-				46EB2E00001810 /* Support Files */,
+				46EB2E00000990 /* Constraint.swift */,
+				46EB2E000009A0 /* ConstraintAttributes.swift */,
+				46EB2E000009B0 /* ConstraintConfig.swift */,
+				46EB2E000009C0 /* ConstraintConstantTarget.swift */,
+				46EB2E000009D0 /* ConstraintDescription.swift */,
+				46EB2E000009E0 /* ConstraintDirectionalInsets.swift */,
+				46EB2E000009F0 /* ConstraintDirectionalInsetTarget.swift */,
+				46EB2E00000A00 /* ConstraintDSL.swift */,
+				46EB2E00000A10 /* ConstraintInsets.swift */,
+				46EB2E00000A20 /* ConstraintInsetTarget.swift */,
+				46EB2E00000A30 /* ConstraintItem.swift */,
+				46EB2E00000A50 /* ConstraintLayoutGuide.swift */,
+				46EB2E00000A40 /* ConstraintLayoutGuide+Extensions.swift */,
+				46EB2E00000A60 /* ConstraintLayoutGuideDSL.swift */,
+				46EB2E00000A70 /* ConstraintLayoutSupport.swift */,
+				46EB2E00000A80 /* ConstraintLayoutSupportDSL.swift */,
+				46EB2E00000A90 /* ConstraintMaker.swift */,
+				46EB2E00000AA0 /* ConstraintMakerEditable.swift */,
+				46EB2E00000AB0 /* ConstraintMakerExtendable.swift */,
+				46EB2E00000AC0 /* ConstraintMakerFinalizable.swift */,
+				46EB2E00000AD0 /* ConstraintMakerPrioritizable.swift */,
+				46EB2E00000AF0 /* ConstraintMakerRelatable.swift */,
+				46EB2E00000AE0 /* ConstraintMakerRelatable+Extensions.swift */,
+				46EB2E00000B00 /* ConstraintMultiplierTarget.swift */,
+				46EB2E00000B10 /* ConstraintOffsetTarget.swift */,
+				46EB2E00000B20 /* ConstraintPriority.swift */,
+				46EB2E00000B30 /* ConstraintPriorityTarget.swift */,
+				46EB2E00000B40 /* ConstraintRelatableTarget.swift */,
+				46EB2E00000B50 /* ConstraintRelation.swift */,
+				46EB2E00000B70 /* ConstraintView.swift */,
+				46EB2E00000B60 /* ConstraintView+Extensions.swift */,
+				46EB2E00000B80 /* ConstraintViewDSL.swift */,
+				46EB2E00000B90 /* Debugging.swift */,
+				46EB2E00000BA0 /* LayoutConstraint.swift */,
+				46EB2E00000BB0 /* LayoutConstraintItem.swift */,
+				46EB2E00000BC0 /* Typealiases.swift */,
+				46EB2E00000BD0 /* UILayoutSupport+Extensions.swift */,
+				46EB2E00000BE0 /* Resources */,
+				46EB2E000016B0 /* Support Files */,
 			);
+			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
 		46EB2E000000D0 /* SwiftFormat */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E000018F0 /* Support Files */,
+				46EB2E000019F0 /* Support Files */,
 			);
+			name = SwiftFormat;
 			path = SwiftFormat;
 			sourceTree = "<group>";
 		};
 		46EB2E000000F0 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E00000500 /* CALayer+Lookin.h */,
-				46EB2E00000510 /* CALayer+Lookin.m */,
+				46EB2E00000520 /* CALayer+Lookin.h */,
+				46EB2E00000530 /* CALayer+Lookin.m */,
 				46EB2E00000100 /* CALayer+LookinServer.h */,
 				46EB2E00000110 /* CALayer+LookinServer.m */,
-				46EB2E00000520 /* Color+Lookin.h */,
-				46EB2E00000530 /* Color+Lookin.m */,
-				46EB2E00000540 /* Image+Lookin.h */,
-				46EB2E00000550 /* Image+Lookin.m */,
+				46EB2E00000540 /* Color+Lookin.h */,
+				46EB2E00000550 /* Color+Lookin.m */,
+				46EB2E00000560 /* Image+Lookin.h */,
+				46EB2E00000570 /* Image+Lookin.m */,
 				46EB2E00000390 /* LKS_AttrGroupsMaker.h */,
 				46EB2E000003A0 /* LKS_AttrGroupsMaker.m */,
 				46EB2E000002E0 /* LKS_AttrModificationPatchHandler.h */,
@@ -595,81 +622,83 @@
 				46EB2E000004A0 /* LKS_HierarchyDisplayItemsMaker.m */,
 				46EB2E00000340 /* LKS_InbuiltAttrModificationHandler.h */,
 				46EB2E00000350 /* LKS_InbuiltAttrModificationHandler.m */,
-				46EB2E000004B0 /* LKS_ObjectRegistry.h */,
-				46EB2E000004C0 /* LKS_ObjectRegistry.m */,
+				46EB2E000004B0 /* LKS_MultiplatformAdapter.h */,
+				46EB2E000004C0 /* LKS_MultiplatformAdapter.m */,
+				46EB2E000004D0 /* LKS_ObjectRegistry.h */,
+				46EB2E000004E0 /* LKS_ObjectRegistry.m */,
 				46EB2E000002C0 /* LKS_RequestHandler.h */,
 				46EB2E000002D0 /* LKS_RequestHandler.m */,
-				46EB2E000004D0 /* LKS_TraceManager.h */,
-				46EB2E000004E0 /* LKS_TraceManager.m */,
+				46EB2E000004F0 /* LKS_TraceManager.h */,
+				46EB2E00000500 /* LKS_TraceManager.m */,
 				46EB2E00000370 /* LKSConfigManager.h */,
 				46EB2E00000380 /* LKSConfigManager.m */,
-				46EB2E000008B0 /* Lookin_PTChannel.h */,
-				46EB2E000008C0 /* Lookin_PTChannel.m */,
-				46EB2E000008D0 /* Lookin_PTPrivate.h */,
-				46EB2E000008E0 /* Lookin_PTProtocol.h */,
-				46EB2E000008F0 /* Lookin_PTProtocol.m */,
-				46EB2E00000900 /* Lookin_PTUSBHub.h */,
-				46EB2E00000910 /* Lookin_PTUSBHub.m */,
-				46EB2E000005E0 /* LookinAppInfo.h */,
-				46EB2E000005F0 /* LookinAppInfo.m */,
-				46EB2E00000600 /* LookinAttribute.h */,
-				46EB2E00000610 /* LookinAttribute.m */,
-				46EB2E00000620 /* LookinAttributeModification.h */,
-				46EB2E00000630 /* LookinAttributeModification.m */,
-				46EB2E00000640 /* LookinAttributesGroup.h */,
-				46EB2E00000650 /* LookinAttributesGroup.m */,
-				46EB2E00000660 /* LookinAttributesSection.h */,
-				46EB2E00000670 /* LookinAttributesSection.m */,
-				46EB2E00000680 /* LookinAttrIdentifiers.h */,
-				46EB2E00000690 /* LookinAttrIdentifiers.m */,
-				46EB2E000006A0 /* LookinAttrType.h */,
-				46EB2E000006B0 /* LookinAutoLayoutConstraint.h */,
-				46EB2E000006C0 /* LookinAutoLayoutConstraint.m */,
-				46EB2E000006D0 /* LookinCodingValueType.h */,
-				46EB2E000006E0 /* LookinConnectionAttachment.h */,
-				46EB2E000006F0 /* LookinConnectionAttachment.m */,
-				46EB2E00000700 /* LookinConnectionResponseAttachment.h */,
-				46EB2E00000710 /* LookinConnectionResponseAttachment.m */,
-				46EB2E00000720 /* LookinCustomAttrModification.h */,
-				46EB2E00000730 /* LookinCustomAttrModification.m */,
-				46EB2E00000740 /* LookinCustomDisplayItemInfo.h */,
-				46EB2E00000750 /* LookinCustomDisplayItemInfo.m */,
-				46EB2E00000760 /* LookinDashboardBlueprint.h */,
-				46EB2E00000770 /* LookinDashboardBlueprint.m */,
-				46EB2E00000780 /* LookinDefines.h */,
-				46EB2E00000790 /* LookinDisplayItem.h */,
-				46EB2E000007A0 /* LookinDisplayItem.m */,
-				46EB2E000007B0 /* LookinDisplayItemDetail.h */,
-				46EB2E000007C0 /* LookinDisplayItemDetail.m */,
-				46EB2E000007D0 /* LookinEventHandler.h */,
-				46EB2E000007E0 /* LookinEventHandler.m */,
-				46EB2E000007F0 /* LookinHierarchyFile.h */,
-				46EB2E00000800 /* LookinHierarchyFile.m */,
-				46EB2E00000810 /* LookinHierarchyInfo.h */,
-				46EB2E00000820 /* LookinHierarchyInfo.m */,
-				46EB2E00000930 /* LookinIvarTrace.h */,
-				46EB2E00000940 /* LookinIvarTrace.m */,
-				46EB2E00000830 /* LookinObject.h */,
-				46EB2E00000840 /* LookinObject.m */,
+				46EB2E000008D0 /* Lookin_PTChannel.h */,
+				46EB2E000008E0 /* Lookin_PTChannel.m */,
+				46EB2E000008F0 /* Lookin_PTPrivate.h */,
+				46EB2E00000900 /* Lookin_PTProtocol.h */,
+				46EB2E00000910 /* Lookin_PTProtocol.m */,
+				46EB2E00000920 /* Lookin_PTUSBHub.h */,
+				46EB2E00000930 /* Lookin_PTUSBHub.m */,
+				46EB2E00000600 /* LookinAppInfo.h */,
+				46EB2E00000610 /* LookinAppInfo.m */,
+				46EB2E00000620 /* LookinAttribute.h */,
+				46EB2E00000630 /* LookinAttribute.m */,
+				46EB2E00000640 /* LookinAttributeModification.h */,
+				46EB2E00000650 /* LookinAttributeModification.m */,
+				46EB2E00000660 /* LookinAttributesGroup.h */,
+				46EB2E00000670 /* LookinAttributesGroup.m */,
+				46EB2E00000680 /* LookinAttributesSection.h */,
+				46EB2E00000690 /* LookinAttributesSection.m */,
+				46EB2E000006A0 /* LookinAttrIdentifiers.h */,
+				46EB2E000006B0 /* LookinAttrIdentifiers.m */,
+				46EB2E000006C0 /* LookinAttrType.h */,
+				46EB2E000006D0 /* LookinAutoLayoutConstraint.h */,
+				46EB2E000006E0 /* LookinAutoLayoutConstraint.m */,
+				46EB2E000006F0 /* LookinCodingValueType.h */,
+				46EB2E00000700 /* LookinConnectionAttachment.h */,
+				46EB2E00000710 /* LookinConnectionAttachment.m */,
+				46EB2E00000720 /* LookinConnectionResponseAttachment.h */,
+				46EB2E00000730 /* LookinConnectionResponseAttachment.m */,
+				46EB2E00000740 /* LookinCustomAttrModification.h */,
+				46EB2E00000750 /* LookinCustomAttrModification.m */,
+				46EB2E00000760 /* LookinCustomDisplayItemInfo.h */,
+				46EB2E00000770 /* LookinCustomDisplayItemInfo.m */,
+				46EB2E00000780 /* LookinDashboardBlueprint.h */,
+				46EB2E00000790 /* LookinDashboardBlueprint.m */,
+				46EB2E000007A0 /* LookinDefines.h */,
+				46EB2E000007B0 /* LookinDisplayItem.h */,
+				46EB2E000007C0 /* LookinDisplayItem.m */,
+				46EB2E000007D0 /* LookinDisplayItemDetail.h */,
+				46EB2E000007E0 /* LookinDisplayItemDetail.m */,
+				46EB2E000007F0 /* LookinEventHandler.h */,
+				46EB2E00000800 /* LookinEventHandler.m */,
+				46EB2E00000810 /* LookinHierarchyFile.h */,
+				46EB2E00000820 /* LookinHierarchyFile.m */,
+				46EB2E00000830 /* LookinHierarchyInfo.h */,
+				46EB2E00000840 /* LookinHierarchyInfo.m */,
+				46EB2E00000950 /* LookinIvarTrace.h */,
+				46EB2E00000960 /* LookinIvarTrace.m */,
+				46EB2E00000850 /* LookinObject.h */,
+				46EB2E00000860 /* LookinObject.m */,
 				46EB2E00000360 /* LookinServer.h */,
-				46EB2E000004F0 /* LookinServerDefines.h */,
-				46EB2E00000850 /* LookinStaticAsyncUpdateTask.h */,
-				46EB2E00000860 /* LookinStaticAsyncUpdateTask.m */,
-				46EB2E00000870 /* LookinTuple.h */,
-				46EB2E00000880 /* LookinTuple.m */,
-				46EB2E00000890 /* LookinWeakContainer.h */,
-				46EB2E000008A0 /* LookinWeakContainer.m */,
-				46EB2E00000560 /* NSArray+Lookin.h */,
-				46EB2E00000570 /* NSArray+Lookin.m */,
-				46EB2E00000580 /* NSObject+Lookin.h */,
-				46EB2E00000590 /* NSObject+Lookin.m */,
+				46EB2E00000510 /* LookinServerDefines.h */,
+				46EB2E00000870 /* LookinStaticAsyncUpdateTask.h */,
+				46EB2E00000880 /* LookinStaticAsyncUpdateTask.m */,
+				46EB2E00000890 /* LookinTuple.h */,
+				46EB2E000008A0 /* LookinTuple.m */,
+				46EB2E000008B0 /* LookinWeakContainer.h */,
+				46EB2E000008C0 /* LookinWeakContainer.m */,
+				46EB2E00000580 /* NSArray+Lookin.h */,
+				46EB2E00000590 /* NSArray+Lookin.m */,
+				46EB2E000005A0 /* NSObject+Lookin.h */,
+				46EB2E000005B0 /* NSObject+Lookin.m */,
 				46EB2E00000120 /* NSObject+LookinServer.h */,
 				46EB2E00000130 /* NSObject+LookinServer.m */,
-				46EB2E000005A0 /* NSSet+Lookin.h */,
-				46EB2E000005B0 /* NSSet+Lookin.m */,
-				46EB2E000005C0 /* NSString+Lookin.h */,
-				46EB2E000005D0 /* NSString+Lookin.m */,
-				46EB2E00000920 /* Peertalk.h */,
+				46EB2E000005C0 /* NSSet+Lookin.h */,
+				46EB2E000005D0 /* NSSet+Lookin.m */,
+				46EB2E000005E0 /* NSString+Lookin.h */,
+				46EB2E000005F0 /* NSString+Lookin.m */,
+				46EB2E00000940 /* Peertalk.h */,
 				46EB2E00000140 /* UIBlurEffect+LookinServer.h */,
 				46EB2E00000150 /* UIBlurEffect+LookinServer.m */,
 				46EB2E00000160 /* UIColor+LookinServer.h */,
@@ -696,62 +725,72 @@
 			name = Core;
 			sourceTree = "<group>";
 		};
-		46EB2E00000950 /* Swift */ = {
+		46EB2E00000970 /* Swift */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E00000960 /* LKS_SwiftTraceManager.swift */,
+				46EB2E00000980 /* LKS_SwiftTraceManager.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
 		};
-		46EB2E000014A0 /* Support Files */ = {
+		46EB2E00000BE0 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E000014D0 /* LookinServer.modulemap */,
-				46EB2E00001520 /* LookinServer-dummy.m */,
-				46EB2E00001510 /* LookinServer-prefix.pch */,
-				46EB2E000014E0 /* LookinServer-umbrella.h */,
-				46EB2E000014B0 /* LookinServer.debug.xcconfig */,
-				46EB2E000014C0 /* LookinServer.release.xcconfig */,
+				46EB2E00000BF0 /* PrivacyInfo.xcprivacy */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		46EB2E00001500 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				46EB2E00001530 /* LookinServer.modulemap */,
+				46EB2E00001580 /* LookinServer-dummy.m */,
+				46EB2E00001570 /* LookinServer-prefix.pch */,
+				46EB2E00001540 /* LookinServer-umbrella.h */,
+				46EB2E00001510 /* LookinServer.debug.xcconfig */,
+				46EB2E00001520 /* LookinServer.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/LookinServer";
 			sourceTree = "<group>";
 		};
-		46EB2E00001810 /* Support Files */ = {
+		46EB2E000016B0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E00001840 /* SnapKit.modulemap */,
-				46EB2E00001890 /* SnapKit-dummy.m */,
-				46EB2E00001880 /* SnapKit-prefix.pch */,
-				46EB2E00001850 /* SnapKit-umbrella.h */,
-				46EB2E00001820 /* SnapKit.debug.xcconfig */,
-				46EB2E00001830 /* SnapKit.release.xcconfig */,
+				46EB2E000016C0 /* ResourceBundle-SnapKit_Privacy-SnapKit-Info.plist */,
+				46EB2E00001940 /* SnapKit.modulemap */,
+				46EB2E00001990 /* SnapKit-dummy.m */,
+				46EB2E00001980 /* SnapKit-prefix.pch */,
+				46EB2E00001950 /* SnapKit-umbrella.h */,
+				46EB2E00001920 /* SnapKit.debug.xcconfig */,
+				46EB2E00001930 /* SnapKit.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SnapKit";
 			sourceTree = "<group>";
 		};
-		46EB2E000018F0 /* Support Files */ = {
+		46EB2E000019F0 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E00001900 /* SwiftFormat.debug.xcconfig */,
-				46EB2E00001910 /* SwiftFormat.release.xcconfig */,
+				46EB2E00001A00 /* SwiftFormat.debug.xcconfig */,
+				46EB2E00001A10 /* SwiftFormat.release.xcconfig */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SwiftFormat";
 			sourceTree = "<group>";
 		};
-		46EB2E000019A0 /* Pods-CLPlayer */ = {
+		46EB2E00001AA0 /* Pods-CLPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				46EB2E000019D0 /* Pods-CLPlayer.modulemap */,
-				46EB2E00001A10 /* Pods-CLPlayer-acknowledgements.markdown */,
-				46EB2E00001A00 /* Pods-CLPlayer-acknowledgements.plist */,
-				46EB2E00001A20 /* Pods-CLPlayer-dummy.m */,
-				46EB2E000019E0 /* Pods-CLPlayer-umbrella.h */,
-				46EB2E000019C0 /* Pods-CLPlayer.debug.xcconfig */,
-				46EB2E000019B0 /* Pods-CLPlayer.release.xcconfig */,
+				46EB2E00001AD0 /* Pods-CLPlayer.modulemap */,
+				46EB2E00001B20 /* Pods-CLPlayer-acknowledgements.markdown */,
+				46EB2E00001B10 /* Pods-CLPlayer-acknowledgements.plist */,
+				46EB2E00001B30 /* Pods-CLPlayer-dummy.m */,
+				46EB2E00001B00 /* Pods-CLPlayer-resources.sh */,
+				46EB2E00001AE0 /* Pods-CLPlayer-umbrella.h */,
+				46EB2E00001AC0 /* Pods-CLPlayer.debug.xcconfig */,
+				46EB2E00001AB0 /* Pods-CLPlayer.release.xcconfig */,
 			);
 			name = "Pods-CLPlayer";
 			path = "Target Support Files/Pods-CLPlayer";
@@ -760,97 +799,98 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		46EB2E00000C10 /* Headers */ = {
+		46EB2E00000C50 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E00001240 /* CALayer+Lookin.h in Headers */,
-				46EB2E00001030 /* CALayer+LookinServer.h in Headers */,
-				46EB2E00001250 /* Color+Lookin.h in Headers */,
-				46EB2E00001260 /* Image+Lookin.h in Headers */,
-				46EB2E00001180 /* LKS_AttrGroupsMaker.h in Headers */,
-				46EB2E00001120 /* LKS_AttrModificationPatchHandler.h in Headers */,
-				46EB2E00001100 /* LKS_ConnectionManager.h in Headers */,
-				46EB2E00001190 /* LKS_CustomAttrGroupsMaker.h in Headers */,
-				46EB2E00001130 /* LKS_CustomAttrModificationHandler.h in Headers */,
-				46EB2E000011A0 /* LKS_CustomAttrSetterManager.h in Headers */,
-				46EB2E000011B0 /* LKS_CustomDisplayItemsMaker.h in Headers */,
-				46EB2E000011C0 /* LKS_EventHandlerMaker.h in Headers */,
-				46EB2E000011D0 /* LKS_ExportManager.h in Headers */,
-				46EB2E000011E0 /* LKS_GestureTargetActionsSearcher.h in Headers */,
-				46EB2E000011F0 /* LKS_Helper.h in Headers */,
-				46EB2E00001140 /* LKS_HierarchyDetailsHandler.h in Headers */,
-				46EB2E00001200 /* LKS_HierarchyDisplayItemsMaker.h in Headers */,
-				46EB2E00001150 /* LKS_InbuiltAttrModificationHandler.h in Headers */,
-				46EB2E00001210 /* LKS_ObjectRegistry.h in Headers */,
-				46EB2E00001110 /* LKS_RequestHandler.h in Headers */,
-				46EB2E00001220 /* LKS_TraceManager.h in Headers */,
-				46EB2E00001170 /* LKSConfigManager.h in Headers */,
-				46EB2E00001430 /* Lookin_PTChannel.h in Headers */,
-				46EB2E00001440 /* Lookin_PTPrivate.h in Headers */,
-				46EB2E00001450 /* Lookin_PTProtocol.h in Headers */,
-				46EB2E00001460 /* Lookin_PTUSBHub.h in Headers */,
-				46EB2E000012B0 /* LookinAppInfo.h in Headers */,
-				46EB2E000012C0 /* LookinAttribute.h in Headers */,
-				46EB2E000012D0 /* LookinAttributeModification.h in Headers */,
-				46EB2E000012E0 /* LookinAttributesGroup.h in Headers */,
-				46EB2E000012F0 /* LookinAttributesSection.h in Headers */,
-				46EB2E00001300 /* LookinAttrIdentifiers.h in Headers */,
-				46EB2E00001310 /* LookinAttrType.h in Headers */,
-				46EB2E00001320 /* LookinAutoLayoutConstraint.h in Headers */,
-				46EB2E00001330 /* LookinCodingValueType.h in Headers */,
-				46EB2E00001340 /* LookinConnectionAttachment.h in Headers */,
-				46EB2E00001350 /* LookinConnectionResponseAttachment.h in Headers */,
-				46EB2E00001360 /* LookinCustomAttrModification.h in Headers */,
-				46EB2E00001370 /* LookinCustomDisplayItemInfo.h in Headers */,
-				46EB2E00001380 /* LookinDashboardBlueprint.h in Headers */,
-				46EB2E00001390 /* LookinDefines.h in Headers */,
-				46EB2E000013A0 /* LookinDisplayItem.h in Headers */,
-				46EB2E000013B0 /* LookinDisplayItemDetail.h in Headers */,
-				46EB2E000013C0 /* LookinEventHandler.h in Headers */,
-				46EB2E000013D0 /* LookinHierarchyFile.h in Headers */,
-				46EB2E000013E0 /* LookinHierarchyInfo.h in Headers */,
-				46EB2E00001480 /* LookinIvarTrace.h in Headers */,
-				46EB2E000013F0 /* LookinObject.h in Headers */,
-				46EB2E00001160 /* LookinServer.h in Headers */,
-				46EB2E000014F0 /* LookinServer-umbrella.h in Headers */,
-				46EB2E00001230 /* LookinServerDefines.h in Headers */,
-				46EB2E00001400 /* LookinStaticAsyncUpdateTask.h in Headers */,
-				46EB2E00001410 /* LookinTuple.h in Headers */,
-				46EB2E00001420 /* LookinWeakContainer.h in Headers */,
-				46EB2E00001270 /* NSArray+Lookin.h in Headers */,
-				46EB2E00001280 /* NSObject+Lookin.h in Headers */,
-				46EB2E00001040 /* NSObject+LookinServer.h in Headers */,
-				46EB2E00001290 /* NSSet+Lookin.h in Headers */,
-				46EB2E000012A0 /* NSString+Lookin.h in Headers */,
-				46EB2E00001470 /* Peertalk.h in Headers */,
-				46EB2E00001050 /* UIBlurEffect+LookinServer.h in Headers */,
-				46EB2E00001060 /* UIColor+LookinServer.h in Headers */,
-				46EB2E00001070 /* UIImage+LookinServer.h in Headers */,
-				46EB2E00001080 /* UIImageView+LookinServer.h in Headers */,
-				46EB2E00001090 /* UILabel+LookinServer.h in Headers */,
-				46EB2E000010A0 /* UITableView+LookinServer.h in Headers */,
-				46EB2E000010B0 /* UITextField+LookinServer.h in Headers */,
-				46EB2E000010C0 /* UITextView+LookinServer.h in Headers */,
-				46EB2E000010D0 /* UIView+LookinServer.h in Headers */,
-				46EB2E000010E0 /* UIViewController+LookinServer.h in Headers */,
-				46EB2E000010F0 /* UIVisualEffectView+LookinServer.h in Headers */,
+				46EB2E000012A0 /* CALayer+Lookin.h in Headers */,
+				46EB2E00001080 /* CALayer+LookinServer.h in Headers */,
+				46EB2E000012B0 /* Color+Lookin.h in Headers */,
+				46EB2E000012C0 /* Image+Lookin.h in Headers */,
+				46EB2E000011D0 /* LKS_AttrGroupsMaker.h in Headers */,
+				46EB2E00001170 /* LKS_AttrModificationPatchHandler.h in Headers */,
+				46EB2E00001150 /* LKS_ConnectionManager.h in Headers */,
+				46EB2E000011E0 /* LKS_CustomAttrGroupsMaker.h in Headers */,
+				46EB2E00001180 /* LKS_CustomAttrModificationHandler.h in Headers */,
+				46EB2E000011F0 /* LKS_CustomAttrSetterManager.h in Headers */,
+				46EB2E00001200 /* LKS_CustomDisplayItemsMaker.h in Headers */,
+				46EB2E00001210 /* LKS_EventHandlerMaker.h in Headers */,
+				46EB2E00001220 /* LKS_ExportManager.h in Headers */,
+				46EB2E00001230 /* LKS_GestureTargetActionsSearcher.h in Headers */,
+				46EB2E00001240 /* LKS_Helper.h in Headers */,
+				46EB2E00001190 /* LKS_HierarchyDetailsHandler.h in Headers */,
+				46EB2E00001250 /* LKS_HierarchyDisplayItemsMaker.h in Headers */,
+				46EB2E000011A0 /* LKS_InbuiltAttrModificationHandler.h in Headers */,
+				46EB2E00001260 /* LKS_MultiplatformAdapter.h in Headers */,
+				46EB2E00001270 /* LKS_ObjectRegistry.h in Headers */,
+				46EB2E00001160 /* LKS_RequestHandler.h in Headers */,
+				46EB2E00001280 /* LKS_TraceManager.h in Headers */,
+				46EB2E000011C0 /* LKSConfigManager.h in Headers */,
+				46EB2E00001490 /* Lookin_PTChannel.h in Headers */,
+				46EB2E000014A0 /* Lookin_PTPrivate.h in Headers */,
+				46EB2E000014B0 /* Lookin_PTProtocol.h in Headers */,
+				46EB2E000014C0 /* Lookin_PTUSBHub.h in Headers */,
+				46EB2E00001310 /* LookinAppInfo.h in Headers */,
+				46EB2E00001320 /* LookinAttribute.h in Headers */,
+				46EB2E00001330 /* LookinAttributeModification.h in Headers */,
+				46EB2E00001340 /* LookinAttributesGroup.h in Headers */,
+				46EB2E00001350 /* LookinAttributesSection.h in Headers */,
+				46EB2E00001360 /* LookinAttrIdentifiers.h in Headers */,
+				46EB2E00001370 /* LookinAttrType.h in Headers */,
+				46EB2E00001380 /* LookinAutoLayoutConstraint.h in Headers */,
+				46EB2E00001390 /* LookinCodingValueType.h in Headers */,
+				46EB2E000013A0 /* LookinConnectionAttachment.h in Headers */,
+				46EB2E000013B0 /* LookinConnectionResponseAttachment.h in Headers */,
+				46EB2E000013C0 /* LookinCustomAttrModification.h in Headers */,
+				46EB2E000013D0 /* LookinCustomDisplayItemInfo.h in Headers */,
+				46EB2E000013E0 /* LookinDashboardBlueprint.h in Headers */,
+				46EB2E000013F0 /* LookinDefines.h in Headers */,
+				46EB2E00001400 /* LookinDisplayItem.h in Headers */,
+				46EB2E00001410 /* LookinDisplayItemDetail.h in Headers */,
+				46EB2E00001420 /* LookinEventHandler.h in Headers */,
+				46EB2E00001430 /* LookinHierarchyFile.h in Headers */,
+				46EB2E00001440 /* LookinHierarchyInfo.h in Headers */,
+				46EB2E000014E0 /* LookinIvarTrace.h in Headers */,
+				46EB2E00001450 /* LookinObject.h in Headers */,
+				46EB2E000011B0 /* LookinServer.h in Headers */,
+				46EB2E00001550 /* LookinServer-umbrella.h in Headers */,
+				46EB2E00001290 /* LookinServerDefines.h in Headers */,
+				46EB2E00001460 /* LookinStaticAsyncUpdateTask.h in Headers */,
+				46EB2E00001470 /* LookinTuple.h in Headers */,
+				46EB2E00001480 /* LookinWeakContainer.h in Headers */,
+				46EB2E000012D0 /* NSArray+Lookin.h in Headers */,
+				46EB2E000012E0 /* NSObject+Lookin.h in Headers */,
+				46EB2E00001090 /* NSObject+LookinServer.h in Headers */,
+				46EB2E000012F0 /* NSSet+Lookin.h in Headers */,
+				46EB2E00001300 /* NSString+Lookin.h in Headers */,
+				46EB2E000014D0 /* Peertalk.h in Headers */,
+				46EB2E000010A0 /* UIBlurEffect+LookinServer.h in Headers */,
+				46EB2E000010B0 /* UIColor+LookinServer.h in Headers */,
+				46EB2E000010C0 /* UIImage+LookinServer.h in Headers */,
+				46EB2E000010D0 /* UIImageView+LookinServer.h in Headers */,
+				46EB2E000010E0 /* UILabel+LookinServer.h in Headers */,
+				46EB2E000010F0 /* UITableView+LookinServer.h in Headers */,
+				46EB2E00001100 /* UITextField+LookinServer.h in Headers */,
+				46EB2E00001110 /* UITextView+LookinServer.h in Headers */,
+				46EB2E00001120 /* UIView+LookinServer.h in Headers */,
+				46EB2E00001130 /* UIViewController+LookinServer.h in Headers */,
+				46EB2E00001140 /* UIVisualEffectView+LookinServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		46EB2E00001590 /* Headers */ = {
+		46EB2E000015F0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E00001860 /* SnapKit-umbrella.h in Headers */,
+				46EB2E00001960 /* SnapKit-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		46EB2E00001970 /* Headers */ = {
+		46EB2E00001A70 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E000019F0 /* Pods-CLPlayer-umbrella.h in Headers */,
+				46EB2E00001AF0 /* Pods-CLPlayer-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -859,50 +899,51 @@
 /* Begin PBXNativeTarget section */
 		19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46EB2E00001550 /* Build configuration list for PBXNativeTarget "SnapKit" */;
+			buildConfigurationList = 46EB2E000015B0 /* Build configuration list for PBXNativeTarget "SnapKit" */;
 			buildPhases = (
-				46EB2E00001590 /* Headers */,
-				46EB2E000015A0 /* Sources */,
-				46EB2E000015B0 /* Frameworks */,
-				46EB2E00001870 /* Copy generated compatibility header */,
+				46EB2E000015F0 /* Headers */,
+				46EB2E00001600 /* Sources */,
+				46EB2E00001610 /* Frameworks */,
+				46EB2E00001970 /* Copy generated compatibility header */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				46EB2E00001BC0 /* PBXTargetDependency */,
 			);
 			name = SnapKit;
 			productName = SnapKit;
-			productReference = 979486118B3E90C08386079D57962701 /* libSnapKit.a */;
+			productReference = 979486118B3E90C08386079D57962701 /* SnapKit */;
 			productType = "com.apple.product-type.library.static";
 		};
 		2FAD9256D639B425639593F6D6C1BEDE /* Pods-CLPlayer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46EB2E00001930 /* Build configuration list for PBXNativeTarget "Pods-CLPlayer" */;
+			buildConfigurationList = 46EB2E00001A30 /* Build configuration list for PBXNativeTarget "Pods-CLPlayer" */;
 			buildPhases = (
-				46EB2E00001970 /* Headers */,
-				46EB2E00001980 /* Sources */,
-				46EB2E00001990 /* Frameworks */,
+				46EB2E00001A70 /* Headers */,
+				46EB2E00001A80 /* Sources */,
+				46EB2E00001A90 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				46EB2E00001A50 /* PBXTargetDependency */,
-				46EB2E00001A70 /* PBXTargetDependency */,
-				46EB2E00001A90 /* PBXTargetDependency */,
+				46EB2E00001B60 /* PBXTargetDependency */,
+				46EB2E00001B80 /* PBXTargetDependency */,
+				46EB2E00001BA0 /* PBXTargetDependency */,
 			);
 			name = "Pods-CLPlayer";
 			productName = "Pods-CLPlayer";
-			productReference = F10AF1E93497D0B2C06AC8CB9D8356FC /* libPods-CLPlayer.a */;
+			productReference = F10AF1E93497D0B2C06AC8CB9D8356FC /* Pods-CLPlayer */;
 			productType = "com.apple.product-type.library.static";
 		};
 		638FEAAFC575BB76BC6AC055CDDA3506 /* LookinServer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 46EB2E00000BD0 /* Build configuration list for PBXNativeTarget "LookinServer" */;
+			buildConfigurationList = 46EB2E00000C10 /* Build configuration list for PBXNativeTarget "LookinServer" */;
 			buildPhases = (
-				46EB2E00000C10 /* Headers */,
-				46EB2E00000C20 /* Sources */,
-				46EB2E00000C30 /* Frameworks */,
-				46EB2E00001500 /* Copy generated compatibility header */,
+				46EB2E00000C50 /* Headers */,
+				46EB2E00000C60 /* Sources */,
+				46EB2E00000C70 /* Frameworks */,
+				46EB2E00001560 /* Copy generated compatibility header */,
 			);
 			buildRules = (
 			);
@@ -910,8 +951,25 @@
 			);
 			name = LookinServer;
 			productName = LookinServer;
-			productReference = 25664483ABF4DC8EC03E7472AA04333B /* libLookinServer.a */;
+			productReference = 25664483ABF4DC8EC03E7472AA04333B /* LookinServer */;
 			productType = "com.apple.product-type.library.static";
+		};
+		8A8DB685241263AFDF5E6B20FE67B93A /* SnapKit-SnapKit_Privacy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46EB2E00001630 /* Build configuration list for PBXNativeTarget "SnapKit-SnapKit_Privacy" */;
+			buildPhases = (
+				46EB2E00001670 /* Sources */,
+				46EB2E00001680 /* Frameworks */,
+				46EB2E00001690 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SnapKit-SnapKit_Privacy";
+			productName = SnapKit_Privacy;
+			productReference = B9DCB5EC0B1CDADD221717CADDF62359 /* SnapKit-SnapKit_Privacy */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -919,9 +977,8 @@
 		46EB2E00000000 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
-				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1540;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
 			};
 			buildConfigurationList = 46EB2E00000030 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 13.0";
@@ -932,6 +989,8 @@
 				en,
 			);
 			mainGroup = 46EB2E00000010;
+			minimizedProjectReferenceProxies = 0;
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 46EB2E00000020 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -939,13 +998,25 @@
 				638FEAAFC575BB76BC6AC055CDDA3506 /* LookinServer */,
 				2FAD9256D639B425639593F6D6C1BEDE /* Pods-CLPlayer */,
 				19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */,
+				8A8DB685241263AFDF5E6B20FE67B93A /* SnapKit-SnapKit_Privacy */,
 				1CD0618C486973D5588EF20D2E8C0AEA /* SwiftFormat */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		46EB2E00001690 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46EB2E000016A0 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXShellScriptBuildPhase section */
-		46EB2E00001500 /* Copy generated compatibility header */ = {
+		46EB2E00001560 /* Copy generated compatibility header */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -969,7 +1040,7 @@
 			shellPath = /bin/sh;
 			shellScript = "COMPATIBILITY_HEADER_PATH=\"${BUILT_PRODUCTS_DIR}/Swift Compatibility Header/${PRODUCT_MODULE_NAME}-Swift.h\"\nMODULE_MAP_PATH=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_MODULE_NAME}.modulemap\"\n\nditto \"${DERIVED_SOURCES_DIR}/${PRODUCT_MODULE_NAME}-Swift.h\" \"${COMPATIBILITY_HEADER_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/LookinServer/LookinServer.modulemap\" \"${MODULE_MAP_PATH}\"\nditto \"${PODS_ROOT}/Headers/Public/LookinServer/LookinServer-umbrella.h\" \"${BUILT_PRODUCTS_DIR}\"\nprintf \"\\n\\nmodule ${PRODUCT_MODULE_NAME}.Swift {\\n  header \\\"${COMPATIBILITY_HEADER_PATH}\\\"\\n  requires objc\\n}\\n\" >> \"${MODULE_MAP_PATH}\"\n";
 		};
-		46EB2E00001870 /* Copy generated compatibility header */ = {
+		46EB2E00001970 /* Copy generated compatibility header */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -996,151 +1067,165 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		46EB2E00000C20 /* Sources */ = {
+		46EB2E00000C60 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E00000E30 /* CALayer+Lookin.m in Sources */,
-				46EB2E00000C40 /* CALayer+LookinServer.m in Sources */,
-				46EB2E00000E40 /* Color+Lookin.m in Sources */,
-				46EB2E00000E50 /* Image+Lookin.m in Sources */,
-				46EB2E00000D80 /* LKS_AttrGroupsMaker.m in Sources */,
-				46EB2E00000D30 /* LKS_AttrModificationPatchHandler.m in Sources */,
-				46EB2E00000D10 /* LKS_ConnectionManager.m in Sources */,
-				46EB2E00000D90 /* LKS_CustomAttrGroupsMaker.m in Sources */,
-				46EB2E00000D40 /* LKS_CustomAttrModificationHandler.m in Sources */,
-				46EB2E00000DA0 /* LKS_CustomAttrSetterManager.m in Sources */,
-				46EB2E00000DB0 /* LKS_CustomDisplayItemsMaker.m in Sources */,
-				46EB2E00000DC0 /* LKS_EventHandlerMaker.m in Sources */,
-				46EB2E00000DD0 /* LKS_ExportManager.m in Sources */,
-				46EB2E00000DE0 /* LKS_GestureTargetActionsSearcher.m in Sources */,
-				46EB2E00000DF0 /* LKS_Helper.m in Sources */,
-				46EB2E00000D50 /* LKS_HierarchyDetailsHandler.m in Sources */,
-				46EB2E00000E00 /* LKS_HierarchyDisplayItemsMaker.m in Sources */,
-				46EB2E00000D60 /* LKS_InbuiltAttrModificationHandler.m in Sources */,
-				46EB2E00000E10 /* LKS_ObjectRegistry.m in Sources */,
-				46EB2E00000D20 /* LKS_RequestHandler.m in Sources */,
-				46EB2E00001490 /* LKS_SwiftTraceManager.swift in Sources */,
-				46EB2E00000E20 /* LKS_TraceManager.m in Sources */,
-				46EB2E00000D70 /* LKSConfigManager.m in Sources */,
-				46EB2E00000FF0 /* Lookin_PTChannel.m in Sources */,
-				46EB2E00001000 /* Lookin_PTProtocol.m in Sources */,
-				46EB2E00001010 /* Lookin_PTUSBHub.m in Sources */,
-				46EB2E00000EA0 /* LookinAppInfo.m in Sources */,
-				46EB2E00000EB0 /* LookinAttribute.m in Sources */,
-				46EB2E00000EC0 /* LookinAttributeModification.m in Sources */,
-				46EB2E00000ED0 /* LookinAttributesGroup.m in Sources */,
-				46EB2E00000EE0 /* LookinAttributesSection.m in Sources */,
-				46EB2E00000EF0 /* LookinAttrIdentifiers.m in Sources */,
-				46EB2E00000F00 /* LookinAutoLayoutConstraint.m in Sources */,
-				46EB2E00000F10 /* LookinConnectionAttachment.m in Sources */,
-				46EB2E00000F20 /* LookinConnectionResponseAttachment.m in Sources */,
-				46EB2E00000F30 /* LookinCustomAttrModification.m in Sources */,
-				46EB2E00000F40 /* LookinCustomDisplayItemInfo.m in Sources */,
-				46EB2E00000F50 /* LookinDashboardBlueprint.m in Sources */,
-				46EB2E00000F60 /* LookinDisplayItem.m in Sources */,
-				46EB2E00000F70 /* LookinDisplayItemDetail.m in Sources */,
-				46EB2E00000F80 /* LookinEventHandler.m in Sources */,
-				46EB2E00000F90 /* LookinHierarchyFile.m in Sources */,
-				46EB2E00000FA0 /* LookinHierarchyInfo.m in Sources */,
-				46EB2E00001020 /* LookinIvarTrace.m in Sources */,
-				46EB2E00000FB0 /* LookinObject.m in Sources */,
-				46EB2E00001530 /* LookinServer-dummy.m in Sources */,
-				46EB2E00000FC0 /* LookinStaticAsyncUpdateTask.m in Sources */,
-				46EB2E00000FD0 /* LookinTuple.m in Sources */,
-				46EB2E00000FE0 /* LookinWeakContainer.m in Sources */,
-				46EB2E00000E60 /* NSArray+Lookin.m in Sources */,
-				46EB2E00000E70 /* NSObject+Lookin.m in Sources */,
-				46EB2E00000C50 /* NSObject+LookinServer.m in Sources */,
-				46EB2E00000E80 /* NSSet+Lookin.m in Sources */,
-				46EB2E00000E90 /* NSString+Lookin.m in Sources */,
-				46EB2E00000C60 /* UIBlurEffect+LookinServer.m in Sources */,
-				46EB2E00000C70 /* UIColor+LookinServer.m in Sources */,
-				46EB2E00000C80 /* UIImage+LookinServer.m in Sources */,
-				46EB2E00000C90 /* UIImageView+LookinServer.m in Sources */,
-				46EB2E00000CA0 /* UILabel+LookinServer.m in Sources */,
-				46EB2E00000CB0 /* UITableView+LookinServer.m in Sources */,
-				46EB2E00000CC0 /* UITextField+LookinServer.m in Sources */,
-				46EB2E00000CD0 /* UITextView+LookinServer.m in Sources */,
-				46EB2E00000CE0 /* UIView+LookinServer.m in Sources */,
-				46EB2E00000CF0 /* UIViewController+LookinServer.m in Sources */,
-				46EB2E00000D00 /* UIVisualEffectView+LookinServer.m in Sources */,
+				46EB2E00000E80 /* CALayer+Lookin.m in Sources */,
+				46EB2E00000C80 /* CALayer+LookinServer.m in Sources */,
+				46EB2E00000E90 /* Color+Lookin.m in Sources */,
+				46EB2E00000EA0 /* Image+Lookin.m in Sources */,
+				46EB2E00000DC0 /* LKS_AttrGroupsMaker.m in Sources */,
+				46EB2E00000D70 /* LKS_AttrModificationPatchHandler.m in Sources */,
+				46EB2E00000D50 /* LKS_ConnectionManager.m in Sources */,
+				46EB2E00000DD0 /* LKS_CustomAttrGroupsMaker.m in Sources */,
+				46EB2E00000D80 /* LKS_CustomAttrModificationHandler.m in Sources */,
+				46EB2E00000DE0 /* LKS_CustomAttrSetterManager.m in Sources */,
+				46EB2E00000DF0 /* LKS_CustomDisplayItemsMaker.m in Sources */,
+				46EB2E00000E00 /* LKS_EventHandlerMaker.m in Sources */,
+				46EB2E00000E10 /* LKS_ExportManager.m in Sources */,
+				46EB2E00000E20 /* LKS_GestureTargetActionsSearcher.m in Sources */,
+				46EB2E00000E30 /* LKS_Helper.m in Sources */,
+				46EB2E00000D90 /* LKS_HierarchyDetailsHandler.m in Sources */,
+				46EB2E00000E40 /* LKS_HierarchyDisplayItemsMaker.m in Sources */,
+				46EB2E00000DA0 /* LKS_InbuiltAttrModificationHandler.m in Sources */,
+				46EB2E00000E50 /* LKS_MultiplatformAdapter.m in Sources */,
+				46EB2E00000E60 /* LKS_ObjectRegistry.m in Sources */,
+				46EB2E00000D60 /* LKS_RequestHandler.m in Sources */,
+				46EB2E000014F0 /* LKS_SwiftTraceManager.swift in Sources */,
+				46EB2E00000E70 /* LKS_TraceManager.m in Sources */,
+				46EB2E00000DB0 /* LKSConfigManager.m in Sources */,
+				46EB2E00001040 /* Lookin_PTChannel.m in Sources */,
+				46EB2E00001050 /* Lookin_PTProtocol.m in Sources */,
+				46EB2E00001060 /* Lookin_PTUSBHub.m in Sources */,
+				46EB2E00000EF0 /* LookinAppInfo.m in Sources */,
+				46EB2E00000F00 /* LookinAttribute.m in Sources */,
+				46EB2E00000F10 /* LookinAttributeModification.m in Sources */,
+				46EB2E00000F20 /* LookinAttributesGroup.m in Sources */,
+				46EB2E00000F30 /* LookinAttributesSection.m in Sources */,
+				46EB2E00000F40 /* LookinAttrIdentifiers.m in Sources */,
+				46EB2E00000F50 /* LookinAutoLayoutConstraint.m in Sources */,
+				46EB2E00000F60 /* LookinConnectionAttachment.m in Sources */,
+				46EB2E00000F70 /* LookinConnectionResponseAttachment.m in Sources */,
+				46EB2E00000F80 /* LookinCustomAttrModification.m in Sources */,
+				46EB2E00000F90 /* LookinCustomDisplayItemInfo.m in Sources */,
+				46EB2E00000FA0 /* LookinDashboardBlueprint.m in Sources */,
+				46EB2E00000FB0 /* LookinDisplayItem.m in Sources */,
+				46EB2E00000FC0 /* LookinDisplayItemDetail.m in Sources */,
+				46EB2E00000FD0 /* LookinEventHandler.m in Sources */,
+				46EB2E00000FE0 /* LookinHierarchyFile.m in Sources */,
+				46EB2E00000FF0 /* LookinHierarchyInfo.m in Sources */,
+				46EB2E00001070 /* LookinIvarTrace.m in Sources */,
+				46EB2E00001000 /* LookinObject.m in Sources */,
+				46EB2E00001590 /* LookinServer-dummy.m in Sources */,
+				46EB2E00001010 /* LookinStaticAsyncUpdateTask.m in Sources */,
+				46EB2E00001020 /* LookinTuple.m in Sources */,
+				46EB2E00001030 /* LookinWeakContainer.m in Sources */,
+				46EB2E00000EB0 /* NSArray+Lookin.m in Sources */,
+				46EB2E00000EC0 /* NSObject+Lookin.m in Sources */,
+				46EB2E00000C90 /* NSObject+LookinServer.m in Sources */,
+				46EB2E00000ED0 /* NSSet+Lookin.m in Sources */,
+				46EB2E00000EE0 /* NSString+Lookin.m in Sources */,
+				46EB2E00000CA0 /* UIBlurEffect+LookinServer.m in Sources */,
+				46EB2E00000CB0 /* UIColor+LookinServer.m in Sources */,
+				46EB2E00000CC0 /* UIImage+LookinServer.m in Sources */,
+				46EB2E00000CD0 /* UIImageView+LookinServer.m in Sources */,
+				46EB2E00000CE0 /* UILabel+LookinServer.m in Sources */,
+				46EB2E00000CF0 /* UITableView+LookinServer.m in Sources */,
+				46EB2E00000D00 /* UITextField+LookinServer.m in Sources */,
+				46EB2E00000D10 /* UITextView+LookinServer.m in Sources */,
+				46EB2E00000D20 /* UIView+LookinServer.m in Sources */,
+				46EB2E00000D30 /* UIViewController+LookinServer.m in Sources */,
+				46EB2E00000D40 /* UIVisualEffectView+LookinServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		46EB2E000015A0 /* Sources */ = {
+		46EB2E00001600 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E000015C0 /* Constraint.swift in Sources */,
-				46EB2E000015D0 /* ConstraintAttributes.swift in Sources */,
-				46EB2E000015E0 /* ConstraintConfig.swift in Sources */,
-				46EB2E000015F0 /* ConstraintConstantTarget.swift in Sources */,
-				46EB2E00001600 /* ConstraintDescription.swift in Sources */,
-				46EB2E00001610 /* ConstraintDirectionalInsets.swift in Sources */,
-				46EB2E00001620 /* ConstraintDirectionalInsetTarget.swift in Sources */,
-				46EB2E00001630 /* ConstraintDSL.swift in Sources */,
-				46EB2E00001640 /* ConstraintInsets.swift in Sources */,
-				46EB2E00001650 /* ConstraintInsetTarget.swift in Sources */,
-				46EB2E00001660 /* ConstraintItem.swift in Sources */,
-				46EB2E00001680 /* ConstraintLayoutGuide.swift in Sources */,
-				46EB2E00001670 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
-				46EB2E00001690 /* ConstraintLayoutGuideDSL.swift in Sources */,
-				46EB2E000016A0 /* ConstraintLayoutSupport.swift in Sources */,
-				46EB2E000016B0 /* ConstraintLayoutSupportDSL.swift in Sources */,
-				46EB2E000016C0 /* ConstraintMaker.swift in Sources */,
-				46EB2E000016D0 /* ConstraintMakerEditable.swift in Sources */,
-				46EB2E000016E0 /* ConstraintMakerExtendable.swift in Sources */,
-				46EB2E000016F0 /* ConstraintMakerFinalizable.swift in Sources */,
-				46EB2E00001700 /* ConstraintMakerPrioritizable.swift in Sources */,
-				46EB2E00001720 /* ConstraintMakerRelatable.swift in Sources */,
-				46EB2E00001710 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
-				46EB2E00001730 /* ConstraintMultiplierTarget.swift in Sources */,
-				46EB2E00001740 /* ConstraintOffsetTarget.swift in Sources */,
-				46EB2E00001750 /* ConstraintPriority.swift in Sources */,
-				46EB2E00001760 /* ConstraintPriorityTarget.swift in Sources */,
-				46EB2E00001770 /* ConstraintRelatableTarget.swift in Sources */,
-				46EB2E00001780 /* ConstraintRelation.swift in Sources */,
-				46EB2E000017A0 /* ConstraintView.swift in Sources */,
-				46EB2E00001790 /* ConstraintView+Extensions.swift in Sources */,
-				46EB2E000017B0 /* ConstraintViewDSL.swift in Sources */,
-				46EB2E000017C0 /* Debugging.swift in Sources */,
-				46EB2E000017D0 /* LayoutConstraint.swift in Sources */,
-				46EB2E000017E0 /* LayoutConstraintItem.swift in Sources */,
-				46EB2E000018A0 /* SnapKit-dummy.m in Sources */,
-				46EB2E000017F0 /* Typealiases.swift in Sources */,
-				46EB2E00001800 /* UILayoutSupport+Extensions.swift in Sources */,
+				46EB2E000016D0 /* Constraint.swift in Sources */,
+				46EB2E000016E0 /* ConstraintAttributes.swift in Sources */,
+				46EB2E000016F0 /* ConstraintConfig.swift in Sources */,
+				46EB2E00001700 /* ConstraintConstantTarget.swift in Sources */,
+				46EB2E00001710 /* ConstraintDescription.swift in Sources */,
+				46EB2E00001720 /* ConstraintDirectionalInsets.swift in Sources */,
+				46EB2E00001730 /* ConstraintDirectionalInsetTarget.swift in Sources */,
+				46EB2E00001740 /* ConstraintDSL.swift in Sources */,
+				46EB2E00001750 /* ConstraintInsets.swift in Sources */,
+				46EB2E00001760 /* ConstraintInsetTarget.swift in Sources */,
+				46EB2E00001770 /* ConstraintItem.swift in Sources */,
+				46EB2E00001790 /* ConstraintLayoutGuide.swift in Sources */,
+				46EB2E00001780 /* ConstraintLayoutGuide+Extensions.swift in Sources */,
+				46EB2E000017A0 /* ConstraintLayoutGuideDSL.swift in Sources */,
+				46EB2E000017B0 /* ConstraintLayoutSupport.swift in Sources */,
+				46EB2E000017C0 /* ConstraintLayoutSupportDSL.swift in Sources */,
+				46EB2E000017D0 /* ConstraintMaker.swift in Sources */,
+				46EB2E000017E0 /* ConstraintMakerEditable.swift in Sources */,
+				46EB2E000017F0 /* ConstraintMakerExtendable.swift in Sources */,
+				46EB2E00001800 /* ConstraintMakerFinalizable.swift in Sources */,
+				46EB2E00001810 /* ConstraintMakerPrioritizable.swift in Sources */,
+				46EB2E00001830 /* ConstraintMakerRelatable.swift in Sources */,
+				46EB2E00001820 /* ConstraintMakerRelatable+Extensions.swift in Sources */,
+				46EB2E00001840 /* ConstraintMultiplierTarget.swift in Sources */,
+				46EB2E00001850 /* ConstraintOffsetTarget.swift in Sources */,
+				46EB2E00001860 /* ConstraintPriority.swift in Sources */,
+				46EB2E00001870 /* ConstraintPriorityTarget.swift in Sources */,
+				46EB2E00001880 /* ConstraintRelatableTarget.swift in Sources */,
+				46EB2E00001890 /* ConstraintRelation.swift in Sources */,
+				46EB2E000018B0 /* ConstraintView.swift in Sources */,
+				46EB2E000018A0 /* ConstraintView+Extensions.swift in Sources */,
+				46EB2E000018C0 /* ConstraintViewDSL.swift in Sources */,
+				46EB2E000018D0 /* Debugging.swift in Sources */,
+				46EB2E000018E0 /* LayoutConstraint.swift in Sources */,
+				46EB2E000018F0 /* LayoutConstraintItem.swift in Sources */,
+				46EB2E000019A0 /* SnapKit-dummy.m in Sources */,
+				46EB2E00001900 /* Typealiases.swift in Sources */,
+				46EB2E00001910 /* UILayoutSupport+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		46EB2E00001980 /* Sources */ = {
+		46EB2E00001670 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				46EB2E00001A30 /* Pods-CLPlayer-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		46EB2E00001A80 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46EB2E00001B40 /* Pods-CLPlayer-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		46EB2E00001A50 /* PBXTargetDependency */ = {
+		46EB2E00001B60 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LookinServer;
 			target = 638FEAAFC575BB76BC6AC055CDDA3506 /* LookinServer */;
-			targetProxy = 46EB2E00001A40 /* PBXContainerItemProxy */;
+			targetProxy = 46EB2E00001B50 /* PBXContainerItemProxy */;
 		};
-		46EB2E00001A70 /* PBXTargetDependency */ = {
+		46EB2E00001B80 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SnapKit;
 			target = 19622742EBA51E823D6DAE3F8CDBFAD4 /* SnapKit */;
-			targetProxy = 46EB2E00001A60 /* PBXContainerItemProxy */;
+			targetProxy = 46EB2E00001B70 /* PBXContainerItemProxy */;
 		};
-		46EB2E00001A90 /* PBXTargetDependency */ = {
+		46EB2E00001BA0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftFormat;
 			target = 1CD0618C486973D5588EF20D2E8C0AEA /* SwiftFormat */;
-			targetProxy = 46EB2E00001A80 /* PBXContainerItemProxy */;
+			targetProxy = 46EB2E00001B90 /* PBXContainerItemProxy */;
+		};
+		46EB2E00001BC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "SnapKit-SnapKit_Privacy";
+			target = 8A8DB685241263AFDF5E6B20FE67B93A /* SnapKit-SnapKit_Privacy */;
+			targetProxy = 46EB2E00001BB0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1180,11 +1265,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1205,6 +1288,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -1247,11 +1331,9 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1268,6 +1350,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
@@ -1275,14 +1358,17 @@
 			};
 			name = Release;
 		};
-		46EB2E00000BE0 /* Release */ = {
+		46EB2E00000C20 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46EB2E000014C0 /* LookinServer.release.xcconfig */;
+			baseConfigurationReference = 46EB2E00001520 /* LookinServer.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/LookinServer/LookinServer-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MODULEMAP_FILE = Headers/Public/LookinServer/LookinServer.modulemap;
 				OTHER_LDFLAGS = "";
@@ -1293,20 +1379,24 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		46EB2E00000BF0 /* Debug */ = {
+		46EB2E00000C30 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46EB2E000014B0 /* LookinServer.debug.xcconfig */;
+			baseConfigurationReference = 46EB2E00001510 /* LookinServer.debug.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/LookinServer/LookinServer-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MODULEMAP_FILE = Headers/Public/LookinServer/LookinServer.modulemap;
 				OTHER_LDFLAGS = "";
@@ -1317,20 +1407,24 @@
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		46EB2E00001560 /* Release */ = {
+		46EB2E000015C0 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46EB2E00001830 /* SnapKit.release.xcconfig */;
+			baseConfigurationReference = 46EB2E00001930 /* SnapKit.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MODULEMAP_FILE = Headers/Public/SnapKit/SnapKit.modulemap;
 				OTHER_LDFLAGS = "";
@@ -1342,21 +1436,25 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		46EB2E00001570 /* Debug */ = {
+		46EB2E000015D0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46EB2E00001820 /* SnapKit.debug.xcconfig */;
+			baseConfigurationReference = 46EB2E00001920 /* SnapKit.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PREFIX_HEADER = "Target Support Files/SnapKit/SnapKit-prefix.pch";
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MODULEMAP_FILE = Headers/Public/SnapKit/SnapKit.modulemap;
 				OTHER_LDFLAGS = "";
@@ -1368,18 +1466,54 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		46EB2E000018D0 /* Release */ = {
+		46EB2E00001640 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46EB2E00001910 /* SwiftFormat.release.xcconfig */;
+			baseConfigurationReference = 46EB2E00001930 /* SnapKit.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SnapKit";
+				IBSC_MODULE = SnapKit;
+				INFOPLIST_FILE = "Target Support Files/SnapKit/ResourceBundle-SnapKit_Privacy-SnapKit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_NAME = SnapKit_Privacy;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		46EB2E00001650 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46EB2E00001920 /* SnapKit.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/SnapKit";
+				IBSC_MODULE = SnapKit;
+				INFOPLIST_FILE = "Target Support Files/SnapKit/ResourceBundle-SnapKit_Privacy-SnapKit-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_NAME = SnapKit_Privacy;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		46EB2E000019D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 46EB2E00001A10 /* SwiftFormat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1391,13 +1525,14 @@
 			};
 			name = Release;
 		};
-		46EB2E000018E0 /* Debug */ = {
+		46EB2E000019E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46EB2E00001900 /* SwiftFormat.debug.xcconfig */;
+			baseConfigurationReference = 46EB2E00001A00 /* SwiftFormat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1408,15 +1543,17 @@
 			};
 			name = Debug;
 		};
-		46EB2E00001940 /* Release */ = {
+		46EB2E00001A40 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46EB2E000019B0 /* Pods-CLPlayer.release.xcconfig */;
+			baseConfigurationReference = 46EB2E00001AB0 /* Pods-CLPlayer.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-CLPlayer/Pods-CLPlayer.modulemap";
@@ -1431,15 +1568,17 @@
 			};
 			name = Release;
 		};
-		46EB2E00001950 /* Debug */ = {
+		46EB2E00001A50 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46EB2E000019C0 /* Pods-CLPlayer.debug.xcconfig */;
+			baseConfigurationReference = 46EB2E00001AC0 /* Pods-CLPlayer.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				ENABLE_MODULE_VERIFIER = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-CLPlayer/Pods-CLPlayer.modulemap";
@@ -1465,38 +1604,47 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46EB2E00000BD0 /* Build configuration list for PBXNativeTarget "LookinServer" */ = {
+		46EB2E00000C10 /* Build configuration list for PBXNativeTarget "LookinServer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				46EB2E00000BF0 /* Debug */,
-				46EB2E00000BE0 /* Release */,
+				46EB2E00000C30 /* Debug */,
+				46EB2E00000C20 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46EB2E00001550 /* Build configuration list for PBXNativeTarget "SnapKit" */ = {
+		46EB2E000015B0 /* Build configuration list for PBXNativeTarget "SnapKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				46EB2E00001570 /* Debug */,
-				46EB2E00001560 /* Release */,
+				46EB2E000015D0 /* Debug */,
+				46EB2E000015C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46EB2E000018C0 /* Build configuration list for PBXAggregateTarget "SwiftFormat" */ = {
+		46EB2E00001630 /* Build configuration list for PBXNativeTarget "SnapKit-SnapKit_Privacy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				46EB2E000018E0 /* Debug */,
-				46EB2E000018D0 /* Release */,
+				46EB2E00001650 /* Debug */,
+				46EB2E00001640 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		46EB2E00001930 /* Build configuration list for PBXNativeTarget "Pods-CLPlayer" */ = {
+		46EB2E000019C0 /* Build configuration list for PBXAggregateTarget "SwiftFormat" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				46EB2E00001950 /* Debug */,
-				46EB2E00001940 /* Release */,
+				46EB2E000019E0 /* Debug */,
+				46EB2E000019D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		46EB2E00001A30 /* Build configuration list for PBXNativeTarget "Pods-CLPlayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46EB2E00001A50 /* Debug */,
+				46EB2E00001A40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

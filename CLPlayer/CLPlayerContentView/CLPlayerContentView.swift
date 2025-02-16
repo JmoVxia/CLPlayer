@@ -612,7 +612,7 @@ private extension CLPlayerContentView {
     }
 
     func autoFadeOutTooView() {
-        guard config.autoFadeOut > .zero && config.autoFadeOut != .greatestFiniteMagnitude else { return }
+        guard config.autoFadeOut > .zero, config.autoFadeOut != .greatestFiniteMagnitude else { return }
         autoFadeOutTimer = CLGCDTimer(interval: 0.25 + config.autoFadeOut, initialDelay: 0.25 + config.autoFadeOut)
         autoFadeOutTimer?.run { [weak self] _ in
             self?.hiddenToolView()
@@ -621,6 +621,14 @@ private extension CLPlayerContentView {
 
     func cancelAutoFadeOutTooView() {
         autoFadeOutTimer = nil
+    }
+
+    func formatDuration(_ duration: TimeInterval) -> String {
+        let time = Int(ceil(duration))
+        let hours = time / 3600
+        let minutes = (time % 3600) / 60
+        let seconds = time % 60
+        return hours == 0 ? String(format: "%02ld:%02ld", minutes, seconds) : String(format: "%02ld:%02ld:%02ld", hours, minutes, seconds)
     }
 }
 
@@ -662,19 +670,11 @@ extension CLPlayerContentView {
     }
 
     func setTotalDuration(_ totalDuration: TimeInterval) {
-        let time = Int(ceil(totalDuration))
-        let hours = time / 3600
-        let minutes = time / 60
-        let seconds = time % 60
-        totalDurationLabel.text = hours == .zero ? String(format: "%02ld:%02ld", minutes, seconds) : String(format: "%02ld:%02ld:%02ld", hours, minutes, seconds)
+        totalDurationLabel.text = formatDuration(totalDuration)
     }
 
     func setCurrentDuration(_ currentDuration: TimeInterval) {
-        let time = Int(ceil(currentDuration))
-        let hours = time / 3600
-        let minutes = time / 60
-        let seconds = time % 60
-        currentDurationLabel.text = hours == .zero ? String(format: "%02ld:%02ld", minutes, seconds) : String(format: "%02ld:%02ld:%02ld", hours, minutes, seconds)
+        currentDurationLabel.text = formatDuration(currentDuration)
     }
 }
 

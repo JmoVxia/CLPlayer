@@ -465,6 +465,7 @@
 				5BA39B112727D147005059F5 /* Frameworks */,
 				5BA39B122727D147005059F5 /* Resources */,
 				5B918B752727D7E2008355E5 /* SwiftFormat */,
+				C0D51680FE4C70A5F62CD809 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -563,6 +564,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftFormat/CommandLineTool/swiftformat\" . --exclude Carthage,Pods --swiftversion \"5.0\" --disable unusedArguments\n";
+		};
+		C0D51680FE4C70A5F62CD809 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CLPlayer/Pods-CLPlayer-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CLPlayer/Pods-CLPlayer-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CLPlayer/Pods-CLPlayer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
