@@ -5,6 +5,7 @@
 //  Created by Chen JmoVxia on 2021/12/14.
 //
 
+import AVFoundation
 import SnapKit
 import UIKit
 
@@ -52,6 +53,19 @@ class CLFrameController: CLController {
         return view
     }()
 
+    private lazy var seekButton: UIButton = {
+        let view = UIButton()
+        view.titleLabel?.font = .systemFont(ofSize: 18)
+        view.setTitle("跳转播放进度", for: .normal)
+        view.setTitle("跳转播放进度", for: .selected)
+        view.setTitle("跳转播放进度", for: .highlighted)
+        view.setTitleColor(.orange, for: .normal)
+        view.setTitleColor(.orange, for: .selected)
+        view.setTitleColor(.orange, for: .highlighted)
+        view.addTarget(self, action: #selector(seekAction), for: .touchUpInside)
+        return view
+    }()
+
     deinit {
         print("CLFrameController deinit")
     }
@@ -95,12 +109,17 @@ private extension CLFrameController {
         updateTitleLabel { $0.text = "UIView" }
         view.addSubview(player)
         view.addSubview(changeButton)
+        view.addSubview(seekButton)
     }
 
     func makeConstraints() {
         changeButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(-150)
+        }
+        seekButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(changeButton.snp.bottom).offset(10)
         }
     }
 }
@@ -134,6 +153,7 @@ extension CLFrameController {
     func playAction() {
         placeholderView.imageView.image = UIImage(named: "placeholder")
         player.url = URL(string: "https://www.apple.com/105/media/cn/mac/family/2018/46c4b917_abfd_45a3_9b51_4e3054191797/films/bruce/mac-bruce-tpl-cn-2018_1280x720h.mp4")
+        player.seek(to: .init(time: .init(value: 10, timescale: 1)))
         player.play()
     }
 
@@ -146,5 +166,9 @@ extension CLFrameController {
         })
         player.url = URL(string: "http://vjs.zencdn.net/v/oceans.mp4")
         player.play()
+    }
+
+    func seekAction() {
+        player.seek(to: .init(time: .init(value: 25, timescale: 1)))
     }
 }

@@ -51,6 +51,8 @@ class CLPlayerView: UIView {
         }
     }()
 
+    private var seekTime: CLPlayer.CLPlayerSeek? = nil
+
     private var waitReadyToPlayState: CLWaitReadyToPlayState = .nomal
 
     private var sliderTimer: CLGCDTimer?
@@ -280,6 +282,10 @@ private extension CLPlayerView {
             playbackBufferEmptyObserve = playerItem.observe(\.isPlaybackBufferEmpty, options: [.new]) { [weak self] _, _ in
                 self?.observePlaybackBufferEmptyAction()
             }
+            if let seekTime {
+                player?.seek(to: seekTime.time, toleranceBefore: seekTime.toleranceBefore, toleranceAfter: seekTime.toleranceAfter)
+                self.seekTime = nil
+            }
 
             switch waitReadyToPlayState {
             case .nomal:
@@ -443,6 +449,15 @@ extension CLPlayerView {
         totalDuration = 0
         currentDuration = 0
         sliderTimer = nil
+        seekTime = nil
+    }
+
+    func seek(to time: CLPlayer.CLPlayerSeek) {
+        if contentView.playState.canFastForward {
+            player?.seek(to: time.time, toleranceBefore: time.toleranceBefore, toleranceAfter: time.toleranceAfter)
+        } else {
+            seekTime = time
+        }
     }
 }
 

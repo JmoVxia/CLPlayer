@@ -27,6 +27,14 @@ extension CLPlayerContentView {
         case failed
         case pause
         case ended
+        var canFastForward: Bool {
+            switch self {
+            case .unknow, .waiting, .failed:
+                return false
+            case .readyToPlay, .playing, .pause, .buffering, .ended:
+                return true
+            }
+        }
     }
 
     enum CLPanDirection {

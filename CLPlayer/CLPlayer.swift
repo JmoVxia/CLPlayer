@@ -5,11 +5,18 @@
 //  Created by Chen JmoVxia on 2023/11/10.
 //
 
+import AVFoundation
 import UIKit
 
-// MARK: - JmoVxia---枚举
+// MARK: - JmoVxia---扩展
 
-extension CLPlayer {}
+public extension CLPlayer {
+    struct CLPlayerSeek {
+        let time: CMTime
+        var toleranceBefore: CMTime = .zero
+        var toleranceAfter: CMTime = .zero
+    }
+}
 
 // MARK: - JmoVxia---类-属性
 
@@ -30,19 +37,19 @@ public class CLPlayer: UIStackView {
         let view = CLPlayerView(config: config)
         view.backButtonTappedHandler = { [weak self] in
             guard let self else { return }
-            self.delegate?.didClickBackButton(in: self)
+            self.delegate?.playerDidClickBackButton(self)
         }
         view.playToEndHandler = { [weak self] in
             guard let self else { return }
-            self.delegate?.didPlayToEnd(in: self)
+            self.delegate?.playerDidFinishPlaying(self)
         }
         view.playProgressChanged = { [weak self] value in
             guard let self else { return }
-            self.delegate?.player(self, playProgressChanged: value)
+            self.delegate?.player(self, didUpdateProgress: value)
         }
         view.playFailed = { [weak self] error in
             guard let self else { return }
-            self.delegate?.player(self, playFailed: error)
+            self.delegate?.player(self, didFailWithError: error)
         }
         return view
     }()
@@ -150,5 +157,9 @@ public extension CLPlayer {
 
     func stop() {
         playerView.stop()
+    }
+
+    func seek(to time: CLPlayerSeek) {
+        playerView.seek(to: time)
     }
 }
