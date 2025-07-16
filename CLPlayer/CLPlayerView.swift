@@ -32,9 +32,12 @@ class CLPlayerView: UIView {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: UIDevice.orientationDidChangeNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIApplication.willResignActiveNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @discardableResult private func mainSync<T>(execute block: () -> T) -> T {
+        guard !Thread.isMainThread else { return block() }
+        return DispatchQueue.main.sync { block() }
     }
 
     private(set) lazy var contentView: CLPlayerContentView = {
@@ -43,15 +46,20 @@ class CLPlayerView: UIView {
         return view
     }()
 
-    private let keyWindow: UIWindow? = {
-        if #available(iOS 13.0, *) {
-            return UIApplication.shared.windows.filter { $0.isKeyWindow }.last
-        } else {
-            return UIApplication.shared.keyWindow
+    private var keyWindow: UIWindow? {
+        mainSync {
+            if #available(iOS 13.0, *) {
+                UIApplication.shared.connectedScenes
+                    .compactMap { $0 as? UIWindowScene }
+                    .flatMap(\.windows)
+                    .first { $0.isKeyWindow }
+            } else {
+                UIApplication.shared.keyWindow
+            }
         }
-    }()
+    }
 
-    private var seekTime: CLPlayer.CLPlayerSeek? = nil
+    private var seekTime: CLPlayer.CLPlayerSeek?
 
     private var waitReadyToPlayState: CLWaitReadyToPlayState = .nomal
 
@@ -236,16 +244,17 @@ private extension CLPlayerView {
         guard config.rotateStyle != .none else { return }
         if config.rotateStyle == .small, isFullScreen { return }
         if config.rotateStyle == .fullScreen, !isFullScreen { return }
-
-        switch UIDevice.current.orientation {
-        case .portrait:
-            dismiss()
-        case .landscapeLeft:
-            presentWithOrientation(.left)
-        case .landscapeRight:
-            presentWithOrientation(.right)
-        default:
-            break
+        DispatchQueue.main.async {
+            switch UIDevice.current.orientation {
+            case .portrait:
+                self.dismiss()
+            case .landscapeLeft:
+                self.presentWithOrientation(.left)
+            case .landscapeRight:
+                self.presentWithOrientation(.right)
+            default:
+                break
+            }
         }
     }
 
@@ -356,6 +365,14 @@ private extension CLPlayerView {
 // MARK: - JmoVxia---Screen
 
 private extension CLPlayerView {
+    func findTop(from rootViewController: UIViewController?) -> UIViewController? {
+        guard let root = rootViewController else { return nil }
+        if let nav = root as? UINavigationController { return findTop(from: nav.visibleViewController) }
+        if let tab = root as? UITabBarController, let selected = tab.selectedViewController { return findTop(from: selected) }
+        if let presented = root.presentedViewController, !(presented is UIAlertController) { return findTop(from: presented) }
+        return root
+    }
+
     func dismiss() {
         guard Thread.isMainThread else { return DispatchQueue.main.async { self.dismiss() } }
         guard contentView.screenState == .fullScreen else { return }
@@ -364,7 +381,6 @@ private extension CLPlayerView {
         controller.dismiss(animated: true, completion: {
             self.contentView.screenState = .small
             self.fullScreenController = nil
-            UIViewController.attemptRotationToDeviceOrientation()
         })
     }
 
@@ -373,7 +389,7 @@ private extension CLPlayerView {
         guard superview != nil else { return }
         guard fullScreenController == nil else { return }
         guard contentView.screenState == .small else { return }
-        guard let rootViewController = keyWindow?.rootViewController else { return }
+        guard let topController = findTop(from: keyWindow?.rootViewController) else { return }
         contentView.screenState = .animating
 
         animationTransitioning = CLAnimationTransitioning(playerView: self, animationOrientation: orientation)
@@ -381,9 +397,8 @@ private extension CLPlayerView {
         fullScreenController = orientation == .right ? CLFullScreenLeftController() : CLFullScreenRightController()
         fullScreenController?.transitioningDelegate = self
         fullScreenController?.modalPresentationStyle = .fullScreen
-        rootViewController.present(fullScreenController!, animated: true, completion: {
+        topController.present(fullScreenController!, animated: true, completion: {
             self.contentView.screenState = .fullScreen
-            UIViewController.attemptRotationToDeviceOrientation()
         })
     }
 }

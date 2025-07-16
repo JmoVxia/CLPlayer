@@ -160,6 +160,7 @@ private extension CLTableViewController {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
 
         let player = player ?? CLPlayer()
+        self.player = player
         cell.contentView.addSubview(player)
         player.snp.makeConstraints { make in
             make.left.top.width.equalToSuperview()

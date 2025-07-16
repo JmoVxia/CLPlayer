@@ -11,27 +11,30 @@ import UIKit
 extension UIColor {
     // 16进制颜色
     class func hex(_ string: String, alpha: CGFloat = 1.0) -> UIColor {
-        let hexString = string.trimmingCharacters(in: .whitespacesAndNewlines)
-        let scanner = Scanner(string: hexString)
-
+        var hexString = string.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         if hexString.hasPrefix("#") {
-            scanner.scanLocation = 1
-        } else if hexString.hasPrefix("0x") {
-            scanner.scanLocation = 2
+            hexString.removeFirst()
+        } else if hexString.hasPrefix("0X") {
+            hexString.removeFirst(2)
         }
-        var color: UInt32 = 0
-        scanner.scanHexInt32(&color)
 
-        let mask = 0x0000_00FF
-        let r = Int(color >> 16) & mask
-        let g = Int(color >> 8) & mask
-        let b = Int(color) & mask
+        // 确保是6位
+        guard hexString.count == 6 else {
+            return UIColor.clear
+        }
 
-        let red = CGFloat(r) / 255.0
-        let green = CGFloat(g) / 255.0
-        let blue = CGFloat(b) / 255.0
+        let scanner = Scanner(string: hexString)
+        scanner.charactersToBeSkipped = nil
 
-        return self.init(red: red, green: green, blue: blue, alpha: alpha)
+        var color: UInt64 = 0
+        if scanner.scanHexInt64(&color) {
+            let r = CGFloat((color & 0xFF0000) >> 16) / 255.0
+            let g = CGFloat((color & 0x00FF00) >> 8) / 255.0
+            let b = CGFloat(color & 0x0000FF) / 255.0
+            return UIColor(red: r, green: g, blue: b, alpha: alpha)
+        } else {
+            return UIColor.clear
+        }
     }
 
     /// 颜色16进制字符串

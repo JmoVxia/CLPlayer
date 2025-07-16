@@ -26,7 +26,11 @@ class CLFrameController: CLController {
     }()
 
     private lazy var player: CLPlayer = {
-        let view = CLPlayer(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height + navigationBarHeight + 50, width: view.bounds.width, height: view.bounds.width / (16.0 / 9.0))) { config in
+        let statusBarFrame = UIApplication.shared.connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .first(where: { $0.activationState == .foregroundActive })?
+            .statusBarManager?.statusBarFrame.height ?? 0
+        let view = CLPlayer(frame: CGRect(x: 0, y: statusBarFrame + navigationBarHeight + 50, width: view.bounds.width, height: view.bounds.width / (16.0 / 9.0))) { config in
             config.videoGravity = .resizeAspectFill
             config.topBarHiddenStyle = .never
             config.isHiddenToolbarWhenStart = false

@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = 'CLPlayer'
-  s.version      = '2.0.7'
+  s.version      = '2.0.8'
   s.summary      = 'Swift版自定义AVPlayer'
   s.description  = <<-DESC
                    CLPlayer是基于系统AVPlayer封装的视频播放器.
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = 'https://github.com/JmoVxia/CLPlayer'
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
-  s.authors      = {'JmoVxia' => '269968846@qq.com'}
+  s.authors      = {'JmoVxia' => 'JmoVxia@gmail.com'}
   s.social_media_url = 'https://github.com/JmoVxia'
   s.swift_versions = ['5.0']
   s.ios.deployment_target = '12.0'

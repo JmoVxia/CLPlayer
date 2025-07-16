@@ -14,7 +14,5 @@ class CLFullScreenLeftController: CLFullScreenController {
         return .landscapeLeft
     }
 
-    deinit {
-        print("CLFullScreenLeftController deinit")
-    }
+    deinit {}
 }

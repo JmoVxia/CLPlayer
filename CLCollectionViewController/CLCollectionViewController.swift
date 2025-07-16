@@ -148,19 +148,18 @@ extension CLCollectionViewController {
 private extension CLCollectionViewController {
     func playWithIndexPath(_ indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        let player = player ?? CLPlayer()
+        self.player = player
 
-        if player == nil {
-            player = CLPlayer()
-        }
-        player?.title = NSMutableAttributedString("这是一个标题", attributes: { $0
+        player.title = NSMutableAttributedString("这是一个标题", attributes: { $0
                 .font(.systemFont(ofSize: 16))
                 .foregroundColor(.orange)
                 .alignment(.center)
         })
-        player?.url = URL(string: array[indexPath.row])
-        cell.contentView.addSubview(player!)
-        player?.frame = cell.contentView.bounds
-        player?.play()
+        player.url = URL(string: array[indexPath.row])
+        cell.contentView.addSubview(player)
+        player.frame = cell.contentView.bounds
+        player.play()
     }
 }
 

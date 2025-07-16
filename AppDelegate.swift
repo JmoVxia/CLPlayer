@@ -11,7 +11,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_: UIApplication, didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window?.rootViewController = CLTabBarController()
+        window?.rootViewController = CLTabBarController(nibName: nil, bundle: nil)
         window?.makeKeyAndVisible()
         return true
     }

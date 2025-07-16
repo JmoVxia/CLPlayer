@@ -161,8 +161,16 @@ extension CLHomeController {}
 private extension CLHomeController {
     func getAllowedAVPlayerFileExtensions() -> [String] {
         let avTypes = AVURLAsset.audiovisualTypes()
-        var avExtensions = avTypes.map { UTTypeCopyPreferredTagWithClass($0 as CFString, kUTTagClassFilenameExtension)?.takeRetainedValue() as String? ?? "" }
-        avExtensions = avExtensions.filter { !$0.isEmpty }
+        var avExtensions: [String] = []
+
+        for avFileType in avTypes {
+            let rawValue = avFileType.rawValue
+            if let utType = UTType(rawValue),
+               let ext = utType.preferredFilenameExtension
+            {
+                avExtensions.append(ext)
+            }
+        }
         return avExtensions
     }
 

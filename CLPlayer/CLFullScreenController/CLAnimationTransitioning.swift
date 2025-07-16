@@ -22,13 +22,23 @@ extension CLAnimationTransitioning {
 }
 
 class CLAnimationTransitioning: NSObject {
-    private let keyWindow: UIWindow? = {
-        if #available(iOS 13.0, *) {
-            return UIApplication.shared.windows.filter { $0.isKeyWindow }.last
-        } else {
-            return UIApplication.shared.keyWindow
+    @discardableResult private func mainSync<T>(execute block: () -> T) -> T {
+        guard !Thread.isMainThread else { return block() }
+        return DispatchQueue.main.sync { block() }
+    }
+
+    private var keyWindow: UIWindow? {
+        mainSync {
+            if #available(iOS 13.0, *) {
+                UIApplication.shared.connectedScenes
+                    .compactMap { $0 as? UIWindowScene }
+                    .flatMap(\.windows)
+                    .first { $0.isKeyWindow }
+            } else {
+                UIApplication.shared.keyWindow
+            }
         }
-    }()
+    }
 
     private weak var playerView: CLPlayerView?
 
@@ -89,7 +99,6 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
                 toView.bounds = transitionContext.containerView.bounds
                 toView.center = transitionContext.containerView.center
                 transitionContext.completeTransition(true)
-                UIViewController.attemptRotationToDeviceOrientation()
             }
         } else {
             guard let parentStackView = parentStackView else { return }
@@ -114,7 +123,6 @@ extension CLAnimationTransitioning: UIViewControllerAnimatedTransitioning {
                 parentStackView.addArrangedSubview(playerView)
                 fromView.removeFromSuperview()
                 transitionContext.completeTransition(true)
-                UIViewController.attemptRotationToDeviceOrientation()
             }
         }
     }
